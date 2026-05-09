@@ -1,0 +1,363 @@
+/* 게임 셸: Apps in Toss WebView 풀스크린 가정. Safe Area는 padding으로 처리. */
+:root {
+  --color-bg: #0c1117;
+  --color-bg-elev: #161e29;
+  --color-card: #ffffff;
+  --color-card-border: rgba(255, 255, 255, 0.08);
+  --color-text: #f4f6fa;
+  --color-muted: #94a3b8;
+  --color-accent: #f4d03f;
+  --color-correct: #34d399;
+  --color-wrong: #f87171;
+  --color-shadow: rgba(0, 0, 0, 0.4);
+}
+
+html,
+body,
+#root {
+  background-color: var(--color-bg);
+  color: var(--color-text);
+}
+
+.game-shell {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  padding: env(safe-area-inset-top) env(safe-area-inset-right)
+    env(safe-area-inset-bottom) env(safe-area-inset-left);
+  overflow: hidden;
+  user-select: none;
+}
+
+.game-header {
+  flex: 0 0 auto;
+  padding: 16px 20px 0;
+}
+
+.game-title {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--color-text);
+  letter-spacing: 0.02em;
+}
+
+.game-main {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 16px 24px;
+  gap: 12px;
+}
+
+.card-section {
+  flex: 1 1 0;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* HUD */
+.hud {
+  flex: 0 0 auto;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  width: 100%;
+  max-width: 420px;
+  padding: 10px 14px;
+  background-color: var(--color-bg-elev);
+  border-radius: 12px;
+  box-shadow: 0 4px 16px var(--color-shadow);
+}
+
+.hud-cell {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}
+
+.hud-cell-time .hud-value {
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--color-accent);
+}
+
+.hud-label {
+  font-size: 11px;
+  color: var(--color-muted);
+  letter-spacing: 0.04em;
+}
+
+.hud-value {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--color-text);
+  display: inline-flex;
+  align-items: baseline;
+  gap: 4px;
+}
+
+.hud-suffix {
+  font-size: 11px;
+  color: var(--color-muted);
+}
+
+.hud-correct {
+  color: var(--color-correct);
+}
+
+.hud-wrong {
+  color: var(--color-wrong);
+  margin-left: 2px;
+}
+
+.hud-divider {
+  color: var(--color-muted);
+  margin: 0 4px;
+}
+
+/* 카드 패널 */
+.card-view {
+  position: relative;
+  width: min(92vw, 360px);
+  aspect-ratio: 1;
+  background-color: var(--color-card);
+  border-radius: 24px;
+  padding: 12px;
+  box-shadow: 0 12px 32px var(--color-shadow);
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  gap: 4px;
+}
+
+.card-view.opponent {
+  background-color: var(--color-card);
+}
+
+.card-view.mine {
+  background-color: var(--color-card);
+}
+
+.card-placeholder {
+  width: min(92vw, 360px);
+  aspect-ratio: 1;
+  background-color: var(--color-bg-elev);
+  border-radius: 24px;
+  opacity: 0.4;
+}
+
+/* 심볼 버튼 */
+.symbol-button {
+  appearance: none;
+  background: transparent;
+  border: 0;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+
+.symbol-button:disabled {
+  cursor: default;
+}
+
+.symbol-button.mine:active .symbol-image {
+  filter: brightness(0.92);
+}
+
+.symbol-image {
+  display: block;
+  width: 70%;
+  height: 70%;
+  max-width: 64px;
+  max-height: 64px;
+  pointer-events: none;
+  transition: transform 0.12s ease;
+}
+
+/* 정답 심볼이 10초마다 살짝 흔들리는 효과 (Unity의 EffectShowHint). */
+.symbol-button.is-answer .symbol-image {
+  animation: hint-shake 10s ease-in-out infinite;
+  animation-delay: 10s;
+}
+
+@keyframes hint-shake {
+  0%,
+  92%,
+  100% {
+    margin-left: 0;
+  }
+  93% {
+    margin-left: -6px;
+  }
+  94% {
+    margin-left: 6px;
+  }
+  95% {
+    margin-left: -6px;
+  }
+  96% {
+    margin-left: 6px;
+  }
+  97% {
+    margin-left: -4px;
+  }
+  98% {
+    margin-left: 4px;
+  }
+  99% {
+    margin-left: 0;
+  }
+}
+
+/* 피드백 */
+.feedback {
+  position: fixed;
+  transform: translate(-50%, -50%);
+  font-size: 20px;
+  font-weight: 800;
+  pointer-events: none;
+  animation: feedback-pop 0.6s ease forwards;
+  text-shadow: 0 2px 8px var(--color-shadow);
+  z-index: 10;
+}
+
+.feedback.correct {
+  color: var(--color-correct);
+}
+
+.feedback.wrong {
+  color: var(--color-wrong);
+}
+
+@keyframes feedback-pop {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.8);
+  }
+  20% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1.1);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -120%) scale(1);
+  }
+}
+
+/* 모달 */
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  z-index: 20;
+}
+
+.modal-card {
+  width: 100%;
+  max-width: 360px;
+  background-color: #1f2a36;
+  border-radius: 20px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  box-shadow: 0 20px 60px var(--color-shadow);
+}
+
+.modal-title {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.modal-body {
+  margin: 0;
+  font-size: 15px;
+  color: var(--color-muted);
+  line-height: 1.5;
+}
+
+.modal-list {
+  margin: 0;
+  padding-left: 18px;
+  font-size: 14px;
+  color: var(--color-muted);
+  line-height: 1.6;
+}
+
+.modal-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.modal-button {
+  appearance: none;
+  border: 0;
+  border-radius: 14px;
+  padding: 14px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.modal-button.primary {
+  background-color: var(--color-accent);
+  color: #1c1300;
+}
+
+.modal-button.primary:active {
+  transform: scale(0.98);
+}
+
+.modal-button.ghost {
+  background-color: rgba(255, 255, 255, 0.08);
+  color: var(--color-text);
+}
+
+.modal-result-time {
+  margin: 0;
+  text-align: center;
+  font-weight: 800;
+}
+
+.result-seconds {
+  font-size: 56px;
+  color: var(--color-accent);
+}
+
+.result-seconds-suffix {
+  font-size: 20px;
+  margin-left: 4px;
+  color: var(--color-text);
+}
+
+@media (min-width: 481px) {
+  /* PC/태블릿 폭에서도 모바일 비율 유지 */
+  .game-shell {
+    inset: auto;
+    position: relative;
+    max-width: 480px;
+    margin: 0 auto;
+    height: 100vh;
+  }
+}

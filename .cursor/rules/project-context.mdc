@@ -1,0 +1,22 @@
+---
+description: Match Picture 포팅 작업 기본 컨텍스트
+alwaysApply: true
+---
+
+# Project Context
+
+이 프로젝트는 Unity 원본 프로젝트를 Apps in Toss WebView/Granite 기반 앱으로 포팅하는 작업이다.
+
+항상 작업 전에 다음 외부 컨텍스트를 우선 참고한다.
+
+- 원본 소스 위치: `/Users/syous/Repositories/seoleeapps/MatchPictureUnity`
+- 설계/계획 문서 위치: `/Users/syous/Obsidian/Vault/30 Projects/Active/같은그림찾기`
+- 앱인토스 문서: `.cursor/skills/apps-in-toss.md`
+
+작업 원칙:
+
+- 기능 구현 전 원본 Unity 프로젝트의 실제 동작과 에셋 구조를 먼저 확인한다.
+- 요구사항이나 구현 우선순위가 불분명하면 설계/계획 문서를 먼저 확인한다.
+- 원본 소스와 옵시디언 문서는 참고용으로 다루며, 명시 요청이 없으면 수정하지 않는다.
+- 현재 프로젝트의 구조, TypeScript/React/Vite 스타일, Apps in Toss WebView/Granite 제약에 맞춰 최소 범위로 반영한다.
+- Apps in Toss 관련 API나 정책 판단이 필요하면 `.cursor/skills/apps-in-toss.md`와 Apps in Toss 문서를 함께 확인한다.
