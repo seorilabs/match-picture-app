@@ -5,7 +5,7 @@ export default defineConfig({
   brand: {
     displayName: "같은그림찾기",
     primaryColor: "#F4D03F",
-    icon: "",
+    icon: "icon.png",
   },
   web: {
     host: "localhost",

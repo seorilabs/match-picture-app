@@ -30,35 +30,32 @@ body,
   user-select: none;
 }
 
-.game-header {
-  flex: 0 0 auto;
-  padding: 16px 20px 0;
-}
-
-.game-title {
-  margin: 0;
-  font-size: 18px;
-  font-weight: 700;
-  color: var(--color-text);
-  letter-spacing: 0.02em;
-}
-
 .game-main {
   flex: 1 1 auto;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
-  padding: 12px 16px 24px;
-  gap: 12px;
+  padding: 12px 16px 16px;
+  gap: 8px;
 }
 
 .card-section {
   flex: 1 1 0;
   width: 100%;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
+  gap: 6px;
+}
+
+.card-hint {
+  margin: 0;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: var(--color-accent);
 }
 
 /* HUD */
@@ -130,27 +127,166 @@ body,
   background-color: var(--color-card);
   border-radius: 24px;
   padding: 12px;
-  box-shadow: 0 12px 32px var(--color-shadow);
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   grid-template-rows: repeat(2, 1fr);
   gap: 4px;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    opacity 0.2s ease;
+  /* 마운트 시 살짝 페이드 인. ready → playing 전환에서 카드가 "열리는" 느낌을 줍니다. */
+  animation: card-flip-in 0.28s cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 
+/* to 단계를 비워서 종료 후 본래 클래스 스타일(opponent의 dim 등)을 그대로 따르게 합니다. */
+@keyframes card-flip-in {
+  from {
+    opacity: 0;
+  }
+}
+
+/* 상대 카드: 보여주기용. 살짝 가라앉은 시각적 위계로 둡니다. */
 .card-view.opponent {
-  background-color: var(--color-card);
+  opacity: 0.92;
+  transform: scale(0.96);
+  transform-origin: bottom center;
+  box-shadow: 0 6px 16px var(--color-shadow);
 }
 
+/* 내 카드: 탭 가능한 카드. 액센트 색 외곽 글로우로 어포던스를 줍니다. */
 .card-view.mine {
-  background-color: var(--color-card);
+  box-shadow:
+    0 0 0 2px rgba(244, 208, 63, 0.55),
+    0 18px 40px rgba(244, 208, 63, 0.18),
+    0 12px 32px var(--color-shadow);
+}
+
+/* 판정 진행 중에는 브라우저 레벨에서도 후속 입력을 차단해 멀티터치 어뷰징을 막습니다. */
+.mine-section.is-locked .card-view {
+  pointer-events: none;
+  filter: saturate(0.85) brightness(0.92);
 }
 
 .card-placeholder {
   width: min(92vw, 360px);
   aspect-ratio: 1;
-  background-color: var(--color-bg-elev);
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.02))
+      padding-box,
+    linear-gradient(135deg, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.02))
+      border-box;
+  border: 1px dashed rgba(255, 255, 255, 0.15);
   border-radius: 24px;
-  opacity: 0.4;
+}
+
+/* 카드 뒷면 (deck back). ready 상태에서 두 카드 자리에 모두 깔립니다. */
+.card-back {
+  position: relative;
+  width: min(92vw, 360px);
+  aspect-ratio: 1;
+  border-radius: 24px;
+  border: 1px solid rgba(244, 208, 63, 0.18);
+  background:
+    radial-gradient(circle at 30% 25%, rgba(244, 208, 63, 0.12), transparent 55%),
+    radial-gradient(circle at 75% 80%, rgba(244, 208, 63, 0.08), transparent 55%),
+    linear-gradient(140deg, #1b2535, #0f1620);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.04),
+    0 12px 32px var(--color-shadow);
+  overflow: hidden;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    opacity 0.2s ease;
+}
+
+/* 안쪽 점선 라이너로 카드 뒷면 무늬 느낌을 줍니다. */
+.card-back::before {
+  content: "";
+  position: absolute;
+  inset: 14px;
+  border-radius: 18px;
+  border: 1.5px dashed rgba(244, 208, 63, 0.22);
+  pointer-events: none;
+}
+
+/* 가운데 큰 물음표로 "아직 안 열린 카드"임을 시각화. */
+.card-back::after {
+  content: "?";
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 96px;
+  font-weight: 800;
+  color: rgba(244, 208, 63, 0.18);
+  letter-spacing: 0.05em;
+  pointer-events: none;
+}
+
+/* 위쪽(상대 카드 자리)은 시각 위계상 살짝 가라앉게. */
+.card-back.opponent {
+  opacity: 0.85;
+  transform: scale(0.96);
+  transform-origin: bottom center;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.04),
+    0 6px 16px var(--color-shadow);
+}
+
+/* 아래쪽(내 카드 자리) = 클릭 가능. 액센트 글로우와 펄스로 어포던스를 줍니다. */
+.card-reveal {
+  appearance: none;
+  cursor: pointer;
+  color: var(--color-accent);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-weight: 700;
+  border-color: rgba(244, 208, 63, 0.45);
+  -webkit-tap-highlight-color: transparent;
+  animation: card-reveal-pulse 1.6s ease-in-out infinite;
+}
+
+.card-reveal:active {
+  transform: scale(0.985);
+  animation-play-state: paused;
+}
+
+.card-reveal-label {
+  position: relative;
+  z-index: 1;
+  font-size: 20px;
+}
+
+.card-reveal-hint {
+  position: relative;
+  z-index: 1;
+  font-size: 13px;
+  font-weight: 500;
+  color: rgba(244, 208, 63, 0.7);
+}
+
+@keyframes card-reveal-pulse {
+  0%,
+  100% {
+    box-shadow:
+      0 0 0 2px rgba(244, 208, 63, 0.45),
+      0 12px 32px var(--color-shadow),
+      0 18px 40px rgba(244, 208, 63, 0.12);
+    transform: translateY(0);
+  }
+  50% {
+    box-shadow:
+      0 0 0 2px rgba(244, 208, 63, 0.7),
+      0 18px 40px rgba(244, 208, 63, 0.35),
+      0 12px 32px var(--color-shadow);
+    transform: translateY(-2px);
+  }
 }
 
 /* 심볼 버튼 */
@@ -184,6 +320,8 @@ body,
   height: 70%;
   max-width: 64px;
   max-height: 64px;
+  /* 원본 가로/세로 비율을 유지하면서 박스 안에 맞춥니다. */
+  object-fit: contain;
   pointer-events: none;
   transition: transform 0.12s ease;
 }

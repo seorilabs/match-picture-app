@@ -18,15 +18,27 @@ import { useInterstitialAd } from "./ait/ads";
 
 const TUTORIAL_KEY = "match-picture/has-played";
 
-/** Unity quirks 때문에 첫 큐에 들어가는 카드 수는 TOTAL_CARDS + 1입니다. */
-const INITIAL_QUEUE_SIZE = TOTAL_CARDS + 1;
-
 function App() {
-  const game = useGame();
+  const {
+    status,
+    remaining,
+    round,
+    elapsedSeconds,
+    correctCount,
+    wrongCount,
+    locked,
+    lastFeedback,
+    resultSeconds,
+    start: startGame,
+    reveal: revealFirstRound,
+    tap,
+    retry: retryGame,
+  } = useGame();
+
   const [tutorialOpen, setTutorialOpen] = useState(false);
   const [tutorialResolved, setTutorialResolved] = useState(false);
 
-  const ad = useInterstitialAd();
+  const { ready: adReady, show: showAd } = useInterstitialAd();
   // 게임 화면이 살아있는 동안 화면 항상 켜짐.
   useScreenAwake(true);
 
@@ -35,8 +47,8 @@ function App() {
   const lastSubmittedSecondsRef = useRef<number | null>(null);
 
   // 최초 진입 시 튜토리얼 노출 여부를 결정합니다. Apps in Toss Storage 우선, 없으면 localStorage.
-  // game 객체 전체를 deps에 넣으면 game.start 호출로 상태가 바뀔 때마다 effect가 재실행되어
-  // 무한 루프로 프리징되므로, stable한 game.start callback만 deps로 잡습니다.
+  // useGame이 매 렌더 새 객체를 반환하므로 통째로 deps에 넣으면 무한 루프로 프리징됩니다.
+  // useGame 내부의 start callback은 안정된 reference이므로 그것만 deps로 잡습니다.
   useEffect(() => {
     let cancelled = false;
     (async () => {
@@ -45,7 +57,7 @@ function App() {
       if (flag) {
         setTutorialOpen(false);
         setTutorialResolved(true);
-        game.start();
+        startGame();
       } else {
         setTutorialOpen(true);
       }
@@ -53,93 +65,108 @@ function App() {
     return () => {
       cancelled = true;
     };
-  }, [game.start]);
+  }, [startGame]);
 
   // 클리어 시점에 리더보드 제출 + 리뷰 요청을 시도합니다. 모두 조용한 실패가 기본이라 게임 흐름을 막지 않습니다.
   useEffect(() => {
-    if (game.status !== "finished" || game.resultSeconds === null) return;
-    const seconds = game.resultSeconds;
-    if (lastSubmittedSecondsRef.current !== seconds) {
-      lastSubmittedSecondsRef.current = seconds;
-      void submitClearTime(seconds);
+    if (status !== "finished" || resultSeconds === null) return;
+    if (lastSubmittedSecondsRef.current !== resultSeconds) {
+      lastSubmittedSecondsRef.current = resultSeconds;
+      void submitClearTime(resultSeconds);
     }
     if (!reviewRequestedRef.current) {
       reviewRequestedRef.current = true;
       void requestReviewIfSupported();
     }
-  }, [game.resultSeconds, game.status]);
+  }, [resultSeconds, status]);
 
   const handleTutorialClose = useCallback(() => {
     setTutorialOpen(false);
     setTutorialResolved(true);
     void writeItem(TUTORIAL_KEY, "1");
-    game.start();
-  }, [game.start]);
+    startGame();
+  }, [startGame]);
 
   const handleRetry = useCallback(async () => {
     // 광고가 로드되어 있으면 노출 후 게임 시작. 그렇지 않으면 즉시 시작.
-    if (ad.ready) {
-      await ad.show();
+    if (adReady) {
+      await showAd();
     }
-    game.retry();
-  }, [ad.ready, ad.show, game.retry]);
+    retryGame();
+  }, [adReady, retryGame, showAd]);
 
   const handleShare = useCallback(async () => {
-    if (game.resultSeconds === null) return;
-    await shareScore(game.resultSeconds);
-  }, [game.resultSeconds]);
+    if (resultSeconds === null) return;
+    await shareScore(resultSeconds);
+  }, [resultSeconds]);
+
+  const isReady = status === "ready";
 
   return (
     <div className="game-shell">
-      <header className="game-header">
-        <h1 className="game-title">같은그림찾기</h1>
-      </header>
-
       <main className="game-main">
         <section className="card-section opponent-section" aria-label="상대 카드">
-          {game.round ? (
+          {round ? (
             <CardView
-              card={game.round.opponent}
+              card={round.opponent}
               variant="opponent"
-              hint={game.round.hint}
+              hint={round.hint}
               clickable={false}
               onPress={() => undefined}
             />
+          ) : isReady ? (
+            <div className="card-back opponent" aria-hidden="true" />
           ) : (
-            <div className="card-placeholder" />
+            <div className="card-placeholder" aria-hidden="true" />
           )}
         </section>
 
         <Hud
-          remaining={game.remaining}
-          totalRemaining={INITIAL_QUEUE_SIZE - 1}
-          elapsedSeconds={game.elapsedSeconds}
-          correctCount={game.correctCount}
-          wrongCount={game.wrongCount}
+          remaining={remaining}
+          totalRemaining={TOTAL_CARDS}
+          elapsedSeconds={elapsedSeconds}
+          correctCount={correctCount}
+          wrongCount={wrongCount}
         />
 
-        <section className="card-section mine-section" aria-label="내 카드">
-          {game.round ? (
-            <CardView
-              card={game.round.mine}
-              variant="mine"
-              hint={game.round.hint}
-              clickable={!game.locked && game.status === "playing"}
-              onPress={(symbol, origin) => game.tap(symbol, { origin })}
-            />
+        <section
+          className={`card-section mine-section${locked ? " is-locked" : ""}`}
+          aria-label="내 카드"
+        >
+          {round ? (
+            <>
+              <p className="card-hint">↓ 같은 그림을 찾아주세요</p>
+              <CardView
+                card={round.mine}
+                variant="mine"
+                hint={round.hint}
+                clickable={!locked && status === "playing"}
+                onPress={(symbol, origin) => tap(symbol, { origin })}
+              />
+            </>
+          ) : isReady ? (
+            <button
+              type="button"
+              className="card-back card-reveal"
+              onClick={revealFirstRound}
+              aria-label="첫 카드 열기"
+            >
+              <span className="card-reveal-label">탭해서 카드 열기</span>
+              <span className="card-reveal-hint">시간은 첫 정답부터 측정돼요</span>
+            </button>
           ) : (
-            <div className="card-placeholder" />
+            <div className="card-placeholder" aria-hidden="true" />
           )}
         </section>
       </main>
 
-      <Feedback event={game.lastFeedback} />
+      <Feedback event={lastFeedback} />
 
       <TutorialModal open={tutorialOpen} onClose={handleTutorialClose} />
 
       <ResultModal
-        open={tutorialResolved && game.status === "finished"}
-        seconds={game.resultSeconds}
+        open={tutorialResolved && status === "finished"}
+        seconds={resultSeconds}
         onRetry={handleRetry}
         onShare={handleShare}
         shareSupported={isShareSupported()}
