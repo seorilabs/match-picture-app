@@ -13,22 +13,17 @@ interface TutorialModalProps {
 export function TutorialModal({ open, onClose }: TutorialModalProps) {
   return (
     <Modal open={open} variant="tutorial">
-      <h2 className="modal-title">같은 그림을 찾아주세요</h2>
+      <h2 className="modal-title">같은 그림 찾기</h2>
       <p className="modal-body">
-        위/아래 두 카드 사이에는 같은 그림이 정확히 한 개 있어요.
-        아래 카드에서 같은 그림을 빠르게 찾아 눌러주세요.
+        두 카드에 공통 그림이 하나 있어요. 아래 카드에서 찾아 누르세요.
+        오답은 잠시 잠기고, 기록은 클리어 시간으로 남아요.
       </p>
-      <ul className="modal-list">
-        <li>맞히면 다음 카드로 넘어가요.</li>
-        <li>틀리면 잠시 입력이 잠겨요.</li>
-        <li>모든 카드를 마치는 데 걸린 시간이 기록돼요.</li>
-      </ul>
       <button
         type="button"
         className="modal-button primary"
         onClick={onClose}
       >
-        시작하기
+        시작
       </button>
     </Modal>
   );

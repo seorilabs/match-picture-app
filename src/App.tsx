@@ -118,6 +118,7 @@ function App() {
   );
 
   const isReady = status === "ready";
+  const isFirstRound = status === "playing" && correctCount === 0;
 
   return (
     <div className="game-shell">
@@ -152,7 +153,11 @@ function App() {
         >
           {round ? (
             <>
-              <p className="card-hint">↓ 같은 그림을 찾아주세요</p>
+              <p className={`card-hint${isFirstRound ? " is-first-round" : ""}`}>
+                {isFirstRound
+                  ? "아래 카드에서 같은 그림을 누르세요"
+                  : "↓ 같은 그림을 찾아주세요"}
+              </p>
               <CardView
                 card={round.mine}
                 variant="mine"
