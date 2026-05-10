@@ -2,6 +2,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 
 import "./App.css";
 
+import { playEffectSound, preloadEffectSounds } from "./audio/effects";
 import { CardView } from "./components/CardView";
 import { Feedback } from "./components/Feedback";
 import { Hud } from "./components/Hud";
@@ -81,13 +82,20 @@ function App() {
   }, [resultSeconds, status]);
 
   const handleTutorialClose = useCallback(() => {
+    preloadEffectSounds();
     setTutorialOpen(false);
     setTutorialResolved(true);
     void writeItem(TUTORIAL_KEY, "1");
     startGame();
   }, [startGame]);
 
+  const handleRevealFirstRound = useCallback(() => {
+    preloadEffectSounds();
+    revealFirstRound();
+  }, [revealFirstRound]);
+
   const handleRetry = useCallback(async () => {
+    preloadEffectSounds();
     // 광고가 로드되어 있으면 노출 후 게임 시작. 그렇지 않으면 즉시 시작.
     if (adReady) {
       await showAd();
@@ -99,6 +107,15 @@ function App() {
     if (resultSeconds === null) return;
     await shareScore(resultSeconds);
   }, [resultSeconds]);
+
+  const handleMinePress = useCallback(
+    (symbol: string, origin: { x: number; y: number }) => {
+      if (!round || locked || status !== "playing") return;
+      playEffectSound(symbol === round.hint ? "correct" : "wrong");
+      tap(symbol, { origin });
+    },
+    [locked, round, status, tap],
+  );
 
   const isReady = status === "ready";
 
@@ -141,14 +158,14 @@ function App() {
                 variant="mine"
                 hint={round.hint}
                 clickable={!locked && status === "playing"}
-                onPress={(symbol, origin) => tap(symbol, { origin })}
+                onPress={handleMinePress}
               />
             </>
           ) : isReady ? (
             <button
               type="button"
               className="card-back card-reveal"
-              onClick={revealFirstRound}
+              onClick={handleRevealFirstRound}
               aria-label="첫 카드 열기"
             >
               <span className="card-reveal-label">탭해서 카드 열기</span>
