@@ -12,11 +12,10 @@ import {
 /**
  * 게임 진행 단계입니다.
  * - `idle`: 큐가 비어 있는 초기 상태.
- * - `ready`: 큐는 준비됐지만 첫 카드는 아직 열리지 않은 상태. 사용자 탭으로 `reveal()`을 호출합니다.
- * - `playing`: 첫 라운드가 노출되어 매칭이 진행되는 상태.
+ * - `playing`: Unity 원본처럼 시작 즉시 위/아래 카드가 노출되어 매칭이 진행되는 상태.
  * - `finished`: 모든 카드를 마쳐서 결과가 표시되는 상태.
  */
-export type GameStatus = "idle" | "ready" | "playing" | "finished";
+export type GameStatus = "idle" | "playing" | "finished";
 
 export interface FeedbackEvent {
   /** 피드백 식별자입니다. 같은 키가 두 번 들어와도 React가 갱신을 인지하도록 ID를 부여합니다. */
@@ -41,15 +40,13 @@ export interface GameSnapshot {
   locked: boolean;
   /** 마지막 피드백 이벤트. */
   lastFeedback: FeedbackEvent | null;
-  /** 클리어 시 결과 시간(초). 종료 전에는 null. */
+  /** 클리어 시 결과 시간(초, 실수). 종료 전에는 null. */
   resultSeconds: number | null;
 }
 
 export interface GameApi extends GameSnapshot {
-  /** 큐를 준비하고 `ready` 상태로 들어갑니다. 첫 카드는 아직 노출되지 않습니다. */
+  /** 큐를 준비하고 첫 라운드를 즉시 노출합니다. */
   start: () => void;
-  /** 사용자가 첫 카드를 여는 동작입니다. 큐에서 두 장을 꺼내 첫 라운드를 만듭니다. */
-  reveal: () => void;
   /** 사용자가 내 카드의 한 심볼을 탭했을 때 호출합니다. */
   tap: (
     symbol: string,
@@ -81,7 +78,7 @@ export function useGame(): GameApi {
   const [resultSeconds, setResultSeconds] = useState<number | null>(null);
 
   // 남은 라운드 수는 정답 수에서 derive합니다.
-  // ready 상태에선 TOTAL_CARDS에서 시작해 정답마다 1씩 줄어듭니다.
+  // Unity 원본 HUD처럼 시작 시 10에서 시작해 정답마다 1씩 줄어듭니다.
   const remaining = Math.max(0, TOTAL_CARDS - correctCount);
 
   const queueRef = useRef<Card[]>([]);
@@ -139,24 +136,19 @@ export function useGame(): GameApi {
     timerStartedRef.current = false;
     lockedRef.current = false;
 
-    setRound(null);
+    const firstRound = takeNextRound(queueRef.current, null);
+    roundRef.current = firstRound;
+    statusRef.current = firstRound === null ? "idle" : "playing";
+
+    setRound(firstRound);
     setElapsedSeconds(0);
     setCorrectCount(0);
     setWrongCount(0);
     setLocked(false);
     setLastFeedback(null);
     setResultSeconds(null);
-    // 첫 카드는 사용자가 reveal()을 호출할 때 열립니다.
-    setStatus(queueRef.current.length > 0 ? "ready" : "idle");
+    setStatus(firstRound === null ? "idle" : "playing");
   }, [cancelPendingFollowUp, stopTicking]);
-
-  const reveal = useCallback(() => {
-    if (queueRef.current.length === 0) return;
-    const firstRound = takeNextRound(queueRef.current, null);
-    if (firstRound === null) return;
-    setRound(firstRound);
-    setStatus("playing");
-  }, []);
 
   const finish = useCallback(
     (seconds: number) => {
@@ -164,9 +156,8 @@ export function useGame(): GameApi {
       cancelPendingFollowUp();
       lockedRef.current = false;
       setStatus("finished");
-      setRound(null);
       setLocked(false);
-      setResultSeconds(Math.floor(seconds));
+      setResultSeconds(seconds);
     },
     [cancelPendingFollowUp, stopTicking],
   );
@@ -249,7 +240,6 @@ export function useGame(): GameApi {
     lastFeedback,
     resultSeconds,
     start,
-    reveal,
     tap,
     retry,
   };

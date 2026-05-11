@@ -1,28 +1,43 @@
-/* 게임 셸: Apps in Toss WebView 풀스크린 가정. Safe Area는 padding으로 처리. */
+@font-face {
+  font-family: "PressStart2P";
+  src: url("/fonts/PressStart2P-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
 :root {
-  --color-bg: #0c1117;
-  --color-bg-elev: #161e29;
-  --color-card: #ffffff;
-  --color-card-border: rgba(255, 255, 255, 0.08);
-  --color-text: #f4f6fa;
-  --color-muted: #94a3b8;
-  --color-accent: #f4d03f;
-  --color-correct: #34d399;
-  --color-wrong: #f87171;
-  --color-shadow: rgba(0, 0, 0, 0.4);
+  --unity-font: "PressStart2P", monospace;
+  --unity-bg: #6bbdd3;
+  --unity-card: #f0f0f0;
+  --unity-text: #333333;
+  --unity-yellow: #fff000;
+  --unity-green: #249100;
+  --hud-height: 48px;
+  --card-gap: clamp(18px, 4.2vh, 34px);
   --card-size: min(
-    92vw,
-    360px,
-    calc((100vh - env(safe-area-inset-top) - env(safe-area-inset-bottom) - 150px) / 2)
+    82vw,
+    320px,
+    calc(
+      (
+          100vh - var(--hud-height) - var(--card-gap) -
+            env(safe-area-inset-top) - env(safe-area-inset-bottom) - 36px
+        ) / 2
+    )
   );
 }
 
 @supports (height: 100dvh) {
   :root {
     --card-size: min(
-      92vw,
-      360px,
-      calc((100dvh - env(safe-area-inset-top) - env(safe-area-inset-bottom) - 150px) / 2)
+      82vw,
+      320px,
+      calc(
+        (
+            100dvh - var(--hud-height) - var(--card-gap) -
+              env(safe-area-inset-top) - env(safe-area-inset-bottom) - 36px
+          ) / 2
+      )
     );
   }
 }
@@ -30,8 +45,8 @@
 html,
 body,
 #root {
-  background-color: var(--color-bg);
-  color: var(--color-text);
+  background-color: var(--unity-bg);
+  color: var(--unity-text);
 }
 
 .game-shell {
@@ -43,308 +58,102 @@ body,
     env(safe-area-inset-bottom) env(safe-area-inset-left);
   overflow: hidden;
   user-select: none;
+  background-color: var(--unity-bg);
+  background-image: url("/bg.png");
+  background-size: 100% 100%;
+}
+
+.hud {
+  flex: 0 0 var(--hud-height);
+  height: var(--hud-height);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(26px, 7.5vw, 46px);
+  width: 100%;
+  background: #ffffff;
+  color: #000000;
+  font-family: var(--unity-font);
+}
+
+.hud-group {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-width: 112px;
+}
+
+.hud-icon {
+  display: block;
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+  pointer-events: none;
+}
+
+.hud-icon-card {
+  border: 1px solid rgba(0, 0, 0, 0.16);
+  border-radius: 2px;
+}
+
+.hud-value {
+  display: inline-block;
+  min-width: 0;
+  font-size: clamp(22px, 7vw, 31px);
+  line-height: 1;
+  color: #000000;
+  letter-spacing: 0;
+  white-space: nowrap;
 }
 
 .game-main {
   flex: 1 1 auto;
+  min-height: 0;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-between;
-  padding: 12px 16px 16px;
-  gap: 8px;
-  min-height: 0;
+  justify-content: center;
+  gap: var(--card-gap);
+  padding: 18px 0;
 }
 
 .card-section {
-  flex: 1 1 0;
-  min-height: 0;
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 6px;
-}
-
-.card-hint {
-  margin: 0;
-  min-height: 28px;
-  max-width: min(92vw, 360px);
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 12px;
-  font-weight: 600;
-  line-height: 1.25;
-  text-align: center;
-  letter-spacing: 0;
-  color: var(--color-accent);
-}
-
-.card-hint.is-first-round {
-  padding: 6px 10px;
-  border: 1px solid rgba(244, 208, 63, 0.42);
-  border-radius: 999px;
-  background-color: rgba(244, 208, 63, 0.12);
-  box-shadow: 0 0 0 1px rgba(244, 208, 63, 0.08);
-  animation: first-round-hint-pulse 1.4s ease-in-out infinite;
-}
-
-@keyframes first-round-hint-pulse {
-  0%,
-  100% {
-    box-shadow:
-      0 0 0 1px rgba(244, 208, 63, 0.08),
-      0 0 0 0 rgba(244, 208, 63, 0);
-  }
-  50% {
-    box-shadow:
-      0 0 0 1px rgba(244, 208, 63, 0.22),
-      0 0 0 4px rgba(244, 208, 63, 0.08);
-  }
-}
-
-/* HUD */
-.hud {
   flex: 0 0 auto;
-  display: grid;
-  grid-template-columns: 1fr auto 1fr;
-  align-items: center;
   width: 100%;
-  max-width: 420px;
-  padding: 10px 14px;
-  background-color: var(--color-bg-elev);
-  border-radius: 12px;
-  box-shadow: 0 4px 16px var(--color-shadow);
-}
-
-.hud-cell {
   display: flex;
-  flex-direction: column;
   align-items: center;
-  gap: 2px;
+  justify-content: center;
 }
 
-.hud-cell-time .hud-value {
-  font-size: 22px;
-  font-weight: 700;
-  color: var(--color-accent);
-}
-
-.hud-label {
-  font-size: 11px;
-  color: var(--color-muted);
-  letter-spacing: 0.04em;
-}
-
-.hud-value {
-  font-size: 16px;
-  font-weight: 600;
-  color: var(--color-text);
-  display: inline-flex;
-  align-items: baseline;
-  gap: 4px;
-}
-
-.hud-suffix {
-  font-size: 11px;
-  color: var(--color-muted);
-}
-
-.hud-correct {
-  color: var(--color-correct);
-}
-
-.hud-wrong {
-  color: var(--color-wrong);
-  margin-left: 2px;
-}
-
-.hud-divider {
-  color: var(--color-muted);
-  margin: 0 4px;
-}
-
-/* 카드 패널 */
-.card-view {
+.card-view,
+.card-placeholder,
+.tutorial-card {
   position: relative;
   width: var(--card-size);
   aspect-ratio: 1;
-  background-color: var(--color-card);
-  border-radius: 24px;
-  padding: 12px;
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  grid-template-rows: repeat(2, 1fr);
-  gap: 4px;
-  transition:
-    transform 0.2s ease,
-    box-shadow 0.2s ease,
-    opacity 0.2s ease;
-  /* 마운트 시 살짝 페이드 인. ready → playing 전환에서 카드가 "열리는" 느낌을 줍니다. */
-  animation: card-flip-in 0.28s cubic-bezier(0.2, 0.8, 0.2, 1);
+  border-radius: 50%;
+  background: var(--unity-card);
 }
 
-/* to 단계를 비워서 종료 후 본래 클래스 스타일(opponent의 dim 등)을 그대로 따르게 합니다. */
-@keyframes card-flip-in {
-  from {
-    opacity: 0;
-  }
+.card-view {
+  overflow: visible;
 }
 
-/* 상대 카드: 보여주기용. 살짝 가라앉은 시각적 위계로 둡니다. */
-.card-view.opponent {
-  opacity: 0.92;
-  transform: scale(0.96);
-  transform-origin: bottom center;
-  box-shadow: 0 6px 16px var(--color-shadow);
-}
-
-/* 내 카드: 탭 가능한 카드. 액센트 색 외곽 글로우로 어포던스를 줍니다. */
-.card-view.mine {
-  box-shadow:
-    0 0 0 2px rgba(244, 208, 63, 0.55),
-    0 18px 40px rgba(244, 208, 63, 0.18),
-    0 12px 32px var(--color-shadow);
-}
-
-/* 판정 진행 중에는 브라우저 레벨에서도 후속 입력을 차단해 멀티터치 어뷰징을 막습니다. */
 .mine-section.is-locked .card-view {
   pointer-events: none;
-  filter: saturate(0.85) brightness(0.92);
 }
 
-.card-placeholder {
-  width: var(--card-size);
-  aspect-ratio: 1;
-  background:
-    linear-gradient(135deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.02))
-      padding-box,
-    linear-gradient(135deg, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.02))
-      border-box;
-  border: 1px dashed rgba(255, 255, 255, 0.15);
-  border-radius: 24px;
-}
-
-/* 카드 뒷면 (deck back). ready 상태에서 두 카드 자리에 모두 깔립니다. */
-.card-back {
-  position: relative;
-  width: var(--card-size);
-  aspect-ratio: 1;
-  border-radius: 24px;
-  border: 1px solid rgba(244, 208, 63, 0.18);
-  background:
-    radial-gradient(circle at 30% 25%, rgba(244, 208, 63, 0.12), transparent 55%),
-    radial-gradient(circle at 75% 80%, rgba(244, 208, 63, 0.08), transparent 55%),
-    linear-gradient(140deg, #1b2535, #0f1620);
-  box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.04),
-    0 12px 32px var(--color-shadow);
-  overflow: hidden;
-  transition:
-    transform 0.2s ease,
-    box-shadow 0.2s ease,
-    opacity 0.2s ease;
-}
-
-/* 안쪽 점선 라이너로 카드 뒷면 무늬 느낌을 줍니다. */
-.card-back::before {
-  content: "";
-  position: absolute;
-  inset: 14px;
-  border-radius: 18px;
-  border: 1.5px dashed rgba(244, 208, 63, 0.22);
-  pointer-events: none;
-}
-
-/* 가운데 큰 물음표로 "아직 안 열린 카드"임을 시각화. */
-.card-back::after {
-  content: "?";
-  position: absolute;
-  inset: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 96px;
-  font-weight: 800;
-  color: rgba(244, 208, 63, 0.18);
-  letter-spacing: 0.05em;
-  pointer-events: none;
-}
-
-/* 위쪽(상대 카드 자리)은 시각 위계상 살짝 가라앉게. */
-.card-back.opponent {
-  opacity: 0.85;
-  transform: scale(0.96);
-  transform-origin: bottom center;
-  box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.04),
-    0 6px 16px var(--color-shadow);
-}
-
-/* 아래쪽(내 카드 자리) = 클릭 가능. 액센트 글로우와 펄스로 어포던스를 줍니다. */
-.card-reveal {
-  appearance: none;
-  cursor: pointer;
-  color: var(--color-accent);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  font-weight: 700;
-  border-color: rgba(244, 208, 63, 0.45);
-  -webkit-tap-highlight-color: transparent;
-  animation: card-reveal-pulse 1.6s ease-in-out infinite;
-}
-
-.card-reveal:active {
-  transform: scale(0.985);
-  animation-play-state: paused;
-}
-
-.card-reveal-label {
-  position: relative;
-  z-index: 1;
-  font-size: 20px;
-}
-
-.card-reveal-hint {
-  position: relative;
-  z-index: 1;
-  font-size: 13px;
-  font-weight: 500;
-  color: rgba(244, 208, 63, 0.7);
-}
-
-@keyframes card-reveal-pulse {
-  0%,
-  100% {
-    box-shadow:
-      0 0 0 2px rgba(244, 208, 63, 0.45),
-      0 12px 32px var(--color-shadow),
-      0 18px 40px rgba(244, 208, 63, 0.12);
-    transform: translateY(0);
-  }
-  50% {
-    box-shadow:
-      0 0 0 2px rgba(244, 208, 63, 0.7),
-      0 18px 40px rgba(244, 208, 63, 0.35),
-      0 12px 32px var(--color-shadow);
-    transform: translateY(-2px);
-  }
-}
-
-/* 심볼 버튼 */
 .symbol-button {
   appearance: none;
+  position: absolute;
+  width: 15.3846%;
+  aspect-ratio: 1;
+  transform: translate(-50%, -50%);
   background: transparent;
   border: 0;
   padding: 0;
   margin: 0;
-  width: 100%;
-  height: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -363,17 +172,13 @@ body,
 
 .symbol-image {
   display: block;
-  width: 70%;
-  height: 70%;
-  max-width: 64px;
-  max-height: 64px;
-  /* 원본 가로/세로 비율을 유지하면서 박스 안에 맞춥니다. */
+  width: 100%;
+  height: 100%;
   object-fit: contain;
   pointer-events: none;
   transition: transform 0.12s ease;
 }
 
-/* 정답 심볼이 10초마다 살짝 흔들리는 효과 (Unity의 EffectShowHint). */
 .symbol-button.is-answer .symbol-image {
   animation: hint-shake 10s ease-in-out infinite;
   animation-delay: 10s;
@@ -408,141 +213,192 @@ body,
   }
 }
 
-/* 피드백 */
 .feedback {
   position: fixed;
   transform: translate(-50%, -50%);
-  font-size: 20px;
-  font-weight: 800;
+  font-size: min(30vw, 136px);
+  font-weight: 700;
+  line-height: 1;
   pointer-events: none;
   animation: feedback-pop 0.6s ease forwards;
-  text-shadow: 0 2px 8px var(--color-shadow);
   z-index: 10;
 }
 
 .feedback.correct {
-  color: var(--color-correct);
+  color: var(--unity-green);
 }
 
 .feedback.wrong {
-  color: var(--color-wrong);
+  color: #ff000a;
 }
 
 @keyframes feedback-pop {
   0% {
     opacity: 0;
-    transform: translate(-50%, -50%) scale(0.8);
+    transform: translate(-50%, -50%) scale(0.9);
   }
   20% {
     opacity: 1;
-    transform: translate(-50%, -50%) scale(1.1);
+    transform: translate(-50%, -50%) scale(1.06);
   }
   100% {
     opacity: 0;
-    transform: translate(-50%, -120%) scale(1);
+    transform: translate(-50%, -95%) scale(1);
   }
 }
 
-/* 모달 */
 .modal-backdrop {
   position: fixed;
   inset: 0;
-  background-color: rgba(0, 0, 0, 0.6);
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 24px;
+  padding: 0;
   z-index: 20;
+  background: transparent;
 }
 
 .modal-card {
+  width: min(74vw, 288px);
+  background: transparent;
+  border-radius: 0;
+  padding: 0;
+  box-shadow: none;
+}
+
+.result-panel {
   width: 100%;
-  max-width: 360px;
-  background-color: #1f2a36;
-  border-radius: 20px;
-  padding: 24px;
+  font-family: var(--unity-font);
+  text-align: center;
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.12);
+}
+
+.result-time {
+  height: clamp(64px, 10vh, 84px);
   display: flex;
-  flex-direction: column;
-  gap: 16px;
-  box-shadow: 0 20px 60px var(--color-shadow);
+  align-items: center;
+  justify-content: center;
+  background: #000000;
+  color: var(--unity-yellow);
+  font-size: clamp(31px, 10vw, 48px);
+  line-height: 1;
+  letter-spacing: 0;
 }
 
-.modal-title {
-  margin: 0;
-  font-size: 20px;
-  font-weight: 700;
-}
-
-.modal-body {
-  margin: 0;
-  font-size: 15px;
-  color: var(--color-muted);
-  line-height: 1.5;
-}
-
-.modal-list {
-  margin: 0;
-  padding-left: 18px;
-  font-size: 14px;
-  color: var(--color-muted);
-  line-height: 1.6;
-}
-
-.modal-actions {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-
-.modal-button {
+.result-button {
   appearance: none;
+  width: 100%;
+  height: clamp(66px, 10.4vh, 82px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
   border: 0;
-  border-radius: 14px;
-  padding: 14px;
-  font-size: 16px;
-  font-weight: 600;
+  border-top: 1px solid #9fc8d8;
+  background: #f4f4f4;
+  color: #333333;
+  font-family: var(--unity-font);
+  font-size: clamp(24px, 7.8vw, 38px);
+  line-height: 1;
+  letter-spacing: 0;
   cursor: pointer;
   -webkit-tap-highlight-color: transparent;
 }
 
-.modal-button.primary {
-  background-color: var(--color-accent);
-  color: #1c1300;
+.result-button:active {
+  background: #d7d7d7;
 }
 
-.modal-button.primary:active {
-  transform: scale(0.98);
+.tutorial-overlay {
+  position: fixed;
+  top: calc(env(safe-area-inset-top) + var(--hud-height));
+  right: env(safe-area-inset-right);
+  bottom: env(safe-area-inset-bottom);
+  left: env(safe-area-inset-left);
+  z-index: 15;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--unity-bg);
+  background-image: url("/bg.png");
+  background-size: 100% 100%;
 }
 
-.modal-button.ghost {
-  background-color: rgba(255, 255, 255, 0.08);
-  color: var(--color-text);
+.tutorial-cards {
+  width: 100%;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--card-gap);
+  padding: 18px 0;
 }
 
-.modal-result-time {
-  margin: 0;
-  text-align: center;
-  font-weight: 800;
+.tutorial-symbol {
+  position: absolute;
+  width: 15.3846%;
+  aspect-ratio: 1;
+  transform: translate(-50%, -50%);
 }
 
-.result-seconds {
-  font-size: 56px;
-  color: var(--color-accent);
+.tutorial-symbol img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  pointer-events: none;
 }
 
-.result-seconds-suffix {
-  font-size: 20px;
-  margin-left: 4px;
-  color: var(--color-text);
+.tutorial-symbol.is-highlighted::before {
+  content: "";
+  position: absolute;
+  inset: -26%;
+  border: max(8px, calc(var(--card-size) * 0.03)) solid var(--unity-green);
+  border-radius: 50%;
+  pointer-events: none;
 }
 
-@media (min-width: 481px) {
-  /* PC/태블릿 폭에서도 모바일 비율 유지 */
-  .game-shell {
-    inset: auto;
-    position: relative;
-    max-width: 480px;
-    margin: 0 auto;
-    height: 100vh;
+.tutorial-hand {
+  position: absolute;
+  width: 112%;
+  height: 112%;
+  left: -46%;
+  top: 54%;
+  transform: rotate(-4deg);
+  transform-origin: 70% 20%;
+}
+
+.tutorial-close {
+  appearance: none;
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  border: 2px solid #666666;
+  background: #f8f8f8;
+  color: #333333;
+  font: 28px/1 Arial, sans-serif;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+@media (max-width: 360px) {
+  .hud {
+    gap: 16px;
+  }
+
+  .hud-group {
+    min-width: 96px;
+    gap: 8px;
+  }
+
+  .hud-icon {
+    width: 36px;
+    height: 36px;
   }
 }

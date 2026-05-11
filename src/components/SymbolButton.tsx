@@ -6,6 +6,8 @@ interface SymbolButtonProps {
   rotate: number;
   /** 화면에 보여줄 스케일 배수. */
   scale: number;
+  /** Unity Card.prefab의 650x650 좌표계 기준 위치입니다. */
+  position: { x: number; y: number };
   /** 정답이면 true. 힌트 효과 적용 여부 결정. */
   isAnswer?: boolean;
   /** 클릭 가능 여부. */
@@ -27,6 +29,7 @@ function SymbolButtonInner({
   symbol,
   rotate,
   scale,
+  position,
   isAnswer = false,
   clickable,
   onPress,
@@ -44,6 +47,10 @@ function SymbolButtonInner({
   const style: CSSProperties = {
     transform: `rotate(${rotate}deg) scale(${scale})`,
   };
+  const buttonStyle: CSSProperties = {
+    left: `${50 + (position.x / 650) * 100}%`,
+    top: `${50 - (position.y / 650) * 100}%`,
+  };
 
   return (
     <button
@@ -54,6 +61,7 @@ function SymbolButtonInner({
       onClick={handleClick}
       disabled={!clickable && variant === "mine"}
       aria-label={`symbol ${symbol}`}
+      style={buttonStyle}
     >
       <img
         className="symbol-image"

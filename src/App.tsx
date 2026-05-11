@@ -8,13 +8,15 @@ import { Feedback } from "./components/Feedback";
 import { Hud } from "./components/Hud";
 import { ResultModal } from "./components/ResultModal";
 import { TutorialModal } from "./components/TutorialModal";
-import { TOTAL_CARDS } from "./game/rules";
 import { useGame } from "./game/useGame";
 import { readItem, writeItem } from "./ait/storage";
 import { useScreenAwake } from "./ait/awake";
-import { isShareSupported, shareScore } from "./ait/share";
 import { requestReviewIfSupported } from "./ait/review";
-import { submitClearTime } from "./ait/leaderboard";
+import {
+  isLeaderboardEnabled,
+  openLeaderboard,
+  submitClearTime,
+} from "./ait/leaderboard";
 import { useInterstitialAd } from "./ait/ads";
 
 const TUTORIAL_KEY = "match-picture/has-played";
@@ -25,13 +27,10 @@ function App() {
     remaining,
     round,
     elapsedSeconds,
-    correctCount,
-    wrongCount,
     locked,
     lastFeedback,
     resultSeconds,
     start: startGame,
-    reveal: revealFirstRound,
     tap,
     retry: retryGame,
   } = useGame();
@@ -39,6 +38,7 @@ function App() {
   const [tutorialOpen, setTutorialOpen] = useState(false);
   const [tutorialResolved, setTutorialResolved] = useState(false);
 
+  const leaderboardEnabled = isLeaderboardEnabled();
   const { ready: adReady, show: showAd } = useInterstitialAd();
   // 게임 화면이 살아있는 동안 화면 항상 켜짐.
   useScreenAwake(true);
@@ -89,11 +89,6 @@ function App() {
     startGame();
   }, [startGame]);
 
-  const handleRevealFirstRound = useCallback(() => {
-    preloadEffectSounds();
-    revealFirstRound();
-  }, [revealFirstRound]);
-
   const handleRetry = useCallback(async () => {
     preloadEffectSounds();
     // 광고가 로드되어 있으면 노출 후 게임 시작. 그렇지 않으면 즉시 시작.
@@ -103,10 +98,15 @@ function App() {
     retryGame();
   }, [adReady, retryGame, showAd]);
 
-  const handleShare = useCallback(async () => {
-    if (resultSeconds === null) return;
-    await shareScore(resultSeconds);
-  }, [resultSeconds]);
+  const handleOpenLeaderboard = useCallback(async () => {
+    await openLeaderboard();
+  }, []);
+
+  const handleExit = useCallback(() => {
+    if (window.history.length > 1) {
+      window.history.back();
+    }
+  }, []);
 
   const handleMinePress = useCallback(
     (symbol: string, origin: { x: number; y: number }) => {
@@ -117,11 +117,10 @@ function App() {
     [locked, round, status, tap],
   );
 
-  const isReady = status === "ready";
-  const isFirstRound = status === "playing" && correctCount === 0;
-
   return (
     <div className="game-shell">
+      <Hud remaining={remaining} elapsedSeconds={elapsedSeconds} />
+
       <main className="game-main">
         <section className="card-section opponent-section" aria-label="상대 카드">
           {round ? (
@@ -132,50 +131,23 @@ function App() {
               clickable={false}
               onPress={() => undefined}
             />
-          ) : isReady ? (
-            <div className="card-back opponent" aria-hidden="true" />
           ) : (
             <div className="card-placeholder" aria-hidden="true" />
           )}
         </section>
-
-        <Hud
-          remaining={remaining}
-          totalRemaining={TOTAL_CARDS}
-          elapsedSeconds={elapsedSeconds}
-          correctCount={correctCount}
-          wrongCount={wrongCount}
-        />
 
         <section
           className={`card-section mine-section${locked ? " is-locked" : ""}`}
           aria-label="내 카드"
         >
           {round ? (
-            <>
-              <p className={`card-hint${isFirstRound ? " is-first-round" : ""}`}>
-                {isFirstRound
-                  ? "아래 카드에서 같은 그림을 누르세요"
-                  : "↓ 같은 그림을 찾아주세요"}
-              </p>
-              <CardView
-                card={round.mine}
-                variant="mine"
-                hint={round.hint}
-                clickable={!locked && status === "playing"}
-                onPress={handleMinePress}
-              />
-            </>
-          ) : isReady ? (
-            <button
-              type="button"
-              className="card-back card-reveal"
-              onClick={handleRevealFirstRound}
-              aria-label="첫 카드 열기"
-            >
-              <span className="card-reveal-label">탭해서 카드 열기</span>
-              <span className="card-reveal-hint">시간은 첫 정답부터 측정돼요</span>
-            </button>
+            <CardView
+              card={round.mine}
+              variant="mine"
+              hint={round.hint}
+              clickable={!locked && status === "playing"}
+              onPress={handleMinePress}
+            />
           ) : (
             <div className="card-placeholder" aria-hidden="true" />
           )}
@@ -190,8 +162,9 @@ function App() {
         open={tutorialResolved && status === "finished"}
         seconds={resultSeconds}
         onRetry={handleRetry}
-        onShare={handleShare}
-        shareSupported={isShareSupported()}
+        leaderboardEnabled={leaderboardEnabled}
+        onOpenLeaderboard={handleOpenLeaderboard}
+        onExit={handleExit}
       />
     </div>
   );

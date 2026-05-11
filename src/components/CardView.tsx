@@ -20,17 +20,30 @@ interface SymbolPlacement {
   symbol: string;
   rotate: number;
   scale: number;
+  position: { x: number; y: number };
 }
+
+const UNITY_SYMBOL_POSITIONS: Array<{ x: number; y: number }> = [
+  { x: -217, y: 58 },
+  { x: 158, y: -93 },
+  { x: 84, y: 220 },
+  { x: -95, y: 215 },
+  { x: 2, y: -224 },
+  { x: -169, y: -116 },
+  { x: -1, y: 26 },
+  { x: 214, y: 70 },
+];
 
 /**
  * 매 라운드 카드가 바뀔 때마다 Unity의 `SetCardWithRotation`처럼 회전/스케일을
  * 랜덤하게 결정합니다. `card` 배열 자체가 키 역할을 하도록 useMemo의 의존성을 잡습니다.
  */
 function arrangeSymbols(card: Card): SymbolPlacement[] {
-  return card.map((symbol) => ({
+  return card.map((symbol, index) => ({
     symbol,
     rotate: Math.random() * 360 - 180,
     scale: 0.85 + Math.random() * 0.55,
+    position: UNITY_SYMBOL_POSITIONS[index],
   }));
 }
 
@@ -51,6 +64,7 @@ export function CardView({
           symbol={placement.symbol}
           rotate={placement.rotate}
           scale={placement.scale}
+          position={placement.position}
           isAnswer={placement.symbol === hint}
           clickable={clickable}
           onPress={onPress}

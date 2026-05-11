@@ -10,7 +10,7 @@ interface FeedbackProps {
  */
 export function Feedback({ event }: FeedbackProps) {
   if (event === null) return null;
-  const message = event.kind === "correct" ? "정답!" : "다시!";
+  const message = event.kind === "correct" ? "O" : "X";
   const style = event.origin
     ? {
         left: event.origin.x,
