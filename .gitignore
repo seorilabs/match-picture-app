@@ -10,6 +10,9 @@ build/
 .granite/
 .ait/
 
+# Store submission assets (not part of the app build)
+store/
+
 # Logs
 logs/
 *.log
