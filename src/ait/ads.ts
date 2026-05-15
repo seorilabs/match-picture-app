@@ -45,14 +45,17 @@ function isInterstitialSupported(): boolean {
  * 게임 흐름은 광고 표시 여부와 관계없이 진행되어야 하므로 결과 코드는
  * 단순한 boolean으로만 반환합니다.
  */
-export function useInterstitialAd(): InterstitialApi {
+export function useInterstitialAd(enabledByConfig = true): InterstitialApi {
   const [ready, setReady] = useState(false);
-  const enabled = isInterstitialSupported();
+  const enabled = enabledByConfig && isInterstitialSupported();
   const unregisterRef = useRef<(() => void) | null>(null);
   const dismissResolversRef = useRef<((value: boolean) => void)[]>([]);
 
   const loadOnce = useCallback(() => {
-    if (!enabled) return;
+    if (!enabled) {
+      setReady(false);
+      return;
+    }
     if (unregisterRef.current) {
       unregisterRef.current();
       unregisterRef.current = null;
@@ -75,6 +78,14 @@ export function useInterstitialAd(): InterstitialApi {
   }, [enabled]);
 
   useEffect(() => {
+    if (!enabled) {
+      if (unregisterRef.current) {
+        unregisterRef.current();
+        unregisterRef.current = null;
+      }
+      setReady(false);
+      return;
+    }
     loadOnce();
     return () => {
       if (unregisterRef.current) {
@@ -82,7 +93,7 @@ export function useInterstitialAd(): InterstitialApi {
         unregisterRef.current = null;
       }
     };
-  }, [loadOnce]);
+  }, [enabled, loadOnce]);
 
   const show = useCallback<InterstitialApi["show"]>(async () => {
     if (!enabled || !ready) return false;

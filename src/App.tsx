@@ -2,8 +2,13 @@ import { useCallback, useEffect, useRef, useState } from "react";
 
 import "./App.css";
 
-import { playEffectSound, preloadEffectSounds } from "./audio/effects";
+import {
+  playEffectSound,
+  preloadEffectSounds,
+  stopEffectSounds,
+} from "./audio/effects";
 import { CardView } from "./components/CardView";
+import { ExitConfirmModal } from "./components/ExitConfirmModal";
 import { Feedback } from "./components/Feedback";
 import { Hud } from "./components/Hud";
 import { ResultModal } from "./components/ResultModal";
@@ -12,16 +17,23 @@ import { useGame } from "./game/useGame";
 import { readItem, writeItem } from "./ait/storage";
 import { useScreenAwake } from "./ait/awake";
 import { requestReviewIfSupported } from "./ait/review";
-import {
-  isLeaderboardEnabled,
-  openLeaderboard,
-  submitClearTime,
-} from "./ait/leaderboard";
+import { openLeaderboard, submitClearTime } from "./ait/leaderboard";
 import { useInterstitialAd } from "./ait/ads";
+import { closeMiniApp, useDisableIosSwipeBack } from "./ait/navigation";
+import { useHiddenCallback } from "./ait/visibility";
+import {
+  getDefaultLaunchConfig,
+  loadCachedLaunchConfig,
+  loadLaunchConfig,
+} from "./ait/launchConfig";
+import { getDebugSessionTotalCards } from "./debug/sessionConfig";
 
 const TUTORIAL_KEY = "match-picture/has-played";
+const SOUND_KEY = "match-picture/sound-enabled";
 
 function App() {
+  const [launchConfig, setLaunchConfig] = useState(getDefaultLaunchConfig);
+  const [debugTotalCards] = useState(getDebugSessionTotalCards);
   const {
     status,
     remaining,
@@ -33,15 +45,26 @@ function App() {
     start: startGame,
     tap,
     retry: retryGame,
-  } = useGame();
+  } = useGame({ totalCards: debugTotalCards ?? undefined });
 
   const [tutorialOpen, setTutorialOpen] = useState(false);
   const [tutorialResolved, setTutorialResolved] = useState(false);
+  const [soundEnabled, setSoundEnabled] = useState(true);
+  const [exitConfirmOpen, setExitConfirmOpen] = useState(false);
+  const [leaderboardStatus, setLeaderboardStatus] = useState<
+    "idle" | "opening" | "failed"
+  >("idle");
+  const [leaderboardMessage, setLeaderboardMessage] = useState<string | null>(
+    null,
+  );
 
-  const leaderboardEnabled = isLeaderboardEnabled();
-  const { ready: adReady, show: showAd } = useInterstitialAd();
+  const { ready: adReady, show: showAd } = useInterstitialAd(
+    launchConfig.interstitialAdEnabled,
+  );
   // 게임 화면이 살아있는 동안 화면 항상 켜짐.
   useScreenAwake(true);
+  useDisableIosSwipeBack(true);
+  useHiddenCallback(stopEffectSounds);
 
   // 한 세션에 리뷰 요청은 한 번만 호출합니다 (정책 보호 + 사용자 경험).
   const reviewRequestedRef = useRef(false);
@@ -53,8 +76,12 @@ function App() {
   useEffect(() => {
     let cancelled = false;
     (async () => {
-      const flag = await readItem(TUTORIAL_KEY);
+      const [flag, savedSoundEnabled] = await Promise.all([
+        readItem(TUTORIAL_KEY),
+        readItem(SOUND_KEY),
+      ]);
       if (cancelled) return;
+      if (savedSoundEnabled === "0") setSoundEnabled(false);
       if (flag) {
         setTutorialOpen(false);
         setTutorialResolved(true);
@@ -68,58 +95,123 @@ function App() {
     };
   }, [startGame]);
 
+  useEffect(() => {
+    let cancelled = false;
+    void loadCachedLaunchConfig().then((config) => {
+      if (cancelled || config === null) return;
+      setLaunchConfig(config);
+    });
+    void loadLaunchConfig().then((config) => {
+      if (cancelled) return;
+      setLaunchConfig(config);
+    });
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
+  useEffect(() => {
+    if (soundEnabled) {
+      preloadEffectSounds();
+    } else {
+      stopEffectSounds();
+    }
+  }, [soundEnabled]);
+
+  useEffect(() => {
+    if (status !== "finished") {
+      setLeaderboardStatus("idle");
+      setLeaderboardMessage(null);
+    }
+  }, [status]);
+
   // 클리어 시점에 리더보드 제출 + 리뷰 요청을 시도합니다. 모두 조용한 실패가 기본이라 게임 흐름을 막지 않습니다.
   useEffect(() => {
     if (status !== "finished" || resultSeconds === null) return;
-    if (lastSubmittedSecondsRef.current !== resultSeconds) {
+    if (
+      launchConfig.leaderboardEnabled &&
+      lastSubmittedSecondsRef.current !== resultSeconds
+    ) {
       lastSubmittedSecondsRef.current = resultSeconds;
       void submitClearTime(resultSeconds);
     }
-    if (!reviewRequestedRef.current) {
+    if (launchConfig.reviewRequestEnabled && !reviewRequestedRef.current) {
       reviewRequestedRef.current = true;
       void requestReviewIfSupported();
     }
-  }, [resultSeconds, status]);
+  }, [
+    launchConfig.leaderboardEnabled,
+    launchConfig.reviewRequestEnabled,
+    resultSeconds,
+    status,
+  ]);
+
+  const handleToggleSound = useCallback(() => {
+    setSoundEnabled((current) => {
+      const next = !current;
+      void writeItem(SOUND_KEY, next ? "1" : "0");
+      if (!next) stopEffectSounds();
+      return next;
+    });
+  }, []);
 
   const handleTutorialClose = useCallback(() => {
-    preloadEffectSounds();
+    if (soundEnabled) preloadEffectSounds();
     setTutorialOpen(false);
     setTutorialResolved(true);
     void writeItem(TUTORIAL_KEY, "1");
     startGame();
-  }, [startGame]);
+  }, [soundEnabled, startGame]);
 
   const handleRetry = useCallback(async () => {
-    preloadEffectSounds();
+    if (soundEnabled) preloadEffectSounds();
     // 광고가 로드되어 있으면 노출 후 게임 시작. 그렇지 않으면 즉시 시작.
     if (adReady) {
       await showAd();
     }
     retryGame();
-  }, [adReady, retryGame, showAd]);
+  }, [adReady, retryGame, showAd, soundEnabled]);
 
   const handleOpenLeaderboard = useCallback(async () => {
-    await openLeaderboard();
+    setLeaderboardStatus("opening");
+    setLeaderboardMessage(null);
+    const result = await openLeaderboard();
+    setLeaderboardStatus(result.status === "OPENED" ? "idle" : "failed");
+    setLeaderboardMessage(result.status === "OPENED" ? null : result.message);
   }, []);
 
   const handleExit = useCallback(() => {
-    if (window.history.length > 1) {
-      window.history.back();
-    }
+    setExitConfirmOpen(true);
+  }, []);
+
+  const handleCancelExit = useCallback(() => {
+    setExitConfirmOpen(false);
+  }, []);
+
+  const handleConfirmExit = useCallback(() => {
+    setExitConfirmOpen(false);
+    void closeMiniApp();
   }, []);
 
   const handleMinePress = useCallback(
     (symbol: string, origin: { x: number; y: number }) => {
       if (!round || locked || status !== "playing") return;
-      playEffectSound(symbol === round.hint ? "correct" : "wrong");
+      if (soundEnabled) {
+        playEffectSound(symbol === round.hint ? "correct" : "wrong");
+      }
       tap(symbol, { origin });
     },
-    [locked, round, status, tap],
+    [locked, round, soundEnabled, status, tap],
   );
 
   return (
     <div className="game-shell">
-      <Hud remaining={remaining} elapsedSeconds={elapsedSeconds} />
+      <Hud
+        remaining={remaining}
+        elapsedSeconds={elapsedSeconds}
+        soundEnabled={soundEnabled}
+        onToggleSound={handleToggleSound}
+      />
 
       <main className="game-main">
         <section className="card-section opponent-section" aria-label="상대 카드">
@@ -159,12 +251,20 @@ function App() {
       <TutorialModal open={tutorialOpen} onClose={handleTutorialClose} />
 
       <ResultModal
-        open={tutorialResolved && status === "finished"}
+        open={tutorialResolved && status === "finished" && !exitConfirmOpen}
         seconds={resultSeconds}
         onRetry={handleRetry}
-        leaderboardEnabled={leaderboardEnabled}
+        leaderboardEnabled={launchConfig.leaderboardEnabled}
+        leaderboardStatus={leaderboardStatus}
+        leaderboardMessage={leaderboardMessage}
         onOpenLeaderboard={handleOpenLeaderboard}
         onExit={handleExit}
+      />
+
+      <ExitConfirmModal
+        open={exitConfirmOpen}
+        onCancel={handleCancelExit}
+        onConfirm={handleConfirmExit}
       />
     </div>
   );

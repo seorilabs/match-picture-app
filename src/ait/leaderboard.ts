@@ -6,10 +6,6 @@ import {
 
 import { MAX_DISPLAY_SECONDS } from "../game/rules";
 
-const LEADERBOARD_ENABLED =
-  (import.meta.env.VITE_ENABLE_LEADERBOARD ?? "").trim().toLowerCase() ===
-  "true";
-
 const GAME_CENTER_MIN_VERSION = {
   android: "5.221.0",
   ios: "5.221.0",
@@ -17,12 +13,79 @@ const GAME_CENTER_MIN_VERSION = {
 
 const SCORE_BASE = MAX_DISPLAY_SECONDS + 1;
 
+export type OpenLeaderboardResult =
+  | { status: "OPENED" }
+  | { status: "UNSUPPORTED"; message: string }
+  | { status: "ERROR"; message: string };
+
+interface ReactNativeWebViewWindow extends Window {
+  ReactNativeWebView?: {
+    postMessage: (message: string) => void;
+  };
+}
+
 function formatScore(score: number): string {
   return score.toFixed(3).replace(/\.?0+$/, "");
 }
 
-export function isLeaderboardEnabled(): boolean {
-  return LEADERBOARD_ENABLED;
+function stringifyError(error: unknown): string {
+  if (error instanceof Error) return error.message;
+  if (typeof error === "string") return error;
+  try {
+    return JSON.stringify(error);
+  } catch {
+    return String(error);
+  }
+}
+
+function truncateMessage(message: string): string {
+  return message.length > 140 ? `${message.slice(0, 137)}...` : message;
+}
+
+function postDebugLog(
+  logType: "debug" | "warn" | "error",
+  action: string,
+  params: Record<string, string>,
+) {
+  const payload = {
+    log_name: "match_picture_leaderboard",
+    log_type: logType,
+    params: {
+      action,
+      href: typeof window === "undefined" ? "" : window.location.href,
+      ...params,
+    },
+  };
+
+  try {
+    const webView = (window as ReactNativeWebViewWindow).ReactNativeWebView;
+    webView?.postMessage(
+      JSON.stringify({
+        type: "method",
+        functionName: "debugLog",
+        eventId: `match-picture-leaderboard-${Date.now()}`,
+        args: [payload],
+      }),
+    );
+  } catch {
+    // Fall through to browser console in local development.
+  }
+}
+
+function warnLeaderboard(message: string, error?: unknown) {
+  const errorMessage =
+    error === undefined ? undefined : truncateMessage(stringifyError(error));
+  postDebugLog(error === undefined ? "warn" : "error", "warning", {
+    message,
+    ...(errorMessage ? { error: errorMessage } : {}),
+  });
+
+  if (!import.meta.env.DEV) return;
+  if (error === undefined) {
+    console.warn(`[leaderboard] ${message}`);
+  } else {
+    console.warn(`[leaderboard] ${message}`, error);
+  }
 }
 
 /**
@@ -52,26 +115,40 @@ export async function submitClearTime(seconds: number): Promise<
   | "UNSUPPORTED"
   | "ERROR"
 > {
-  if (!LEADERBOARD_ENABLED) return "DISABLED";
   try {
     const result = await submitGameCenterLeaderBoardScore({
       score: clearTimeToLeaderboardScore(seconds),
     });
-    if (!result) return "UNSUPPORTED";
+    if (!result) {
+      warnLeaderboard("score submit skipped: unsupported app version");
+      return "UNSUPPORTED";
+    }
+    if (result.statusCode !== "SUCCESS") {
+      warnLeaderboard(`score submit failed: ${result.statusCode}`);
+    }
     return result.statusCode;
-  } catch {
+  } catch (error) {
+    warnLeaderboard("score submit threw", error);
     return "ERROR";
   }
 }
 
-export async function openLeaderboard(): Promise<boolean> {
-  if (!LEADERBOARD_ENABLED) return false;
+export async function openLeaderboard(): Promise<OpenLeaderboardResult> {
+  postDebugLog("debug", "open_requested", {});
+
   try {
     const supported = isMinVersionSupported(GAME_CENTER_MIN_VERSION);
-    if (!supported) return false;
+    if (!supported) {
+      const message = "unsupported app version";
+      warnLeaderboard(`open skipped: ${message}`);
+      return { status: "UNSUPPORTED", message };
+    }
     await openGameCenterLeaderboard();
-    return true;
-  } catch {
-    return false;
+    postDebugLog("debug", "open_resolved", { status: "OPENED" });
+    return { status: "OPENED" };
+  } catch (error) {
+    const message = truncateMessage(stringifyError(error));
+    warnLeaderboard("open threw", error);
+    return { status: "ERROR", message };
   }
 }

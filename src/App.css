@@ -64,16 +64,24 @@ body,
 }
 
 .hud {
+  position: relative;
   flex: 0 0 var(--hud-height);
   height: var(--hud-height);
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: clamp(26px, 7.5vw, 46px);
   width: 100%;
   background: #ffffff;
   color: #000000;
   font-family: var(--unity-font);
+}
+
+.hud-stats {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(26px, 7.5vw, 46px);
+  width: 100%;
 }
 
 .hud-group {
@@ -105,6 +113,93 @@ body,
   color: #000000;
   letter-spacing: 0;
   white-space: nowrap;
+}
+
+.sound-toggle {
+  appearance: none;
+  position: absolute;
+  top: 4px;
+  right: 8px;
+  width: 40px;
+  height: 40px;
+  border: 0;
+  background: transparent;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+
+.sound-toggle:active {
+  opacity: 0.72;
+}
+
+.sound-glyph {
+  position: relative;
+  display: block;
+  width: 28px;
+  height: 28px;
+}
+
+.sound-speaker {
+  position: absolute;
+  left: 2px;
+  top: 10px;
+  width: 8px;
+  height: 9px;
+  background: #333333;
+}
+
+.sound-speaker::after {
+  content: "";
+  position: absolute;
+  left: 8px;
+  top: -6px;
+  width: 0;
+  height: 0;
+  border-top: 10px solid transparent;
+  border-bottom: 10px solid transparent;
+  border-left: 12px solid #333333;
+}
+
+.sound-wave {
+  position: absolute;
+  border: 2px solid #333333;
+  border-left: 0;
+  border-radius: 0 20px 20px 0;
+}
+
+.sound-wave-inner {
+  right: 4px;
+  top: 9px;
+  width: 5px;
+  height: 10px;
+}
+
+.sound-wave-outer {
+  right: 0;
+  top: 5px;
+  width: 9px;
+  height: 18px;
+}
+
+.sound-toggle:not(.is-on) .sound-wave {
+  display: none;
+}
+
+.sound-toggle:not(.is-on) .sound-glyph::after {
+  content: "";
+  position: absolute;
+  left: 3px;
+  top: 13px;
+  width: 28px;
+  height: 3px;
+  background: #ff000a;
+  transform: rotate(-42deg);
+  transform-origin: center;
 }
 
 .game-main {
@@ -273,6 +368,13 @@ body,
   box-shadow: 0 1px 0 rgba(0, 0, 0, 0.12);
 }
 
+.confirm-panel {
+  width: 100%;
+  font-family: var(--unity-font);
+  text-align: center;
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.12);
+}
+
 .result-time {
   height: clamp(64px, 10vh, 84px);
   display: flex;
@@ -281,6 +383,18 @@ body,
   background: #000000;
   color: var(--unity-yellow);
   font-size: clamp(31px, 10vw, 48px);
+  line-height: 1;
+  letter-spacing: 0;
+}
+
+.confirm-title {
+  height: clamp(64px, 10vh, 84px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #000000;
+  color: var(--unity-yellow);
+  font-size: clamp(28px, 8vw, 42px);
   line-height: 1;
   letter-spacing: 0;
 }
@@ -306,6 +420,37 @@ body,
 
 .result-button:active {
   background: #d7d7d7;
+}
+
+.result-button:disabled {
+  cursor: default;
+  opacity: 0.72;
+}
+
+.result-status {
+  min-height: clamp(44px, 6.2vh, 58px);
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  align-items: center;
+  justify-content: center;
+  border-top: 1px solid #9fc8d8;
+  background: #f4f4f4;
+  color: #b00020;
+  font-family: var(--unity-font);
+  font-size: clamp(10px, 3vw, 14px);
+  line-height: 1.35;
+  letter-spacing: 0;
+  padding: 0 8px;
+}
+
+.result-status-detail {
+  max-width: 100%;
+  color: #333333;
+  font-family: Arial, sans-serif;
+  font-size: 11px;
+  line-height: 1.15;
+  overflow-wrap: anywhere;
 }
 
 .tutorial-overlay {
@@ -388,7 +533,7 @@ body,
 }
 
 @media (max-width: 360px) {
-  .hud {
+  .hud-stats {
     gap: 16px;
   }
 
@@ -400,5 +545,9 @@ body,
   .hud-icon {
     width: 36px;
     height: 36px;
+  }
+
+  .sound-toggle {
+    right: 4px;
   }
 }

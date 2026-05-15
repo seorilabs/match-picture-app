@@ -56,6 +56,11 @@ export interface GameApi extends GameSnapshot {
   retry: () => void;
 }
 
+export interface GameOptions {
+  /** 테스트 빌드에서만 기본 10 라운드를 더 짧게 줄일 수 있습니다. */
+  totalCards?: number;
+}
+
 /**
  * 정답 후 다음 라운드로 넘어가기 전 정답 효과를 보여주는 시간(ms).
  * Unity의 `EffectMatch` 코루틴이 약 20프레임 정도 걸렸던 것을 짧게 잡았습니다.
@@ -67,7 +72,15 @@ const CORRECT_DELAY_MS = 450;
  */
 const WRONG_PENALTY_MS = 1500;
 
-export function useGame(): GameApi {
+function normalizeTotalCards(value: number | undefined): number {
+  if (!Number.isInteger(value)) return TOTAL_CARDS;
+  return Math.min(TOTAL_CARDS, Math.max(1, value));
+}
+
+export function useGame(options: GameOptions = {}): GameApi {
+  const configuredTotalCardsRef = useRef(
+    normalizeTotalCards(options.totalCards),
+  );
   const [status, setStatus] = useState<GameStatus>("idle");
   const [round, setRound] = useState<RoundState | null>(null);
   const [elapsedSeconds, setElapsedSeconds] = useState(0);
@@ -76,10 +89,13 @@ export function useGame(): GameApi {
   const [locked, setLocked] = useState(false);
   const [lastFeedback, setLastFeedback] = useState<FeedbackEvent | null>(null);
   const [resultSeconds, setResultSeconds] = useState<number | null>(null);
+  const [activeTotalCards, setActiveTotalCards] = useState(
+    configuredTotalCardsRef.current,
+  );
 
   // 남은 라운드 수는 정답 수에서 derive합니다.
-  // Unity 원본 HUD처럼 시작 시 10에서 시작해 정답마다 1씩 줄어듭니다.
-  const remaining = Math.max(0, TOTAL_CARDS - correctCount);
+  // 운영 기본값은 Unity 원본처럼 10에서 시작하고, 테스트 빌드에서는 더 짧게 줄일 수 있습니다.
+  const remaining = Math.max(0, activeTotalCards - correctCount);
 
   const queueRef = useRef<Card[]>([]);
   const timerStartedRef = useRef(false);
@@ -94,6 +110,10 @@ export function useGame(): GameApi {
   const roundRef = useRef<RoundState | null>(null);
   statusRef.current = status;
   roundRef.current = round;
+
+  useEffect(() => {
+    configuredTotalCardsRef.current = normalizeTotalCards(options.totalCards);
+  }, [options.totalCards]);
 
   const stopTicking = useCallback(() => {
     if (tickRef.current !== null) {
@@ -127,10 +147,11 @@ export function useGame(): GameApi {
     cancelPendingFollowUp();
     stopTicking();
 
+    const totalCards = configuredTotalCardsRef.current;
     const deck = createDeck({
       prime: PRIME,
       symbolsPerCard: SYMBOLS_PER_CARD,
-      maxCards: TOTAL_CARDS,
+      maxCards: totalCards,
     });
     queueRef.current = [...deck];
     timerStartedRef.current = false;
@@ -141,6 +162,7 @@ export function useGame(): GameApi {
     statusRef.current = firstRound === null ? "idle" : "playing";
 
     setRound(firstRound);
+    setActiveTotalCards(totalCards);
     setElapsedSeconds(0);
     setCorrectCount(0);
     setWrongCount(0);

@@ -6,6 +6,8 @@ interface ResultModalProps {
   seconds: number | null;
   onRetry: () => void;
   leaderboardEnabled: boolean;
+  leaderboardStatus: "idle" | "opening" | "failed";
+  leaderboardMessage: string | null;
   onOpenLeaderboard: () => void;
   onExit: () => void;
 }
@@ -16,6 +18,8 @@ export function ResultModal({
   seconds,
   onRetry,
   leaderboardEnabled,
+  leaderboardStatus,
+  leaderboardMessage,
   onOpenLeaderboard,
   onExit,
 }: ResultModalProps) {
@@ -27,10 +31,19 @@ export function ResultModal({
           <button
             type="button"
             className="result-button"
+            disabled={leaderboardStatus === "opening"}
             onClick={onOpenLeaderboard}
           >
-            RANKING
+            {leaderboardStatus === "opening" ? "OPENING" : "RANKING"}
           </button>
+        ) : null}
+        {leaderboardStatus === "failed" ? (
+          <div className="result-status">
+            <span>RANKING UNAVAILABLE</span>
+            {leaderboardMessage ? (
+              <span className="result-status-detail">{leaderboardMessage}</span>
+            ) : null}
+          </div>
         ) : null}
         <button type="button" className="result-button" onClick={onRetry}>
           RETRY

@@ -43,3 +43,14 @@ export function playEffectSound(sound: EffectSound): void {
     // Ignore unsupported or interrupted playback.
   }
 }
+
+export function stopEffectSounds(): void {
+  for (const player of players.values()) {
+    try {
+      player.pause();
+      player.currentTime = 0;
+    } catch {
+      // Ignore unsupported or interrupted playback.
+    }
+  }
+}

@@ -1,0 +1,70 @@
+name: Deploy Apps in Toss
+
+on:
+  workflow_dispatch:
+    inputs:
+      memo:
+        description: "Apps in Toss deployment memo"
+        required: false
+        default: "GitHub Actions deployment"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: deploy-apps-in-toss
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    name: Build and Deploy
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    environment: apps-in-toss
+
+    env:
+      APPS_IN_TOSS_API_KEY: ${{ secrets.APPS_IN_TOSS_API_KEY }}
+      DEPLOY_MEMO: ${{ inputs.memo }}
+      VITE_AD_GROUP_ID: ${{ secrets.VITE_AD_GROUP_ID }}
+      VITE_REMOTE_CONFIG_URL: ${{ vars.VITE_REMOTE_CONFIG_URL || 'https://config.vzyx.xyz/match-picture/launch-config.json' }}
+      VITE_REMOTE_CONFIG_FALLBACK_URL: ${{ vars.VITE_REMOTE_CONFIG_FALLBACK_URL }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+
+      - name: Check required secrets
+        run: |
+          test -n "$APPS_IN_TOSS_API_KEY"
+          test -n "$VITE_AD_GROUP_ID"
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Test
+        run: npm test
+
+      - name: Build AIT artifact
+        run: npm run build
+
+      - name: Upload build artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: match-picture-app-deploy-${{ github.sha }}
+          if-no-files-found: error
+          retention-days: 30
+          path: |
+            match-picture-app.ait
+            dist/**
+
+      - name: Deploy to Apps in Toss
+        run: npm run deploy -- --api-key "$APPS_IN_TOSS_API_KEY" --location ./match-picture-app.ait -m "$DEPLOY_MEMO"
