@@ -1,12 +1,9 @@
 name: Deploy Apps in Toss
 
 on:
-  workflow_dispatch:
-    inputs:
-      memo:
-        description: "Apps in Toss deployment memo"
-        required: false
-        default: "GitHub Actions deployment"
+  push:
+    branches:
+      - main
 
 permissions:
   contents: read
@@ -24,7 +21,7 @@ jobs:
 
     env:
       APPS_IN_TOSS_API_KEY: ${{ secrets.APPS_IN_TOSS_API_KEY }}
-      DEPLOY_MEMO: ${{ inputs.memo }}
+      DEPLOY_MEMO: "GitHub Actions main deployment ${{ github.sha }}"
       VITE_AD_GROUP_ID: ${{ secrets.VITE_AD_GROUP_ID }}
       VITE_REMOTE_CONFIG_URL: ${{ vars.VITE_REMOTE_CONFIG_URL || 'https://config.vzyx.xyz/match-picture/launch-config.json' }}
       VITE_REMOTE_CONFIG_FALLBACK_URL: ${{ vars.VITE_REMOTE_CONFIG_FALLBACK_URL }}
