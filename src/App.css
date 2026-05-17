@@ -235,6 +235,81 @@ body,
   overflow: visible;
 }
 
+.card-placeholder {
+  border: 4px solid rgba(255, 255, 255, 0.82);
+  box-shadow:
+    inset 0 0 0 8px rgba(0, 0, 0, 0.05),
+    0 4px 0 rgba(0, 0, 0, 0.18);
+}
+
+.card-back {
+  overflow: hidden;
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.2) 25%, transparent 25%) 0 0 /
+      28px 28px,
+    linear-gradient(135deg, transparent 75%, rgba(255, 255, 255, 0.18) 75%) 0 0 /
+      28px 28px,
+    #f0f0f0;
+}
+
+.card-back::before {
+  content: "?";
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(0, 0, 0, 0.16);
+  font-family: var(--unity-font);
+  font-size: clamp(70px, 24vw, 120px);
+  line-height: 1;
+}
+
+.ready-card-button {
+  appearance: none;
+  border: 4px solid rgba(255, 255, 255, 0.9);
+  padding: 0;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+
+.ready-card-button::before {
+  opacity: 0.55;
+}
+
+.ready-card-button:active {
+  transform: translateY(2px);
+  box-shadow:
+    inset 0 0 0 8px rgba(0, 0, 0, 0.05),
+    0 2px 0 rgba(0, 0, 0, 0.2);
+}
+
+.ready-card-label,
+.ready-card-subtitle {
+  position: relative;
+  z-index: 1;
+  display: block;
+  text-align: center;
+  letter-spacing: 0;
+}
+
+.ready-card-label {
+  color: #000000;
+  font-family: var(--unity-font);
+  font-size: clamp(28px, 10vw, 48px);
+  line-height: 1;
+}
+
+.ready-card-subtitle {
+  margin-top: 12px;
+  color: #333333;
+  font-family: Arial, "Apple SD Gothic Neo", sans-serif;
+  font-size: clamp(16px, 4.8vw, 22px);
+  font-weight: 700;
+  line-height: 1.2;
+}
+
 .mine-section.is-locked .card-view {
   pointer-events: none;
 }
@@ -466,6 +541,59 @@ body,
   background-color: var(--unity-bg);
   background-image: url("/bg.png");
   background-size: 100% 100%;
+  --tutorial-card-size: min(52vw, 200px, calc((100vh - var(--hud-height) - 230px) / 2));
+}
+
+@supports (height: 100dvh) {
+  .tutorial-overlay {
+    --tutorial-card-size: min(
+      52vw,
+      200px,
+      calc((100dvh - var(--hud-height) - 230px) / 2)
+    );
+  }
+}
+
+.tutorial-content {
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(10px, 2vh, 16px);
+  padding: 12px 0;
+}
+
+.tutorial-copy {
+  box-sizing: border-box;
+  width: min(72vw, 280px);
+  border: 3px solid rgba(0, 0, 0, 0.18);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.94);
+  color: #222222;
+  padding: clamp(12px, 2.4vh, 16px) clamp(14px, 4vw, 18px);
+  text-align: center;
+  box-shadow: 0 4px 0 rgba(0, 0, 0, 0.14);
+}
+
+.tutorial-copy h1 {
+  margin: 0 0 8px;
+  font-family: Arial, "Apple SD Gothic Neo", sans-serif;
+  font-size: clamp(21px, 6vw, 28px);
+  font-weight: 800;
+  line-height: 1.12;
+  letter-spacing: 0;
+}
+
+.tutorial-copy p {
+  margin: 6px 0 0;
+  font-family: Arial, "Apple SD Gothic Neo", sans-serif;
+  font-size: clamp(14px, 4vw, 17px);
+  font-weight: 700;
+  line-height: 1.35;
+  letter-spacing: 0;
 }
 
 .tutorial-cards {
@@ -475,8 +603,12 @@ body,
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: var(--card-gap);
-  padding: 18px 0;
+  gap: clamp(10px, 2vh, 18px);
+  padding: 0;
+}
+
+.tutorial-card {
+  width: max(148px, var(--tutorial-card-size));
 }
 
 .tutorial-symbol {
@@ -498,7 +630,8 @@ body,
   content: "";
   position: absolute;
   inset: -26%;
-  border: max(8px, calc(var(--card-size) * 0.03)) solid var(--unity-green);
+  border: max(7px, calc(var(--tutorial-card-size) * 0.03)) solid
+    var(--unity-green);
   border-radius: 50%;
   pointer-events: none;
 }
@@ -513,23 +646,30 @@ body,
   transform-origin: 70% 20%;
 }
 
-.tutorial-close {
+.tutorial-start {
   appearance: none;
-  position: absolute;
-  top: 8px;
-  right: 8px;
-  width: 42px;
-  height: 42px;
-  border-radius: 50%;
-  border: 2px solid #666666;
-  background: #f8f8f8;
-  color: #333333;
-  font: 28px/1 Arial, sans-serif;
+  width: min(64vw, 250px);
+  min-height: 52px;
+  border: 0;
+  border-radius: 8px;
+  background: #000000;
+  color: var(--unity-yellow);
+  font-family: Arial, "Apple SD Gothic Neo", sans-serif;
+  font-size: clamp(18px, 5vw, 24px);
+  font-weight: 800;
+  line-height: 1.2;
+  letter-spacing: 0;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
   -webkit-tap-highlight-color: transparent;
+  box-shadow: 0 4px 0 rgba(0, 0, 0, 0.2);
+}
+
+.tutorial-start:active {
+  transform: translateY(2px);
+  box-shadow: 0 2px 0 rgba(0, 0, 0, 0.2);
 }
 
 @media (max-width: 360px) {

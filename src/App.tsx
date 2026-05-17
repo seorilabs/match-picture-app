@@ -43,6 +43,7 @@ function App() {
     lastFeedback,
     resultSeconds,
     start: startGame,
+    reveal: revealGame,
     tap,
     retry: retryGame,
   } = useGame({ totalCards: debugTotalCards ?? undefined });
@@ -172,6 +173,11 @@ function App() {
     retryGame();
   }, [adReady, retryGame, showAd, soundEnabled]);
 
+  const handleRevealCards = useCallback(() => {
+    if (soundEnabled) preloadEffectSounds();
+    revealGame();
+  }, [revealGame, soundEnabled]);
+
   const handleOpenLeaderboard = useCallback(async () => {
     setLeaderboardStatus("opening");
     setLeaderboardMessage(null);
@@ -223,6 +229,8 @@ function App() {
               clickable={false}
               onPress={() => undefined}
             />
+          ) : status === "ready" ? (
+            <div className="card-placeholder card-back" aria-hidden="true" />
           ) : (
             <div className="card-placeholder" aria-hidden="true" />
           )}
@@ -240,6 +248,16 @@ function App() {
               clickable={!locked && status === "playing"}
               onPress={handleMinePress}
             />
+          ) : status === "ready" ? (
+            <button
+              type="button"
+              className="card-placeholder card-back ready-card-button"
+              onClick={handleRevealCards}
+              aria-label="카드 열고 게임 시작"
+            >
+              <span className="ready-card-label">OPEN</span>
+              <span className="ready-card-subtitle">카드 열기</span>
+            </button>
           ) : (
             <div className="card-placeholder" aria-hidden="true" />
           )}

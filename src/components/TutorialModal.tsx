@@ -62,24 +62,36 @@ function TutorialCard({
   );
 }
 
-/** Unity 원본의 최초 1회 튜토리얼 화면을 App Store 스크린샷 형태로 재현합니다. */
+/** 최초 플레이어가 규칙과 첫 액션을 이해하도록 안내합니다. */
 export function TutorialModal({ open, onClose }: TutorialModalProps) {
   if (!open) return null;
 
   return (
-    <div className="tutorial-overlay" role="dialog" aria-modal="true">
-      <div className="tutorial-cards" aria-hidden="true">
-        <TutorialCard symbols={SAMPLE_TOP} highlight="040" />
-        <TutorialCard symbols={SAMPLE_BOTTOM} highlight="040" hand />
+    <div
+      className="tutorial-overlay"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="tutorial-title"
+    >
+      <div className="tutorial-content">
+        <div className="tutorial-copy">
+          <h1 id="tutorial-title">같은 그림을 찾아요</h1>
+          <p>
+            위 카드와 아래 카드에는 같은 그림이 딱 하나 있어요. 아래
+            카드에서 그 그림을 누르면 다음 카드로 넘어갑니다.
+          </p>
+          <p>틀리면 잠깐 멈추고, 빨리 끝낼수록 기록이 좋아져요.</p>
+        </div>
+
+        <div className="tutorial-cards" aria-hidden="true">
+          <TutorialCard symbols={SAMPLE_TOP} highlight="040" />
+          <TutorialCard symbols={SAMPLE_BOTTOM} highlight="040" hand />
+        </div>
+
+        <button type="button" className="tutorial-start" onClick={onClose}>
+          알겠어요
+        </button>
       </div>
-      <button
-        type="button"
-        className="tutorial-close"
-        onClick={onClose}
-        aria-label="튜토리얼 닫기"
-      >
-        X
-      </button>
     </div>
   );
 }
