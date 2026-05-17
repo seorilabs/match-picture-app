@@ -12,10 +12,11 @@ import {
 /**
  * 게임 진행 단계입니다.
  * - `idle`: 큐가 비어 있는 초기 상태.
- * - `playing`: Unity 원본처럼 시작 즉시 위/아래 카드가 노출되어 매칭이 진행되는 상태.
+ * - `ready`: 큐와 첫 라운드를 준비했지만 사용자가 아직 카드를 열지 않은 상태.
+ * - `playing`: 위/아래 카드가 노출되어 매칭이 진행되는 상태.
  * - `finished`: 모든 카드를 마쳐서 결과가 표시되는 상태.
  */
-export type GameStatus = "idle" | "playing" | "finished";
+export type GameStatus = "idle" | "ready" | "playing" | "finished";
 
 export interface FeedbackEvent {
   /** 피드백 식별자입니다. 같은 키가 두 번 들어와도 React가 갱신을 인지하도록 ID를 부여합니다. */
@@ -45,8 +46,10 @@ export interface GameSnapshot {
 }
 
 export interface GameApi extends GameSnapshot {
-  /** 큐를 준비하고 첫 라운드를 즉시 노출합니다. */
+  /** 큐를 준비하고 카드 뒷면 상태로 대기합니다. */
   start: () => void;
+  /** 준비된 첫 라운드를 열고 게임을 시작합니다. */
+  reveal: () => void;
   /** 사용자가 내 카드의 한 심볼을 탭했을 때 호출합니다. */
   tap: (
     symbol: string,
@@ -57,7 +60,7 @@ export interface GameApi extends GameSnapshot {
 }
 
 export interface GameOptions {
-  /** 테스트 빌드에서만 기본 10 라운드를 더 짧게 줄일 수 있습니다. */
+  /** 개발 세션에서만 기본 10 라운드를 더 짧게 줄일 수 있습니다. */
   totalCards?: number;
 }
 
@@ -102,6 +105,7 @@ export function useGame(options: GameOptions = {}): GameApi {
   const feedbackIdRef = useRef(0);
   const tickRef = useRef<number | null>(null);
   const pendingTimeoutRef = useRef<number | null>(null);
+  const preparedRoundRef = useRef<RoundState | null>(null);
   // 멀티터치 어뷰징 방지용 동기 락. React state는 다음 렌더에야 반영되므로
   // 같은 프레임의 후속 탭이 모두 통과하는 문제를 막기 위해 ref를 진실 소스로 사용합니다.
   const lockedRef = useRef(false);
@@ -158,10 +162,11 @@ export function useGame(options: GameOptions = {}): GameApi {
     lockedRef.current = false;
 
     const firstRound = takeNextRound(queueRef.current, null);
-    roundRef.current = firstRound;
-    statusRef.current = firstRound === null ? "idle" : "playing";
+    preparedRoundRef.current = firstRound;
+    roundRef.current = null;
+    statusRef.current = firstRound === null ? "idle" : "ready";
 
-    setRound(firstRound);
+    setRound(null);
     setActiveTotalCards(totalCards);
     setElapsedSeconds(0);
     setCorrectCount(0);
@@ -169,8 +174,25 @@ export function useGame(options: GameOptions = {}): GameApi {
     setLocked(false);
     setLastFeedback(null);
     setResultSeconds(null);
-    setStatus(firstRound === null ? "idle" : "playing");
+    setStatus(firstRound === null ? "idle" : "ready");
   }, [cancelPendingFollowUp, stopTicking]);
+
+  const reveal = useCallback(() => {
+    if (statusRef.current !== "ready") return;
+    const firstRound = preparedRoundRef.current;
+    if (firstRound === null) return;
+
+    preparedRoundRef.current = null;
+    roundRef.current = firstRound;
+    statusRef.current = "playing";
+    setRound(firstRound);
+    setStatus("playing");
+
+    if (!timerStartedRef.current) {
+      timerStartedRef.current = true;
+      startTickingIfNeeded();
+    }
+  }, [startTickingIfNeeded]);
 
   const finish = useCallback(
     (seconds: number) => {
@@ -262,6 +284,7 @@ export function useGame(options: GameOptions = {}): GameApi {
     lastFeedback,
     resultSeconds,
     start,
+    reveal,
     tap,
     retry,
   };
