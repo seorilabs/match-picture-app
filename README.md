@@ -38,6 +38,8 @@ Apps in Toss 배포는 `.github/workflows/deploy.yml`에서 수동 실행합니�
 | 이름 | 위치 | 설명 |
 | --- | --- | --- |
 | `APPS_IN_TOSS_API_KEY` | Secret | `ait deploy --api-key`에 사용할 Apps in Toss API key |
+| `AIT_APP_DISPLAY_NAME` | Variable | Apps in Toss 콘솔 앱 정보에 제출한 앱 이름. `granite.config.ts`의 `brand.displayName`에 사용되며 배포 빌드에 필수 |
+| `AIT_BRAND_ICON_URL` | Variable | Apps in Toss 콘솔 앱 정보에 업로드한 앱 로고 이미지 URL. `granite.config.ts`의 `brand.icon`에 사용되며 배포 빌드에 필수 |
 | `VITE_AD_GROUP_ID` | Secret | 운영 전면 광고 그룹 ID |
 | `VITE_REMOTE_CONFIG_URL` | Variable | 선택값. 기본값은 `https://config.vzyx.xyz/match-picture/launch-config.json` |
 | `VITE_REMOTE_CONFIG_FALLBACK_URL` | Variable | 선택값. 독립 fallback host가 있을 때만 설정 |
@@ -48,6 +50,8 @@ Apps in Toss 배포는 `.github/workflows/deploy.yml`에서 수동 실행합니�
 
 | 키 | 설명 |
 | --- | --- |
+| `AIT_APP_DISPLAY_NAME` | Apps in Toss 콘솔 앱 정보에 제출한 앱 이름입니다. 공백 포함 여부까지 콘솔 값과 정확히 같아야 하며, `npm run build`에서는 필수입니다. `npm run dev`에서는 없으면 `같은그림찾기`를 사용합니다. |
+| `AIT_BRAND_ICON_URL` | Apps in Toss 콘솔 앱 정보에 업로드한 앱 로고 이미지 URL입니다. 콘솔에서 업로드한 로고를 우클릭해 링크를 복사한 값을 넣어야 하며, `npm run build`에서는 필수입니다. `npm run dev`에서는 없으면 `public/icon.png`를 사용합니다. |
 | `VITE_AD_GROUP_ID` | Apps in Toss 통합 광고(전면형) 그룹 ID. 콘솔에서 발급한 운영 ID를 `.env.production.local`에 설정합니다. 없으면 광고 노출이 비활성화됩니다. |
 | `VITE_REMOTE_CONFIG_URL` | 선택값. 출시 후 기능을 끄기 위한 public HTTPS JSON URL입니다. 운영 기본값은 `https://config.vzyx.xyz/match-picture/launch-config.json`입니다. 쉼표로 여러 URL을 넣을 수 있습니다. |
 | `VITE_REMOTE_CONFIG_FALLBACK_URL` | 선택값. 기본 URL이 내려갔을 때 추가로 시도할 public HTTPS JSON URL입니다. 같은 k8s 클러스터가 아닌 독립 호스트를 쓸 때만 설정합니다. 쉼표로 여러 URL을 넣을 수 있습니다. |

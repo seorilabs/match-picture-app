@@ -19,6 +19,8 @@ jobs:
     timeout-minutes: 15
 
     env:
+      AIT_APP_DISPLAY_NAME: ${{ vars.AIT_APP_DISPLAY_NAME }}
+      AIT_BRAND_ICON_URL: ${{ vars.AIT_BRAND_ICON_URL }}
       VITE_REMOTE_CONFIG_URL: https://config.vzyx.xyz/match-picture/launch-config.json
       VITE_REMOTE_CONFIG_FALLBACK_URL: ""
 

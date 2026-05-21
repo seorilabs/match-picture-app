@@ -21,6 +21,8 @@ jobs:
 
     env:
       APPS_IN_TOSS_API_KEY: ${{ secrets.APPS_IN_TOSS_API_KEY }}
+      AIT_APP_DISPLAY_NAME: ${{ vars.AIT_APP_DISPLAY_NAME }}
+      AIT_BRAND_ICON_URL: ${{ vars.AIT_BRAND_ICON_URL }}
       DEPLOY_MEMO: "GitHub Actions main deployment ${{ github.sha }}"
       VITE_AD_GROUP_ID: ${{ secrets.VITE_AD_GROUP_ID }}
       VITE_REMOTE_CONFIG_URL: ${{ vars.VITE_REMOTE_CONFIG_URL || 'https://config.vzyx.xyz/match-picture/launch-config.json' }}
@@ -36,9 +38,11 @@ jobs:
           node-version: 24
           cache: npm
 
-      - name: Check required secrets
+      - name: Check required config
         run: |
           test -n "$APPS_IN_TOSS_API_KEY"
+          test -n "$AIT_APP_DISPLAY_NAME"
+          test -n "$AIT_BRAND_ICON_URL"
           test -n "$VITE_AD_GROUP_ID"
 
       - name: Install dependencies
