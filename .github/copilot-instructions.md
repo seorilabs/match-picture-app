@@ -13,17 +13,10 @@
 
 이 프로젝트는 기존 Unity 게임을 Apps in Toss WebView/Granite 기반 앱으로 포팅하는 프로젝트다.
 
-작업 전 다음 자료를 우선 참고한다.
-
-- 원본 Unity 프로젝트: `/Users/syous/Repositories/seoleeapps/MatchPictureUnity`
-- 설계 및 기획 문서: `/Users/syous/Obsidian/Vault/30 Projects/Active/같은그림찾기`
-- Apps in Toss 문서 인덱스: `.cursor/skills/apps-in-toss.md`
-
 구현 판단 기준:
 
 - 게임 동작, 애셋 구조, 밸런스, 연출은 원본 Unity 프로젝트의 실제 구현을 먼저 확인한다.
 - 요구사항이나 우선순위가 불명확하면 설계 및 기획 문서를 먼저 확인한다.
-- Apps in Toss API, 심사 정책, WebView/Granite 제약이 관련되면 `.cursor/skills/apps-in-toss.md`와 공식 문서를 함께 확인한다.
 - 원본 Unity 프로젝트와 Obsidian 문서는 참고 자료이며, 이 저장소의 구현 방식에 맞게 작게 옮긴다.
 
 ## 코드 작성 지침
