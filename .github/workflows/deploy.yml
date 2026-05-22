@@ -6,7 +6,7 @@ on:
       - main
 
 permissions:
-  contents: read
+  contents: write
 
 concurrency:
   group: deploy-apps-in-toss
@@ -45,6 +45,19 @@ jobs:
           test -n "$AIT_BRAND_ICON_URL"
           test -n "$VITE_AD_GROUP_ID"
 
+      - name: Resolve release tag
+        id: release
+        run: |
+          VERSION="${GITHUB_RUN_NUMBER}.${GITHUB_RUN_ATTEMPT}"
+          TAG="v${VERSION}"
+
+          if git ls-remote --exit-code --tags origin "refs/tags/${TAG}" >/dev/null 2>&1; then
+            echo "::error::Release tag ${TAG} already exists."
+            exit 1
+          fi
+
+          echo "tag=${TAG}" >> "$GITHUB_OUTPUT"
+
       - name: Install dependencies
         run: npm ci
 
@@ -69,3 +82,10 @@ jobs:
 
       - name: Deploy to Apps in Toss
         run: npm run deploy -- --api-key "$APPS_IN_TOSS_API_KEY" --location ./match-picture-app.ait -m "$DEPLOY_MEMO"
+
+      - name: Push release tag
+        env:
+          RELEASE_TAG: ${{ steps.release.outputs.tag }}
+        run: |
+          git tag "$RELEASE_TAG" "$GITHUB_SHA"
+          git push origin "$RELEASE_TAG"
