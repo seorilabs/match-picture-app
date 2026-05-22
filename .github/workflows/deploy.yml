@@ -6,7 +6,7 @@ on:
       - main
 
 permissions:
-  contents: write
+  contents: read
 
 concurrency:
   group: deploy-apps-in-toss
@@ -18,6 +18,8 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 20
     environment: apps-in-toss
+    permissions:
+      contents: write
 
     env:
       APPS_IN_TOSS_API_KEY: ${{ secrets.APPS_IN_TOSS_API_KEY }}
@@ -51,9 +53,19 @@ jobs:
           VERSION="${GITHUB_RUN_NUMBER}.${GITHUB_RUN_ATTEMPT}"
           TAG="v${VERSION}"
 
-          if git ls-remote --exit-code --tags origin "refs/tags/${TAG}" >/dev/null 2>&1; then
+          set +e
+          git ls-remote --exit-code --tags origin "refs/tags/${TAG}" >/dev/null 2>&1
+          LS_REMOTE_STATUS=$?
+          set -e
+
+          if [ "$LS_REMOTE_STATUS" -eq 0 ]; then
             echo "::error::Release tag ${TAG} already exists."
             exit 1
+          fi
+
+          if [ "$LS_REMOTE_STATUS" -ne 2 ]; then
+            echo "::error::Failed to check release tag ${TAG}. git ls-remote exited with ${LS_REMOTE_STATUS}."
+            exit "$LS_REMOTE_STATUS"
           fi
 
           echo "tag=${TAG}" >> "$GITHUB_OUTPUT"
