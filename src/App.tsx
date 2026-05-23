@@ -17,7 +17,11 @@ import { useGame } from "./game/useGame";
 import { readItem, writeItem } from "./ait/storage";
 import { useScreenAwake } from "./ait/awake";
 import { requestReviewIfSupported } from "./ait/review";
-import { openLeaderboard, submitClearTime } from "./ait/leaderboard";
+import {
+  clearTimeToLeaderboardScore,
+  openLeaderboard,
+  submitClearTime,
+} from "./ait/leaderboard";
 import { useInterstitialAd } from "./ait/ads";
 import { closeMiniApp, useDisableIosSwipeBack } from "./ait/navigation";
 import { useHiddenCallback } from "./ait/visibility";
@@ -54,6 +58,9 @@ function App() {
   const [exitConfirmOpen, setExitConfirmOpen] = useState(false);
   const [leaderboardStatus, setLeaderboardStatus] = useState<
     "idle" | "opening" | "failed"
+  >("idle");
+  const [leaderboardSubmitStatus, setLeaderboardSubmitStatus] = useState<
+    "idle" | "submitting" | "submitted" | "failed"
   >("idle");
   const [leaderboardMessage, setLeaderboardMessage] = useState<string | null>(
     null,
@@ -122,7 +129,9 @@ function App() {
   useEffect(() => {
     if (status !== "finished") {
       setLeaderboardStatus("idle");
+      setLeaderboardSubmitStatus("idle");
       setLeaderboardMessage(null);
+      lastSubmittedSecondsRef.current = null;
     }
   }, [status]);
 
@@ -134,7 +143,14 @@ function App() {
       lastSubmittedSecondsRef.current !== resultSeconds
     ) {
       lastSubmittedSecondsRef.current = resultSeconds;
-      void submitClearTime(resultSeconds);
+      const submittedSeconds = resultSeconds;
+      setLeaderboardSubmitStatus("submitting");
+      void submitClearTime(resultSeconds).then((submitStatus) => {
+        if (lastSubmittedSecondsRef.current !== submittedSeconds) return;
+        setLeaderboardSubmitStatus(
+          submitStatus === "SUCCESS" ? "submitted" : "failed",
+        );
+      });
     }
     if (launchConfig.reviewRequestEnabled && !reviewRequestedRef.current) {
       reviewRequestedRef.current = true;
@@ -273,6 +289,12 @@ function App() {
         seconds={resultSeconds}
         onRetry={handleRetry}
         leaderboardEnabled={launchConfig.leaderboardEnabled}
+        leaderboardScore={
+          resultSeconds === null
+            ? null
+            : clearTimeToLeaderboardScore(resultSeconds)
+        }
+        leaderboardSubmitStatus={leaderboardSubmitStatus}
         leaderboardStatus={leaderboardStatus}
         leaderboardMessage={leaderboardMessage}
         onOpenLeaderboard={handleOpenLeaderboard}

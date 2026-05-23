@@ -462,6 +462,33 @@ body,
   letter-spacing: 0;
 }
 
+.result-score {
+  min-height: clamp(42px, 6vh, 52px);
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  align-items: center;
+  justify-content: center;
+  border-top: 1px solid #9fc8d8;
+  background: #f4f4f4;
+  color: #333333;
+  font-family: var(--unity-font);
+  font-size: 13px;
+  line-height: 1;
+  letter-spacing: 0;
+  padding: 0 10px;
+}
+
+.result-score-label {
+  color: #595959;
+  font-size: 11px;
+}
+
+.result-score-value {
+  color: #222222;
+  font-size: 20px;
+}
+
 .confirm-title {
   height: clamp(64px, 10vh, 84px);
   display: flex;
