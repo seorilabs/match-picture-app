@@ -56,7 +56,7 @@ Apps in Toss 배포는 `.github/workflows/deploy.yml`에서 수동 실행합니�
 | `VITE_REMOTE_CONFIG_URL` | 선택값. 출시 후 기능을 끄기 위한 public HTTPS JSON URL입니다. 운영 기본값은 `https://config.vzyx.xyz/match-picture/launch-config.json`입니다. 쉼표로 여러 URL을 넣을 수 있습니다. |
 | `VITE_REMOTE_CONFIG_FALLBACK_URL` | 선택값. 기본 URL이 내려갔을 때 추가로 시도할 public HTTPS JSON URL입니다. 같은 k8s 클러스터가 아닌 독립 호스트를 쓸 때만 설정합니다. 쉼표로 여러 URL을 넣을 수 있습니다. |
 
-리더보드는 기본 활성화되어 있으며, 게임 클리어 시 점수를 제출하고 결과 화면에 `RANKING` 버튼을 표시합니다. 콘솔에서 게임 센터/리더보드 설정이 완료되어 있어야 실제 토스 앱에서 정상 동작합니다.
+리더보드는 기본 활성화되어 있으며, 게임 클리어 시 점수를 제출하고 상단 HUD의 `RANK` 버튼과 결과 화면의 `RANKING` 버튼에서 열 수 있습니다. 콘솔에서 게임 센터/리더보드 설정이 완료되어 있어야 실제 토스 앱에서 정상 동작합니다.
 
 출시 후 리더보드, 리뷰 요청, 전면 광고를 긴급 비활성화하려면 `VITE_REMOTE_CONFIG_URL`이 가리키는 JSON을 아래처럼 바꿉니다. 해당 URL은 앱 WebView에서 `fetch`로 읽기 때문에 HTTPS와 CORS 허용이 필요합니다. 원격 설정을 성공적으로 읽으면 앱 Storage/localStorage에 마지막 성공값을 저장하고, 이후 설정 서버가 내려가면 저장된 값을 fallback으로 사용합니다.
 
