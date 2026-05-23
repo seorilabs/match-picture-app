@@ -32,13 +32,16 @@ export function ResultModal({
       <div className="result-panel">
         <div className="result-time">{formatSeconds(seconds ?? 0)}</div>
         {leaderboardEnabled && leaderboardSubmitStatus === "submitting" ? (
-          <div className="result-score">REGISTERING SCORE</div>
+          <div className="result-score">랭킹 등록 중</div>
+        ) : null}
+        {leaderboardEnabled && leaderboardSubmitStatus === "failed" ? (
+          <div className="result-score">랭킹 등록 실패</div>
         ) : null}
         {leaderboardEnabled &&
         leaderboardSubmitStatus === "submitted" &&
         leaderboardScore ? (
           <div className="result-score">
-            <span className="result-score-label">RANKING SCORE</span>
+            <span className="result-score-label">랭킹 등록 점수</span>
             <span className="result-score-value">{leaderboardScore}</span>
           </div>
         ) : null}
