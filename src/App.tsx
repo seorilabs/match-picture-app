@@ -232,7 +232,11 @@ function App() {
         remaining={remaining}
         elapsedSeconds={elapsedSeconds}
         soundEnabled={soundEnabled}
+        leaderboardEnabled={launchConfig.leaderboardEnabled}
+        leaderboardStatus={leaderboardStatus}
+        leaderboardMessage={leaderboardMessage}
         onToggleSound={handleToggleSound}
+        onOpenLeaderboard={handleOpenLeaderboard}
       />
 
       <main className="game-main">
