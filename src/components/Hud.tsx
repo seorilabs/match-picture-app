@@ -4,20 +4,49 @@ interface HudProps {
   remaining: number;
   elapsedSeconds: number;
   soundEnabled: boolean;
+  leaderboardEnabled: boolean;
+  leaderboardStatus: "idle" | "opening" | "failed";
+  leaderboardMessage: string | null;
   onToggleSound: () => void;
+  onOpenLeaderboard: () => void;
 }
 
-/** Unity 원본 상단 UI처럼 남은 카드와 경과 시간만 보여줍니다. */
+/** Unity 원본 상단 UI를 기준으로 남은 카드, 경과 시간, 빠른 액션을 보여줍니다. */
 export function Hud({
   remaining,
   elapsedSeconds,
   soundEnabled,
+  leaderboardEnabled,
+  leaderboardStatus,
+  leaderboardMessage,
   onToggleSound,
+  onOpenLeaderboard,
 }: HudProps) {
   const baseUrl = import.meta.env.BASE_URL;
+  const leaderboardLabel =
+    leaderboardStatus === "opening"
+      ? "랭킹 여는 중"
+      : leaderboardStatus === "failed" && leaderboardMessage
+        ? `랭킹 열기. 최근 실패: ${leaderboardMessage}`
+        : "랭킹 열기";
 
   return (
     <div className="hud">
+      {leaderboardEnabled ? (
+        <button
+          type="button"
+          className={`leaderboard-toggle${
+            leaderboardStatus === "failed" ? " is-failed" : ""
+          }`}
+          aria-label={leaderboardLabel}
+          disabled={leaderboardStatus === "opening"}
+          onClick={onOpenLeaderboard}
+        >
+          <span aria-hidden="true">
+            {leaderboardStatus === "opening" ? "..." : "RANK"}
+          </span>
+        </button>
+      ) : null}
       <div className="hud-stats" role="status" aria-live="polite">
         <div className="hud-group">
           <img

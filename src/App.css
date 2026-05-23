@@ -115,6 +115,52 @@ body,
   white-space: nowrap;
 }
 
+.leaderboard-toggle {
+  appearance: none;
+  position: absolute;
+  top: 4px;
+  left: 4px;
+  width: 48px;
+  height: 40px;
+  border: 0;
+  background: transparent;
+  color: #333333;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--unity-font);
+  font-size: 9px;
+  line-height: 1;
+  letter-spacing: 0;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+
+.leaderboard-toggle:active {
+  opacity: 0.72;
+}
+
+.leaderboard-toggle:disabled {
+  cursor: default;
+  opacity: 0.64;
+}
+
+.leaderboard-toggle.is-failed {
+  color: #b00020;
+}
+
+.leaderboard-toggle.is-failed::after {
+  content: "";
+  position: absolute;
+  right: 8px;
+  bottom: 7px;
+  left: 8px;
+  height: 2px;
+  background: #ff000a;
+}
+
 .sound-toggle {
   appearance: none;
   position: absolute;
