@@ -6,6 +6,8 @@ interface ResultModalProps {
   seconds: number | null;
   onRetry: () => void;
   leaderboardEnabled: boolean;
+  leaderboardScore: string | null;
+  leaderboardSubmitStatus: "idle" | "submitting" | "submitted" | "failed";
   leaderboardStatus: "idle" | "opening" | "failed";
   leaderboardMessage: string | null;
   onOpenLeaderboard: () => void;
@@ -18,6 +20,8 @@ export function ResultModal({
   seconds,
   onRetry,
   leaderboardEnabled,
+  leaderboardScore,
+  leaderboardSubmitStatus,
   leaderboardStatus,
   leaderboardMessage,
   onOpenLeaderboard,
@@ -27,6 +31,39 @@ export function ResultModal({
     <Modal open={open} variant="result">
       <div className="result-panel">
         <div className="result-time">{formatSeconds(seconds ?? 0)}</div>
+        {leaderboardEnabled && leaderboardSubmitStatus === "submitting" ? (
+          <div
+            className="result-score"
+            role="status"
+            aria-live="polite"
+            aria-atomic="true"
+          >
+            랭킹 등록 중
+          </div>
+        ) : null}
+        {leaderboardEnabled && leaderboardSubmitStatus === "failed" ? (
+          <div
+            className="result-score"
+            role="status"
+            aria-live="polite"
+            aria-atomic="true"
+          >
+            랭킹 등록 실패
+          </div>
+        ) : null}
+        {leaderboardEnabled &&
+        leaderboardSubmitStatus === "submitted" &&
+        leaderboardScore ? (
+          <div
+            className="result-score"
+            role="status"
+            aria-live="polite"
+            aria-atomic="true"
+          >
+            <span className="result-score-label">랭킹 등록 점수</span>
+            <span className="result-score-value">{leaderboardScore}</span>
+          </div>
+        ) : null}
         {leaderboardEnabled ? (
           <button
             type="button"
