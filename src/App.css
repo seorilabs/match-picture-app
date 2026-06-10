@@ -360,6 +360,79 @@ body,
   pointer-events: none;
 }
 
+.mode-bar {
+  position: absolute;
+  top: calc(env(safe-area-inset-top) + var(--hud-height) + 10px);
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 8px;
+  z-index: 5;
+}
+
+.mode-chip {
+  appearance: none;
+  border: 3px solid rgba(0, 0, 0, 0.22);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.92);
+  color: #333333;
+  font-family: Arial, "Apple SD Gothic Neo", sans-serif;
+  font-size: 13px;
+  font-weight: 800;
+  line-height: 1;
+  padding: 9px 13px;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+  box-shadow: 0 3px 0 rgba(0, 0, 0, 0.16);
+  white-space: nowrap;
+}
+
+.mode-chip:active {
+  transform: translateY(2px);
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.16);
+}
+
+.mode-chip.is-active {
+  background: #000000;
+  border-color: #000000;
+  color: var(--unity-yellow);
+}
+
+/* 카드 전환 연출. 새 상대 카드는 위에서 내려앉고(deal),
+   직전 상대 카드는 내 자리로 미끄러져 내려옵니다(slide). */
+.card-anim {
+  position: relative;
+}
+
+.card-anim-deal {
+  animation: card-deal-in 0.34s ease-out backwards;
+}
+
+.card-anim-slide {
+  animation: card-slide-down 0.38s cubic-bezier(0.22, 1.18, 0.36, 1) backwards;
+}
+
+@keyframes card-deal-in {
+  from {
+    opacity: 0;
+    transform: translateY(-34px) scale(0.94);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes card-slide-down {
+  from {
+    transform: translateY(calc(-1 * (var(--card-size) + var(--card-gap))));
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
 .symbol-button {
   appearance: none;
   position: absolute;
@@ -429,15 +502,23 @@ body,
   }
 }
 
-.feedback {
+.feedback-layer {
   position: fixed;
+  width: 0;
+  height: 0;
+  pointer-events: none;
+  z-index: 10;
+}
+
+.feedback {
+  position: absolute;
+  left: 0;
+  top: 0;
   transform: translate(-50%, -50%);
   font-size: min(30vw, 136px);
   font-weight: 700;
   line-height: 1;
-  pointer-events: none;
   animation: feedback-pop 0.6s ease forwards;
-  z-index: 10;
 }
 
 .feedback.correct {
@@ -460,6 +541,69 @@ body,
   100% {
     opacity: 0;
     transform: translate(-50%, -95%) scale(1);
+  }
+}
+
+.feedback-combo {
+  position: absolute;
+  left: 0;
+  top: 0;
+  transform: translate(-50%, 44px);
+  font-family: var(--unity-font);
+  font-size: clamp(14px, 4.6vw, 20px);
+  line-height: 1;
+  color: var(--unity-yellow);
+  text-shadow:
+    -2px 0 #000000,
+    2px 0 #000000,
+    0 -2px #000000,
+    0 2px #000000;
+  white-space: nowrap;
+  animation: combo-pop 0.7s ease forwards;
+}
+
+@keyframes combo-pop {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, 44px) scale(0.7);
+  }
+  25% {
+    opacity: 1;
+    transform: translate(-50%, 44px) scale(1.12);
+  }
+  70% {
+    opacity: 1;
+    transform: translate(-50%, 44px) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-50%, 24px) scale(1);
+  }
+}
+
+.feedback-particle {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 10px;
+  height: 10px;
+  opacity: 0;
+  transform: translate(-50%, -50%);
+  animation: particle-fly 0.65s ease-out forwards;
+}
+
+@keyframes particle-fly {
+  0% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1) rotate(0deg);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(
+        calc(-50% + var(--particle-x)),
+        calc(-50% + var(--particle-y))
+      )
+      scale(0.4) rotate(var(--particle-rotate));
   }
 }
 
@@ -535,6 +679,82 @@ body,
   font-size: 20px;
 }
 
+.result-mode {
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #222222;
+  color: #ffffff;
+  font-family: Arial, "Apple SD Gothic Neo", sans-serif;
+  font-size: 13px;
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: 0;
+}
+
+.result-best {
+  min-height: 38px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-top: 1px solid #9fc8d8;
+  background: #f4f4f4;
+  color: #595959;
+  font-family: var(--unity-font);
+  font-size: 13px;
+  line-height: 1;
+  letter-spacing: 0;
+}
+
+.result-best.is-new {
+  color: #7a5800;
+  font-size: 16px;
+  background: linear-gradient(110deg, #ffe97a 20%, #fff7cf 40%, #ffe97a 60%);
+  background-size: 200% 100%;
+  animation: best-shine 1.2s linear infinite;
+}
+
+@keyframes best-shine {
+  from {
+    background-position: 0% 0;
+  }
+  to {
+    background-position: 200% 0;
+  }
+}
+
+.result-versus {
+  min-height: 50px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  align-items: center;
+  justify-content: center;
+  border-top: 1px solid #9fc8d8;
+  background: #f4f4f4;
+  font-family: var(--unity-font);
+  line-height: 1;
+  letter-spacing: 0;
+  padding: 6px 8px;
+}
+
+.result-versus-target {
+  color: #595959;
+  font-size: 11px;
+  font-family: Arial, "Apple SD Gothic Neo", sans-serif;
+  font-weight: 700;
+}
+
+.result-versus-outcome {
+  color: #b00020;
+  font-size: 19px;
+}
+
+.result-versus.is-win .result-versus-outcome {
+  color: var(--unity-green);
+}
+
 .confirm-title {
   height: clamp(64px, 10vh, 84px);
   display: flex;
@@ -573,6 +793,12 @@ body,
 .result-button:disabled {
   cursor: default;
   opacity: 0.72;
+}
+
+.result-button-secondary {
+  height: clamp(50px, 7.4vh, 62px);
+  font-size: clamp(17px, 5.4vw, 26px);
+  color: #595959;
 }
 
 .result-status {
@@ -743,6 +969,18 @@ body,
 .tutorial-start:active {
   transform: translateY(2px);
   box-shadow: 0 2px 0 rgba(0, 0, 0, 0.2);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .card-anim-deal,
+  .card-anim-slide,
+  .result-best.is-new {
+    animation: none;
+  }
+
+  .feedback-particle {
+    display: none;
+  }
 }
 
 @media (max-width: 360px) {

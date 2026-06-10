@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 
 import "./App.css";
 
@@ -11,17 +11,34 @@ import { CardView } from "./components/CardView";
 import { ExitConfirmModal } from "./components/ExitConfirmModal";
 import { Feedback } from "./components/Feedback";
 import { Hud } from "./components/Hud";
-import { ResultModal } from "./components/ResultModal";
+import { ResultModal, type ShareStatus } from "./components/ResultModal";
 import { TutorialModal } from "./components/TutorialModal";
+import {
+  CLASSIC_BEST_KEY,
+  bestRecordKey,
+  dailyBestKey,
+  isNewBest,
+  parseBestSeconds,
+} from "./game/bestRecord";
+import {
+  type GameMode,
+  formatDailyLabel,
+  getChallengeParamsFromLocation,
+  getDailySeed,
+  getKstDateString,
+} from "./game/mode";
+import { preloadSymbolImages } from "./game/preloadSymbols";
 import { useGame } from "./game/useGame";
 import { readItem, writeItem } from "./ait/storage";
 import { useScreenAwake } from "./ait/awake";
+import { triggerHaptic } from "./ait/haptics";
 import { requestReviewIfSupported } from "./ait/review";
 import {
   clearTimeToLeaderboardScore,
   openLeaderboard,
   submitClearTime,
 } from "./ait/leaderboard";
+import { shareChallenge } from "./ait/share";
 import { useInterstitialAd } from "./ait/ads";
 import { closeMiniApp, useDisableIosSwipeBack } from "./ait/navigation";
 import { useHiddenCallback } from "./ait/visibility";
@@ -38,24 +55,57 @@ const SOUND_KEY = "match-picture/sound-enabled";
 function App() {
   const [launchConfig, setLaunchConfig] = useState(getDefaultLaunchConfig);
   const [debugTotalCards] = useState(getDebugSessionTotalCards);
+  // 도전장 링크로 진입했는지는 첫 렌더에 한 번만 판정합니다.
+  const [challengeParams] = useState(getChallengeParamsFromLocation);
+  const [dailyDateString] = useState(() => getKstDateString());
+  const [mode, setMode] = useState<GameMode>(
+    challengeParams !== null ? "challenge" : "classic",
+  );
+
+  // 데일리/도전장은 고정 시드 팩토리를 쓰고, 클래식은 useGame이 매판 무작위 시드를 만듭니다.
+  const gameSeedFactory = useMemo(() => {
+    if (mode === "daily") {
+      return () => getDailySeed(dailyDateString);
+    }
+    if (mode === "challenge" && challengeParams !== null) {
+      const { seed } = challengeParams;
+      return () => seed;
+    }
+    return undefined;
+  }, [challengeParams, dailyDateString, mode]);
+
   const {
     status,
     remaining,
+    totalCards,
     round,
+    roundIndex,
     elapsedSeconds,
+    correctCount,
     locked,
     lastFeedback,
     resultSeconds,
+    deckSeed,
     start: startGame,
     reveal: revealGame,
     tap,
     retry: retryGame,
-  } = useGame({ totalCards: debugTotalCards ?? undefined });
+  } = useGame({
+    totalCards: debugTotalCards ?? undefined,
+    seedFactory: gameSeedFactory,
+  });
 
   const [tutorialOpen, setTutorialOpen] = useState(false);
   const [tutorialResolved, setTutorialResolved] = useState(false);
   const [soundEnabled, setSoundEnabled] = useState(true);
   const [exitConfirmOpen, setExitConfirmOpen] = useState(false);
+  const [classicBest, setClassicBest] = useState<number | null>(null);
+  const [dailyBest, setDailyBest] = useState<number | null>(null);
+  const [resultBest, setResultBest] = useState<{
+    previous: number | null;
+    isNew: boolean;
+  }>({ previous: null, isNew: false });
+  const [shareStatus, setShareStatus] = useState<ShareStatus>("idle");
   const [leaderboardStatus, setLeaderboardStatus] = useState<
     "idle" | "opening" | "failed"
   >("idle");
@@ -77,23 +127,28 @@ function App() {
   // 한 세션에 리뷰 요청은 한 번만 호출합니다 (정책 보호 + 사용자 경험).
   const reviewRequestedRef = useRef(false);
   const lastSubmittedSecondsRef = useRef<number | null>(null);
+  // 클리어 1회당 베스트 기록 갱신/햅틱을 한 번만 처리하기 위한 가드.
+  const finishProcessedRef = useRef(false);
 
-  // 최초 진입 시 튜토리얼 노출 여부를 결정합니다. Apps in Toss Storage 우선, 없으면 localStorage.
-  // useGame이 매 렌더 새 객체를 반환하므로 통째로 deps에 넣으면 무한 루프로 프리징됩니다.
-  // useGame 내부의 start callback은 안정된 reference이므로 그것만 deps로 잡습니다.
+  // 최초 진입 시 튜토리얼 노출 여부와 저장된 설정/기록을 읽습니다.
+  // Apps in Toss Storage 우선, 없으면 localStorage.
   useEffect(() => {
     let cancelled = false;
     (async () => {
-      const [flag, savedSoundEnabled] = await Promise.all([
-        readItem(TUTORIAL_KEY),
-        readItem(SOUND_KEY),
-      ]);
+      const [flag, savedSoundEnabled, savedClassicBest, savedDailyBest] =
+        await Promise.all([
+          readItem(TUTORIAL_KEY),
+          readItem(SOUND_KEY),
+          readItem(CLASSIC_BEST_KEY),
+          readItem(dailyBestKey(dailyDateString)),
+        ]);
       if (cancelled) return;
       if (savedSoundEnabled === "0") setSoundEnabled(false);
+      setClassicBest(parseBestSeconds(savedClassicBest));
+      setDailyBest(parseBestSeconds(savedDailyBest));
       if (flag) {
         setTutorialOpen(false);
         setTutorialResolved(true);
-        startGame();
       } else {
         setTutorialOpen(true);
       }
@@ -101,7 +156,19 @@ function App() {
     return () => {
       cancelled = true;
     };
-  }, [startGame]);
+  }, [dailyDateString]);
+
+  // 튜토리얼이 끝난 뒤, 그리고 모드가 바뀔 때마다 새 게임을 준비합니다.
+  // useGame 내부의 seedFactory ref 갱신 effect가 먼저 실행되므로 모드 변경이 안전하게 반영됩니다.
+  useEffect(() => {
+    if (!tutorialResolved) return;
+    startGame();
+  }, [mode, startGame, tutorialResolved]);
+
+  // 라운드 전환에서 처음 보는 심볼이 늦게 뜨지 않도록 전체 심볼을 미리 받아둡니다.
+  useEffect(() => {
+    preloadSymbolImages();
+  }, []);
 
   useEffect(() => {
     let cancelled = false;
@@ -131,15 +198,52 @@ function App() {
       setLeaderboardStatus("idle");
       setLeaderboardSubmitStatus("idle");
       setLeaderboardMessage(null);
+      setShareStatus("idle");
       lastSubmittedSecondsRef.current = null;
+      finishProcessedRef.current = false;
     }
   }, [status]);
 
+  // 클리어 시점에 베스트 기록 갱신과 결과 햅틱을 처리합니다.
+  useEffect(() => {
+    if (status !== "finished" || resultSeconds === null) return;
+    if (finishProcessedRef.current) return;
+    finishProcessedRef.current = true;
+
+    const previousBest =
+      mode === "classic" ? classicBest : mode === "daily" ? dailyBest : null;
+    const recordKey = bestRecordKey(mode, dailyDateString);
+    const newBest = recordKey !== null && isNewBest(resultSeconds, previousBest);
+    setResultBest({ previous: previousBest, isNew: newBest });
+
+    const challengeWon =
+      mode === "challenge" &&
+      challengeParams?.targetSeconds != null &&
+      resultSeconds < challengeParams.targetSeconds;
+    triggerHaptic(newBest || challengeWon ? "newBest" : "clear");
+
+    if (newBest && recordKey !== null) {
+      if (mode === "classic") setClassicBest(resultSeconds);
+      if (mode === "daily") setDailyBest(resultSeconds);
+      void writeItem(recordKey, String(resultSeconds));
+    }
+  }, [
+    challengeParams,
+    classicBest,
+    dailyBest,
+    dailyDateString,
+    mode,
+    resultSeconds,
+    status,
+  ]);
+
   // 클리어 시점에 리더보드 제출 + 리뷰 요청을 시도합니다. 모두 조용한 실패가 기본이라 게임 흐름을 막지 않습니다.
+  // 도전장 모드는 공유받은 고정 덱이라 글로벌 랭킹에는 제출하지 않습니다.
   useEffect(() => {
     if (status !== "finished" || resultSeconds === null) return;
     if (
       launchConfig.leaderboardEnabled &&
+      mode !== "challenge" &&
       lastSubmittedSecondsRef.current !== resultSeconds
     ) {
       lastSubmittedSecondsRef.current = resultSeconds;
@@ -159,6 +263,7 @@ function App() {
   }, [
     launchConfig.leaderboardEnabled,
     launchConfig.reviewRequestEnabled,
+    mode,
     resultSeconds,
     status,
   ]);
@@ -177,8 +282,7 @@ function App() {
     setTutorialOpen(false);
     setTutorialResolved(true);
     void writeItem(TUTORIAL_KEY, "1");
-    startGame();
-  }, [soundEnabled, startGame]);
+  }, [soundEnabled]);
 
   const handleRetry = useCallback(async () => {
     if (soundEnabled) preloadEffectSounds();
@@ -202,6 +306,26 @@ function App() {
     setLeaderboardMessage(result.status === "OPENED" ? null : result.message);
   }, []);
 
+  const handleShare = useCallback(async () => {
+    if (resultSeconds === null || deckSeed === null) return;
+    setShareStatus("sharing");
+    const result = await shareChallenge({
+      seed: deckSeed,
+      seconds: resultSeconds,
+    });
+    setShareStatus(
+      result === "SHARED" ? "shared" : result === "COPIED" ? "copied" : "failed",
+    );
+  }, [deckSeed, resultSeconds]);
+
+  const handleSelectMode = useCallback((next: GameMode) => {
+    setMode((current) => (current === next ? current : next));
+  }, []);
+
+  const handlePlayClassic = useCallback(() => {
+    handleSelectMode("classic");
+  }, [handleSelectMode]);
+
   const handleExit = useCallback(() => {
     setExitConfirmOpen(true);
   }, []);
@@ -218,13 +342,18 @@ function App() {
   const handleMinePress = useCallback(
     (symbol: string, origin: { x: number; y: number }) => {
       if (!round || locked || status !== "playing") return;
+      const correct = symbol === round.hint;
       if (soundEnabled) {
-        playEffectSound(symbol === round.hint ? "correct" : "wrong");
+        playEffectSound(correct ? "correct" : "wrong");
       }
+      triggerHaptic(correct ? "correct" : "wrong");
       tap(symbol, { origin });
     },
     [locked, round, soundEnabled, status, tap],
   );
+
+  // 후반으로 갈수록 심볼 위치가 기본 배치에서 멀어지도록 진행률을 전달합니다.
+  const difficultyProgress = totalCards > 0 ? correctCount / totalCards : 0;
 
   return (
     <div className="game-shell">
@@ -239,16 +368,57 @@ function App() {
         onOpenLeaderboard={handleOpenLeaderboard}
       />
 
+      {status === "ready" ? (
+        <div className="mode-bar" role="tablist" aria-label="게임 모드">
+          <button
+            type="button"
+            role="tab"
+            aria-selected={mode === "classic"}
+            className={`mode-chip${mode === "classic" ? " is-active" : ""}`}
+            onClick={() => handleSelectMode("classic")}
+          >
+            클래식
+          </button>
+          <button
+            type="button"
+            role="tab"
+            aria-selected={mode === "daily"}
+            className={`mode-chip${mode === "daily" ? " is-active" : ""}`}
+            onClick={() => handleSelectMode("daily")}
+          >
+            오늘의 도전 {formatDailyLabel(dailyDateString)}
+            {dailyBest !== null ? " ✓" : ""}
+          </button>
+          {challengeParams !== null ? (
+            <button
+              type="button"
+              role="tab"
+              aria-selected={mode === "challenge"}
+              className={`mode-chip${mode === "challenge" ? " is-active" : ""}`}
+              onClick={() => handleSelectMode("challenge")}
+            >
+              도전장
+            </button>
+          ) : null}
+        </div>
+      ) : null}
+
       <main className="game-main">
         <section className="card-section opponent-section" aria-label="상대 카드">
           {round ? (
-            <CardView
-              card={round.opponent}
-              variant="opponent"
-              hint={round.hint}
-              clickable={false}
-              onPress={() => undefined}
-            />
+            <div
+              key={`opponent-${roundIndex}`}
+              className="card-anim card-anim-deal"
+            >
+              <CardView
+                card={round.opponent}
+                variant="opponent"
+                hint={round.hint}
+                clickable={false}
+                progress={difficultyProgress}
+                onPress={() => undefined}
+              />
+            </div>
           ) : status === "ready" ? (
             <div className="card-placeholder card-back" aria-hidden="true" />
           ) : (
@@ -261,13 +431,21 @@ function App() {
           aria-label="내 카드"
         >
           {round ? (
-            <CardView
-              card={round.mine}
-              variant="mine"
-              hint={round.hint}
-              clickable={!locked && status === "playing"}
-              onPress={handleMinePress}
-            />
+            <div
+              key={`mine-${roundIndex}`}
+              className={`card-anim ${
+                roundIndex === 0 ? "card-anim-deal" : "card-anim-slide"
+              }`}
+            >
+              <CardView
+                card={round.mine}
+                variant="mine"
+                hint={round.hint}
+                clickable={!locked && status === "playing"}
+                progress={difficultyProgress}
+                onPress={handleMinePress}
+              />
+            </div>
           ) : status === "ready" ? (
             <button
               type="button"
@@ -291,8 +469,17 @@ function App() {
       <ResultModal
         open={tutorialResolved && status === "finished" && !exitConfirmOpen}
         seconds={resultSeconds}
+        mode={mode}
+        previousBestSeconds={resultBest.previous}
+        isNewBest={resultBest.isNew}
+        challengeTargetSeconds={
+          mode === "challenge" ? (challengeParams?.targetSeconds ?? null) : null
+        }
         onRetry={handleRetry}
-        leaderboardEnabled={launchConfig.leaderboardEnabled}
+        shareStatus={shareStatus}
+        onShare={handleShare}
+        onPlayClassic={handlePlayClassic}
+        leaderboardEnabled={launchConfig.leaderboardEnabled && mode !== "challenge"}
         leaderboardScore={
           resultSeconds === null
             ? null

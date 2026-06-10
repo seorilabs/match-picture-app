@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 
 import { type Card, createDeck } from "./deck";
+import { mulberry32, randomSeed } from "./rng";
 import {
   PRIME,
   SYMBOLS_PER_CARD,
@@ -24,25 +25,35 @@ export interface FeedbackEvent {
   kind: "correct" | "wrong";
   /** 화면에 잠깐 띄우는 기준 좌표(없으면 기본 위치 사용). */
   origin?: { x: number; y: number };
+  /** 이 정답까지의 연속 정답 수. 오답이면 0. */
+  combo: number;
 }
 
 export interface GameSnapshot {
   status: GameStatus;
   /** 남은 라운드 수입니다. 시작 직후 `TOTAL_CARDS`에서 시작해 정답마다 1씩 줄어듭니다. */
   remaining: number;
+  /** 이번 게임의 전체 라운드 수. 난이도 진행률 계산에 사용합니다. */
+  totalCards: number;
   /** 현재 라운드 정보. 시작 전 또는 종료 후에는 null. */
   round: RoundState | null;
+  /** 현재 라운드 번호(0부터). 카드 전환 애니메이션의 키로 사용합니다. */
+  roundIndex: number;
   /** 게임 시작 후 누적된 초 단위 시간 (실수). */
   elapsedSeconds: number;
   /** 정답/오답 카운트. */
   correctCount: number;
   wrongCount: number;
+  /** 현재 연속 정답 수. 오답 시 0으로 돌아갑니다. */
+  combo: number;
   /** 판정 진행 중에 입력을 막기 위한 잠금 상태. */
   locked: boolean;
   /** 마지막 피드백 이벤트. */
   lastFeedback: FeedbackEvent | null;
   /** 클리어 시 결과 시간(초, 실수). 종료 전에는 null. */
   resultSeconds: number | null;
+  /** 이번 게임 덱을 만든 시드. 도전장 공유에 사용합니다. 시작 전에는 null. */
+  deckSeed: number | null;
 }
 
 export interface GameApi extends GameSnapshot {
@@ -62,6 +73,11 @@ export interface GameApi extends GameSnapshot {
 export interface GameOptions {
   /** 개발 세션에서만 기본 10 라운드를 더 짧게 줄일 수 있습니다. */
   totalCards?: number;
+  /**
+   * 게임 시작마다 덱 시드를 결정하는 함수입니다.
+   * 데일리/도전장 모드는 고정 시드를, 클래식은 생략(매판 무작위)합니다.
+   */
+  seedFactory?: () => number;
 }
 
 /**
@@ -84,14 +100,18 @@ export function useGame(options: GameOptions = {}): GameApi {
   const configuredTotalCardsRef = useRef(
     normalizeTotalCards(options.totalCards),
   );
+  const seedFactoryRef = useRef(options.seedFactory);
   const [status, setStatus] = useState<GameStatus>("idle");
   const [round, setRound] = useState<RoundState | null>(null);
+  const [roundIndex, setRoundIndex] = useState(0);
   const [elapsedSeconds, setElapsedSeconds] = useState(0);
   const [correctCount, setCorrectCount] = useState(0);
   const [wrongCount, setWrongCount] = useState(0);
+  const [combo, setCombo] = useState(0);
   const [locked, setLocked] = useState(false);
   const [lastFeedback, setLastFeedback] = useState<FeedbackEvent | null>(null);
   const [resultSeconds, setResultSeconds] = useState<number | null>(null);
+  const [deckSeed, setDeckSeed] = useState<number | null>(null);
   const [activeTotalCards, setActiveTotalCards] = useState(
     configuredTotalCardsRef.current,
   );
@@ -103,6 +123,9 @@ export function useGame(options: GameOptions = {}): GameApi {
   const queueRef = useRef<Card[]>([]);
   const timerStartedRef = useRef(false);
   const feedbackIdRef = useRef(0);
+  // 콤보는 tap 클로저에서 즉시 읽어야 하므로 state와 함께 ref로도 둡니다.
+  const comboRef = useRef(0);
+  const roundIndexRef = useRef(0);
   const tickRef = useRef<number | null>(null);
   const pendingTimeoutRef = useRef<number | null>(null);
   const preparedRoundRef = useRef<RoundState | null>(null);
@@ -118,6 +141,10 @@ export function useGame(options: GameOptions = {}): GameApi {
   useEffect(() => {
     configuredTotalCardsRef.current = normalizeTotalCards(options.totalCards);
   }, [options.totalCards]);
+
+  useEffect(() => {
+    seedFactoryRef.current = options.seedFactory;
+  }, [options.seedFactory]);
 
   const stopTicking = useCallback(() => {
     if (tickRef.current !== null) {
@@ -152,14 +179,19 @@ export function useGame(options: GameOptions = {}): GameApi {
     stopTicking();
 
     const totalCards = configuredTotalCardsRef.current;
+    // 시드를 항상 기록해 둬서 클래식 모드도 게임 후 도전장으로 공유할 수 있게 합니다.
+    const seed = (seedFactoryRef.current?.() ?? randomSeed()) >>> 0;
     const deck = createDeck({
       prime: PRIME,
       symbolsPerCard: SYMBOLS_PER_CARD,
       maxCards: totalCards,
+      rng: mulberry32(seed),
     });
     queueRef.current = [...deck];
     timerStartedRef.current = false;
     lockedRef.current = false;
+    comboRef.current = 0;
+    roundIndexRef.current = 0;
 
     const firstRound = takeNextRound(queueRef.current, null);
     preparedRoundRef.current = firstRound;
@@ -167,13 +199,16 @@ export function useGame(options: GameOptions = {}): GameApi {
     statusRef.current = firstRound === null ? "idle" : "ready";
 
     setRound(null);
+    setRoundIndex(0);
     setActiveTotalCards(totalCards);
     setElapsedSeconds(0);
     setCorrectCount(0);
     setWrongCount(0);
+    setCombo(0);
     setLocked(false);
     setLastFeedback(null);
     setResultSeconds(null);
+    setDeckSeed(seed);
     setStatus(firstRound === null ? "idle" : "ready");
   }, [cancelPendingFollowUp, stopTicking]);
 
@@ -218,11 +253,16 @@ export function useGame(options: GameOptions = {}): GameApi {
       setLocked(true);
 
       const isCorrect = symbol === currentRound.hint;
+      const nextCombo = isCorrect ? comboRef.current + 1 : 0;
+      comboRef.current = nextCombo;
+      setCombo(nextCombo);
+
       const id = ++feedbackIdRef.current;
       setLastFeedback({
         id,
         kind: isCorrect ? "correct" : "wrong",
         origin: options?.origin,
+        combo: nextCombo,
       });
 
       if (isCorrect) {
@@ -244,6 +284,8 @@ export function useGame(options: GameOptions = {}): GameApi {
             });
             return;
           }
+          roundIndexRef.current += 1;
+          setRoundIndex(roundIndexRef.current);
           setRound(next);
           lockedRef.current = false;
           setLocked(false);
@@ -276,13 +318,17 @@ export function useGame(options: GameOptions = {}): GameApi {
   return {
     status,
     remaining,
+    totalCards: activeTotalCards,
     round,
+    roundIndex,
     elapsedSeconds,
     correctCount,
     wrongCount,
+    combo,
     locked,
     lastFeedback,
     resultSeconds,
+    deckSeed,
     start,
     reveal,
     tap,
