@@ -77,6 +77,12 @@ describe("isNearMiss", () => {
     expect(isNearMiss(30.1, 30)).toBe(true);
   });
 
+  it("부동소수점 오차가 있는 경계값도 near-miss로 판정한다", () => {
+    // 32.7 - 30.2 === 2.5000000000000036 (정확히 2.5초 차이를 의도한 값)
+    expect(32.7 - 30.2).toBeGreaterThan(NEAR_MISS_THRESHOLD_SECONDS);
+    expect(isNearMiss(32.7, 30.2)).toBe(true);
+  });
+
   it("크게 뒤지거나 신기록이면 near-miss가 아니다", () => {
     expect(isNearMiss(30 + NEAR_MISS_THRESHOLD_SECONDS + 0.1, 30)).toBe(false);
     expect(isNearMiss(29, 30)).toBe(false);

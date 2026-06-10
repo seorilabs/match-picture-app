@@ -46,6 +46,9 @@ export function isNewBest(
 /** 이 차이(초) 이하로 베스트에 못 미치면 "아깝다" 강조를 보여줍니다. */
 export const NEAR_MISS_THRESHOLD_SECONDS = 2.5;
 
+/** 부동소수점 뺄셈 오차로 경계값(정확히 2.5초)이 빗나가지 않게 하는 허용 오차. */
+const NEAR_MISS_EPSILON_SECONDS = 1e-9;
+
 /**
  * 베스트에 얼마나 못 미쳤는지(초)를 돌려줍니다.
  * 신기록이거나 비교할 베스트가 없으면 null입니다.
@@ -66,5 +69,7 @@ export function isNearMiss(
   previousBest: number | null,
 ): boolean {
   const gap = bestGapSeconds(resultSeconds, previousBest);
-  return gap !== null && gap <= NEAR_MISS_THRESHOLD_SECONDS;
+  return (
+    gap !== null && gap <= NEAR_MISS_THRESHOLD_SECONDS + NEAR_MISS_EPSILON_SECONDS
+  );
 }

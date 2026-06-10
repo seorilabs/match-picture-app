@@ -1027,7 +1027,8 @@ body,
 @media (prefers-reduced-motion: reduce) {
   .card-anim-deal,
   .card-anim-slide,
-  .result-best.is-new {
+  .result-best.is-new,
+  .result-best.is-near-miss {
     animation: none;
   }
 

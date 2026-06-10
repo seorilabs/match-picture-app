@@ -1,7 +1,7 @@
 import { Modal } from "./Modal";
 import { bestGapSeconds, isNearMiss } from "../game/bestRecord";
 import type { GameMode } from "../game/mode";
-import { formatSeconds } from "../game/rules";
+import { MAX_DISPLAY_SECONDS, formatSeconds } from "../game/rules";
 
 export type ShareStatus = "idle" | "sharing" | "shared" | "copied" | "failed";
 
@@ -75,14 +75,13 @@ export function ResultModal({
     seconds !== null &&
     seconds < challengeTargetSeconds;
   // 베스트에 못 미친 차이. 아깝게 놓쳤으면 "한 판 더"를 유도하는 강조를 보여줍니다.
-  const gapSeconds =
-    seconds === null || mode === "challenge"
-      ? null
-      : bestGapSeconds(seconds, previousBestSeconds);
-  const nearMiss =
-    seconds !== null &&
-    mode !== "challenge" &&
-    isNearMiss(seconds, previousBestSeconds);
+  // 표기가 999s로 캡되는 구간에서는 차이 표시가 어긋나 보이므로 함께 숨깁니다.
+  const gapVisible =
+    seconds !== null && seconds <= MAX_DISPLAY_SECONDS && mode !== "challenge";
+  const gapSeconds = gapVisible
+    ? bestGapSeconds(seconds, previousBestSeconds)
+    : null;
+  const nearMiss = gapVisible && isNearMiss(seconds, previousBestSeconds);
 
   return (
     <Modal open={open} variant="result">
