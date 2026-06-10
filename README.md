@@ -79,11 +79,13 @@ Apps in Toss 배포는 `.github/workflows/deploy.yml`에서 수동 실행합니�
 | --- | --- | --- |
 | 클래식 | `public/symbols/*.png` | Unity 원본 NotoEmoji PNG |
 | 픽셀 | `public/symbols/pixel/*.svg` | 12x12 픽셀 아트. 19개 모티프 x 3색 변형 = 57심볼 |
+| 우주 | `public/symbols/space/*.svg` | 12x12 픽셀 아트 우주 테마(행성, UFO, 로켓 등). 19개 모티프 x 3색 변형 = 57심볼 |
 
-픽셀 팩은 `scripts/generate-pixel-pack.mjs`의 ASCII 그리드에서 생성됩니다. 모티프를 추가/수정한 뒤 다시 실행하면 SVG가 갱신됩니다.
+픽셀 아트 팩들은 `scripts/generate-<팩>-pack.mjs`의 ASCII 그리드에서 생성됩니다(공용 로직은 `scripts/pixelPackLib.mjs`). 모티프를 추가/수정한 뒤 다시 실행하면 SVG가 갱신됩니다.
 
 ```bash
 node scripts/generate-pixel-pack.mjs
+node scripts/generate-space-pack.mjs
 ```
 
 새 테마를 추가하려면 57개 에셋(`001`~`057`)을 `public/` 아래 디렉토리에 두고 `src/symbols/packs.ts`의 `SYMBOL_PACKS`에 항목을 추가하면 됩니다. 덱/룰 로직은 심볼 ID만 다루므로 코드 변경은 매니페스트 한 줄입니다.

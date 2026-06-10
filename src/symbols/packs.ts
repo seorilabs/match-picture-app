@@ -28,6 +28,12 @@ export const SYMBOL_PACKS: SymbolPack[] = [
     dir: "symbols/pixel",
     ext: "svg",
   },
+  {
+    id: "space",
+    label: "우주",
+    dir: "symbols/space",
+    ext: "svg",
+  },
 ];
 
 export const DEFAULT_PACK_ID = "classic";
