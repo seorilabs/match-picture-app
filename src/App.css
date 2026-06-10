@@ -407,11 +407,21 @@ body,
   display: flex;
   gap: 8px;
   z-index: 5;
+  /* 팩이 늘어 칩이 화면 폭을 넘으면 줄바꿈 대신 가로 스크롤로 수용합니다. */
+  max-width: calc(100vw - 24px);
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.theme-bar::-webkit-scrollbar {
+  display: none;
 }
 
 .theme-chip {
   font-size: 12px;
   padding: 7px 11px;
+  flex: none;
+  white-space: nowrap;
 }
 
 /* 카드 전환 연출. 새 상대 카드는 위에서 내려앉고(deal),

@@ -34,6 +34,12 @@ export const SYMBOL_PACKS: SymbolPack[] = [
     dir: "symbols/space",
     ext: "svg",
   },
+  {
+    id: "instrument",
+    label: "악기",
+    dir: "symbols/instrument",
+    ext: "svg",
+  },
 ];
 
 export const DEFAULT_PACK_ID = "classic";
