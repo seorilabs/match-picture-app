@@ -314,7 +314,13 @@ function App() {
       seconds: resultSeconds,
     });
     setShareStatus(
-      result === "SHARED" ? "shared" : result === "COPIED" ? "copied" : "failed",
+      result === "SHARED"
+        ? "shared"
+        : result === "COPIED"
+          ? "copied"
+          : result === "ABORTED"
+            ? "idle"
+            : "failed",
     );
   }, [deckSeed, resultSeconds]);
 
@@ -369,11 +375,10 @@ function App() {
       />
 
       {status === "ready" ? (
-        <div className="mode-bar" role="tablist" aria-label="게임 모드">
+        <div className="mode-bar" role="group" aria-label="게임 모드">
           <button
             type="button"
-            role="tab"
-            aria-selected={mode === "classic"}
+            aria-pressed={mode === "classic"}
             className={`mode-chip${mode === "classic" ? " is-active" : ""}`}
             onClick={() => handleSelectMode("classic")}
           >
@@ -381,8 +386,7 @@ function App() {
           </button>
           <button
             type="button"
-            role="tab"
-            aria-selected={mode === "daily"}
+            aria-pressed={mode === "daily"}
             className={`mode-chip${mode === "daily" ? " is-active" : ""}`}
             onClick={() => handleSelectMode("daily")}
           >
@@ -392,8 +396,7 @@ function App() {
           {challengeParams !== null ? (
             <button
               type="button"
-              role="tab"
-              aria-selected={mode === "challenge"}
+              aria-pressed={mode === "challenge"}
               className={`mode-chip${mode === "challenge" ? " is-active" : ""}`}
               onClick={() => handleSelectMode("challenge")}
             >

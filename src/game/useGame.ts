@@ -137,14 +137,13 @@ export function useGame(options: GameOptions = {}): GameApi {
   const roundRef = useRef<RoundState | null>(null);
   statusRef.current = status;
   roundRef.current = round;
+  // seedFactory는 effect가 아니라 렌더 시점에 동기 반영합니다.
+  // 모드 변경과 같은 커밋에서 start()가 호출돼도 항상 최신 팩토리를 읽게 하기 위함입니다.
+  seedFactoryRef.current = options.seedFactory;
 
   useEffect(() => {
     configuredTotalCardsRef.current = normalizeTotalCards(options.totalCards);
   }, [options.totalCards]);
-
-  useEffect(() => {
-    seedFactoryRef.current = options.seedFactory;
-  }, [options.seedFactory]);
 
   const stopTicking = useCallback(() => {
     if (tickRef.current !== null) {

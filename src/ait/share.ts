@@ -9,7 +9,7 @@ import { formatSeconds } from "../game/rules";
 /** granite.config.ts의 appName과 같아야 딥링크가 이 미니앱으로 연결됩니다. */
 const APP_NAME = "match-picture-app";
 
-export type ShareChallengeResult = "SHARED" | "COPIED" | "FAILED";
+export type ShareChallengeResult = "SHARED" | "COPIED" | "ABORTED" | "FAILED";
 
 export interface ShareChallengeOptions {
   /** 이번 게임 덱을 만든 시드. 받는 쪽이 같은 덱으로 플레이합니다. */
@@ -66,9 +66,9 @@ export async function shareChallenge(
       return "SHARED";
     }
   } catch (error) {
-    // 사용자가 공유 시트를 닫은 경우는 실패로 취급하지 않고 조용히 끝냅니다.
+    // 사용자가 직접 공유 시트를 닫은 것이므로 실패도, 클립보드 fallback 대상도 아닙니다.
     if (error instanceof DOMException && error.name === "AbortError") {
-      return "FAILED";
+      return "ABORTED";
     }
   }
 
