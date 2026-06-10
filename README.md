@@ -58,6 +58,19 @@ Apps in Toss 배포는 `.github/workflows/deploy.yml`에서 수동 실행합니�
 
 리더보드는 기본 활성화되어 있으며, 게임 클리어 시 점수를 제출하고 상단 HUD의 `RANK` 버튼과 결과 화면의 `RANKING` 버튼에서 열 수 있습니다. 콘솔에서 게임 센터/리더보드 설정이 완료되어 있어야 실제 토스 앱에서 정상 동작합니다.
 
+## 게임 모드
+
+| 모드 | 진입 방법 | 덱 시드 |
+| --- | --- | --- |
+| 클래식 | 기본 | 매판 무작위 |
+| 오늘의 도전 | 시작 화면 모드 칩 | KST 날짜 기반 시드. 모든 사용자가 같은 "오늘의 덱"을 플레이 |
+| 도전장 | 공유 링크(`?challengeSeed=<uint32>&challengeTarget=<초>`) | 링크에 실린 시드. 보낸 사람과 같은 덱으로 대결 |
+
+- 결과 화면의 `SHARE` 버튼은 이번 판의 덱 시드와 기록을 담은 도전장 링크를 공유합니다. Apps in Toss 환경에서는 `getTossShareLink` + `share` 브릿지를 쓰고, 브라우저에서는 Web Share API → 클립보드 복사 순으로 fallback합니다.
+- 도전장 모드 기록은 글로벌 리더보드에 제출하지 않습니다(공유받은 고정 덱이라 공정성 문제).
+- 베스트 기록은 클래식(`match-picture/best-seconds`)과 데일리(`match-picture/daily-best/<YYYY-MM-DD>`)에 각각 저장되어 결과 화면에서 신기록 여부를 보여줍니다.
+- 라운드가 진행될수록 심볼 위치가 기본 배치에서 점점 멀어져(최대 ±90/650 좌표) 위치 암기를 막습니다.
+
 출시 후 리더보드, 리뷰 요청, 전면 광고를 긴급 비활성화하려면 `VITE_REMOTE_CONFIG_URL`이 가리키는 JSON을 아래처럼 바꿉니다. 해당 URL은 앱 WebView에서 `fetch`로 읽기 때문에 HTTPS와 CORS 허용이 필요합니다. 원격 설정을 성공적으로 읽으면 앱 Storage/localStorage에 마지막 성공값을 저장하고, 이후 설정 서버가 내려가면 저장된 값을 fallback으로 사용합니다.
 
 ```json
