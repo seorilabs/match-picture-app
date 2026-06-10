@@ -1,9 +1,12 @@
 import { type Card } from "../game/deck";
+import { type SymbolPack } from "../symbols/packs";
 import { SymbolButton } from "./SymbolButton";
 
 interface CardViewProps {
   card: Card;
   variant: "opponent" | "mine";
+  /** 심볼 테마. */
+  pack: SymbolPack;
   /** 정답 심볼. `mine`일 때만 의미가 있고, 힌트 효과 표시에 사용합니다. */
   hint: string;
   /** 클릭 가능 여부. opponent는 항상 비활성. */
@@ -92,6 +95,7 @@ function getPlacements(card: Card, progress: number): SymbolPlacement[] {
 export function CardView({
   card,
   variant,
+  pack,
   hint,
   clickable,
   progress = 0,
@@ -105,6 +109,7 @@ export function CardView({
         <SymbolButton
           key={`${variant}-${index}-${placement.symbol}`}
           symbol={placement.symbol}
+          pack={pack}
           rotate={placement.rotate}
           scale={placement.scale}
           position={placement.position}

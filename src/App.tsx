@@ -29,6 +29,12 @@ import {
 } from "./game/mode";
 import { preloadSymbolImages } from "./game/preloadSymbols";
 import { useGame } from "./game/useGame";
+import {
+  DEFAULT_PACK_ID,
+  SYMBOL_PACKS,
+  SYMBOL_PACK_STORAGE_KEY,
+  getSymbolPack,
+} from "./symbols/packs";
 import { readItem, writeItem } from "./ait/storage";
 import { useScreenAwake } from "./ait/awake";
 import { triggerHaptic } from "./ait/haptics";
@@ -98,6 +104,8 @@ function App() {
   const [tutorialOpen, setTutorialOpen] = useState(false);
   const [tutorialResolved, setTutorialResolved] = useState(false);
   const [soundEnabled, setSoundEnabled] = useState(true);
+  const [symbolPackId, setSymbolPackId] = useState(DEFAULT_PACK_ID);
+  const symbolPack = getSymbolPack(symbolPackId);
   const [exitConfirmOpen, setExitConfirmOpen] = useState(false);
   const [classicBest, setClassicBest] = useState<number | null>(null);
   const [dailyBest, setDailyBest] = useState<number | null>(null);
@@ -135,15 +143,22 @@ function App() {
   useEffect(() => {
     let cancelled = false;
     (async () => {
-      const [flag, savedSoundEnabled, savedClassicBest, savedDailyBest] =
-        await Promise.all([
-          readItem(TUTORIAL_KEY),
-          readItem(SOUND_KEY),
-          readItem(CLASSIC_BEST_KEY),
-          readItem(dailyBestKey(dailyDateString)),
-        ]);
+      const [
+        flag,
+        savedSoundEnabled,
+        savedClassicBest,
+        savedDailyBest,
+        savedPackId,
+      ] = await Promise.all([
+        readItem(TUTORIAL_KEY),
+        readItem(SOUND_KEY),
+        readItem(CLASSIC_BEST_KEY),
+        readItem(dailyBestKey(dailyDateString)),
+        readItem(SYMBOL_PACK_STORAGE_KEY),
+      ]);
       if (cancelled) return;
       if (savedSoundEnabled === "0") setSoundEnabled(false);
+      if (savedPackId !== null) setSymbolPackId(getSymbolPack(savedPackId).id);
       setClassicBest(parseBestSeconds(savedClassicBest));
       setDailyBest(parseBestSeconds(savedDailyBest));
       if (flag) {
@@ -165,10 +180,10 @@ function App() {
     startGame();
   }, [mode, startGame, tutorialResolved]);
 
-  // 라운드 전환에서 처음 보는 심볼이 늦게 뜨지 않도록 전체 심볼을 미리 받아둡니다.
+  // 라운드 전환에서 처음 보는 심볼이 늦게 뜨지 않도록 선택된 팩의 심볼 전체를 미리 받아둡니다.
   useEffect(() => {
-    preloadSymbolImages();
-  }, []);
+    preloadSymbolImages(symbolPack);
+  }, [symbolPack]);
 
   useEffect(() => {
     let cancelled = false;
@@ -328,6 +343,12 @@ function App() {
     setMode((current) => (current === next ? current : next));
   }, []);
 
+  const handleSelectPack = useCallback((packId: string) => {
+    const pack = getSymbolPack(packId);
+    setSymbolPackId(pack.id);
+    void writeItem(SYMBOL_PACK_STORAGE_KEY, pack.id);
+  }, []);
+
   const handlePlayClassic = useCallback(() => {
     handleSelectMode("classic");
   }, [handleSelectMode]);
@@ -406,6 +427,24 @@ function App() {
         </div>
       ) : null}
 
+      {status === "ready" ? (
+        <div className="theme-bar" role="group" aria-label="심볼 테마">
+          {SYMBOL_PACKS.map((pack) => (
+            <button
+              key={pack.id}
+              type="button"
+              aria-pressed={symbolPack.id === pack.id}
+              className={`mode-chip theme-chip${
+                symbolPack.id === pack.id ? " is-active" : ""
+              }`}
+              onClick={() => handleSelectPack(pack.id)}
+            >
+              {pack.label}
+            </button>
+          ))}
+        </div>
+      ) : null}
+
       <main className="game-main">
         <section className="card-section opponent-section" aria-label="상대 카드">
           {round ? (
@@ -416,6 +455,7 @@ function App() {
               <CardView
                 card={round.opponent}
                 variant="opponent"
+                pack={symbolPack}
                 hint={round.hint}
                 clickable={false}
                 progress={difficultyProgress}
@@ -443,6 +483,7 @@ function App() {
               <CardView
                 card={round.mine}
                 variant="mine"
+                pack={symbolPack}
                 hint={round.hint}
                 clickable={!locked && status === "playing"}
                 progress={difficultyProgress}

@@ -1,7 +1,11 @@
 import { type CSSProperties, type MouseEvent, memo } from "react";
 
+import { type SymbolPack, symbolSrc } from "../symbols/packs";
+
 interface SymbolButtonProps {
   symbol: string;
+  /** 심볼을 어떤 테마 에셋으로 그릴지 결정합니다. */
+  pack: SymbolPack;
   /** 화면에 보여줄 회전 각도(도). */
   rotate: number;
   /** 화면에 보여줄 스케일 배수. */
@@ -27,6 +31,7 @@ interface SymbolButtonProps {
  */
 function SymbolButtonInner({
   symbol,
+  pack,
   rotate,
   scale,
   position,
@@ -65,7 +70,7 @@ function SymbolButtonInner({
     >
       <img
         className="symbol-image"
-        src={`${import.meta.env.BASE_URL}symbols/${symbol}.png`}
+        src={symbolSrc(pack, symbol)}
         alt=""
         style={style}
         draggable={false}
