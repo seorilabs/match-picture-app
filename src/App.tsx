@@ -159,7 +159,7 @@ function App() {
   }, [dailyDateString]);
 
   // 튜토리얼이 끝난 뒤, 그리고 모드가 바뀔 때마다 새 게임을 준비합니다.
-  // useGame 내부의 seedFactory ref 갱신 effect가 먼저 실행되므로 모드 변경이 안전하게 반영됩니다.
+  // useGame은 seedFactory를 렌더 시점에 ref로 동기 반영하므로 이 effect의 start()는 항상 최신 시드를 씁니다.
   useEffect(() => {
     if (!tutorialResolved) return;
     startGame();

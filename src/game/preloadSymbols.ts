@@ -22,6 +22,12 @@ export function preloadSymbolImages(): void {
       const image = new Image();
       image.decoding = "async";
       image.src = `${import.meta.env.BASE_URL}symbols/${symbolName(i)}.png`;
+      if (typeof image.decode === "function") {
+        // src 할당만으로는 fetch까지만 보장되므로 decode()로 디코딩까지 끝냅니다.
+        void image.decode().catch(() => {
+          // 디코딩 실패(404 등)는 게임 흐름에 영향 없으므로 무시합니다.
+        });
+      }
     }
   };
 

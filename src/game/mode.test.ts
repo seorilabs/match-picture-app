@@ -64,6 +64,17 @@ describe("parseChallengeParams", () => {
     expect(parseChallengeParams("?challengeSeed=abc")).toBeNull();
   });
 
+  it("빈 값이나 10진 정수가 아닌 표기는 거부한다", () => {
+    expect(parseChallengeParams("?challengeSeed=")).toBeNull();
+    expect(parseChallengeParams("?challengeSeed=%20")).toBeNull();
+    expect(parseChallengeParams("?challengeSeed=0x10")).toBeNull();
+    expect(parseChallengeParams("?challengeSeed=1e3")).toBeNull();
+    expect(parseChallengeParams("?challengeSeed=0")).toEqual({
+      seed: 0,
+      targetSeconds: null,
+    });
+  });
+
   it("목표 기록이 비정상이면 시드만 사용한다", () => {
     expect(
       parseChallengeParams("?challengeSeed=1&challengeTarget=-5"),

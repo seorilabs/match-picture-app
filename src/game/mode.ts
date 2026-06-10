@@ -57,8 +57,11 @@ export function parseChallengeParams(search: string): ChallengeParams | null {
 
   const rawSeed = params.get(CHALLENGE_SEED_PARAM);
   if (rawSeed === null) return null;
-  const seed = Number(rawSeed.trim());
-  if (!Number.isInteger(seed) || seed < 0 || seed > MAX_SEED) return null;
+  // Number("")는 0이 되므로 빈 값/공백을 먼저 거르고, 10진 양의 정수 표기만 허용합니다.
+  const trimmedSeed = rawSeed.trim();
+  if (!/^\d+$/.test(trimmedSeed)) return null;
+  const seed = Number(trimmedSeed);
+  if (!Number.isInteger(seed) || seed > MAX_SEED) return null;
 
   const rawTarget = params.get(CHALLENGE_TARGET_PARAM);
   let targetSeconds: number | null = null;
