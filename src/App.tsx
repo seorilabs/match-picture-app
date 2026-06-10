@@ -159,7 +159,8 @@ function App() {
       if (cancelled) return;
       if (savedSoundEnabled === "0") setSoundEnabled(false);
       // 저장값이 없어도 기본 팩으로 상태를 확정해 프리로드가 시작되게 합니다.
-      setSymbolPackId(getSymbolPack(savedPackId).id);
+      // 로딩 중 사용자가 먼저 테마를 고른 경우(current != null)는 덮어쓰지 않습니다.
+      setSymbolPackId((current) => current ?? getSymbolPack(savedPackId).id);
       setClassicBest(parseBestSeconds(savedClassicBest));
       setDailyBest(parseBestSeconds(savedDailyBest));
       if (flag) {
