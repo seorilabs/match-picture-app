@@ -1,6 +1,7 @@
 import { Modal } from "./Modal";
+import { bestGapSeconds, isNearMiss } from "../game/bestRecord";
 import type { GameMode } from "../game/mode";
-import { formatSeconds } from "../game/rules";
+import { MAX_DISPLAY_SECONDS, formatSeconds } from "../game/rules";
 
 export type ShareStatus = "idle" | "sharing" | "shared" | "copied" | "failed";
 
@@ -14,6 +15,10 @@ interface ResultModalProps {
   isNewBest: boolean;
   /** 도전장 모드에서 이길 대상 기록(초). 없으면 null. */
   challengeTargetSeconds: number | null;
+  /** 오늘의 도전을 이미 클리어했는지. 클래식 결과에서 데일리 CTA 노출 여부를 정합니다. */
+  dailyClearedToday: boolean;
+  /** 클래식 결과에서 오늘의 도전으로 이동합니다. */
+  onPlayDaily: () => void;
   onRetry: () => void;
   shareStatus: ShareStatus;
   onShare: () => void;
@@ -50,6 +55,8 @@ export function ResultModal({
   previousBestSeconds,
   isNewBest,
   challengeTargetSeconds,
+  dailyClearedToday,
+  onPlayDaily,
   onRetry,
   shareStatus,
   onShare,
@@ -67,6 +74,14 @@ export function ResultModal({
     challengeTargetSeconds !== null &&
     seconds !== null &&
     seconds < challengeTargetSeconds;
+  // 베스트에 못 미친 차이. 아깝게 놓쳤으면 "한 판 더"를 유도하는 강조를 보여줍니다.
+  // 표기가 999s로 캡되는 구간에서는 차이 표시가 어긋나 보이므로 함께 숨깁니다.
+  const gapVisible =
+    seconds !== null && seconds <= MAX_DISPLAY_SECONDS && mode !== "challenge";
+  const gapSeconds = gapVisible
+    ? bestGapSeconds(seconds, previousBestSeconds)
+    : null;
+  const nearMiss = gapVisible && isNearMiss(seconds, previousBestSeconds);
 
   return (
     <Modal open={open} variant="result">
@@ -77,9 +92,20 @@ export function ResultModal({
           <div className="result-best is-new" role="status" aria-live="polite">
             NEW BEST!
           </div>
+        ) : nearMiss && gapSeconds !== null ? (
+          <div
+            className="result-best is-near-miss"
+            role="status"
+            aria-live="polite"
+          >
+            베스트까지 {gapSeconds.toFixed(1)}초!
+          </div>
         ) : previousBestSeconds !== null && mode !== "challenge" ? (
           <div className="result-best">
             BEST {formatSeconds(previousBestSeconds)}
+            {gapSeconds !== null ? (
+              <span className="result-best-gap">+{gapSeconds.toFixed(1)}s</span>
+            ) : null}
           </div>
         ) : null}
         {challengeTargetSeconds !== null ? (
@@ -158,6 +184,15 @@ export function ResultModal({
         <button type="button" className="result-button" onClick={onRetry}>
           RETRY
         </button>
+        {mode === "classic" && !dailyClearedToday ? (
+          <button
+            type="button"
+            className="result-button result-button-daily"
+            onClick={onPlayDaily}
+          >
+            오늘의 도전 ▶
+          </button>
+        ) : null}
         {mode !== "classic" ? (
           <button
             type="button"
