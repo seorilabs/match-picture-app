@@ -34,10 +34,13 @@ export const DEFAULT_PACK_ID = "classic";
 
 export const SYMBOL_PACK_STORAGE_KEY = "match-picture/symbol-pack";
 
-/** 저장된 ID가 더 이상 없는 팩이면 클래식으로 안전하게 돌아갑니다. */
+const DEFAULT_PACK =
+  SYMBOL_PACKS.find((pack) => pack.id === DEFAULT_PACK_ID) ?? SYMBOL_PACKS[0];
+
+/** 저장된 ID가 더 이상 없는 팩이면 기본 팩(클래식)으로 안전하게 돌아갑니다. */
 export function getSymbolPack(id: string | null | undefined): SymbolPack {
   const pack = SYMBOL_PACKS.find((candidate) => candidate.id === id);
-  return pack ?? SYMBOL_PACKS[0];
+  return pack ?? DEFAULT_PACK;
 }
 
 /** 심볼 ID("001"~)를 선택된 팩의 이미지 URL로 변환합니다. */

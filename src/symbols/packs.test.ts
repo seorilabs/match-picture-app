@@ -1,5 +1,6 @@
 import { existsSync } from "node:fs";
-import { resolve } from "node:path";
+import { dirname, resolve } from "node:path";
+import { fileURLToPath } from "node:url";
 
 import { describe, expect, it } from "vitest";
 
@@ -13,6 +14,9 @@ import {
 } from "./packs";
 
 const DECK_SYMBOL_COUNT = PRIME * PRIME + PRIME + 1;
+
+// ESM 환경에서도 안전하도록 __dirname 대신 import.meta.url로 계산합니다.
+const testDir = dirname(fileURLToPath(import.meta.url));
 
 describe("SYMBOL_PACKS", () => {
   it("팩 ID는 중복되지 않는다", () => {
@@ -28,7 +32,7 @@ describe("SYMBOL_PACKS", () => {
     for (const pack of SYMBOL_PACKS) {
       for (let i = 1; i <= DECK_SYMBOL_COUNT; i++) {
         const assetPath = resolve(
-          __dirname,
+          testDir,
           "../../public",
           pack.dir,
           `${symbolName(i)}.${pack.ext}`,
