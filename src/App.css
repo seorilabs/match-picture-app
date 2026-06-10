@@ -407,8 +407,13 @@ body,
   display: flex;
   gap: 8px;
   z-index: 5;
-  /* 팩이 늘어 칩이 화면 폭을 넘으면 줄바꿈 대신 가로 스크롤로 수용합니다. */
-  max-width: calc(100vw - 24px);
+  /* 팩이 늘어 칩이 화면 폭을 넘으면 줄바꿈 대신 가로 스크롤로 수용합니다.
+     컨테이너(.game-shell) 기준으로 제한하되 safe-area 인셋을 빼서
+     iOS 가로모드 노치/라운드 코너 영역을 침범하지 않게 합니다. */
+  max-width: calc(
+    100% - env(safe-area-inset-left, 0px) - env(safe-area-inset-right, 0px) -
+      24px
+  );
   overflow-x: auto;
   scrollbar-width: none;
 }
