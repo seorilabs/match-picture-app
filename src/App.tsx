@@ -357,6 +357,10 @@ function App() {
     handleSelectMode("classic");
   }, [handleSelectMode]);
 
+  const handlePlayDaily = useCallback(() => {
+    handleSelectMode("daily");
+  }, [handleSelectMode]);
+
   const handleExit = useCallback(() => {
     setExitConfirmOpen(true);
   }, []);
@@ -523,6 +527,8 @@ function App() {
         challengeTargetSeconds={
           mode === "challenge" ? (challengeParams?.targetSeconds ?? null) : null
         }
+        dailyClearedToday={dailyBest !== null}
+        onPlayDaily={handlePlayDaily}
         onRetry={handleRetry}
         shareStatus={shareStatus}
         onShare={handleShare}

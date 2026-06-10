@@ -730,6 +730,31 @@ body,
   animation: best-shine 1.2s linear infinite;
 }
 
+.result-best.is-near-miss {
+  color: #b3431a;
+  font-family: Arial, "Apple SD Gothic Neo", sans-serif;
+  font-size: 15px;
+  font-weight: 800;
+  background: #fff1e6;
+  animation: near-miss-pulse 1.4s ease-in-out infinite;
+}
+
+@keyframes near-miss-pulse {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.06);
+  }
+}
+
+.result-best-gap {
+  margin-left: 8px;
+  color: #8a8a8a;
+  font-size: 11px;
+}
+
 @keyframes best-shine {
   from {
     background-position: 0% 0;
@@ -814,6 +839,19 @@ body,
   height: clamp(50px, 7.4vh, 62px);
   font-size: clamp(17px, 5.4vw, 26px);
   color: #595959;
+}
+
+.result-button-daily {
+  height: clamp(54px, 8vh, 66px);
+  background: #000000;
+  color: var(--unity-yellow);
+  font-family: Arial, "Apple SD Gothic Neo", sans-serif;
+  font-size: clamp(17px, 5vw, 23px);
+  font-weight: 800;
+}
+
+.result-button-daily:active {
+  background: #222222;
 }
 
 .result-status {
