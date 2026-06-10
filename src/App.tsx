@@ -30,7 +30,6 @@ import {
 import { preloadSymbolImages } from "./game/preloadSymbols";
 import { useGame } from "./game/useGame";
 import {
-  DEFAULT_PACK_ID,
   SYMBOL_PACKS,
   SYMBOL_PACK_STORAGE_KEY,
   getSymbolPack,
@@ -104,7 +103,8 @@ function App() {
   const [tutorialOpen, setTutorialOpen] = useState(false);
   const [tutorialResolved, setTutorialResolved] = useState(false);
   const [soundEnabled, setSoundEnabled] = useState(true);
-  const [symbolPackId, setSymbolPackId] = useState(DEFAULT_PACK_ID);
+  // 저장된 테마를 읽기 전(null)에는 프리로드를 보류해 기본 팩을 헛로드하지 않습니다.
+  const [symbolPackId, setSymbolPackId] = useState<string | null>(null);
   const symbolPack = getSymbolPack(symbolPackId);
   const [exitConfirmOpen, setExitConfirmOpen] = useState(false);
   const [classicBest, setClassicBest] = useState<number | null>(null);
@@ -158,7 +158,8 @@ function App() {
       ]);
       if (cancelled) return;
       if (savedSoundEnabled === "0") setSoundEnabled(false);
-      if (savedPackId !== null) setSymbolPackId(getSymbolPack(savedPackId).id);
+      // 저장값이 없어도 기본 팩으로 상태를 확정해 프리로드가 시작되게 합니다.
+      setSymbolPackId(getSymbolPack(savedPackId).id);
       setClassicBest(parseBestSeconds(savedClassicBest));
       setDailyBest(parseBestSeconds(savedDailyBest));
       if (flag) {
@@ -181,9 +182,11 @@ function App() {
   }, [mode, startGame, tutorialResolved]);
 
   // 라운드 전환에서 처음 보는 심볼이 늦게 뜨지 않도록 선택된 팩의 심볼 전체를 미리 받아둡니다.
+  // 저장된 테마가 확정되기 전에는 실행하지 않습니다.
   useEffect(() => {
+    if (symbolPackId === null) return;
     preloadSymbolImages(symbolPack);
-  }, [symbolPack]);
+  }, [symbolPack, symbolPackId]);
 
   useEffect(() => {
     let cancelled = false;
