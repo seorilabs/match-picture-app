@@ -399,6 +399,21 @@ body,
   color: var(--unity-yellow);
 }
 
+.theme-bar {
+  position: absolute;
+  top: calc(env(safe-area-inset-top) + var(--hud-height) + 56px);
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 8px;
+  z-index: 5;
+}
+
+.theme-chip {
+  font-size: 12px;
+  padding: 7px 11px;
+}
+
 /* 카드 전환 연출. 새 상대 카드는 위에서 내려앉고(deal),
    직전 상대 카드는 내 자리로 미끄러져 내려옵니다(slide). */
 .card-anim {

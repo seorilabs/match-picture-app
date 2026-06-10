@@ -71,6 +71,23 @@ Apps in Toss 배포는 `.github/workflows/deploy.yml`에서 수동 실행합니�
 - 베스트 기록은 클래식(`match-picture/best-seconds`)과 데일리(`match-picture/daily-best/<YYYY-MM-DD>`)에 각각 저장되어 결과 화면에서 신기록 여부를 보여줍니다.
 - 라운드가 진행될수록 심볼 위치가 기본 배치에서 점점 멀어져(최대 ±90/650 좌표) 위치 암기를 막습니다.
 
+## 심볼 테마(심볼팩)
+
+시작 화면의 테마 칩에서 심볼 룩을 바꿀 수 있습니다. 선택은 `match-picture/symbol-pack`에 저장됩니다.
+
+| 팩 | 에셋 | 설명 |
+| --- | --- | --- |
+| 클래식 | `public/symbols/*.png` | Unity 원본 NotoEmoji PNG |
+| 픽셀 | `public/symbols/pixel/*.svg` | 12x12 픽셀 아트. 19개 모티프 x 3색 변형 = 57심볼 |
+
+픽셀 팩은 `scripts/generate-pixel-pack.mjs`의 ASCII 그리드에서 생성됩니다. 모티프를 추가/수정한 뒤 다시 실행하면 SVG가 갱신됩니다.
+
+```bash
+node scripts/generate-pixel-pack.mjs
+```
+
+새 테마를 추가하려면 57개 에셋(`001`~`057`)을 `public/` 아래 디렉토리에 두고 `src/symbols/packs.ts`의 `SYMBOL_PACKS`에 항목을 추가하면 됩니다. 덱/룰 로직은 심볼 ID만 다루므로 코드 변경은 매니페스트 한 줄입니다.
+
 출시 후 리더보드, 리뷰 요청, 전면 광고를 긴급 비활성화하려면 `VITE_REMOTE_CONFIG_URL`이 가리키는 JSON을 아래처럼 바꿉니다. 해당 URL은 앱 WebView에서 `fetch`로 읽기 때문에 HTTPS와 CORS 허용이 필요합니다. 원격 설정을 성공적으로 읽으면 앱 Storage/localStorage에 마지막 성공값을 저장하고, 이후 설정 서버가 내려가면 저장된 값을 fallback으로 사용합니다.
 
 ```json
