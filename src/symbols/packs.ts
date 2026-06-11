@@ -40,6 +40,12 @@ export const SYMBOL_PACKS: SymbolPack[] = [
     dir: "symbols/instrument",
     ext: "svg",
   },
+  {
+    id: "ocean",
+    label: "바다",
+    dir: "symbols/ocean",
+    ext: "svg",
+  },
 ];
 
 export const DEFAULT_PACK_ID = "classic";
