@@ -82,6 +82,7 @@ Apps in Toss 배포는 `.github/workflows/deploy.yml`에서 수동 실행합니�
 | 우주 | `public/symbols/space/*.svg` | 12x12 픽셀 아트 우주 테마(행성, UFO, 로켓 등). 19개 모티프 x 3색 변형 = 57심볼 |
 | 악기 | `public/symbols/instrument/*.svg` | 12x12 픽셀 아트 악기/음악 테마(기타, 드럼, 음표 등). 19개 모티프 x 3색 변형 = 57심볼 |
 | 바다 | `public/symbols/ocean/*.svg` | 12x12 픽셀 아트 바다/해변 테마(물고기, 문어, 등대, 닻 등). 19개 모티프 x 3색 변형 = 57심볼 |
+| 음식 | `public/symbols/food/*.svg` | 12x12 픽셀 아트 음식/디저트 테마(사과, 피자, 햄버거, 핫도그, 도넛 등). 19개 모티프 x 3색 변형 = 57심볼 |
 
 픽셀 아트 팩들은 `scripts/generate-<팩>-pack.mjs`의 ASCII 그리드에서 생성됩니다(공용 로직은 `scripts/pixelPackLib.mjs`). 모티프를 추가/수정한 뒤 다시 실행하면 SVG가 갱신됩니다.
 
@@ -90,6 +91,7 @@ node scripts/generate-pixel-pack.mjs
 node scripts/generate-space-pack.mjs
 node scripts/generate-instrument-pack.mjs
 node scripts/generate-ocean-pack.mjs
+node scripts/generate-food-pack.mjs
 ```
 
 새 테마를 추가하려면 57개 에셋(`001`~`057`)을 `public/` 아래 디렉토리에 두고 `src/symbols/packs.ts`의 `SYMBOL_PACKS`에 항목을 추가하면 됩니다. 덱/룰 로직은 심볼 ID만 다루므로 코드 변경은 매니페스트 한 줄입니다.
