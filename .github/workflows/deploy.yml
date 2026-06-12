@@ -15,7 +15,7 @@ concurrency:
 jobs:
   deploy:
     name: Build and Deploy
-    runs-on: ubuntu-latest
+    runs-on: seorilabs-rpi-arm64
     timeout-minutes: 20
     environment: apps-in-toss
     permissions:

@@ -15,7 +15,7 @@ concurrency:
 jobs:
   validate:
     name: Lint, Test, Build
-    runs-on: ubuntu-latest
+    runs-on: seorilabs-rpi-arm64
     timeout-minutes: 15
 
     env:
