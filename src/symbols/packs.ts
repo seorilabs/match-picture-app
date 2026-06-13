@@ -46,6 +46,12 @@ export const SYMBOL_PACKS: SymbolPack[] = [
     dir: "symbols/ocean",
     ext: "svg",
   },
+  {
+    id: "food",
+    label: "음식",
+    dir: "symbols/food",
+    ext: "svg",
+  },
 ];
 
 export const DEFAULT_PACK_ID = "classic";
