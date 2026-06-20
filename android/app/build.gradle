@@ -6,10 +6,11 @@ def keystoreProps = new Properties()
 if (keystorePropsFile.exists()) {
     keystoreProps.load(new FileInputStream(keystorePropsFile))
 }
-def ksStoreFile = keystoreProps['storeFile'] ?: System.getenv('ANDROID_KEYSTORE_FILE')
-def ksStorePass = keystoreProps['storePassword'] ?: System.getenv('ANDROID_KEYSTORE_PASSWORD')
-def ksAlias = keystoreProps['keyAlias'] ?: System.getenv('ANDROID_KEY_ALIAS')
-def ksKeyPass = keystoreProps['keyPassword'] ?: System.getenv('ANDROID_KEY_PASSWORD')
+// getProperty는 키 부재 시 null을 반환하므로 4개 필드 모두 안전하게 환경변수로 폴백된다.
+def ksStoreFile = keystoreProps.getProperty('storeFile') ?: System.getenv('ANDROID_KEYSTORE_FILE')
+def ksStorePass = keystoreProps.getProperty('storePassword') ?: System.getenv('ANDROID_KEYSTORE_PASSWORD')
+def ksAlias = keystoreProps.getProperty('keyAlias') ?: System.getenv('ANDROID_KEY_ALIAS')
+def ksKeyPass = keystoreProps.getProperty('keyPassword') ?: System.getenv('ANDROID_KEY_PASSWORD')
 
 android {
     namespace = "com.github.magicsih.MatchSymbol"
@@ -42,16 +43,26 @@ android {
     }
     buildTypes {
         release {
-            // 서명 자격이 있으면 release 키로 서명. 없으면 unsigned로 빌드되므로
-            // Play 업로드 전에 알 수 있도록 명시적으로 경고한다(CI silent-unsigned 방지).
+            // 서명 자격이 있으면 release 키로 서명한다. 없을 때의 처리는 아래 태스크 가드 참고.
             if (ksStoreFile != null) {
                 signingConfig signingConfigs.release
-            } else {
-                logger.warn("⚠️ release 서명 자격(keystore.properties 또는 ANDROID_KEYSTORE_* 환경변수)이 "
-                    + "없어 unsigned로 빌드됩니다. Google Play 업로드에는 matchpicture 업로드 키 서명이 필요합니다.")
             }
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+// release 산출물이 서명 없이 조용히 빌드되어 Play 업로드에서 거절되는 것을 막는다.
+// 설정 단계가 아니라 release 태스크 "실행" 시점에만 검사하므로 debug 빌드/일반 설정에는 영향이 없다.
+tasks.matching { it.name == 'assembleRelease' || it.name == 'bundleRelease' }.configureEach {
+    doFirst {
+        if (ksStoreFile == null) {
+            throw new GradleException(
+                "release 서명 자격이 없습니다. 로컬은 android/keystore.properties, " +
+                "CI는 ANDROID_KEYSTORE_FILE/PASSWORD/KEY_ALIAS/KEY_PASSWORD 환경변수를 설정하세요. " +
+                "(matchpicture 업로드 키로 서명되어야 Google Play 업로드가 수락됩니다.)"
+            )
         }
     }
 }
