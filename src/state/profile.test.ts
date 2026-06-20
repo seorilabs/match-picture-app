@@ -81,4 +81,19 @@ describe("normalizeProfile / 직렬화", () => {
   it("null 직렬화 입력은 기본 프로필을 돌려준다", () => {
     expect(parseProfile(null)).toEqual(createDefaultProfile());
   });
+
+  it("정원/미션 필드가 없던 구 버전 프로필도 안전하게 마이그레이션된다", () => {
+    // garden·missions가 추가되기 전 형태(coins/ownedPackIds/equippedPackId만 존재).
+    const legacy = JSON.stringify({
+      coins: 320,
+      ownedPackIds: ["classic", "pixel"],
+      equippedPackId: "pixel",
+    });
+    const p = parseProfile(legacy);
+    expect(p.coins).toBe(320);
+    expect(p.equippedPackId).toBe("pixel");
+    // 누락 필드는 기본값으로 채워진다(빈 날짜 → Provider가 오늘로 리셋).
+    expect(p.missions.date).toBe("");
+    expect(p.garden.plots[0]?.speciesId).toBe("sprout");
+  });
 });

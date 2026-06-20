@@ -21,6 +21,7 @@ public class ExampleInstrumentedTest {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
 
-        assertEquals("com.getcapacitor.app", appContext.getPackageName());
+        // 이전받은 구 Play 앱과 동일해야 '업데이트' 교체가 된다(android/app/build.gradle applicationId).
+        assertEquals("com.github.magicsih.MatchPictureUnity", appContext.getPackageName());
     }
 }
