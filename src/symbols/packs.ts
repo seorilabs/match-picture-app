@@ -49,15 +49,15 @@ export const SYMBOL_PACKS: SymbolPack[] = [
   },
   {
     id: "ocean",
-    label: "바다",
     dir: "symbols/ocean",
     ext: "svg",
+    price: 500,
   },
   {
     id: "food",
-    label: "음식",
     dir: "symbols/food",
     ext: "svg",
+    price: 500,
   },
 ];
 
