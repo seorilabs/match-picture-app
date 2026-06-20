@@ -8,9 +8,13 @@ import { symbolName } from "../game/deck";
 import { PRIME } from "../game/rules";
 import {
   DEFAULT_PACK_ID,
+  PREVIEW_SYMBOL_IDS,
+  SYMBOL_COUNT,
+  SYMBOL_IDS,
   SYMBOL_PACKS,
   getSymbolPack,
   symbolSrc,
+  validateSymbolPacks,
 } from "./packs";
 
 const DECK_SYMBOL_COUNT = PRIME * PRIME + PRIME + 1;
@@ -42,6 +46,37 @@ describe("SYMBOL_PACKS", () => {
         );
       }
     }
+  });
+});
+
+describe("심볼 ID 공간 / 검증", () => {
+  it("SYMBOL_COUNT가 덱 계산(prime²+prime+1)과 일치한다", () => {
+    expect(SYMBOL_COUNT).toBe(DECK_SYMBOL_COUNT);
+    expect(SYMBOL_IDS).toHaveLength(SYMBOL_COUNT);
+    expect(SYMBOL_IDS[0]).toBe("001");
+    expect(SYMBOL_IDS[SYMBOL_IDS.length - 1]).toBe("057");
+  });
+
+  it("미리보기 ID는 모두 유효한 공유 심볼 ID다", () => {
+    for (const id of PREVIEW_SYMBOL_IDS) {
+      expect(SYMBOL_IDS).toContain(id);
+    }
+  });
+
+  it("validateSymbolPacks는 정상 매니페스트를 통과시킨다", () => {
+    expect(() => validateSymbolPacks()).not.toThrow();
+  });
+
+  it("validateSymbolPacks는 id 중복/음수 가격을 잡는다", () => {
+    expect(() =>
+      validateSymbolPacks([
+        { id: "a", dir: "d", ext: "png", price: 0 },
+        { id: "a", dir: "d", ext: "png", price: 0 },
+      ]),
+    ).toThrow(/중복/);
+    expect(() =>
+      validateSymbolPacks([{ id: "a", dir: "d", ext: "png", price: -1 }]),
+    ).toThrow(/price/);
   });
 });
 

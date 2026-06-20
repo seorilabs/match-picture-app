@@ -115,11 +115,34 @@ body,
   white-space: nowrap;
 }
 
-.leaderboard-toggle {
+.hud-exit-toggle {
   appearance: none;
   position: absolute;
   top: 4px;
   left: 4px;
+  width: 44px;
+  height: 40px;
+  border: 0;
+  background: transparent;
+  color: #333333;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.hud-exit-toggle:active {
+  opacity: 0.5;
+}
+
+.leaderboard-toggle {
+  appearance: none;
+  position: absolute;
+  top: 4px;
+  left: 50px;
   width: 48px;
   height: 40px;
   border: 0;
@@ -680,6 +703,22 @@ body,
   font-size: clamp(31px, 10vw, 48px);
   line-height: 1;
   letter-spacing: 0;
+}
+
+.result-coins {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  font-family: var(--unity-font);
+  font-size: clamp(18px, 6vw, 26px);
+  color: #8a5a00;
+  background: var(--unity-yellow);
+  padding: 6px 0;
+}
+
+.result-coins-icon {
+  font-family: initial;
 }
 
 .result-score {

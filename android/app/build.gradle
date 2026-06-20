@@ -1,0 +1,97 @@
+apply plugin: 'com.android.application'
+
+// Release 서명 자격: 로컬은 keystore.properties(gitignore됨), CI는 환경변수로 주입.
+def keystorePropsFile = rootProject.file("keystore.properties")
+def keystoreProps = new Properties()
+if (keystorePropsFile.exists()) {
+    keystoreProps.load(new FileInputStream(keystorePropsFile))
+}
+// getProperty는 키 부재 시 null을 반환하므로 4개 필드 모두 안전하게 환경변수로 폴백된다.
+def ksStoreFile = keystoreProps.getProperty('storeFile') ?: System.getenv('ANDROID_KEYSTORE_FILE')
+def ksStorePass = keystoreProps.getProperty('storePassword') ?: System.getenv('ANDROID_KEYSTORE_PASSWORD')
+def ksAlias = keystoreProps.getProperty('keyAlias') ?: System.getenv('ANDROID_KEY_ALIAS')
+def ksKeyPass = keystoreProps.getProperty('keyPassword') ?: System.getenv('ANDROID_KEY_PASSWORD')
+
+android {
+    namespace = "com.github.magicsih.MatchSymbol"
+    compileSdk = rootProject.ext.compileSdkVersion
+    defaultConfig {
+        // Play Store 식별자: 이전받은 구 Unity 앱과 동일해야 '업데이트'로 교체된다.
+        // (namespace는 Capacitor appId(com.github.magicsih.MatchSymbol) 유지 — 스토어 식별자와 무관)
+        applicationId "com.github.magicsih.MatchPictureUnity"
+        minSdkVersion rootProject.ext.minSdkVersion
+        targetSdkVersion rootProject.ext.targetSdkVersion
+        // 구 Unity 마지막: versionCode 11 / versionName 1.0.7 → 그 위로 올린다.
+        versionCode 12
+        versionName "1.0.8"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        aaptOptions {
+             // Files and dirs to omit from the packaged assets dir, modified to accommodate modern web apps.
+             // Default: https://android.googlesource.com/platform/frameworks/base/+/282e181b58cf72b6ca770dc7ca5f91f135444502/tools/aapt/AaptAssets.cpp#61
+            ignoreAssetsPattern = '!.svn:!.git:!.ds_store:!*.scc:.*:!CVS:!thumbs.db:!picasa.ini:!*~'
+        }
+    }
+    signingConfigs {
+        release {
+            if (ksStoreFile != null) {
+                storeFile rootProject.file(ksStoreFile)
+                storePassword ksStorePass
+                keyAlias ksAlias
+                keyPassword ksKeyPass
+            }
+        }
+    }
+    buildTypes {
+        release {
+            // 서명 자격이 있으면 release 키로 서명한다. 없을 때의 처리는 아래 태스크 가드 참고.
+            if (ksStoreFile != null) {
+                signingConfig signingConfigs.release
+            }
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+// release 산출물이 서명 없이 조용히 빌드되어 Play 업로드에서 거절되는 것을 막는다.
+// 설정 단계가 아니라 release 태스크 "실행" 시점에만 검사하므로 debug 빌드/일반 설정에는 영향이 없다.
+tasks.matching { it.name == 'assembleRelease' || it.name == 'bundleRelease' }.configureEach {
+    doFirst {
+        if (ksStoreFile == null) {
+            throw new GradleException(
+                "release 서명 자격이 없습니다. 로컬은 android/keystore.properties, " +
+                "CI는 ANDROID_KEYSTORE_FILE/PASSWORD/KEY_ALIAS/KEY_PASSWORD 환경변수를 설정하세요. " +
+                "(matchpicture 업로드 키로 서명되어야 Google Play 업로드가 수락됩니다.)"
+            )
+        }
+    }
+}
+
+repositories {
+    flatDir{
+        dirs '../capacitor-cordova-android-plugins/src/main/libs', 'libs'
+    }
+}
+
+dependencies {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation "androidx.appcompat:appcompat:$androidxAppCompatVersion"
+    implementation "androidx.coordinatorlayout:coordinatorlayout:$androidxCoordinatorLayoutVersion"
+    implementation "androidx.core:core-splashscreen:$coreSplashScreenVersion"
+    implementation project(':capacitor-android')
+    testImplementation "junit:junit:$junitVersion"
+    androidTestImplementation "androidx.test.ext:junit:$androidxJunitVersion"
+    androidTestImplementation "androidx.test.espresso:espresso-core:$androidxEspressoCoreVersion"
+    implementation project(':capacitor-cordova-android-plugins')
+}
+
+apply from: 'capacitor.build.gradle'
+
+try {
+    def servicesJSON = file('google-services.json')
+    if (servicesJSON.text) {
+        apply plugin: 'com.google.gms.google-services'
+    }
+} catch(Exception e) {
+    logger.info("google-services.json not found, google-services plugin not applied. Push Notifications won't work")
+}
