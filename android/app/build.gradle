@@ -42,9 +42,13 @@ android {
     }
     buildTypes {
         release {
-            // 서명 자격이 있으면 release 키로 서명(없으면 unsigned로 빌드만).
+            // 서명 자격이 있으면 release 키로 서명. 없으면 unsigned로 빌드되므로
+            // Play 업로드 전에 알 수 있도록 명시적으로 경고한다(CI silent-unsigned 방지).
             if (ksStoreFile != null) {
                 signingConfig signingConfigs.release
+            } else {
+                logger.warn("⚠️ release 서명 자격(keystore.properties 또는 ANDROID_KEYSTORE_* 환경변수)이 "
+                    + "없어 unsigned로 빌드됩니다. Google Play 업로드에는 matchpicture 업로드 키 서명이 필요합니다.")
             }
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
