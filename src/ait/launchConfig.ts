@@ -1,4 +1,4 @@
-import { readItem, writeItem } from "./storage";
+import { readRemoteFlags, refreshRemoteFlags } from "../firebase/remoteConfig";
 
 export interface LaunchConfig {
   leaderboardEnabled: boolean;
@@ -6,6 +6,10 @@ export interface LaunchConfig {
   interstitialAdEnabled: boolean;
 }
 
+/**
+ * 불리언 kill-switch 페이로드를 LaunchConfig로 정규화한다.
+ * Firebase RC가 돌려주는 평탄한 불리언 객체뿐 아니라, 과거/유연한 중첩 형태도 받아들인다.
+ */
 type RemoteConfigPayload =
   | {
       leaderboardEnabled?: unknown;
@@ -33,20 +37,6 @@ type RemoteConfigPayload =
     }
   | null
   | undefined;
-
-const CACHE_KEY = "match-picture/launch-config";
-
-function splitUrls(value: string | undefined): string[] {
-  return (value ?? "")
-    .split(",")
-    .map((url) => url.trim())
-    .filter(Boolean);
-}
-
-const REMOTE_CONFIG_URLS = [
-  ...splitUrls(import.meta.env.VITE_REMOTE_CONFIG_URL),
-  ...splitUrls(import.meta.env.VITE_REMOTE_CONFIG_FALLBACK_URL),
-];
 
 const DEFAULT_LAUNCH_CONFIG: LaunchConfig = {
   leaderboardEnabled: true,
@@ -87,51 +77,18 @@ export function parseLaunchConfig(payload: RemoteConfigPayload): LaunchConfig {
   };
 }
 
-export function parseCachedLaunchConfig(value: string | null): LaunchConfig | null {
-  if (!value) return null;
-  try {
-    return parseLaunchConfig(JSON.parse(value) as RemoteConfigPayload);
-  } catch {
-    return null;
-  }
-}
-
 export function getDefaultLaunchConfig(): LaunchConfig {
   return DEFAULT_LAUNCH_CONFIG;
 }
 
+/** Firebase RC의 마지막 활성값(또는 기본값)을 즉시 읽는다. */
 export async function loadCachedLaunchConfig(): Promise<LaunchConfig | null> {
-  return parseCachedLaunchConfig(await readItem(CACHE_KEY));
+  const flags = await readRemoteFlags(DEFAULT_LAUNCH_CONFIG);
+  return flags ? parseLaunchConfig(flags) : null;
 }
 
-async function fetchLaunchConfig(url: string): Promise<LaunchConfig | null> {
-  const controller = new AbortController();
-  const timeoutId = window.setTimeout(() => controller.abort(), 1600);
-
-  try {
-    const response = await fetch(url, {
-      cache: "no-store",
-      signal: controller.signal,
-    });
-    if (!response.ok) return null;
-
-    const payload = (await response.json()) as RemoteConfigPayload;
-    return parseLaunchConfig(payload);
-  } catch {
-    return null;
-  } finally {
-    window.clearTimeout(timeoutId);
-  }
-}
-
+/** Firebase RC에서 최신값을 받아온다. 실패 시 기본값. */
 export async function loadLaunchConfig(): Promise<LaunchConfig> {
-  for (const url of REMOTE_CONFIG_URLS) {
-    const config = await fetchLaunchConfig(url);
-    if (config !== null) {
-      void writeItem(CACHE_KEY, JSON.stringify(config));
-      return config;
-    }
-  }
-
-  return (await loadCachedLaunchConfig()) ?? DEFAULT_LAUNCH_CONFIG;
+  const flags = await refreshRemoteFlags(DEFAULT_LAUNCH_CONFIG);
+  return flags ? parseLaunchConfig(flags) : DEFAULT_LAUNCH_CONFIG;
 }
