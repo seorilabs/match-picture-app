@@ -2,6 +2,7 @@ import { Modal } from "./Modal";
 import { bestGapSeconds, isNearMiss } from "../game/bestRecord";
 import type { GameMode } from "../game/mode";
 import { MAX_DISPLAY_SECONDS, formatSeconds } from "../game/rules";
+import { useI18n } from "../i18n/i18nContext";
 
 export type ShareStatus = "idle" | "sharing" | "shared" | "copied" | "failed";
 
@@ -15,6 +16,8 @@ interface ResultModalProps {
   isNewBest: boolean;
   /** 도전장 모드에서 이길 대상 기록(초). 없으면 null. */
   challengeTargetSeconds: number | null;
+  /** 이번 클리어로 획득한 코인. 없으면 표시하지 않음. */
+  earnedCoins: number | null;
   /** 오늘의 도전을 이미 클리어했는지. 클래식 결과에서 데일리 CTA 노출 여부를 정합니다. */
   dailyClearedToday: boolean;
   /** 클래식 결과에서 오늘의 도전으로 이동합니다. */
@@ -33,12 +36,6 @@ interface ResultModalProps {
   onExit: () => void;
 }
 
-const MODE_LABELS: Record<GameMode, string | null> = {
-  classic: null,
-  daily: "오늘의 도전",
-  challenge: "도전장 대결",
-};
-
 const SHARE_LABELS: Record<ShareStatus, string> = {
   idle: "SHARE",
   sharing: "...",
@@ -55,6 +52,7 @@ export function ResultModal({
   previousBestSeconds,
   isNewBest,
   challengeTargetSeconds,
+  earnedCoins,
   dailyClearedToday,
   onPlayDaily,
   onRetry,
@@ -69,7 +67,13 @@ export function ResultModal({
   onOpenLeaderboard,
   onExit,
 }: ResultModalProps) {
-  const modeLabel = MODE_LABELS[mode];
+  const { t } = useI18n();
+  const modeLabel =
+    mode === "daily"
+      ? t("result.daily")
+      : mode === "challenge"
+        ? t("result.challenge")
+        : null;
   const challengeWon =
     challengeTargetSeconds !== null &&
     seconds !== null &&
@@ -88,6 +92,14 @@ export function ResultModal({
       <div className="result-panel">
         {modeLabel ? <div className="result-mode">{modeLabel}</div> : null}
         <div className="result-time">{formatSeconds(seconds ?? 0)}</div>
+        {earnedCoins !== null && earnedCoins > 0 ? (
+          <div className="result-coins" role="status" aria-live="polite">
+            <span className="result-coins-icon" aria-hidden="true">
+              🪙
+            </span>
+            +{earnedCoins.toLocaleString("ko-KR")}
+          </div>
+        ) : null}
         {isNewBest ? (
           <div className="result-best is-new" role="status" aria-live="polite">
             NEW BEST!
@@ -98,7 +110,7 @@ export function ResultModal({
             role="status"
             aria-live="polite"
           >
-            베스트까지 {gapSeconds.toFixed(1)}초!
+            {t("result.toBest", { n: gapSeconds.toFixed(1) })}
           </div>
         ) : previousBestSeconds !== null && mode !== "challenge" ? (
           <div className="result-best">
@@ -115,7 +127,7 @@ export function ResultModal({
             aria-live="polite"
           >
             <span className="result-versus-target">
-              상대 기록 {formatSeconds(challengeTargetSeconds)}
+              {t("result.rival", { t: formatSeconds(challengeTargetSeconds) })}
             </span>
             <span className="result-versus-outcome">
               {challengeWon ? "WIN!" : "LOSE..."}
@@ -129,7 +141,7 @@ export function ResultModal({
             aria-live="polite"
             aria-atomic="true"
           >
-            랭킹 등록 중
+            {t("result.submitting")}
           </div>
         ) : null}
         {leaderboardEnabled && leaderboardSubmitStatus === "failed" ? (
@@ -139,7 +151,7 @@ export function ResultModal({
             aria-live="polite"
             aria-atomic="true"
           >
-            랭킹 등록 실패
+            {t("result.submitFailed")}
           </div>
         ) : null}
         {leaderboardEnabled &&
@@ -151,7 +163,7 @@ export function ResultModal({
             aria-live="polite"
             aria-atomic="true"
           >
-            <span className="result-score-label">랭킹 등록 점수</span>
+            <span className="result-score-label">{t("result.scoreLabel")}</span>
             <span className="result-score-value">{leaderboardScore}</span>
           </div>
         ) : null}
@@ -190,7 +202,7 @@ export function ResultModal({
             className="result-button result-button-daily"
             onClick={onPlayDaily}
           >
-            오늘의 도전 ▶
+            {t("result.dailyCta")}
           </button>
         ) : null}
         {mode !== "classic" ? (

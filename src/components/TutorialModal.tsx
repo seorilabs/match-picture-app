@@ -1,3 +1,5 @@
+import { useI18n } from "../i18n/i18nContext";
+
 interface TutorialModalProps {
   open: boolean;
   onClose: () => void;
@@ -64,6 +66,7 @@ function TutorialCard({
 
 /** 최초 플레이어가 규칙과 첫 액션을 이해하도록 안내합니다. */
 export function TutorialModal({ open, onClose }: TutorialModalProps) {
+  const { t } = useI18n();
   if (!open) return null;
 
   return (
@@ -75,12 +78,9 @@ export function TutorialModal({ open, onClose }: TutorialModalProps) {
     >
       <div className="tutorial-content">
         <div className="tutorial-copy">
-          <h1 id="tutorial-title">같은 그림을 찾아요</h1>
-          <p>
-            위 카드와 아래 카드에는 같은 그림이 딱 하나 있어요. 아래
-            카드에서 그 그림을 누르면 다음 카드로 넘어갑니다.
-          </p>
-          <p>틀리면 잠깐 멈추고, 빨리 끝낼수록 기록이 좋아져요.</p>
+          <h1 id="tutorial-title">{t("tutorial.title")}</h1>
+          <p>{t("tutorial.body1")}</p>
+          <p>{t("tutorial.body2")}</p>
         </div>
 
         <div className="tutorial-cards" aria-hidden="true">
@@ -89,7 +89,7 @@ export function TutorialModal({ open, onClose }: TutorialModalProps) {
         </div>
 
         <button type="button" className="tutorial-start" onClick={onClose}>
-          알겠어요
+          {t("tutorial.start")}
         </button>
       </div>
     </div>

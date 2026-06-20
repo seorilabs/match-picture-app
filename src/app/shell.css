@@ -1,0 +1,637 @@
+/* 탭 셸 + 메타 화면(홈/상점/미션/설정) 스타일.
+   게임 화면(.game-shell)과 같은 fixed/safe-area 패턴을 따른다. */
+
+.app-shell {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  user-select: none;
+  background-image: linear-gradient(180deg, #7ec7dc 0%, #b9e6f1 60%, #e8f7fb 100%);
+  padding-top: env(safe-area-inset-top);
+  padding-left: env(safe-area-inset-left);
+  padding-right: env(safe-area-inset-right);
+}
+
+.app-screen-area {
+  flex: 1 1 auto;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.screen {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  padding: 20px 18px 28px;
+  min-height: 100%;
+}
+
+.screen-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.screen-title {
+  margin: 0;
+  font-size: 22px;
+  font-weight: 800;
+  color: #0c3a49;
+}
+
+.screen-subtitle {
+  margin: -6px 0 0;
+  font-size: 13px;
+  color: #2c5a68;
+}
+
+/* 코인 배지 */
+.coin-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.9);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
+  font-weight: 700;
+  color: #8a5a00;
+}
+
+.coin-badge-icon {
+  font-size: 16px;
+}
+
+.coin-badge-amount {
+  font-variant-numeric: tabular-nums;
+}
+
+/* 공통 버튼 */
+.primary-button {
+  appearance: none;
+  border: none;
+  border-radius: 14px;
+  padding: 16px;
+  font-size: 18px;
+  font-weight: 800;
+  color: #1a1a1a;
+  background: #f4d03f;
+  box-shadow: 0 4px 0 #c9a92a;
+  cursor: pointer;
+}
+
+.primary-button:active {
+  transform: translateY(2px);
+  box-shadow: 0 2px 0 #c9a92a;
+}
+
+.secondary-button {
+  appearance: none;
+  border: 2px solid rgba(12, 58, 73, 0.25);
+  border-radius: 14px;
+  padding: 13px;
+  font-size: 15px;
+  font-weight: 700;
+  color: #0c3a49;
+  background: rgba(255, 255, 255, 0.7);
+  cursor: pointer;
+}
+
+/* 홈 */
+.home-screen {
+  justify-content: space-between;
+}
+
+.home-meta-card {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.55);
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  margin: 6px 0;
+  min-height: 220px;
+}
+
+.home-meta-art {
+  font-size: 72px;
+  line-height: 1;
+}
+
+.home-meta-caption {
+  margin: 0;
+  font-size: 14px;
+  color: #2c5a68;
+}
+
+.home-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* 상점 */
+.shop-message {
+  margin: 0;
+  padding: 10px 12px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.8);
+  font-size: 13px;
+  color: #0c3a49;
+}
+
+.pack-list,
+.mission-list,
+.settings-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.pack-card,
+.mission-card,
+.settings-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 14px 16px;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.85);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+}
+
+.pack-card-info,
+.mission-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.pack-card-label,
+.mission-label {
+  font-weight: 700;
+  color: #0c3a49;
+}
+
+.pack-card-meta,
+.mission-reward {
+  font-size: 13px;
+  color: #5a7a85;
+}
+
+.pack-button,
+.mission-button {
+  appearance: none;
+  border: none;
+  border-radius: 10px;
+  padding: 9px 16px;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  background: #0c3a49;
+  color: #fff;
+}
+
+.pack-button.is-buy {
+  background: #f4d03f;
+  color: #1a1a1a;
+}
+
+.pack-button:disabled,
+.mission-button:disabled {
+  opacity: 0.45;
+  cursor: default;
+}
+
+.pack-button.is-equipped {
+  background: rgba(12, 58, 73, 0.15);
+  color: #0c3a49;
+}
+
+.mission-button.is-claim {
+  background: #f4d03f;
+  color: #1a1a1a;
+}
+
+.mission-button.is-done {
+  background: rgba(12, 58, 73, 0.15);
+  color: #0c3a49;
+}
+
+/* 상점 팩 카드: 정보+버튼 행 위에 미리보기 스트립을 쌓는다. */
+.pack-card {
+  flex-direction: column;
+  align-items: stretch;
+  gap: 10px;
+}
+
+.pack-card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.pack-card-desc {
+  font-size: 12px;
+  color: #5a7a85;
+}
+
+.pack-preview-strip {
+  appearance: none;
+  border: none;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 10px;
+  border-radius: 10px;
+  background: rgba(12, 58, 73, 0.06);
+  cursor: pointer;
+}
+
+.pack-preview-thumb {
+  width: 30px;
+  height: 30px;
+  object-fit: contain;
+  flex: 0 0 auto;
+}
+
+.pack-preview-more {
+  margin-left: auto;
+  font-size: 12px;
+  font-weight: 700;
+  color: #0c3a49;
+  flex: 0 0 auto;
+}
+
+/* 미리보기 모달: 전체 심볼 그리드 */
+.modal-backdrop[data-modal="pack-preview"] {
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.pack-preview {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  width: 100%;
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 16px;
+}
+
+.pack-preview-head {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  text-align: center;
+}
+
+.pack-preview-title {
+  font-size: 18px;
+  color: #0c3a49;
+}
+
+.pack-preview-desc {
+  font-size: 13px;
+  color: #5a7a85;
+}
+
+.pack-preview-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 6px;
+  max-height: 46vh;
+  overflow-y: auto;
+  padding: 4px;
+}
+
+.pack-preview-cell {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: contain;
+}
+
+.settings-row {
+  font-weight: 600;
+  color: #0c3a49;
+}
+
+.settings-hint {
+  font-weight: 500;
+  font-size: 13px;
+  color: #5a7a85;
+}
+
+.lang-switch {
+  display: inline-flex;
+  gap: 6px;
+}
+
+.lang-chip {
+  appearance: none;
+  border: 1px solid rgba(12, 58, 73, 0.2);
+  background: rgba(255, 255, 255, 0.7);
+  color: #5a7a85;
+  border-radius: 999px;
+  padding: 5px 12px;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.lang-chip.is-active {
+  background: #0c3a49;
+  border-color: #0c3a49;
+  color: #ffffff;
+}
+
+/* 하단 탭바 */
+.tab-bar {
+  flex: 0 0 auto;
+  display: flex;
+  background: #ffffff;
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+.tab-item {
+  flex: 1 1 0;
+  appearance: none;
+  border: none;
+  background: transparent;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  padding: 8px 0 6px;
+  cursor: pointer;
+  color: #98a7ad;
+}
+
+.tab-item.is-active {
+  color: #0c3a49;
+}
+
+.tab-icon {
+  font-size: 22px;
+  line-height: 1;
+  filter: grayscale(0.4);
+}
+
+.tab-item.is-active .tab-icon {
+  filter: none;
+}
+
+.tab-label {
+  font-size: 11px;
+  font-weight: 700;
+}
+
+/* ── 정원(홈 메타) ───────────────────────────── */
+.garden {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 16px 14px 18px;
+  border-radius: 20px;
+  background: linear-gradient(180deg, #cdeffa 0%, #eafbf0 70%, #d6f0c8 100%);
+  border: 1px solid rgba(255, 255, 255, 0.8);
+}
+
+.garden-sky {
+  text-align: right;
+  font-size: 26px;
+  line-height: 1;
+}
+
+.garden-plots {
+  flex: 1 1 auto;
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  gap: 10px;
+}
+
+.garden-plot {
+  flex: 1 1 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 6px;
+  padding: 10px 6px 12px;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.55);
+  min-height: 150px;
+  position: relative;
+}
+
+.garden-plot.is-empty {
+  appearance: none;
+  border: 2px dashed rgba(12, 58, 73, 0.25);
+  background: rgba(255, 255, 255, 0.3);
+  color: #5a7a85;
+  cursor: pointer;
+}
+
+.garden-plot-emoji {
+  font-size: 52px;
+  line-height: 1;
+  margin-top: auto;
+}
+
+.garden-plot-caption {
+  font-size: 11px;
+  font-weight: 700;
+  color: #2c5a68;
+}
+
+.garden-plot-remove {
+  appearance: none;
+  border: none;
+  background: rgba(12, 58, 73, 0.12);
+  color: #0c3a49;
+  border-radius: 8px;
+  padding: 3px 8px;
+  font-size: 11px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.garden-plot-fertilize {
+  appearance: none;
+  border: none;
+  background: #7cc36a;
+  color: #ffffff;
+  border-radius: 8px;
+  padding: 3px 9px;
+  font-size: 11px;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.garden-plot-fertilize:disabled {
+  background: rgba(12, 58, 73, 0.15);
+  color: rgba(12, 58, 73, 0.55);
+  cursor: default;
+}
+
+.garden-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.garden-water-button {
+  flex: 1 1 0;
+  appearance: none;
+  border: none;
+  border-radius: 12px;
+  padding: 12px;
+  font-size: 15px;
+  font-weight: 800;
+  color: #ffffff;
+  background: #2aa9d8;
+  cursor: pointer;
+}
+
+.garden-water-button:disabled {
+  background: rgba(12, 58, 73, 0.2);
+  color: rgba(12, 58, 73, 0.6);
+  cursor: default;
+}
+
+.garden-seed-button {
+  flex: 1 1 0;
+  appearance: none;
+  border: 2px solid rgba(12, 58, 73, 0.2);
+  border-radius: 12px;
+  padding: 12px;
+  font-size: 15px;
+  font-weight: 700;
+  color: #0c3a49;
+  background: rgba(255, 255, 255, 0.7);
+  cursor: pointer;
+}
+
+.garden-dex {
+  margin: 0;
+  text-align: center;
+  font-size: 13px;
+  font-weight: 700;
+  color: #2c5a68;
+}
+
+.garden-message {
+  margin: 0;
+  text-align: center;
+  font-size: 13px;
+  color: #0c3a49;
+  background: rgba(255, 255, 255, 0.85);
+  border-radius: 10px;
+  padding: 8px;
+}
+
+/* ── 씨앗 심기 모달 ───────────────────────────── */
+.modal-backdrop[data-modal="seed-picker"] {
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.seed-picker {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 16px;
+}
+
+.seed-picker-head {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  text-align: center;
+}
+
+.seed-picker-title {
+  font-size: 18px;
+  color: #0c3a49;
+}
+
+.seed-picker-sub {
+  font-size: 12px;
+  color: #5a7a85;
+}
+
+.seed-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-height: 46vh;
+  overflow-y: auto;
+}
+
+.seed-card {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 12px;
+  border-radius: 12px;
+  background: rgba(12, 58, 73, 0.05);
+}
+
+.seed-emoji {
+  font-size: 30px;
+  line-height: 1;
+  flex: 0 0 auto;
+}
+
+.seed-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  flex: 1 1 auto;
+}
+
+.seed-name {
+  font-weight: 700;
+  color: #0c3a49;
+}
+
+.seed-meta {
+  font-size: 12px;
+  color: #5a7a85;
+}
+
+.seed-button {
+  appearance: none;
+  border: none;
+  border-radius: 10px;
+  padding: 9px 14px;
+  font-size: 14px;
+  font-weight: 700;
+  background: #f4d03f;
+  color: #1a1a1a;
+  cursor: pointer;
+  flex: 0 0 auto;
+}
+
+.seed-button:disabled {
+  opacity: 0.4;
+  cursor: default;
+}

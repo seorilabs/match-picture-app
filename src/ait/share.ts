@@ -5,6 +5,7 @@ import {
   CHALLENGE_TARGET_PARAM,
 } from "../game/mode";
 import { formatSeconds } from "../game/rules";
+import { t } from "../i18n/i18n";
 
 /** granite.config.ts의 appName과 같아야 딥링크가 이 미니앱으로 연결됩니다. */
 const APP_NAME = "match-picture-app";
@@ -29,7 +30,7 @@ export function buildChallengeQuery({
 }
 
 function buildMessage(seconds: number, link: string): string {
-  return `같은그림찾기 ${formatSeconds(seconds)} 클리어! 같은 카드로 내 기록을 깨볼래요? ${link}`;
+  return t("share.message", { time: formatSeconds(seconds), link });
 }
 
 function buildWebFallbackLink(query: string): string {

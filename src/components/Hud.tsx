@@ -1,4 +1,5 @@
 import { formatSeconds } from "../game/rules";
+import { useI18n } from "../i18n/i18nContext";
 
 interface HudProps {
   remaining: number;
@@ -9,6 +10,8 @@ interface HudProps {
   leaderboardMessage: string | null;
   onToggleSound: () => void;
   onOpenLeaderboard: () => void;
+  /** 홈(탭)으로 나가기. */
+  onExit: () => void;
 }
 
 /** Unity 원본 상단 UI를 기준으로 남은 카드, 경과 시간, 빠른 액션을 보여줍니다. */
@@ -21,17 +24,27 @@ export function Hud({
   leaderboardMessage,
   onToggleSound,
   onOpenLeaderboard,
+  onExit,
 }: HudProps) {
+  const { t } = useI18n();
   const baseUrl = import.meta.env.BASE_URL;
   const leaderboardLabel =
     leaderboardStatus === "opening"
-      ? "랭킹 여는 중"
+      ? t("hud.aria.openingRanking")
       : leaderboardStatus === "failed" && leaderboardMessage
-        ? `랭킹 열기. 최근 실패: ${leaderboardMessage}`
-        : "랭킹 열기";
+        ? t("hud.aria.rankingFailed", { msg: leaderboardMessage })
+        : t("hud.aria.openRanking");
 
   return (
     <div className="hud">
+      <button
+        type="button"
+        className="hud-exit-toggle"
+        aria-label={t("hud.aria.exit")}
+        onClick={onExit}
+      >
+        <span aria-hidden="true">✕</span>
+      </button>
       {leaderboardEnabled ? (
         <button
           type="button"
@@ -70,7 +83,7 @@ export function Hud({
       <button
         type="button"
         className={`sound-toggle${soundEnabled ? " is-on" : ""}`}
-        aria-label={soundEnabled ? "효과음 끄기" : "효과음 켜기"}
+        aria-label={soundEnabled ? t("hud.aria.soundOff") : t("hud.aria.soundOn")}
         aria-pressed={soundEnabled}
         onClick={onToggleSound}
       >
