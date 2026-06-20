@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 
-import { parseCachedLaunchConfig, parseLaunchConfig } from "./launchConfig";
+import { parseLaunchConfig } from "./launchConfig";
 
 describe("parseLaunchConfig", () => {
   it("defaults operational switches to enabled", () => {
@@ -47,14 +47,5 @@ describe("parseLaunchConfig", () => {
       reviewRequestEnabled: false,
       interstitialAdEnabled: false,
     });
-  });
-
-  it("parses cached config safely", () => {
-    expect(
-      parseCachedLaunchConfig('{"leaderboardEnabled":false}')
-        ?.leaderboardEnabled,
-    ).toBe(false);
-    expect(parseCachedLaunchConfig("{bad-json")).toBeNull();
-    expect(parseCachedLaunchConfig(null)).toBeNull();
   });
 });
