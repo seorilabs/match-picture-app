@@ -130,6 +130,10 @@ const ko: Messages = {
   "pack.space.desc": "행성·UFO·로켓 등 우주 테마",
   "pack.instrument.label": "악기",
   "pack.instrument.desc": "기타·드럼·음표 등 악기 테마",
+  "pack.ocean.label": "바다",
+  "pack.ocean.desc": "물고기·조개·해양 생물 등 바다 테마",
+  "pack.food.label": "음식",
+  "pack.food.desc": "과일·디저트·먹거리 등 음식 테마",
 
   // 식물
   "plant.sprout.name": "새싹",
@@ -250,6 +254,10 @@ const en: Messages = {
   "pack.space.desc": "Planets, UFOs, rockets and more",
   "pack.instrument.label": "Instrument",
   "pack.instrument.desc": "Guitars, drums, notes and more",
+  "pack.ocean.label": "Ocean",
+  "pack.ocean.desc": "Fish, shells, sea creatures and more",
+  "pack.food.label": "Food",
+  "pack.food.desc": "Fruits, desserts, snacks and more",
 
   "plant.sprout.name": "Sprout",
   "plant.cactus.name": "Cactus",

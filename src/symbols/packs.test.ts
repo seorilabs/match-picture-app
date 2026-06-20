@@ -16,6 +16,7 @@ import {
   symbolSrc,
   validateSymbolPacks,
 } from "./packs";
+import { SUPPORTED_LOCALES, messages } from "../i18n/messages";
 
 const DECK_SYMBOL_COUNT = PRIME * PRIME + PRIME + 1;
 
@@ -44,6 +45,25 @@ describe("SYMBOL_PACKS", () => {
         expect(existsSync(assetPath), `${pack.id}: ${assetPath} 없음`).toBe(
           true,
         );
+      }
+    }
+  });
+});
+
+describe("팩 i18n 키 정합성", () => {
+  // 새 팩을 추가하고 messages.ts에 키를 안 넣으면 상점에 원시 키가 노출되는
+  // 사고를 막는다(예: ocean/food 팩 병합 시 발생).
+  it("모든 팩 id가 ko/en 사전에 label·desc 키를 갖는다", () => {
+    for (const locale of SUPPORTED_LOCALES) {
+      for (const pack of SYMBOL_PACKS) {
+        expect(
+          messages[locale][`pack.${pack.id}.label`],
+          `${locale}: pack.${pack.id}.label 누락`,
+        ).toBeTruthy();
+        expect(
+          messages[locale][`pack.${pack.id}.desc`],
+          `${locale}: pack.${pack.id}.desc 누락`,
+        ).toBeTruthy();
       }
     }
   });
