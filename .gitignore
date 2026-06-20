@@ -37,6 +37,12 @@ Thumbs.db
 # Local agent instructions
 AGENTS.local.md
 
+# Android signing — NEVER commit keystore or passwords
+android/keystore.properties
+android/keystore/
+*.keystore
+*.jks
+
 # TypeScript
 *.tsbuildinfo
 

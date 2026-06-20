@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">같은그림찾기</string>
+    <string name="title_activity_main">같은그림찾기</string>
+    <string name="package_name">com.github.magicsih.MatchSymbol</string>
+    <string name="custom_url_scheme">com.github.magicsih.MatchSymbol</string>
+</resources>
