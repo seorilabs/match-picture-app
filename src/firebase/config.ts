@@ -21,4 +21,7 @@ export const firebaseConfig = {
   appId:
     import.meta.env.VITE_FIREBASE_APP_ID ??
     "1:694776397541:web:e3a0a276e8487f66861e0c",
+  // Google Analytics(GA4) 측정 ID. 비어 있으면 Analytics는 비활성(no-op).
+  measurementId:
+    import.meta.env.VITE_FIREBASE_MEASUREMENT_ID ?? "G-L5GMV0NX7C",
 };
