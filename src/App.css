@@ -67,21 +67,38 @@ body,
   position: relative;
   flex: 0 0 var(--hud-height);
   height: var(--hud-height);
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
   align-items: center;
-  justify-content: center;
   width: 100%;
+  padding: 0 8px;
+  box-sizing: border-box;
   background: #ffffff;
   color: #000000;
   font-family: var(--unity-font);
 }
 
+.hud-left {
+  justify-self: start;
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  min-width: 0;
+}
+
+.hud-right {
+  justify-self: end;
+  display: inline-flex;
+  align-items: center;
+}
+
 .hud-stats {
+  justify-self: center;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: clamp(26px, 7.5vw, 46px);
-  width: 100%;
+  gap: clamp(20px, 6vw, 46px);
+  min-width: 0;
 }
 
 .hud-group {
@@ -117,9 +134,6 @@ body,
 
 .hud-exit-toggle {
   appearance: none;
-  position: absolute;
-  top: 4px;
-  left: 4px;
   width: 44px;
   height: 40px;
   border: 0;
@@ -140,9 +154,7 @@ body,
 
 .leaderboard-toggle {
   appearance: none;
-  position: absolute;
-  top: 4px;
-  left: 50px;
+  position: relative;
   width: 48px;
   height: 40px;
   border: 0;
@@ -186,9 +198,6 @@ body,
 
 .sound-toggle {
   appearance: none;
-  position: absolute;
-  top: 4px;
-  right: 8px;
   width: 40px;
   height: 40px;
   border: 0;
@@ -1104,9 +1113,5 @@ body,
   .hud-icon {
     width: 36px;
     height: 36px;
-  }
-
-  .sound-toggle {
-    right: 4px;
   }
 }

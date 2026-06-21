@@ -37,29 +37,31 @@ export function Hud({
 
   return (
     <div className="hud">
-      <button
-        type="button"
-        className="hud-exit-toggle"
-        aria-label={t("hud.aria.exit")}
-        onClick={onExit}
-      >
-        <span aria-hidden="true">✕</span>
-      </button>
-      {leaderboardEnabled ? (
+      <div className="hud-left">
         <button
           type="button"
-          className={`leaderboard-toggle${
-            leaderboardStatus === "failed" ? " is-failed" : ""
-          }`}
-          aria-label={leaderboardLabel}
-          disabled={leaderboardStatus === "opening"}
-          onClick={onOpenLeaderboard}
+          className="hud-exit-toggle"
+          aria-label={t("hud.aria.exit")}
+          onClick={onExit}
         >
-          <span aria-hidden="true">
-            {leaderboardStatus === "opening" ? "..." : "RANK"}
-          </span>
+          <span aria-hidden="true">✕</span>
         </button>
-      ) : null}
+        {leaderboardEnabled ? (
+          <button
+            type="button"
+            className={`leaderboard-toggle${
+              leaderboardStatus === "failed" ? " is-failed" : ""
+            }`}
+            aria-label={leaderboardLabel}
+            disabled={leaderboardStatus === "opening"}
+            onClick={onOpenLeaderboard}
+          >
+            <span aria-hidden="true">
+              {leaderboardStatus === "opening" ? "..." : "RANK"}
+            </span>
+          </button>
+        ) : null}
+      </div>
       <div className="hud-stats" role="status" aria-live="polite">
         <div className="hud-group">
           <img
@@ -80,19 +82,23 @@ export function Hud({
           <span className="hud-value">{formatSeconds(elapsedSeconds)}</span>
         </div>
       </div>
-      <button
-        type="button"
-        className={`sound-toggle${soundEnabled ? " is-on" : ""}`}
-        aria-label={soundEnabled ? t("hud.aria.soundOff") : t("hud.aria.soundOn")}
-        aria-pressed={soundEnabled}
-        onClick={onToggleSound}
-      >
-        <span className="sound-glyph" aria-hidden="true">
-          <span className="sound-speaker" />
-          <span className="sound-wave sound-wave-inner" />
-          <span className="sound-wave sound-wave-outer" />
-        </span>
-      </button>
+      <div className="hud-right">
+        <button
+          type="button"
+          className={`sound-toggle${soundEnabled ? " is-on" : ""}`}
+          aria-label={
+            soundEnabled ? t("hud.aria.soundOff") : t("hud.aria.soundOn")
+          }
+          aria-pressed={soundEnabled}
+          onClick={onToggleSound}
+        >
+          <span className="sound-glyph" aria-hidden="true">
+            <span className="sound-speaker" />
+            <span className="sound-wave sound-wave-inner" />
+            <span className="sound-wave sound-wave-outer" />
+          </span>
+        </button>
+      </div>
     </div>
   );
 }
