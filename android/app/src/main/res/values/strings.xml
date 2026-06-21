@@ -5,9 +5,9 @@
     <string name="package_name">com.github.magicsih.MatchSymbol</string>
     <string name="custom_url_scheme">com.github.magicsih.MatchSymbol</string>
     <!--
-      Play Games Services 프로젝트 ID(숫자). Play Console에서 게임 프로젝트를 만들고
-      앱을 링크하면 발급된다(fast-follow). 아래 placeholder("0000000000") 상태에서는
-      네이티브 리더보드가 안전하게 비활성(no-op)되며, 실제 ID로 교체하면 활성화된다.
+      Play Games Services 앱 ID(숫자). Play Console 게임 서비스 구성 페이지의
+      프로젝트 번호다. (placeholder "0000000000"이면 네이티브 리더보드가 안전하게
+      비활성된다.)
     -->
-    <string name="game_services_app_id">0000000000</string>
+    <string name="game_services_app_id">366958514923</string>
 </resources>
