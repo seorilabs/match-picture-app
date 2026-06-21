@@ -48,6 +48,7 @@ import {
 import { getDebugSessionTotalCards } from "../debug/sessionConfig";
 import { useProfile } from "../state/profileContext";
 import { useI18n } from "../i18n/i18nContext";
+import { trackEvent } from "../firebase/analytics";
 
 const TUTORIAL_KEY = "match-picture/has-played";
 const SOUND_KEY = "match-picture/sound-enabled";
@@ -249,6 +250,10 @@ export function GameScreen({
     setEarnedCoins(awardClearCoins(resultSeconds, mode));
     // 데일리 미션 진행도 갱신.
     recordGameClear({ seconds: resultSeconds, mode });
+    void trackEvent("game_clear", {
+      mode,
+      seconds: Math.round(resultSeconds),
+    });
   }, [
     awardClearCoins,
     challengeParams,

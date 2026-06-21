@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "694776397541",
+    "project_id": "match-picture-app",
+    "storage_bucket": "match-picture-app.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:694776397541:android:83ce410a282742e3861e0c",
+        "android_client_info": {
+          "package_name": "com.github.magicsih.MatchPictureUnity"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAdW-G_nFvLD67btosppW0B1Z_VEmgHddk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
