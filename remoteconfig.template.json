@@ -1,0 +1,21 @@
+{
+  "parameters": {
+    "leaderboardEnabled": {
+      "defaultValue": { "value": "true" },
+      "description": "리더보드(토스 게임센터) 노출/제출 kill-switch",
+      "valueType": "BOOLEAN"
+    },
+    "reviewRequestEnabled": {
+      "defaultValue": { "value": "true" },
+      "description": "앱 리뷰 요청 kill-switch",
+      "valueType": "BOOLEAN"
+    },
+    "interstitialAdEnabled": {
+      "defaultValue": { "value": "true" },
+      "description": "전면 광고 kill-switch",
+      "valueType": "BOOLEAN"
+    }
+  },
+  "parameterGroups": {},
+  "conditions": []
+}
