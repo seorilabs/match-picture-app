@@ -35,7 +35,7 @@ import {
   clearTimeToLeaderboardScore,
   openLeaderboard,
   submitClearTime,
-} from "../ait/leaderboard";
+} from "../leaderboard";
 import { shareChallenge } from "../ait/share";
 import { useInterstitialAd } from "../ait/ads";
 import { useDisableIosSwipeBack } from "../ait/navigation";

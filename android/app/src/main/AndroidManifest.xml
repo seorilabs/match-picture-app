@@ -7,6 +7,14 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
+        <!-- Play Games Services 프로젝트 ID. @string/game_services_app_id 가
+             placeholder면 SDK 초기화가 실패하지만, 초기화를 지연·try/catch로
+             감싸 앱 크래시 없이 리더보드만 no-op 처리한다. -->
+        <meta-data
+            android:name="com.google.android.gms.games.APP_ID"
+            android:value="@string/game_services_app_id" />
+
         <activity
             android:configChanges="orientation|keyboardHidden|keyboard|screenSize|locale|smallestScreenSize|screenLayout|uiMode|navigation|density"
             android:name=".MainActivity"

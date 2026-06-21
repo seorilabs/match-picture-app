@@ -15,6 +15,8 @@
 		504EC30F1FED79650016851F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 504EC30E1FED79650016851F /* Assets.xcassets */; };
 		504EC3121FED79650016851F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 504EC3101FED79650016851F /* LaunchScreen.storyboard */; };
 		50B271D11FEDC1A000F3C39B /* public in Resources */ = {isa = PBXBuildFile; fileRef = 50B271D01FEDC1A000F3C39B /* public */; };
+		A1A1A1A100000000000000F2 /* GameServicesPlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1A1A1A100000000000000F1 /* GameServicesPlugin.swift */; };
+		A1A1A1A100000000000000F4 /* GameServicesPlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = A1A1A1A100000000000000F3 /* GameServicesPlugin.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +30,8 @@
 		504EC3131FED79650016851F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		50B271D01FEDC1A000F3C39B /* public */ = {isa = PBXFileReference; lastKnownFileType = folder; path = public; sourceTree = "<group>"; };
 		958DCC722DB07C7200EA8C5F /* debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = debug.xcconfig; path = ../debug.xcconfig; sourceTree = SOURCE_ROOT; };
+		A1A1A1A100000000000000F1 /* GameServicesPlugin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameServicesPlugin.swift; sourceTree = "<group>"; };
+		A1A1A1A100000000000000F3 /* GameServicesPlugin.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GameServicesPlugin.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,6 +68,7 @@
 			children = (
 				50379B222058CBB4000EE86E /* capacitor.config.json */,
 				504EC3071FED79650016851F /* AppDelegate.swift */,
+				A1A1A1A100000000000000F5 /* GameServices */,
 				504EC30B1FED79650016851F /* Main.storyboard */,
 				504EC30E1FED79650016851F /* Assets.xcassets */,
 				504EC3101FED79650016851F /* LaunchScreen.storyboard */,
@@ -72,6 +77,15 @@
 				50B271D01FEDC1A000F3C39B /* public */,
 			);
 			path = App;
+			sourceTree = "<group>";
+		};
+		A1A1A1A100000000000000F5 /* GameServices */ = {
+			isa = PBXGroup;
+			children = (
+				A1A1A1A100000000000000F1 /* GameServicesPlugin.swift */,
+				A1A1A1A100000000000000F3 /* GameServicesPlugin.m */,
+			);
+			path = GameServices;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -156,6 +170,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				504EC3081FED79650016851F /* AppDelegate.swift in Sources */,
+				A1A1A1A100000000000000F2 /* GameServicesPlugin.swift in Sources */,
+				A1A1A1A100000000000000F4 /* GameServicesPlugin.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
