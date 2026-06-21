@@ -13,6 +13,6 @@
  * - ios: Apple Game Center 리더보드 ID (App Store Connect 설정 후 채움)
  */
 export const NATIVE_LEADERBOARD = {
-  android: import.meta.env.VITE_PGS_LEADERBOARD_ID ?? "CgkI66W6g9cKEAIQAQ",
+  android: import.meta.env.VITE_PGS_LEADERBOARD_ID ?? "CgkI5f2Zn5wUEAIQAA",
   ios: import.meta.env.VITE_GAMECENTER_LEADERBOARD_ID ?? "",
 } as const;
