@@ -1,5 +1,14 @@
 package com.github.magicsih.MatchSymbol;
 
-import com.getcapacitor.BridgeActivity;
+import android.os.Bundle;
 
-public class MainActivity extends BridgeActivity {}
+import com.getcapacitor.BridgeActivity;
+import com.github.magicsih.MatchSymbol.gameservices.GameServicesPlugin;
+
+public class MainActivity extends BridgeActivity {
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        registerPlugin(GameServicesPlugin.class);
+        super.onCreate(savedInstanceState);
+    }
+}
