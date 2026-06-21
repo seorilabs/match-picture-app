@@ -21,9 +21,10 @@ android {
         applicationId "com.github.magicsih.MatchPictureUnity"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        // 구 Unity 마지막: versionCode 11 / versionName 1.0.7 → 그 위로 올린다.
-        versionCode 12
-        versionName "1.0.8"
+        // 구 Unity 마지막: versionCode 11 / 1.0.7. 12는 서명 검증 업로드본.
+        // 13부터 네이티브 리더보드 포함 내부 테스트 빌드.
+        versionCode 13
+        versionName "1.0.9"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         aaptOptions {
              // Files and dirs to omit from the packaged assets dir, modified to accommodate modern web apps.
