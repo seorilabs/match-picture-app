@@ -120,9 +120,18 @@ public class GameServicesPlugin extends Plugin {
             return;
         }
 
+        // submitScoreImmediate는 Task를 돌려주므로 실제 성공/실패를 받아 처리한다.
+        // (fire-and-forget submitScore와 달리 실패가 가려지지 않는다.)
         PlayGames.getLeaderboardsClient(getActivity())
-            .submitScore(leaderboardId, Math.round(score));
-        call.resolve();
+            .submitScoreImmediate(leaderboardId, Math.round(score))
+            .addOnCompleteListener(task -> {
+                if (task.isSuccessful()) {
+                    call.resolve();
+                } else {
+                    Exception error = task.getException();
+                    call.reject(error != null ? error.getMessage() : "score submit failed", error);
+                }
+            });
     }
 
     @PluginMethod
