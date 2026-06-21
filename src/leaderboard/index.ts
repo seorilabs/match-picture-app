@@ -40,7 +40,9 @@ async function submitNativeClearTime(
   if (!leaderboardId) return "DISABLED";
 
   try {
-    await GameServices.signIn();
+    const { authenticated } = await GameServices.signIn();
+    // 로그인 안 되면(미인증/테스터 아님) 제출을 시도하지 않는다.
+    if (!authenticated) return "ERROR";
     await GameServices.submitScore({
       leaderboardId,
       score: clearTimeToNativeScore(seconds, platform),
@@ -61,7 +63,12 @@ async function openNativeLeaderboard(): Promise<OpenLeaderboardResult> {
   }
 
   try {
-    await GameServices.signIn();
+    const { authenticated } = await GameServices.signIn();
+    // 로그인 실패 시 getLeaderboardIntent가 SIGN_IN_REQUIRED로 떨어지므로
+    // 시도하지 않고 명확한 메시지를 돌려준다.
+    if (!authenticated) {
+      return { status: "ERROR", message: "sign-in required" };
+    }
     await GameServices.showLeaderboard({ leaderboardId });
     return { status: "OPENED" };
   } catch (error) {
