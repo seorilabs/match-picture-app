@@ -53,7 +53,7 @@ export function SettingsScreen() {
         </li>
         <li className="settings-row">
           <span>{t("settings.version")}</span>
-          <span className="settings-hint">1.0.8</span>
+          <span className="settings-hint">1.0.10</span>
         </li>
       </ul>
     </div>
