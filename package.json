@@ -18,6 +18,7 @@
   },
   "dependencies": {
     "@apps-in-toss/web-framework": "^2.5.0",
+    "@capacitor-community/admob": "^8.0.0",
     "@capacitor/android": "^8.4.1",
     "@capacitor/app": "^8.1.0",
     "@capacitor/cli": "^8.4.1",

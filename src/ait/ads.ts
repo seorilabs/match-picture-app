@@ -11,7 +11,7 @@ import {
  */
 const AD_GROUP_ID = (import.meta.env.VITE_AD_GROUP_ID ?? "").trim();
 
-interface InterstitialApi {
+export interface InterstitialApi {
   /** 현재 광고가 로드되어 있어 노출 가능한 상태인지. */
   ready: boolean;
   /** 노출 가능한 환경(API 자체 지원 + 그룹 ID 설정)인지. */
@@ -36,7 +36,9 @@ function isInterstitialSupported(): boolean {
 }
 
 /**
- * Apps in Toss 통합 광고(전면형) 훅입니다.
+ * Apps in Toss 통합 광고(전면형) 훅입니다. 토스 WebView 환경 전용이며,
+ * Capacitor 네이티브/브라우저에서는 `isInterstitialSupported()`가 false라 inert합니다.
+ * 플랫폼별 디스패치는 `src/ads/interstitial.ts`의 `useInterstitialAd`가 담당합니다.
  *
  * - 마운트 시 광고를 미리 로드합니다.
  * - `show()` 호출로 노출 후, dismissed 이벤트를 받으면 다음 광고를 다시 로드합니다.
@@ -45,7 +47,7 @@ function isInterstitialSupported(): boolean {
  * 게임 흐름은 광고 표시 여부와 관계없이 진행되어야 하므로 결과 코드는
  * 단순한 boolean으로만 반환합니다.
  */
-export function useInterstitialAd(enabledByConfig = true): InterstitialApi {
+export function useTossInterstitialAd(enabledByConfig = true): InterstitialApi {
   const [ready, setReady] = useState(false);
   const enabled = enabledByConfig && isInterstitialSupported();
   const unregisterRef = useRef<(() => void) | null>(null);

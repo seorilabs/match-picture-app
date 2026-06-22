@@ -24,8 +24,9 @@ android {
         // 구 Unity 마지막: versionCode 11 / 1.0.7. 12는 서명 검증 업로드본.
         // 13부터 네이티브 리더보드 포함 내부 테스트 빌드.
         // 14: PGS Firebase 프로젝트 재연결(app id 694776397541) 반영 빌드.
-        versionCode 14
-        versionName "1.0.10"
+        // 15: Google Play 네이티브 AdMob 전면광고 탑재 빌드.
+        versionCode 15
+        versionName "1.0.11"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         aaptOptions {
              // Files and dirs to omit from the packaged assets dir, modified to accommodate modern web apps.

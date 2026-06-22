@@ -37,7 +37,7 @@ import {
   submitClearTime,
 } from "../leaderboard";
 import { shareChallenge } from "../ait/share";
-import { useInterstitialAd } from "../ait/ads";
+import { useInterstitialAd } from "../ads/interstitial";
 import { useDisableIosSwipeBack } from "../ait/navigation";
 import { useHiddenCallback } from "../ait/visibility";
 import {

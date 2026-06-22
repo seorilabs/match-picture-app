@@ -15,6 +15,12 @@
             android:name="com.google.android.gms.games.APP_ID"
             android:value="@string/game_services_app_id" />
 
+        <!-- AdMob 앱 ID. @string/admob_app_id 가 없거나 잘못되면 SDK가 앱 시작 시
+             크래시하므로 기본값으로 Google 공식 테스트 앱 ID를 둔다. -->
+        <meta-data
+            android:name="com.google.android.gms.ads.APPLICATION_ID"
+            android:value="@string/admob_app_id" />
+
         <activity
             android:configChanges="orientation|keyboardHidden|keyboard|screenSize|locale|smallestScreenSize|screenLayout|uiMode|navigation|density"
             android:name=".MainActivity"
