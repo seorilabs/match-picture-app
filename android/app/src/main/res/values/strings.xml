@@ -11,9 +11,8 @@
     -->
     <string name="game_services_app_id">694776397541</string>
     <!--
-      AdMob 앱 ID. 기본값은 Google 공식 테스트 앱 ID라 크래시 없이 테스트 광고가
-      노출된다. 실제 출시 전 AdMob 콘솔에서 발급한 앱 ID(ca-app-pub-XXXX~YYYY)로
-      교체한다. (전면 광고 단위 ID는 VITE_ADMOB_INTERSTITIAL_ID 환경변수로 주입)
+      AdMob 앱 ID(공개 식별자). 전면 광고 단위 ID는 src/ads/admob.ts 기본값 또는
+      VITE_ADMOB_INTERSTITIAL_ID 환경변수로 주입된다.
     -->
-    <string name="admob_app_id">ca-app-pub-3940256099942544~3347511713</string>
+    <string name="admob_app_id">ca-app-pub-2444587584524186~4836338367</string>
 </resources>

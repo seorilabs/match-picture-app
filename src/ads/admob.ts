@@ -12,13 +12,11 @@ import type { InterstitialApi } from "../ait/ads";
  * `Capacitor.isNativePlatform()`이 true일 때만 동작한다. 플랫폼 분기는
  * `src/ads/interstitial.ts`가 담당한다.
  *
- * 광고 단위 ID는 `VITE_ADMOB_INTERSTITIAL_ID`로 주입한다. 미설정이면 Google 공식
- * 테스트 광고 단위를 쓰고 `isTesting`을 켠다(실 트래픽 오염/정책 위반 방지).
+ * 광고 단위 ID는 공개 식별자다. 운영 광고 단위를 기본값으로 두고,
+ * `VITE_ADMOB_INTERSTITIAL_ID`로 override할 수 있다.
  */
-const TEST_INTERSTITIAL_ID = "ca-app-pub-3940256099942544/1033173712";
 const CONFIGURED_ID = (import.meta.env.VITE_ADMOB_INTERSTITIAL_ID ?? "").trim();
-const INTERSTITIAL_ID = CONFIGURED_ID || TEST_INTERSTITIAL_ID;
-const IS_TESTING = CONFIGURED_ID === "";
+const INTERSTITIAL_ID = CONFIGURED_ID || "ca-app-pub-2444587584524186/4811599278";
 
 function isNative(): boolean {
   return Capacitor.isNativePlatform();
@@ -53,7 +51,7 @@ async function prepare(): Promise<boolean> {
   if (!isNative()) return false;
   try {
     await ensureInitialized();
-    await AdMob.prepareInterstitial({ adId: INTERSTITIAL_ID, isTesting: IS_TESTING });
+    await AdMob.prepareInterstitial({ adId: INTERSTITIAL_ID });
     return true;
   } catch {
     return false;
