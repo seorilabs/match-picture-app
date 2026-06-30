@@ -1,9 +1,14 @@
 name: CI
 
+# PR→main 정적 게이트 추가(deploy.yml의 main 자동배포 제거 보완).
 on:
+  pull_request:
+    branches:
+      - main
   push:
     branches-ignore:
       - main
+  workflow_dispatch:
 
 permissions:
   contents: read
