@@ -1,9 +1,11 @@
 name: Deploy Apps in Toss
 
+# main 병합 자동 배포 제거(쿼터 보호). 배포는 명시적 Release/Tag(v*.*.*) 또는 수동 dispatch.
 on:
+  workflow_dispatch:
   push:
-    branches:
-      - main
+    tags:
+      - 'v*.*.*'
 
 permissions:
   contents: read
@@ -47,29 +49,6 @@ jobs:
           test -n "$AIT_BRAND_ICON_URL"
           test -n "$VITE_AD_GROUP_ID"
 
-      - name: Resolve release tag
-        id: release
-        run: |
-          VERSION="${GITHUB_RUN_NUMBER}.${GITHUB_RUN_ATTEMPT}"
-          TAG="v${VERSION}"
-
-          set +e
-          git ls-remote --exit-code --tags origin "refs/tags/${TAG}" >/dev/null 2>&1
-          LS_REMOTE_STATUS=$?
-          set -e
-
-          if [ "$LS_REMOTE_STATUS" -eq 0 ]; then
-            echo "::error::Release tag ${TAG} already exists."
-            exit 1
-          fi
-
-          if [ "$LS_REMOTE_STATUS" -ne 2 ]; then
-            echo "::error::Failed to check release tag ${TAG}. git ls-remote exited with ${LS_REMOTE_STATUS}."
-            exit "$LS_REMOTE_STATUS"
-          fi
-
-          echo "tag=${TAG}" >> "$GITHUB_OUTPUT"
-
       - name: Install dependencies
         run: npm ci
 
@@ -87,17 +66,10 @@ jobs:
         with:
           name: match-picture-app-deploy-${{ github.sha }}
           if-no-files-found: error
-          retention-days: 30
+          retention-days: 3
           path: |
             match-picture-app.ait
             dist/**
 
       - name: Deploy to Apps in Toss
         run: npm run deploy -- --api-key "$APPS_IN_TOSS_API_KEY" --location ./match-picture-app.ait -m "$DEPLOY_MEMO"
-
-      - name: Push release tag
-        env:
-          RELEASE_TAG: ${{ steps.release.outputs.tag }}
-        run: |
-          git tag "$RELEASE_TAG" "$GITHUB_SHA"
-          git push origin "$RELEASE_TAG"
