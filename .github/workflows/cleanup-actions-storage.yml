@@ -1,0 +1,29 @@
+# Actions 스토리지(아티팩트/캐시) 정리 — 수동 dispatch.
+name: Cleanup Actions Storage
+
+on:
+  workflow_dispatch:
+    inputs:
+      delete_artifacts:
+        type: boolean
+        default: true
+      delete_caches:
+        type: boolean
+        default: true
+      dry_run:
+        type: boolean
+        default: false
+
+permissions:
+  actions: write
+  contents: read
+
+jobs:
+  cleanup:
+    uses: seorilabs/.github/.github/workflows/cleanup-actions-storage.yml@main
+    secrets: inherit
+    with:
+      delete_artifacts: ${{ inputs.delete_artifacts }}
+      delete_caches: ${{ inputs.delete_caches }}
+      dry_run: ${{ inputs.dry_run }}
+      runs_on: ${{ github.event.repository.private && 'seorilabs-rpi-arm64' || 'ubuntu-latest' }}

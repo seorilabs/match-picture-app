@@ -1,0 +1,50 @@
+# AIT(.ait) 빌드 + AppsInToss 배포 — ARC. org 재사용 워크플로우 호출.
+# dispatch 직접 실행 또는 deploy-all.yml에서 workflow_call.
+# 빌드는 저장소 루트(granite.config.ts)에서 실행. build_command에 AIT_APP_DISPLAY_NAME/
+# AIT_BRAND_ICON_URL/VITE_AD_GROUP_ID(vars)를 명시적으로 주입한다 — granite.config.ts가
+# release build에서 display name/icon이 없으면 throw 하고, 재사용 워크플로우는 Firebase vars만
+# 주입하기 때문. secret은 reusable with:로 전달 불가하므로 VITE_AD_GROUP_ID는 repository
+# Variable 이어야 광고가 빌드에 포함된다(README 참고).
+name: Deploy AppsInToss
+
+on:
+  workflow_dispatch:
+    inputs:
+      release_tag:
+        description: "배포할 릴리즈 태그. 비우면 호출 ref."
+        type: string
+        required: false
+        default: ""
+      memo:
+        description: "배포 메모(선택)"
+        type: string
+        required: false
+        default: ""
+  workflow_call:
+    inputs:
+      release_tag:
+        type: string
+        required: false
+        default: ""
+      memo:
+        type: string
+        required: false
+        default: ""
+
+permissions:
+  contents: read
+
+jobs:
+  ait:
+    uses: seorilabs/.github/.github/workflows/rn-deploy-ait.yml@main
+    secrets: inherit
+    with:
+      release_tag: ${{ inputs.release_tag }}
+      memo: ${{ inputs.memo }}
+      ait_dir: "."
+      package_manager: npm
+      install_command: "npm ci"
+      build_command: "AIT_APP_DISPLAY_NAME='${{ vars.AIT_APP_DISPLAY_NAME }}' AIT_BRAND_ICON_URL='${{ vars.AIT_BRAND_ICON_URL }}' VITE_AD_GROUP_ID='${{ vars.VITE_AD_GROUP_ID }}' npm run build"
+      artifact_path: |
+        match-picture-app.ait
+        dist/**

@@ -1,0 +1,39 @@
+# 명시적 SemVer 릴리즈 태그 생성(merge 자동 태깅 아님).
+# 보통 Backoffice/Telegram에서 트리거하지만 수동 dispatch도 가능.
+name: Release Tag
+
+on:
+  workflow_dispatch:
+    inputs:
+      bump:
+        description: "tag 미지정 시 증가 단위"
+        type: choice
+        options: [patch, minor, major]
+        default: patch
+      tag:
+        description: "직접 지정할 태그(v1.2.3). 비우면 최신+bump."
+        type: string
+        required: false
+        default: ""
+      target_ref:
+        description: "태그를 붙일 ref(브랜치/SHA). 비우면 현재 dispatch ref."
+        type: string
+        required: false
+        default: ""
+      dry_run:
+        description: "푸시 없이 계산만"
+        type: boolean
+        default: false
+
+permissions:
+  contents: write
+
+jobs:
+  tag:
+    uses: seorilabs/.github/.github/workflows/release-tag.yml@main
+    secrets: inherit
+    with:
+      target_ref: ${{ inputs.target_ref || github.ref_name }}
+      tag: ${{ inputs.tag }}
+      bump: ${{ inputs.bump }}
+      dry_run: ${{ inputs.dry_run }}
