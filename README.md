@@ -31,20 +31,29 @@ adb reverse tcp:5173 tcp:5173
 
 ## GitHub Actions
 
-CI는 `.github/workflows/ci.yml`에서 실행합니다. `pull_request`와 `main` push마다 `npm ci`, `npm run lint`, `npm test`, `npm run build`를 수행하고 `.ait` 산출물을 artifact로 보관합니다.
+CI/CD는 Seorilabs org 재사용 워크플로우(`seorilabs/.github/.github/workflows/*.yml@main`)를 호출하는 얇은 caller들로 구성됩니다.
 
-Apps in Toss 배포는 `.github/workflows/deploy.yml`에서 수동 실행합니다. GitHub repository 또는 environment `apps-in-toss`에 아래 값을 설정해야 합니다.
+| Caller | 트리거 | 호출하는 org 워크플로우 | 역할 |
+| --- | --- | --- | --- |
+| `static-checks.yml` | `push`/`pull_request`(main), dispatch | `rn-static-checks.yml` | `npm ci` → `npm run lint` + `npm test` 정적 게이트 |
+| `deploy-apps-in-toss.yml` | dispatch, `workflow_call` | `rn-deploy-ait.yml` | 루트에서 `.ait` 빌드 → AppsInToss 배포 |
+| `release-tag.yml` | dispatch | `release-tag.yml` | 명시적 SemVer 릴리즈 태그 생성 |
+| `cleanup-actions-storage.yml` | dispatch | `cleanup-actions-storage.yml` | Actions 아티팩트/캐시 정리 |
+
+main push/PR은 정적 체크만 돌고, 마켓 배포는 명시적 dispatch(또는 Release Tag)로만 실행됩니다. private repo는 ARC 러너(`seorilabs-rpi-arm64`), public은 `ubuntu-latest`로 라우팅됩니다.
+
+Apps in Toss 배포를 위해 GitHub repository 또는 environment `apps-in-toss`에 아래 값을 설정해야 합니다.
 
 | 이름 | 위치 | 설명 |
 | --- | --- | --- |
-| `APPS_IN_TOSS_API_KEY` | Secret | `ait deploy --api-key`에 사용할 Apps in Toss API key |
+| `APPS_IN_TOSS_API_KEY` | Secret | `ait deploy --api-key`에 사용할 Apps in Toss API key. org 재사용 워크플로우가 `secrets: inherit`로 읽습니다 |
 | `AIT_APP_DISPLAY_NAME` | Variable | Apps in Toss 콘솔 앱 정보에 제출한 앱 이름. `granite.config.ts`의 `brand.displayName`에 사용되며 배포 빌드에 필수 |
 | `AIT_BRAND_ICON_URL` | Variable | Apps in Toss 콘솔 앱 정보에 업로드한 앱 로고 이미지 URL. `granite.config.ts`의 `brand.icon`에 사용되며 배포 빌드에 필수 |
-| `VITE_AD_GROUP_ID` | Secret | 운영 전면 광고 그룹 ID |
+| `VITE_AD_GROUP_ID` | **Variable** | 운영 전면 광고 그룹 ID. org 재사용 워크플로우는 secret을 `with:`로 받을 수 없어 caller가 이 값을 **Variable**로 `build_command`에 주입합니다. Secret으로만 있으면 배포 빌드에서 광고가 비활성화되므로 **Secret → Variable로 이전**해야 합니다 |
 | `VITE_REMOTE_CONFIG_URL` | Variable | 선택값. 기본값은 `https://config.vzyx.xyz/match-picture/launch-config.json` |
 | `VITE_REMOTE_CONFIG_FALLBACK_URL` | Variable | 선택값. 독립 fallback host가 있을 때만 설정 |
 
-배포는 GitHub Actions의 `Deploy Apps in Toss` workflow를 `Run workflow`로 실행합니다. 실행 전 lint/test/build를 다시 통과한 뒤 `match-picture-app.ait`를 업로드합니다.
+배포는 GitHub Actions의 `Deploy AppsInToss` workflow를 `Run workflow`로 실행합니다(또는 `Release Tag`로 태그를 찍어 트리거). 루트에서 `npm run build`로 `match-picture-app.ait`를 만든 뒤 업로드/배포합니다.
 
 ## 환경 변수
 
