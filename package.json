@@ -17,7 +17,7 @@
     "test": "vitest run"
   },
   "dependencies": {
-    "@apps-in-toss/web-framework": "^2.5.0",
+    "@apps-in-toss/web-framework": "^2.10.7",
     "@capacitor/android": "^8.4.1",
     "@capacitor/app": "^8.1.0",
     "@capacitor/cli": "^8.4.1",
