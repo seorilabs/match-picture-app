@@ -35,6 +35,8 @@ describe("computeCoinReward", () => {
     expect(computeComboBonus(3)).toBe(3);
     expect(computeComboBonus(8)).toBe(18);
     expect(computeComboBonus(20)).toBe(20);
+    expect(computeCoinReward(20, "classic", 2)).toBe(10);
+    expect(computeCoinReward(20, "classic", 3)).toBe(13);
     expect(computeCoinReward(20, "classic", 8)).toBe(28);
   });
 
