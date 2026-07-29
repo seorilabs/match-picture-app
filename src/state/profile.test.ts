@@ -1,6 +1,8 @@
 import { describe, expect, it } from "vitest";
 
 import {
+  computeAwardedComboBonus,
+  computeComboBonus,
   computeCoinReward,
   createDefaultProfile,
   equipPack,
@@ -22,13 +24,24 @@ describe("createDefaultProfile", () => {
 
 describe("computeCoinReward", () => {
   it("빠를수록 보상이 크고, 느려도 기본 보상은 받는다", () => {
-    expect(computeCoinReward(0, "classic")).toBe(30); // 10 + 20 보너스
-    expect(computeCoinReward(20, "classic")).toBe(10); // 보너스 0
-    expect(computeCoinReward(60, "classic")).toBe(10); // 음수 보너스는 0으로
+    expect(computeCoinReward(0, "classic", 0)).toBe(30); // 10 + 20 보너스
+    expect(computeCoinReward(20, "classic", 0)).toBe(10); // 보너스 0
+    expect(computeCoinReward(60, "classic", 0)).toBe(10); // 음수 보너스는 0으로
   });
 
-  it("도전장 모드는 절반만 지급한다", () => {
-    expect(computeCoinReward(0, "challenge")).toBe(15);
+  it("최대 콤보 2 이하는 보너스가 없고 3부터 3코인씩 최대 20코인을 더한다", () => {
+    expect(computeComboBonus(0)).toBe(0);
+    expect(computeComboBonus(2)).toBe(0);
+    expect(computeComboBonus(3)).toBe(3);
+    expect(computeComboBonus(8)).toBe(18);
+    expect(computeComboBonus(20)).toBe(20);
+    expect(computeCoinReward(20, "classic", 8)).toBe(28);
+  });
+
+  it("도전장 모드는 속도와 콤보를 합산한 전체 보상을 절반으로 지급한다", () => {
+    // 기본 10 + 속도 20 + 콤보 18 = 48, 도전장은 절반인 24.
+    expect(computeCoinReward(0, "challenge", 8)).toBe(24);
+    expect(computeAwardedComboBonus(0, "challenge", 8)).toBe(9);
   });
 });
 

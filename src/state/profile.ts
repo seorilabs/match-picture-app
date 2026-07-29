@@ -103,14 +103,34 @@ export function ownsPack(profile: Profile, packId: string): boolean {
 
 /**
  * 게임 클리어 보상 코인.
- * 기본 보상 + 빠를수록 커지는 속도 보너스. 도전장(공유 고정 덱)은 절반.
+ * 기본 보상 + 속도 보너스 + 최대 콤보 보너스. 도전장(공유 고정 덱)은 합산 후 절반.
  */
-export function computeCoinReward(seconds: number, mode: GameMode): number {
+export function computeComboBonus(maxCombo: number): number {
+  return Math.min(20, Math.max(0, maxCombo - 2) * 3);
+}
+
+export function computeCoinReward(
+  seconds: number,
+  mode: GameMode,
+  maxCombo: number,
+): number {
   const base = 10;
   // 20초 이내면 1초당 1코인씩 보너스(최대 20).
   const speedBonus = Math.max(0, Math.min(20, Math.round(20 - seconds)));
-  const total = base + speedBonus;
+  const total = base + speedBonus + computeComboBonus(maxCombo);
   return mode === "challenge" ? Math.round(total / 2) : total;
+}
+
+/** 최종 지급액 중 최대 콤보가 실제로 늘린 코인 수입니다. */
+export function computeAwardedComboBonus(
+  seconds: number,
+  mode: GameMode,
+  maxCombo: number,
+): number {
+  return (
+    computeCoinReward(seconds, mode, maxCombo) -
+    computeCoinReward(seconds, mode, 0)
+  );
 }
 
 export interface PurchaseResult {

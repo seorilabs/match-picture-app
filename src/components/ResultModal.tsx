@@ -18,6 +18,9 @@ interface ResultModalProps {
   challengeTargetSeconds: number | null;
   /** 이번 클리어로 획득한 코인. 없으면 표시하지 않음. */
   earnedCoins: number | null;
+  /** 이번 판 최대 콤보와 실제 지급액 중 콤보가 늘린 코인. */
+  maxCombo: number;
+  comboBonusCoins: number;
   /** 오늘의 도전을 이미 클리어했는지. 클래식 결과에서 데일리 CTA 노출 여부를 정합니다. */
   dailyClearedToday: boolean;
   /** 클래식 결과에서 오늘의 도전으로 이동합니다. */
@@ -53,6 +56,8 @@ export function ResultModal({
   isNewBest,
   challengeTargetSeconds,
   earnedCoins,
+  maxCombo,
+  comboBonusCoins,
   dailyClearedToday,
   onPlayDaily,
   onRetry,
@@ -98,6 +103,14 @@ export function ResultModal({
               🪙
             </span>
             +{earnedCoins.toLocaleString("ko-KR")}
+          </div>
+        ) : null}
+        {earnedCoins !== null ? (
+          <div className="result-combo">
+            {t("result.comboBonus", {
+              combo: maxCombo,
+              bonus: comboBonusCoins,
+            })}
           </div>
         ) : null}
         {isNewBest ? (

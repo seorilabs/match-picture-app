@@ -106,6 +106,7 @@ const ko: Messages = {
   "result.submitFailed": "랭킹 등록 실패",
   "result.scoreLabel": "랭킹 등록 점수",
   "result.dailyCta": "오늘의 도전 ▶",
+  "result.comboBonus": "최대 콤보 x{combo} 🪙 +{bonus}",
 
   // 튜토리얼
   "tutorial.title": "같은 그림을 찾아요",
@@ -234,6 +235,7 @@ const en: Messages = {
   "result.submitFailed": "Score submit failed",
   "result.scoreLabel": "Submitted score",
   "result.dailyCta": "Daily Challenge ▶",
+  "result.comboBonus": "Max combo x{combo} 🪙 +{bonus}",
 
   "tutorial.title": "Find the Matching Picture",
   "tutorial.body1":

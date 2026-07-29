@@ -732,6 +732,19 @@ body,
   font-family: initial;
 }
 
+.result-combo {
+  min-height: 34px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-top: 1px solid #e3b727;
+  background: #fff4b8;
+  color: #6f4a00;
+  font-family: Arial, "Apple SD Gothic Neo", sans-serif;
+  font-size: 13px;
+  font-weight: 800;
+}
+
 .result-score {
   min-height: clamp(42px, 6vh, 52px);
   display: flex;
