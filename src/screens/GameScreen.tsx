@@ -25,6 +25,7 @@ import {
   getDailySeed,
   getKstDateString,
 } from "../game/mode";
+import { createGameClearEventPayload } from "../game/clearEvent";
 import { preloadSymbolImages } from "../game/preloadSymbols";
 import { useGame } from "../game/useGame";
 import { readItem, writeItem } from "../ait/storage";
@@ -47,6 +48,7 @@ import {
 } from "../ait/launchConfig";
 import { getDebugSessionTotalCards } from "../debug/sessionConfig";
 import { useProfile } from "../state/profileContext";
+import { computeAwardedComboBonus } from "../state/profile";
 import { useI18n } from "../i18n/i18nContext";
 import { trackEvent } from "../firebase/analytics";
 
@@ -100,6 +102,7 @@ export function GameScreen({
     roundIndex,
     elapsedSeconds,
     correctCount,
+    maxCombo,
     locked,
     lastFeedback,
     resultSeconds,
@@ -124,6 +127,7 @@ export function GameScreen({
     isNew: boolean;
   }>({ previous: null, isNew: false });
   const [earnedCoins, setEarnedCoins] = useState<number | null>(null);
+  const [comboBonusCoins, setComboBonusCoins] = useState(0);
   const [shareStatus, setShareStatus] = useState<ShareStatus>("idle");
   const [leaderboardStatus, setLeaderboardStatus] = useState<
     "idle" | "opening" | "failed"
@@ -217,6 +221,7 @@ export function GameScreen({
       setLeaderboardMessage(null);
       setShareStatus("idle");
       setEarnedCoins(null);
+      setComboBonusCoins(0);
       lastSubmittedSecondsRef.current = null;
       finishProcessedRef.current = false;
     }
@@ -247,13 +252,14 @@ export function GameScreen({
     }
 
     // 클리어 보상 코인 지급(클리어당 1회) + 결과 화면에 표시.
-    setEarnedCoins(awardClearCoins(resultSeconds, mode));
+    setEarnedCoins(awardClearCoins(resultSeconds, mode, maxCombo));
+    setComboBonusCoins(computeAwardedComboBonus(resultSeconds, mode, maxCombo));
     // 데일리 미션 진행도 갱신.
     recordGameClear({ seconds: resultSeconds, mode });
-    void trackEvent("game_clear", {
-      mode,
-      seconds: Math.round(resultSeconds),
-    });
+    void trackEvent(
+      "game_clear",
+      createGameClearEventPayload(mode, resultSeconds, maxCombo),
+    );
   }, [
     awardClearCoins,
     challengeParams,
@@ -261,6 +267,7 @@ export function GameScreen({
     dailyBest,
     dailyDateString,
     mode,
+    maxCombo,
     recordGameClear,
     resultSeconds,
     status,
@@ -516,6 +523,8 @@ export function GameScreen({
           mode === "challenge" ? (challengeParams?.targetSeconds ?? null) : null
         }
         earnedCoins={earnedCoins}
+        maxCombo={maxCombo}
+        comboBonusCoins={comboBonusCoins}
         dailyClearedToday={dailyBest !== null}
         onPlayDaily={handlePlayDaily}
         onRetry={handleRetry}

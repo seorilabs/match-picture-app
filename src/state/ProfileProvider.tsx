@@ -102,16 +102,19 @@ export function ProfileProvider({ children }: { children: ReactNode }) {
     }));
   }, []);
 
-  const awardClearCoins = useCallback((seconds: number, mode: GameMode) => {
-    const reward = computeCoinReward(seconds, mode);
-    if (reward > 0) {
-      setProfile((current) => ({
-        ...current,
-        coins: current.coins + reward,
-      }));
-    }
-    return reward;
-  }, []);
+  const awardClearCoins = useCallback(
+    (seconds: number, mode: GameMode, maxCombo: number) => {
+      const reward = computeCoinReward(seconds, mode, maxCombo);
+      if (reward > 0) {
+        setProfile((current) => ({
+          ...current,
+          coins: current.coins + reward,
+        }));
+      }
+      return reward;
+    },
+    [],
+  );
 
   const buyPack = useCallback((packId: string): PurchaseResult => {
     let result: PurchaseResult = { ok: false, profile: createDefaultProfile() };

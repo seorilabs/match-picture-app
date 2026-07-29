@@ -14,7 +14,11 @@ export interface ProfileContextValue {
   equippedPack: SymbolPack;
   ownsPack: (packId: string) => boolean;
   /** 게임 클리어 보상 코인을 지급하고, 지급한 양을 반환. */
-  awardClearCoins: (seconds: number, mode: GameMode) => number;
+  awardClearCoins: (
+    seconds: number,
+    mode: GameMode,
+    maxCombo: number,
+  ) => number;
   addCoins: (amount: number) => void;
   buyPack: (packId: string) => PurchaseResult;
   equip: (packId: string) => void;

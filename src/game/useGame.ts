@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 
 import { type Card, createDeck } from "./deck";
+import { advanceComboProgress, createInitialComboProgress } from "./combo";
 import { mulberry32, randomSeed } from "./rng";
 import {
   PRIME,
@@ -46,6 +47,8 @@ export interface GameSnapshot {
   wrongCount: number;
   /** 현재 연속 정답 수. 오답 시 0으로 돌아갑니다. */
   combo: number;
+  /** 이번 게임에서 달성한 최대 연속 정답 수. */
+  maxCombo: number;
   /** 판정 진행 중에 입력을 막기 위한 잠금 상태. */
   locked: boolean;
   /** 마지막 피드백 이벤트. */
@@ -108,6 +111,7 @@ export function useGame(options: GameOptions = {}): GameApi {
   const [correctCount, setCorrectCount] = useState(0);
   const [wrongCount, setWrongCount] = useState(0);
   const [combo, setCombo] = useState(0);
+  const [maxCombo, setMaxCombo] = useState(0);
   const [locked, setLocked] = useState(false);
   const [lastFeedback, setLastFeedback] = useState<FeedbackEvent | null>(null);
   const [resultSeconds, setResultSeconds] = useState<number | null>(null);
@@ -125,6 +129,7 @@ export function useGame(options: GameOptions = {}): GameApi {
   const feedbackIdRef = useRef(0);
   // 콤보는 tap 클로저에서 즉시 읽어야 하므로 state와 함께 ref로도 둡니다.
   const comboRef = useRef(0);
+  const maxComboRef = useRef(0);
   const roundIndexRef = useRef(0);
   const tickRef = useRef<number | null>(null);
   const pendingTimeoutRef = useRef<number | null>(null);
@@ -189,7 +194,9 @@ export function useGame(options: GameOptions = {}): GameApi {
     queueRef.current = [...deck];
     timerStartedRef.current = false;
     lockedRef.current = false;
-    comboRef.current = 0;
+    const initialCombo = createInitialComboProgress();
+    comboRef.current = initialCombo.combo;
+    maxComboRef.current = initialCombo.maxCombo;
     roundIndexRef.current = 0;
 
     const firstRound = takeNextRound(queueRef.current, null);
@@ -203,7 +210,8 @@ export function useGame(options: GameOptions = {}): GameApi {
     setElapsedSeconds(0);
     setCorrectCount(0);
     setWrongCount(0);
-    setCombo(0);
+    setCombo(initialCombo.combo);
+    setMaxCombo(initialCombo.maxCombo);
     setLocked(false);
     setLastFeedback(null);
     setResultSeconds(null);
@@ -252,16 +260,21 @@ export function useGame(options: GameOptions = {}): GameApi {
       setLocked(true);
 
       const isCorrect = symbol === currentRound.hint;
-      const nextCombo = isCorrect ? comboRef.current + 1 : 0;
-      comboRef.current = nextCombo;
-      setCombo(nextCombo);
+      const nextCombo = advanceComboProgress(
+        { combo: comboRef.current, maxCombo: maxComboRef.current },
+        isCorrect,
+      );
+      comboRef.current = nextCombo.combo;
+      maxComboRef.current = nextCombo.maxCombo;
+      setCombo(nextCombo.combo);
+      setMaxCombo(nextCombo.maxCombo);
 
       const id = ++feedbackIdRef.current;
       setLastFeedback({
         id,
         kind: isCorrect ? "correct" : "wrong",
         origin: options?.origin,
-        combo: nextCombo,
+        combo: nextCombo.combo,
       });
 
       if (isCorrect) {
@@ -324,6 +337,7 @@ export function useGame(options: GameOptions = {}): GameApi {
     correctCount,
     wrongCount,
     combo,
+    maxCombo,
     locked,
     lastFeedback,
     resultSeconds,
