@@ -47,13 +47,16 @@ describe("useGame 최대 콤보", () => {
   it("tap의 연속 정답마다 GameSnapshot.maxCombo를 갱신한다", async () => {
     startAndReveal();
 
-    for (let expected = 1; expected <= 3; expected += 1) {
-      tapCorrect();
-      expect(currentGame.maxCombo).toBe(expected);
-      if (expected < 3) {
-        await act(() => vi.advanceTimersByTimeAsync(450));
-      }
-    }
+    tapCorrect();
+    expect(currentGame.maxCombo).toBe(1);
+    await act(() => vi.advanceTimersByTimeAsync(450));
+
+    tapCorrect();
+    expect(currentGame.maxCombo).toBe(2);
+    await act(() => vi.advanceTimersByTimeAsync(450));
+
+    tapCorrect();
+    expect(currentGame.maxCombo).toBe(3);
   });
 
   it("start와 retry가 최대 콤보를 각각 0으로 초기화한다", () => {
