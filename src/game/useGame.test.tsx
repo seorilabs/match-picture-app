@@ -4,7 +4,7 @@ import { act } from "react";
 import { createRoot, type Root } from "react-dom/client";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
-import { useGame, type GameApi } from "./useGame";
+import { useGame, type GameApi, type GameSnapshot } from "./useGame";
 
 let currentGame: GameApi;
 let container: HTMLDivElement;
@@ -44,19 +44,29 @@ describe("useGame 최대 콤보", () => {
     globalThis.IS_REACT_ACT_ENVIRONMENT = false;
   });
 
-  it("tap의 연속 정답마다 GameSnapshot.maxCombo를 갱신한다", async () => {
+  it("useGame tap은 GameSnapshot.maxCombo를 Math.max로 갱신한다", async () => {
     startAndReveal();
+    let maxCombo: number = 0;
 
+    let nextCombo = 1;
     tapCorrect();
-    expect(currentGame.maxCombo).toBe(1);
+    maxCombo = Math.max(maxCombo, nextCombo);
+    let snapshot: GameSnapshot = currentGame;
+    expect(snapshot.maxCombo).toBe(maxCombo);
     await act(() => vi.advanceTimersByTimeAsync(450));
 
+    nextCombo = 2;
     tapCorrect();
-    expect(currentGame.maxCombo).toBe(2);
+    maxCombo = Math.max(maxCombo, nextCombo);
+    snapshot = currentGame;
+    expect(snapshot.maxCombo).toBe(maxCombo);
     await act(() => vi.advanceTimersByTimeAsync(450));
 
+    nextCombo = 3;
     tapCorrect();
-    expect(currentGame.maxCombo).toBe(3);
+    maxCombo = Math.max(maxCombo, nextCombo);
+    snapshot = currentGame;
+    expect(snapshot.maxCombo).toBe(maxCombo);
   });
 
   it("start와 retry가 최대 콤보를 각각 0으로 초기화한다", () => {

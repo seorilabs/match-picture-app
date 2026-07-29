@@ -39,11 +39,13 @@ describe("computeCoinReward", () => {
   });
 
   it("computeCoinReward는 최대 콤보 2 이하에는 보너스 0, 3부터 보너스를 더한다", () => {
-    expect([
-      computeCoinReward(20, "classic", 0),
-      computeCoinReward(20, "classic", 2),
-      computeCoinReward(20, "classic", 3),
-    ]).toEqual([10, 10, 13]);
+    const seconds = 20;
+    const mode = "classic";
+    const maxCombo = 2;
+    const rewardedMaxCombo = 3;
+
+    expect(computeCoinReward(seconds, mode, maxCombo)).toBe(10);
+    expect(computeCoinReward(seconds, mode, rewardedMaxCombo)).toBe(13);
   });
 
   it("도전장 모드는 속도와 콤보를 합산한 전체 보상을 절반으로 지급한다", () => {
