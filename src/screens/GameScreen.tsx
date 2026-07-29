@@ -39,6 +39,11 @@ import {
 } from "../leaderboard";
 import { shareChallenge } from "../ait/share";
 import { useInterstitialAd } from "../ait/ads";
+import {
+  createInterstitialAdPolicyState,
+  recordCompletedGame,
+  showInterstitialAdIfAllowed,
+} from "../ait/adPolicy";
 import { useDisableIosSwipeBack } from "../ait/navigation";
 import { useHiddenCallback } from "../ait/visibility";
 import {
@@ -150,6 +155,7 @@ export function GameScreen({
   // 한 세션에 리뷰 요청은 한 번만 호출합니다 (정책 보호 + 사용자 경험).
   const reviewRequestedRef = useRef(false);
   const lastSubmittedSecondsRef = useRef<number | null>(null);
+  const interstitialPolicyRef = useRef(createInterstitialAdPolicyState());
   // 클리어 1회당 베스트 기록/햅틱/코인 지급을 한 번만 처리하기 위한 가드.
   const finishProcessedRef = useRef(false);
 
@@ -232,6 +238,9 @@ export function GameScreen({
     if (status !== "finished" || resultSeconds === null) return;
     if (finishProcessedRef.current) return;
     finishProcessedRef.current = true;
+    interstitialPolicyRef.current = recordCompletedGame(
+      interstitialPolicyRef.current,
+    );
 
     const previousBest =
       mode === "classic" ? classicBest : mode === "daily" ? dailyBest : null;
@@ -321,11 +330,24 @@ export function GameScreen({
 
   const handleRetry = useCallback(async () => {
     if (soundEnabled) preloadEffectSounds();
-    if (adReady) {
-      await showAd();
-    }
+    interstitialPolicyRef.current = await showInterstitialAdIfAllowed({
+      ready: adReady,
+      state: interstitialPolicyRef.current,
+      config: {
+        minIntervalSeconds: launchConfig.interstitialMinIntervalSeconds,
+        freeGames: launchConfig.interstitialFreeGames,
+      },
+      show: showAd,
+    });
     retryGame();
-  }, [adReady, retryGame, showAd, soundEnabled]);
+  }, [
+    adReady,
+    launchConfig.interstitialFreeGames,
+    launchConfig.interstitialMinIntervalSeconds,
+    retryGame,
+    showAd,
+    soundEnabled,
+  ]);
 
   const handleRevealCards = useCallback(() => {
     if (soundEnabled) preloadEffectSounds();

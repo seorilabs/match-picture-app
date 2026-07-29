@@ -4,17 +4,21 @@ export interface LaunchConfig {
   leaderboardEnabled: boolean;
   reviewRequestEnabled: boolean;
   interstitialAdEnabled: boolean;
+  interstitialMinIntervalSeconds: number;
+  interstitialFreeGames: number;
 }
 
 /**
- * 불리언 kill-switch 페이로드를 LaunchConfig로 정규화한다.
- * Firebase RC가 돌려주는 평탄한 불리언 객체뿐 아니라, 과거/유연한 중첩 형태도 받아들인다.
+ * 운영 페이로드를 LaunchConfig로 정규화한다.
+ * Firebase RC가 돌려주는 평탄한 객체뿐 아니라, 과거/유연한 중첩 형태도 받아들인다.
  */
 type RemoteConfigPayload =
   | {
       leaderboardEnabled?: unknown;
       reviewRequestEnabled?: unknown;
       interstitialAdEnabled?: unknown;
+      interstitialMinIntervalSeconds?: unknown;
+      interstitialFreeGames?: unknown;
       features?: {
         leaderboard?: unknown;
         reviewRequest?: unknown;
@@ -30,9 +34,13 @@ type RemoteConfigPayload =
       ads?: {
         enabled?: unknown;
         interstitialEnabled?: unknown;
+        interstitialMinIntervalSeconds?: unknown;
+        interstitialFreeGames?: unknown;
       };
       interstitialAd?: {
         enabled?: unknown;
+        minIntervalSeconds?: unknown;
+        freeGames?: unknown;
       };
     }
   | null
@@ -42,10 +50,19 @@ const DEFAULT_LAUNCH_CONFIG: LaunchConfig = {
   leaderboardEnabled: true,
   reviewRequestEnabled: true,
   interstitialAdEnabled: true,
+  interstitialMinIntervalSeconds: 120,
+  interstitialFreeGames: 2,
 };
 
 function readBoolean(value: unknown): boolean | null {
   return typeof value === "boolean" ? value : null;
+}
+
+function readNonNegativeInteger(value: unknown): number | null {
+  if (typeof value !== "number" || !Number.isFinite(value) || value < 0) {
+    return null;
+  }
+  return Math.floor(value);
 }
 
 export function parseLaunchConfig(payload: RemoteConfigPayload): LaunchConfig {
@@ -70,10 +87,24 @@ export function parseLaunchConfig(payload: RemoteConfigPayload): LaunchConfig {
     readBoolean(payload?.interstitialAd?.enabled) ??
     DEFAULT_LAUNCH_CONFIG.interstitialAdEnabled;
 
+  const interstitialMinIntervalSeconds =
+    readNonNegativeInteger(payload?.interstitialMinIntervalSeconds) ??
+    readNonNegativeInteger(payload?.ads?.interstitialMinIntervalSeconds) ??
+    readNonNegativeInteger(payload?.interstitialAd?.minIntervalSeconds) ??
+    DEFAULT_LAUNCH_CONFIG.interstitialMinIntervalSeconds;
+
+  const interstitialFreeGames =
+    readNonNegativeInteger(payload?.interstitialFreeGames) ??
+    readNonNegativeInteger(payload?.ads?.interstitialFreeGames) ??
+    readNonNegativeInteger(payload?.interstitialAd?.freeGames) ??
+    DEFAULT_LAUNCH_CONFIG.interstitialFreeGames;
+
   return {
     leaderboardEnabled,
     reviewRequestEnabled,
     interstitialAdEnabled,
+    interstitialMinIntervalSeconds,
+    interstitialFreeGames,
   };
 }
 

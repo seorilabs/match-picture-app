@@ -14,6 +14,16 @@
       "defaultValue": { "value": "true" },
       "description": "전면 광고 kill-switch",
       "valueType": "BOOLEAN"
+    },
+    "interstitialMinIntervalSeconds": {
+      "defaultValue": { "value": "120" },
+      "description": "전면 광고 최소 노출 간격(초)",
+      "valueType": "NUMBER"
+    },
+    "interstitialFreeGames": {
+      "defaultValue": { "value": "2" },
+      "description": "세션 시작 후 전면 광고 면제 게임 수",
+      "valueType": "NUMBER"
     }
   },
   "parameterGroups": {},

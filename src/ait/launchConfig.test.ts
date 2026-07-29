@@ -8,6 +8,8 @@ describe("parseLaunchConfig", () => {
       leaderboardEnabled: true,
       reviewRequestEnabled: true,
       interstitialAdEnabled: true,
+      interstitialMinIntervalSeconds: 120,
+      interstitialFreeGames: 2,
     });
   });
 
@@ -46,6 +48,42 @@ describe("parseLaunchConfig", () => {
     ).toMatchObject({
       reviewRequestEnabled: false,
       interstitialAdEnabled: false,
+    });
+  });
+
+  it("normalizes interstitial frequency cap values", () => {
+    expect(
+      parseLaunchConfig({
+        interstitialMinIntervalSeconds: 90.9,
+        interstitialFreeGames: 3.8,
+      }),
+    ).toMatchObject({
+      interstitialMinIntervalSeconds: 90,
+      interstitialFreeGames: 3,
+    });
+
+    expect(
+      parseLaunchConfig({
+        interstitialMinIntervalSeconds: -1,
+        interstitialFreeGames: Number.NaN,
+      }),
+    ).toMatchObject({
+      interstitialMinIntervalSeconds: 120,
+      interstitialFreeGames: 2,
+    });
+  });
+
+  it("reads nested interstitial frequency cap variants", () => {
+    expect(
+      parseLaunchConfig({
+        interstitialAd: {
+          minIntervalSeconds: 60,
+          freeGames: 1,
+        },
+      }),
+    ).toMatchObject({
+      interstitialMinIntervalSeconds: 60,
+      interstitialFreeGames: 1,
     });
   });
 });

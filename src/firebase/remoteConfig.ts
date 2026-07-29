@@ -1,6 +1,6 @@
 /**
- * Firebase Remote Config 어댑터. 출시 후 기능(리더보드/리뷰요청/전면광고)을
- * 긴급 제어하는 kill-switch 3종을 읽는다. (기존 vzyx JSON을 대체)
+ * Firebase Remote Config 어댑터. 출시 후 기능 kill-switch와 전면 광고
+ * 빈도 캡을 읽는다. (기존 vzyx JSON을 대체)
  *
  * 어떤 환경(토스/Capacitor/브라우저)에서도 RC가 지원되지 않거나 실패하면 null을
  * 반환해 호출부가 기본값으로 떨어지게 한다.
@@ -20,13 +20,20 @@ export interface RemoteFlags {
   leaderboardEnabled: boolean;
   reviewRequestEnabled: boolean;
   interstitialAdEnabled: boolean;
+  interstitialMinIntervalSeconds: number;
+  interstitialFreeGames: number;
 }
 
-const FLAG_KEYS: (keyof RemoteFlags)[] = [
+const BOOLEAN_FLAG_KEYS = [
   "leaderboardEnabled",
   "reviewRequestEnabled",
   "interstitialAdEnabled",
-];
+] as const satisfies readonly (keyof RemoteFlags)[];
+
+const NUMBER_FLAG_KEYS = [
+  "interstitialMinIntervalSeconds",
+  "interstitialFreeGames",
+] as const satisfies readonly (keyof RemoteFlags)[];
 
 let rcPromise: Promise<RemoteConfig | null> | null = null;
 
@@ -52,8 +59,11 @@ async function getRC(defaults: RemoteFlags): Promise<RemoteConfig | null> {
 
 function readFlags(rc: RemoteConfig): RemoteFlags {
   const result = {} as RemoteFlags;
-  for (const key of FLAG_KEYS) {
+  for (const key of BOOLEAN_FLAG_KEYS) {
     result[key] = getValue(rc, key).asBoolean();
+  }
+  for (const key of NUMBER_FLAG_KEYS) {
+    result[key] = getValue(rc, key).asNumber();
   }
   return result;
 }
