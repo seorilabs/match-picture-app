@@ -2,6 +2,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 
 import { type Card, createDeck } from "./deck";
 import { advanceComboProgress, createInitialComboProgress } from "./combo";
+import type { PowerUpEffect, PowerUpId } from "./powerUps";
 import { mulberry32, randomSeed } from "./rng";
 import {
   PRIME,
@@ -57,6 +58,12 @@ export interface GameSnapshot {
   resultSeconds: number | null;
   /** 이번 게임 덱을 만든 시드. 도전장 공유에 사용합니다. 시작 전에는 null. */
   deckSeed: number | null;
+  /** 현재 라운드에서 이미 사용한 파워업. 각 파워업은 라운드당 한 번만 허용합니다. */
+  usedPowerUps: readonly PowerUpId[];
+  /** 즉시 힌트 강조가 현재 라운드에 적용됐는지. */
+  powerUpHintActive: boolean;
+  /** 소거 파워업으로 비활성화한 현재 라운드의 오답 심볼. */
+  eliminatedSymbols: readonly string[];
 }
 
 export interface GameApi extends GameSnapshot {
@@ -69,6 +76,8 @@ export interface GameApi extends GameSnapshot {
     symbol: string,
     options?: { origin?: { x: number; y: number } },
   ) => void;
+  /** 코인 차감이 확인된 파워업 효과를 현재 라운드에 반영합니다. */
+  applyPowerUpEffect: (effect: PowerUpEffect) => boolean;
   /** 결과 화면에서 다시 시작합니다. */
   retry: () => void;
 }
@@ -116,6 +125,8 @@ export function useGame(options: GameOptions = {}): GameApi {
   const [lastFeedback, setLastFeedback] = useState<FeedbackEvent | null>(null);
   const [resultSeconds, setResultSeconds] = useState<number | null>(null);
   const [deckSeed, setDeckSeed] = useState<number | null>(null);
+  const [usedPowerUps, setUsedPowerUps] = useState<PowerUpId[]>([]);
+  const [eliminatedSymbols, setEliminatedSymbols] = useState<string[]>([]);
   const [activeTotalCards, setActiveTotalCards] = useState(
     configuredTotalCardsRef.current,
   );
@@ -140,6 +151,8 @@ export function useGame(options: GameOptions = {}): GameApi {
   // 비동기 클로저에서도 최신 status/round를 참조하기 위해 보조 ref를 둡니다.
   const statusRef = useRef<GameStatus>("idle");
   const roundRef = useRef<RoundState | null>(null);
+  const usedPowerUpsRef = useRef<PowerUpId[]>([]);
+  const eliminatedSymbolsRef = useRef<string[]>([]);
   statusRef.current = status;
   roundRef.current = round;
   // seedFactory는 effect가 아니라 렌더 시점에 동기 반영합니다.
@@ -178,6 +191,13 @@ export function useGame(options: GameOptions = {}): GameApi {
     }
   }, []);
 
+  const resetPowerUpsForRound = useCallback(() => {
+    usedPowerUpsRef.current = [];
+    eliminatedSymbolsRef.current = [];
+    setUsedPowerUps([]);
+    setEliminatedSymbols([]);
+  }, []);
+
   const start = useCallback(() => {
     cancelPendingFollowUp();
     stopTicking();
@@ -194,6 +214,7 @@ export function useGame(options: GameOptions = {}): GameApi {
     queueRef.current = [...deck];
     timerStartedRef.current = false;
     lockedRef.current = false;
+    resetPowerUpsForRound();
     const initialCombo = createInitialComboProgress();
     comboRef.current = initialCombo.combo;
     maxComboRef.current = initialCombo.maxCombo;
@@ -217,7 +238,7 @@ export function useGame(options: GameOptions = {}): GameApi {
     setResultSeconds(null);
     setDeckSeed(seed);
     setStatus(firstRound === null ? "idle" : "ready");
-  }, [cancelPendingFollowUp, stopTicking]);
+  }, [cancelPendingFollowUp, resetPowerUpsForRound, stopTicking]);
 
   const reveal = useCallback(() => {
     if (statusRef.current !== "ready") return;
@@ -297,6 +318,8 @@ export function useGame(options: GameOptions = {}): GameApi {
             return;
           }
           roundIndexRef.current += 1;
+          resetPowerUpsForRound();
+          roundRef.current = next;
           setRoundIndex(roundIndexRef.current);
           setRound(next);
           lockedRef.current = false;
@@ -311,7 +334,41 @@ export function useGame(options: GameOptions = {}): GameApi {
         }, WRONG_PENALTY_MS);
       }
     },
-    [finish, startTickingIfNeeded],
+    [finish, resetPowerUpsForRound, startTickingIfNeeded],
+  );
+
+  const applyPowerUpEffect = useCallback<GameApi["applyPowerUpEffect"]>(
+    (effect) => {
+      const currentRound = roundRef.current;
+      if (
+        statusRef.current !== "playing" ||
+        lockedRef.current ||
+        currentRound === null ||
+        usedPowerUpsRef.current.includes(effect.id)
+      ) {
+        return false;
+      }
+
+      if (effect.id === "eliminate") {
+        const validSymbols = effect.eliminatedSymbols.filter(
+          (symbol) =>
+            symbol !== currentRound.hint &&
+            currentRound.mine.includes(symbol) &&
+            !eliminatedSymbolsRef.current.includes(symbol),
+        );
+        if (validSymbols.length === 0) return false;
+        eliminatedSymbolsRef.current = [
+          ...eliminatedSymbolsRef.current,
+          ...validSymbols,
+        ];
+        setEliminatedSymbols(eliminatedSymbolsRef.current);
+      }
+
+      usedPowerUpsRef.current = [...usedPowerUpsRef.current, effect.id];
+      setUsedPowerUps(usedPowerUpsRef.current);
+      return true;
+    },
+    [],
   );
 
   const retry = useCallback(() => {
@@ -342,9 +399,13 @@ export function useGame(options: GameOptions = {}): GameApi {
     lastFeedback,
     resultSeconds,
     deckSeed,
+    usedPowerUps,
+    powerUpHintActive: usedPowerUps.includes("hint"),
+    eliminatedSymbols,
     start,
     reveal,
     tap,
+    applyPowerUpEffect,
     retry,
   };
 }

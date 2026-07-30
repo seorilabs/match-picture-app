@@ -25,6 +25,12 @@ import {
   getDailySeed,
   getKstDateString,
 } from "../game/mode";
+import {
+  POWER_UPS,
+  planPowerUpUse,
+  type PowerUpFailureReason,
+  type PowerUpId,
+} from "../game/powerUps";
 import { createGameClearEventPayload } from "../game/clearEvent";
 import { preloadSymbolImages } from "../game/preloadSymbols";
 import { useGame } from "../game/useGame";
@@ -72,8 +78,11 @@ export function GameScreen({
   onExitToHome,
 }: GameScreenProps) {
   const {
+    profile,
     equippedPack: symbolPack,
     awardClearCoins,
+    addCoins,
+    spendCoins,
     recordGameClear,
   } = useProfile();
   const { t } = useI18n();
@@ -112,9 +121,13 @@ export function GameScreen({
     lastFeedback,
     resultSeconds,
     deckSeed,
+    usedPowerUps,
+    powerUpHintActive,
+    eliminatedSymbols,
     start: startGame,
     reveal: revealGame,
     tap,
+    applyPowerUpEffect,
     retry: retryGame,
   } = useGame({
     totalCards: debugTotalCards ?? undefined,
@@ -143,6 +156,7 @@ export function GameScreen({
   const [leaderboardMessage, setLeaderboardMessage] = useState<string | null>(
     null,
   );
+  const [powerUpMessage, setPowerUpMessage] = useState<string | null>(null);
 
   const { ready: adReady, show: showAd } = useInterstitialAd(
     launchConfig.interstitialAdEnabled,
@@ -233,6 +247,10 @@ export function GameScreen({
     }
   }, [status]);
 
+  useEffect(() => {
+    setPowerUpMessage(null);
+  }, [mode, roundIndex, status]);
+
   // 클리어 시점에 베스트 기록 갱신, 결과 햅틱, 코인 지급을 처리합니다.
   useEffect(() => {
     if (status !== "finished" || resultSeconds === null) return;
@@ -245,7 +263,8 @@ export function GameScreen({
     const previousBest =
       mode === "classic" ? classicBest : mode === "daily" ? dailyBest : null;
     const recordKey = bestRecordKey(mode, dailyDateString);
-    const newBest = recordKey !== null && isNewBest(resultSeconds, previousBest);
+    const newBest =
+      recordKey !== null && isNewBest(resultSeconds, previousBest);
     setResultBest({ previous: previousBest, isNew: newBest });
 
     const challengeWon =
@@ -418,6 +437,72 @@ export function GameScreen({
     [locked, round, soundEnabled, status, tap],
   );
 
+  const powerUpFailureMessage = useCallback(
+    (reason: PowerUpFailureReason): string => {
+      if (reason === "ranked-mode") return t("powerup.policy.ranked");
+      if (reason === "not-enough-coins") return t("powerup.notEnough");
+      if (reason === "already-used") return t("powerup.alreadyUsed");
+      return t("powerup.unavailable");
+    },
+    [t],
+  );
+
+  const handleUsePowerUp = useCallback(
+    (id: PowerUpId) => {
+      const plan = planPowerUpUse({
+        id,
+        coins: profile.coins,
+        mode,
+        round,
+        usedPowerUps,
+        eliminatedSymbols,
+      });
+      if (!plan.ok) {
+        setPowerUpMessage(powerUpFailureMessage(plan.reason));
+        return;
+      }
+
+      const spent = spendCoins(plan.price);
+      if (!spent.ok) {
+        setPowerUpMessage(t("powerup.notEnough"));
+        return;
+      }
+
+      if (!applyPowerUpEffect(plan.effect)) {
+        addCoins(plan.price);
+        setPowerUpMessage(t("powerup.unavailable"));
+        return;
+      }
+
+      setPowerUpMessage(t(`powerup.success.${id}`));
+    },
+    [
+      addCoins,
+      applyPowerUpEffect,
+      eliminatedSymbols,
+      mode,
+      powerUpFailureMessage,
+      profile.coins,
+      round,
+      spendCoins,
+      t,
+      usedPowerUps,
+    ],
+  );
+
+  const powerUpsInteractive =
+    mode === "classic" && status === "playing" && !locked;
+  const hintUsed = usedPowerUps.includes("hint");
+  const eliminateUsed = usedPowerUps.includes("eliminate");
+  const defaultPowerUpMessage =
+    mode !== "classic"
+      ? t("powerup.policy.ranked")
+      : status !== "playing"
+        ? t("powerup.openFirst")
+        : locked
+          ? t("powerup.wait")
+          : t("powerup.available");
+
   // 후반으로 갈수록 심볼 위치가 기본 배치에서 멀어지도록 진행률을 전달합니다.
   const difficultyProgress = totalCards > 0 ? correctCount / totalCards : 0;
 
@@ -494,6 +579,50 @@ export function GameScreen({
           )}
         </section>
 
+        <section className="power-up-panel" aria-label={t("powerup.groupAria")}>
+          <div className="power-up-buttons">
+            <button
+              type="button"
+              className={`power-up-button${
+                profile.coins < POWER_UPS.hint.price ? " is-unaffordable" : ""
+              }${hintUsed ? " is-used" : ""}`}
+              disabled={!powerUpsInteractive || hintUsed}
+              onClick={() => handleUsePowerUp("hint")}
+            >
+              <span className="power-up-icon" aria-hidden="true">
+                💡
+              </span>
+              <span className="power-up-name">{t("powerup.hint")}</span>
+              <span className="power-up-cost">
+                {hintUsed ? t("powerup.used") : `🪙 ${POWER_UPS.hint.price}`}
+              </span>
+            </button>
+            <button
+              type="button"
+              className={`power-up-button${
+                profile.coins < POWER_UPS.eliminate.price
+                  ? " is-unaffordable"
+                  : ""
+              }${eliminateUsed ? " is-used" : ""}`}
+              disabled={!powerUpsInteractive || eliminateUsed}
+              onClick={() => handleUsePowerUp("eliminate")}
+            >
+              <span className="power-up-icon" aria-hidden="true">
+                ✂️
+              </span>
+              <span className="power-up-name">{t("powerup.eliminate")}</span>
+              <span className="power-up-cost">
+                {eliminateUsed
+                  ? t("powerup.used")
+                  : `🪙 ${POWER_UPS.eliminate.price}`}
+              </span>
+            </button>
+          </div>
+          <p className="power-up-message" role="status" aria-live="polite">
+            {powerUpMessage ?? defaultPowerUpMessage}
+          </p>
+        </section>
+
         <section
           className={`card-section mine-section${locked ? " is-locked" : ""}`}
           aria-label={t("game.aria.mine")}
@@ -510,6 +639,8 @@ export function GameScreen({
                 variant="mine"
                 pack={symbolPack}
                 hint={round.hint}
+                powerUpHintActive={powerUpHintActive}
+                eliminatedSymbols={eliminatedSymbols}
                 clickable={!locked && status === "playing"}
                 progress={difficultyProgress}
                 onPress={handleMinePress}

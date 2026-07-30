@@ -89,6 +89,22 @@ const ko: Messages = {
   "game.openSub": "카드 열기",
   "home.aria.garden": "나의 정원",
 
+  // 인게임 파워업
+  "powerup.groupAria": "코인 파워업",
+  "powerup.hint": "즉시 힌트",
+  "powerup.eliminate": "오답 소거",
+  "powerup.used": "사용함",
+  "powerup.policy.ranked":
+    "공정한 기록 경쟁을 위해 데일리·도전장에서는 사용할 수 없어요.",
+  "powerup.notEnough": "코인이 부족해요.",
+  "powerup.alreadyUsed": "이 라운드에서 이미 사용했어요.",
+  "powerup.unavailable": "지금은 이 파워업을 사용할 수 없어요.",
+  "powerup.openFirst": "카드를 열면 파워업을 사용할 수 있어요.",
+  "powerup.wait": "판정이 끝난 뒤 사용할 수 있어요.",
+  "powerup.available": "각 파워업은 라운드마다 한 번 사용할 수 있어요.",
+  "powerup.success.hint": "정답 심볼을 강조했어요.",
+  "powerup.success.eliminate": "오답 심볼 2개를 소거했어요.",
+
   // HUD
   "hud.aria.openRanking": "랭킹 열기",
   "hud.aria.openingRanking": "랭킹 여는 중",
@@ -220,6 +236,21 @@ const en: Messages = {
   "game.openSub": "Open cards",
   "home.aria.garden": "My garden",
 
+  "powerup.groupAria": "Coin power-ups",
+  "powerup.hint": "Instant Hint",
+  "powerup.eliminate": "Remove Errors",
+  "powerup.used": "Used",
+  "powerup.policy.ranked":
+    "Power-ups are disabled in Daily and Challenge modes for fair rankings.",
+  "powerup.notEnough": "Not enough coins.",
+  "powerup.alreadyUsed": "Already used in this round.",
+  "powerup.unavailable": "This power-up is unavailable right now.",
+  "powerup.openFirst": "Open the cards to use power-ups.",
+  "powerup.wait": "Available after the current result finishes.",
+  "powerup.available": "Each power-up can be used once per round.",
+  "powerup.success.hint": "Highlighted the matching symbol.",
+  "powerup.success.eliminate": "Removed two incorrect symbols.",
+
   "hud.aria.openRanking": "Open ranking",
   "hud.aria.openingRanking": "Opening ranking",
   "hud.aria.rankingFailed": "Open ranking. Last failed: {msg}",
@@ -240,7 +271,8 @@ const en: Messages = {
   "tutorial.title": "Find the Matching Picture",
   "tutorial.body1":
     "There's exactly one matching picture on the top and bottom cards. Tap it on the bottom card to move to the next card.",
-  "tutorial.body2": "A wrong tap pauses you briefly — finish faster for a better time.",
+  "tutorial.body2":
+    "A wrong tap pauses you briefly — finish faster for a better time.",
   "tutorial.start": "Got it",
 
   "share.message":
