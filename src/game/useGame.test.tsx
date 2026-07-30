@@ -84,4 +84,52 @@ describe("useGame 최대 콤보", () => {
     act(() => currentGame.retry());
     expect(currentGame.maxCombo).toBe(0);
   });
+
+  it("힌트와 소거 효과를 현재 라운드에 즉시 반영하고 중복 사용을 막는다", () => {
+    startAndReveal();
+    const wrongSymbols =
+      currentGame.round?.mine.filter(
+        (symbol) => symbol !== currentGame.round?.hint,
+      ) ?? [];
+
+    let hintApplied = false;
+    act(() => {
+      hintApplied = currentGame.applyPowerUpEffect({ id: "hint" });
+    });
+    expect(hintApplied).toBe(true);
+    expect(currentGame.powerUpHintActive).toBe(true);
+
+    let duplicateApplied = true;
+    act(() => {
+      duplicateApplied = currentGame.applyPowerUpEffect({ id: "hint" });
+    });
+    expect(duplicateApplied).toBe(false);
+
+    let eliminateApplied = false;
+    act(() => {
+      eliminateApplied = currentGame.applyPowerUpEffect({
+        id: "eliminate",
+        eliminatedSymbols: wrongSymbols.slice(0, 2),
+      });
+    });
+    expect(eliminateApplied).toBe(true);
+    expect(currentGame.eliminatedSymbols).toEqual(wrongSymbols.slice(0, 2));
+    expect(currentGame.usedPowerUps).toEqual(["hint", "eliminate"]);
+  });
+
+  it("정답 뒤 다음 라운드에서는 파워업 사용 상태를 초기화한다", async () => {
+    startAndReveal();
+    act(() => {
+      currentGame.applyPowerUpEffect({ id: "hint" });
+    });
+    expect(currentGame.powerUpHintActive).toBe(true);
+
+    tapCorrect();
+    await act(() => vi.advanceTimersByTimeAsync(450));
+
+    expect(currentGame.roundIndex).toBe(1);
+    expect(currentGame.powerUpHintActive).toBe(false);
+    expect(currentGame.usedPowerUps).toEqual([]);
+    expect(currentGame.eliminatedSymbols).toEqual([]);
+  });
 });

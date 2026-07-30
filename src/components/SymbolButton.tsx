@@ -14,13 +14,14 @@ interface SymbolButtonProps {
   position: { x: number; y: number };
   /** 정답이면 true. 힌트 효과 적용 여부 결정. */
   isAnswer?: boolean;
+  /** 코인 힌트로 정답을 즉시 강조하는지. */
+  powerHintActive?: boolean;
+  /** 소거 파워업으로 비활성화한 오답인지. */
+  eliminated?: boolean;
   /** 클릭 가능 여부. */
   clickable: boolean;
   /** 클릭 시 호출. */
-  onPress: (
-    symbol: string,
-    origin: { x: number; y: number },
-  ) => void;
+  onPress: (symbol: string, origin: { x: number; y: number }) => void;
   /** 카드 그룹 식별자. UI 키 충돌 방지용. */
   variant: "opponent" | "mine";
 }
@@ -36,6 +37,8 @@ function SymbolButtonInner({
   scale,
   position,
   isAnswer = false,
+  powerHintActive = false,
+  eliminated = false,
   clickable,
   onPress,
   variant,
@@ -62,9 +65,11 @@ function SymbolButtonInner({
       type="button"
       className={`symbol-button${variant === "mine" ? " mine" : ""}${
         isAnswer && variant === "mine" ? " is-answer" : ""
+      }${powerHintActive && variant === "mine" ? " is-power-hint" : ""}${
+        eliminated && variant === "mine" ? " is-eliminated" : ""
       }`}
       onClick={handleClick}
-      disabled={!clickable && variant === "mine"}
+      disabled={(!clickable || eliminated) && variant === "mine"}
       aria-label={`symbol ${symbol}`}
       style={buttonStyle}
     >

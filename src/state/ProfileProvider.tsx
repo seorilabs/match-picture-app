@@ -37,8 +37,10 @@ import {
   parseProfile,
   purchasePack,
   serializeProfile,
+  spendCoins as spendProfileCoins,
   type Profile,
   type PurchaseResult,
+  type SpendCoinsResult,
 } from "./profile";
 
 export function ProfileProvider({ children }: { children: ReactNode }) {
@@ -116,6 +118,19 @@ export function ProfileProvider({ children }: { children: ReactNode }) {
     [],
   );
 
+  const spendCoins = useCallback((amount: number): SpendCoinsResult => {
+    let result: SpendCoinsResult = {
+      ok: false,
+      profile: createDefaultProfile(),
+      reason: "invalid-amount",
+    };
+    setProfile((current) => {
+      result = spendProfileCoins(current, amount);
+      return result.ok ? result.profile : current;
+    });
+    return result;
+  }, []);
+
   const buyPack = useCallback((packId: string): PurchaseResult => {
     let result: PurchaseResult = { ok: false, profile: createDefaultProfile() };
     setProfile((current) => {
@@ -189,7 +204,11 @@ export function ProfileProvider({ children }: { children: ReactNode }) {
         return current;
       }
       outcome = { ok: true };
-      return { ...current, garden: placed.garden, coins: current.coins - price };
+      return {
+        ...current,
+        garden: placed.garden,
+        coins: current.coins - price,
+      };
     });
     return outcome;
   }, []);
@@ -235,6 +254,7 @@ export function ProfileProvider({ children }: { children: ReactNode }) {
       ownsPack: (packId: string) => ownsPack(profile, packId),
       awardClearCoins,
       addCoins,
+      spendCoins,
       buyPack,
       equip,
       missions: ensureToday(profile.missions, today),
@@ -258,6 +278,7 @@ export function ProfileProvider({ children }: { children: ReactNode }) {
       profile,
       recordGameClear,
       removePlant,
+      spendCoins,
       today,
       waterGarden,
     ],

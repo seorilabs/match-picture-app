@@ -11,6 +11,7 @@ import {
   parseProfile,
   purchasePack,
   serializeProfile,
+  spendCoins,
 } from "./profile";
 
 describe("createDefaultProfile", () => {
@@ -79,6 +80,28 @@ describe("purchasePack", () => {
   });
 });
 
+describe("spendCoins", () => {
+  it("요청한 양만 정확히 차감한다", () => {
+    const profile = { ...createDefaultProfile(), coins: 40 };
+    const result = spendCoins(profile, 15);
+
+    expect(result.ok).toBe(true);
+    expect(result.profile.coins).toBe(25);
+    expect(profile.coins).toBe(40);
+  });
+
+  it("코인이 부족하면 원래 프로필을 보존한다", () => {
+    const profile = { ...createDefaultProfile(), coins: 14 };
+    const result = spendCoins(profile, 15);
+
+    expect(result).toEqual({
+      ok: false,
+      profile,
+      reason: "not-enough-coins",
+    });
+  });
+});
+
 describe("equipPack", () => {
   it("보유한 팩만 장착할 수 있다", () => {
     const p = { ...createDefaultProfile(), coins: 999 };
@@ -90,14 +113,23 @@ describe("equipPack", () => {
 
 describe("normalizeProfile / 직렬화", () => {
   it("손상된 입력도 안전한 기본값으로 정규화한다", () => {
-    const p = normalizeProfile({ coins: -5, ownedPackIds: ["nope"], equippedPackId: "nope" });
+    const p = normalizeProfile({
+      coins: -5,
+      ownedPackIds: ["nope"],
+      equippedPackId: "nope",
+    });
     expect(p.coins).toBe(0);
     expect(p.ownedPackIds).toEqual(["classic"]);
     expect(p.equippedPackId).toBe("classic");
   });
 
   it("round-trip 직렬화/파싱이 일치한다", () => {
-    const p = { ...createDefaultProfile(), coins: 250, ownedPackIds: ["classic", "space"], equippedPackId: "space" };
+    const p = {
+      ...createDefaultProfile(),
+      coins: 250,
+      ownedPackIds: ["classic", "space"],
+      equippedPackId: "space",
+    };
     expect(parseProfile(serializeProfile(p))).toEqual(p);
   });
 

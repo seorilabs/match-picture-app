@@ -139,6 +139,29 @@ export interface PurchaseResult {
   reason?: "already-owned" | "not-enough-coins" | "unknown-pack";
 }
 
+export interface SpendCoinsResult {
+  ok: boolean;
+  profile: Profile;
+  reason?: "invalid-amount" | "not-enough-coins";
+}
+
+/** 소비형 아이템 가격만큼 코인을 차감한다. 실패 시 원래 Profile을 그대로 돌려준다. */
+export function spendCoins(profile: Profile, amount: number): SpendCoinsResult {
+  if (!Number.isInteger(amount) || amount <= 0) {
+    return { ok: false, profile, reason: "invalid-amount" };
+  }
+  if (profile.coins < amount) {
+    return { ok: false, profile, reason: "not-enough-coins" };
+  }
+  return {
+    ok: true,
+    profile: {
+      ...profile,
+      coins: profile.coins - amount,
+    },
+  };
+}
+
 /** 코인으로 팩을 구매(해금). 순수 함수 — 새 Profile을 돌려준다. */
 export function purchasePack(profile: Profile, packId: string): PurchaseResult {
   const pack: SymbolPack | undefined = SYMBOL_PACKS.find(

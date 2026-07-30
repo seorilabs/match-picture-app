@@ -2,7 +2,7 @@ import { createContext, useContext } from "react";
 
 import type { SymbolPack } from "../symbols/packs";
 import type { GameMode } from "../game/mode";
-import type { Profile, PurchaseResult } from "./profile";
+import type { Profile, PurchaseResult, SpendCoinsResult } from "./profile";
 import type { ClearInfo, DailyMissions, MissionId } from "./missions";
 import type { Garden, PlantSeedReason } from "./garden";
 
@@ -20,6 +20,8 @@ export interface ProfileContextValue {
     maxCombo: number,
   ) => number;
   addCoins: (amount: number) => void;
+  /** 소비형 아이템 가격을 정확히 차감한다. */
+  spendCoins: (amount: number) => SpendCoinsResult;
   buyPack: (packId: string) => PurchaseResult;
   equip: (packId: string) => void;
   /** 오늘의 미션(날짜 리셋 반영됨). */

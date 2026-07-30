@@ -9,6 +9,10 @@ interface CardViewProps {
   pack: SymbolPack;
   /** 정답 심볼. `mine`일 때만 의미가 있고, 힌트 효과 표시에 사용합니다. */
   hint: string;
+  /** 코인 힌트로 정답을 즉시 강조하는지. */
+  powerUpHintActive?: boolean;
+  /** 코인 소거로 현재 라운드에서 비활성화한 오답 심볼. */
+  eliminatedSymbols?: readonly string[];
   /** 클릭 가능 여부. opponent는 항상 비활성. */
   clickable: boolean;
   /**
@@ -16,10 +20,7 @@ interface CardViewProps {
    * 위치 패턴 암기를 막고 난이도를 올립니다.
    */
   progress?: number;
-  onPress: (
-    symbol: string,
-    origin: { x: number; y: number },
-  ) => void;
+  onPress: (symbol: string, origin: { x: number; y: number }) => void;
 }
 
 interface SymbolPlacement {
@@ -97,6 +98,8 @@ export function CardView({
   variant,
   pack,
   hint,
+  powerUpHintActive = false,
+  eliminatedSymbols = [],
   clickable,
   progress = 0,
   onPress,
@@ -114,7 +117,9 @@ export function CardView({
           scale={placement.scale}
           position={placement.position}
           isAnswer={placement.symbol === hint}
-          clickable={clickable}
+          powerHintActive={powerUpHintActive && placement.symbol === hint}
+          eliminated={eliminatedSymbols.includes(placement.symbol)}
+          clickable={clickable && !eliminatedSymbols.includes(placement.symbol)}
           onPress={onPress}
           variant={variant}
         />
