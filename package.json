@@ -17,7 +17,7 @@
     "lint": "eslint .",
     "format": "prettier --write .",
     "test": "vitest run",
-    "test:release-version": "node --test scripts/resolve-release-version.node-test.mjs"
+    "test:release-version": "node --test scripts/*.node-test.mjs"
   },
   "dependencies": {
     "@apps-in-toss/web-framework": "^2.10.7",
