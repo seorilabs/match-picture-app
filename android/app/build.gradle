@@ -1,9 +1,12 @@
 apply plugin: 'com.android.application'
 
-// Release 서명 자격: 로컬은 keystore.properties(gitignore됨), CI는 환경변수로 주입.
-def keystorePropsFile = rootProject.file("keystore.properties")
+// Release 서명 자격: 로컬은 keystore.properties, org CI는 key.properties로 주입.
+def keystorePropsFile = [
+    rootProject.file("key.properties"),
+    rootProject.file("keystore.properties"),
+].find { it.exists() }
 def keystoreProps = new Properties()
-if (keystorePropsFile.exists()) {
+if (keystorePropsFile != null) {
     keystoreProps.load(new FileInputStream(keystorePropsFile))
 }
 // getProperty는 키 부재 시 null을 반환하므로 4개 필드 모두 안전하게 환경변수로 폴백된다.
@@ -23,8 +26,8 @@ android {
         targetSdkVersion rootProject.ext.targetSdkVersion
         // 구 Unity 마지막: versionCode 11 / 1.0.7. 12는 서명 검증 업로드본.
         // 13부터 네이티브 리더보드 포함 내부 테스트 빌드.
-        versionCode 13
-        versionName "1.0.9"
+        versionCode providers.gradleProperty("versionCodeOverride").getOrElse("15").toInteger()
+        versionName providers.gradleProperty("versionNameOverride").getOrElse("1.0.11")
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         aaptOptions {
              // Files and dirs to omit from the packaged assets dir, modified to accommodate modern web apps.

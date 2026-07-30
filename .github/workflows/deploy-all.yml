@@ -1,0 +1,97 @@
+name: Deploy All
+
+on:
+  workflow_dispatch:
+    inputs:
+      release_tag:
+        description: "배포할 stable SemVer 태그(vX.Y.Z). 비우면 최신 정상 태그"
+        type: string
+        required: false
+        default: ""
+      deploy_ait:
+        type: boolean
+        default: true
+      deploy_google_play:
+        type: boolean
+        default: true
+      deploy_app_store:
+        type: boolean
+        default: true
+      track:
+        type: choice
+        options: [internal, production]
+        default: internal
+      release_status:
+        type: choice
+        options: [draft, completed]
+        default: completed
+      memo:
+        type: string
+        required: false
+        default: ""
+
+permissions:
+  contents: read
+  id-token: write
+
+concurrency:
+  group: deploy-all-${{ inputs.release_tag || github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  resolve:
+    name: Resolve stable release tag
+    runs-on: ${{ github.event.repository.private && 'seorilabs-rpi-arm64' || 'ubuntu-latest' }}
+    timeout-minutes: 10
+    outputs:
+      tag: ${{ steps.tag.outputs.tag }}
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+          fetch-tags: true
+      - id: tag
+        shell: bash
+        env:
+          INPUT_TAG: ${{ inputs.release_tag }}
+        run: |
+          set -euo pipefail
+          tag="$INPUT_TAG"
+          if [ -z "$tag" ]; then
+            tag="$(git tag --list 'v*' --sort=-v:refname | grep -E '^v(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)$' | head -n 1 || true)"
+          fi
+          [[ "$tag" =~ ^v(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)$ ]] \
+            || { echo "stable SemVer 릴리즈 태그가 필요함: ${tag:-empty}" >&2; exit 1; }
+          echo "tag=$tag" >> "$GITHUB_OUTPUT"
+
+  ait:
+    name: Deploy AppsInToss
+    needs: resolve
+    if: ${{ inputs.deploy_ait }}
+    uses: ./.github/workflows/deploy-apps-in-toss.yml
+    secrets: inherit
+    with:
+      release_tag: ${{ needs.resolve.outputs.tag }}
+      memo: ${{ inputs.memo }}
+
+  google-play:
+    name: Deploy Google Play
+    needs: resolve
+    if: ${{ inputs.deploy_google_play }}
+    uses: ./.github/workflows/deploy-google-play.yml
+    secrets: inherit
+    with:
+      release_tag: ${{ needs.resolve.outputs.tag }}
+      upload: true
+      track: ${{ inputs.track }}
+      release_status: ${{ inputs.release_status }}
+
+  app-store:
+    name: Deploy App Store
+    needs: resolve
+    if: ${{ inputs.deploy_app_store }}
+    uses: ./.github/workflows/deploy-app-store.yml
+    secrets: inherit
+    with:
+      release_tag: ${{ needs.resolve.outputs.tag }}
+      upload: true

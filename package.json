@@ -1,7 +1,7 @@
 {
   "name": "match-picture-app",
   "private": true,
-  "version": "0.1.0",
+  "version": "1.0.11",
   "type": "module",
   "scripts": {
     "dev": "granite dev",
@@ -10,11 +10,14 @@
     "build:web": "vite build",
     "web": "vite --host 0.0.0.0 --port 5173",
     "sync": "vite build && cap sync",
+    "sync:android": "vite build && cap sync android",
+    "sync:ios": "vite build && cap sync ios",
     "open:android": "cap open android",
     "open:ios": "cap open ios",
     "lint": "eslint .",
     "format": "prettier --write .",
-    "test": "vitest run"
+    "test": "vitest run",
+    "test:release-version": "node --test scripts/*.node-test.mjs"
   },
   "dependencies": {
     "@apps-in-toss/web-framework": "^2.10.7",

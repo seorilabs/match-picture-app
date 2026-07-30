@@ -1,0 +1,63 @@
+name: Promote Google Play
+
+on:
+  workflow_dispatch:
+    inputs:
+      release_tag:
+        description: "승격할 stable SemVer 태그(vX.Y.Z)"
+        type: string
+        required: false
+      from_track:
+        type: string
+        default: internal
+      to_track:
+        type: string
+        default: production
+      release_status:
+        type: string
+        default: completed
+      rollout:
+        description: "단계적 출시 비율(0,1]. 비우면 완전 출시"
+        type: string
+        default: ""
+  workflow_call:
+    inputs:
+      release_tag:
+        required: false
+        type: string
+      from_track:
+        required: false
+        default: internal
+        type: string
+      to_track:
+        required: false
+        default: production
+        type: string
+      release_status:
+        required: false
+        default: completed
+        type: string
+      rollout:
+        required: false
+        default: ""
+        type: string
+
+permissions:
+  contents: read
+  id-token: write
+
+concurrency:
+  group: match-picture-google-play-promote-${{ inputs.release_tag || github.ref_name }}
+  cancel-in-progress: false
+
+jobs:
+  promote:
+    uses: seorilabs/.github/.github/workflows/promote-google-play.yml@main
+    secrets: inherit
+    with:
+      release_tag: ${{ inputs.release_tag }}
+      from_track: ${{ inputs.from_track }}
+      to_track: ${{ inputs.to_track }}
+      release_status: ${{ inputs.release_status }}
+      rollout: ${{ inputs.rollout }}
+      upload_script: scripts/upload-google-play-internal.py

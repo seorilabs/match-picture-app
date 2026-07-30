@@ -7,6 +7,7 @@ const LOCALE_LABELS: Record<Locale, string> = {
   ko: "한국어",
   en: "English",
 };
+const APP_VERSION = import.meta.env.VITE_APP_VERSION || "1.0.11";
 
 /**
  * 사운드 토글은 현재 게임 화면(GameScreen)이 소유하고 있어, 추후 전역 설정으로 끌어올린다.
@@ -53,7 +54,7 @@ export function SettingsScreen() {
         </li>
         <li className="settings-row">
           <span>{t("settings.version")}</span>
-          <span className="settings-hint">1.0.8</span>
+          <span className="settings-hint">{APP_VERSION}</span>
         </li>
       </ul>
     </div>
