@@ -28,6 +28,7 @@ adb reverse tcp:5173 tcp:5173
 | `npm run format` | Prettier 일괄 적용 |
 | `npm run build` | Apps in Toss CLI(`ait build`)로 배포 번들 생성 |
 | `npm run deploy` | 배포 번들 업로드 |
+| `npm run test:release-version` | stable SemVer → Play/App Store 빌드 번호 변환 검증 |
 
 ## GitHub Actions
 
@@ -37,10 +38,16 @@ CI/CD는 Seorilabs org 재사용 워크플로우(`seorilabs/.github/.github/work
 | --- | --- | --- | --- |
 | `static-checks.yml` | `push`/`pull_request`(main), dispatch | `rn-static-checks.yml` | `npm ci` → `npm run lint` + `npm test` 정적 게이트 |
 | `deploy-apps-in-toss.yml` | dispatch, `workflow_call` | `rn-deploy-ait.yml` | 루트에서 `.ait` 빌드 → AppsInToss 배포 |
+| `deploy-google-play.yml` | dispatch, `workflow_call` | `rn-deploy-google-play.yml` | Capacitor Android 동기화 → 서명 AAB → Google Play |
+| `promote-google-play.yml` | dispatch, `workflow_call` | `promote-google-play.yml` | 내부 트랙 빌드를 재빌드 없이 production으로 승격 |
+| `deploy-app-store.yml` | dispatch, `workflow_call` | `rn-deploy-app-store.yml` | Capacitor SPM iOS archive → App Store Connect |
+| `deploy-all.yml` | dispatch | repo caller 3종 | 동일 stable SemVer 태그를 세 마켓에 배포 |
 | `release-tag.yml` | dispatch | `release-tag.yml` | 명시적 SemVer 릴리즈 태그 생성 |
 | `cleanup-actions-storage.yml` | dispatch | `cleanup-actions-storage.yml` | Actions 아티팩트/캐시 정리 |
 
-main push/PR은 정적 체크만 돌고, 마켓 배포는 명시적 dispatch(또는 Release Tag)로만 실행됩니다. private repo는 ARC 러너(`seorilabs-rpi-arm64`), public은 `ubuntu-latest`로 라우팅됩니다.
+main push/PR은 정적 체크만 돌고, 마켓 배포는 명시적 dispatch로만 실행됩니다. Web/AIT와 태그 해석은 ARC 러너(`seorilabs-rpi-arm64`), Android release는 x64 Linux, Apple archive는 macOS 러너로 분리됩니다.
+
+릴리즈 버전은 workflow run 번호가 아니라 `vMAJOR.MINOR.PATCH` 태그가 기준입니다. `scripts/resolve-release-version.mjs`가 같은 태그에서 Android `versionName`/`versionCode`와 Apple marketing/build version을 함께 계산합니다. `v27.1` 같은 과거 2자리 태그와 `v27.1.NaN`은 릴리즈 후보로 사용하지 않습니다. 현재 마켓 기준은 Google Play `1.0.11`, App Store `1.0.4`이므로 다음 통합 patch 릴리즈는 `v1.0.12`입니다.
 
 Apps in Toss 배포를 위해 GitHub repository 또는 environment `apps-in-toss`에 아래 값을 설정해야 합니다.
 

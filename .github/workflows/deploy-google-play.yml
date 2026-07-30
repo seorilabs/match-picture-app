@@ -1,0 +1,58 @@
+# Capacitor Android AAB + Google Play 업로드. Android release는 x64 Linux 재사용 워크플로우가 담당한다.
+name: Deploy Google Play
+
+on:
+  workflow_dispatch:
+    inputs:
+      release_tag:
+        description: "배포할 stable SemVer 태그(vX.Y.Z)"
+        type: string
+        required: false
+        default: ""
+      upload:
+        description: "true면 Google Play track에 업로드"
+        type: boolean
+        default: false
+      track:
+        type: choice
+        options: [internal, production]
+        default: internal
+      release_status:
+        type: choice
+        options: [draft, completed]
+        default: completed
+  workflow_call:
+    inputs:
+      release_tag:
+        type: string
+        required: false
+        default: ""
+      upload:
+        type: boolean
+        default: true
+      track:
+        type: string
+        default: internal
+      release_status:
+        type: string
+        default: completed
+
+permissions:
+  contents: read
+  id-token: write
+
+jobs:
+  google-play:
+    uses: seorilabs/.github/.github/workflows/rn-deploy-google-play.yml@main
+    secrets: inherit
+    with:
+      release_tag: ${{ inputs.release_tag }}
+      upload: ${{ inputs.upload }}
+      track: ${{ inputs.track }}
+      release_status: ${{ inputs.release_status }}
+      package_manager: npm
+      java_version: "21"
+      android_dir: android
+      prepare_script: scripts/prepare-native-release.mjs
+      version_script: scripts/resolve-release-version.mjs
+      upload_script: scripts/upload-google-play-internal.py

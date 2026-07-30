@@ -39,6 +39,7 @@ AGENTS.local.md
 
 # Android signing — NEVER commit keystore or passwords
 android/keystore.properties
+android/key.properties
 android/keystore/
 *.keystore
 *.jks

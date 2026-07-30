@@ -1,0 +1,8 @@
+{
+  "schemaVersion": 1,
+  "packageName": "com.github.magicsih.MatchPictureUnity",
+  "defaultLanguage": "ko-KR",
+  "appType": "game",
+  "releaseTrack": "internal",
+  "releaseStatus": "completed"
+}

@@ -1,0 +1,62 @@
+# Capacitor SPM iOS archive + App Store Connect 업로드. Apple build는 macOS 재사용 워크플로우가 담당한다.
+name: Deploy App Store
+
+on:
+  workflow_dispatch:
+    inputs:
+      release_tag:
+        description: "배포할 stable SemVer 태그(vX.Y.Z)"
+        type: string
+        required: false
+        default: ""
+      upload:
+        description: "true면 App Store Connect 업로드"
+        type: boolean
+        default: false
+      ios_scheme:
+        type: string
+        default: App
+      ios_workspace:
+        description: "Xcode project 경로"
+        type: string
+        default: ios/App/App.xcodeproj
+      ios_bundle_id:
+        type: string
+        default: com.github.magicsih.MatchSymbol
+  workflow_call:
+    inputs:
+      release_tag:
+        type: string
+        required: false
+        default: ""
+      upload:
+        type: boolean
+        default: true
+      ios_scheme:
+        type: string
+        default: App
+      ios_workspace:
+        type: string
+        default: ios/App/App.xcodeproj
+      ios_bundle_id:
+        type: string
+        default: com.github.magicsih.MatchSymbol
+
+permissions:
+  contents: read
+
+jobs:
+  app-store:
+    uses: seorilabs/.github/.github/workflows/rn-deploy-app-store.yml@main
+    secrets: inherit
+    with:
+      release_tag: ${{ inputs.release_tag }}
+      upload: ${{ inputs.upload }}
+      ios_scheme: ${{ inputs.ios_scheme }}
+      ios_workspace: ${{ inputs.ios_workspace }}
+      ios_bundle_id: ${{ inputs.ios_bundle_id }}
+      ios_dir: "."
+      package_manager: npm
+      prepare_script: scripts/prepare-native-release.mjs
+      use_cocoapods: false
+      version_script: scripts/resolve-release-version.mjs
