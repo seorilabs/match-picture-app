@@ -16,7 +16,16 @@ import {
 
 import { getFirebaseApp } from "./app";
 import { trackEvent } from "./analytics";
-import { PLATFORM_API_URL, PLATFORM_APP_ID } from "../platform/config";
+import {
+  PLATFORM_API_URL,
+  PLATFORM_APP_ID,
+  PRESENCE_ENABLED,
+  presenceContext,
+} from "../platform/config";
+import {
+  createPresenceRunner,
+  type PresenceRunner,
+} from "../platform/presence";
 import {
   openPlatformSession,
   type PlatformSessionResult,
@@ -31,11 +40,33 @@ function getPlatform(): Platform | null {
     platform = createPlatform({
       appId: PLATFORM_APP_ID,
       baseUrl: PLATFORM_API_URL,
+      // 기본은 꺼짐. 중앙 게이트 통과 후 릴리스 후보에서만 env로 켠다.
+      presenceEnabled: PRESENCE_ENABLED,
+      presenceContext,
     });
     return platform;
   } catch {
     return null;
   }
+}
+
+/**
+ * Presence heartbeat lifecycle. 비활성이면 아무 호출도 하지 않는다(네트워크 0회).
+ * 세션이 열린 뒤에 시작하며, 실패는 전부 삼켜 게임 흐름에 전파하지 않는다.
+ */
+const presence: PresenceRunner = createPresenceRunner({
+  enabled: PRESENCE_ENABLED,
+  getPresence: () => getPlatform()?.presence ?? null,
+});
+
+/** 앱이 포그라운드로 돌아왔을 때 호출한다. 네트워크 완료를 기다리지 않는다. */
+export function resumePlatformPresence(): void {
+  presence.resume();
+}
+
+/** 앱 종료/이탈 시 호출한다. */
+export function stopPlatformPresence(): void {
+  presence.stop();
 }
 
 function getFirebaseAuth(): Auth | null {
@@ -87,6 +118,8 @@ export function ensurePlatformSession(): Promise<PlatformSessionResult> {
       ok: result.ok,
       reason: result.ok ? "ok" : result.reason,
     });
+    // 세션이 열린 뒤에만 heartbeat를 시작한다(활성일 때만).
+    if (result.ok) presence.start();
     return result;
   })();
 

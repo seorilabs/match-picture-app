@@ -10,12 +10,18 @@ const signIn = vi.fn(async () => undefined);
 const signInWithCustomToken = vi.fn(async () => ({
   user: { getIdToken: async () => "id-token" },
 }));
+const presenceStart = vi.fn();
+const createPlatformOptions: Record<string, unknown>[] = [];
 
 vi.mock("@seorilabs/platform-sdk", () => ({
-  createPlatform: () => ({
-    identity: { firebaseCustomToken },
-    signIn,
-  }),
+  createPlatform: (options: Record<string, unknown>) => {
+    createPlatformOptions.push(options);
+    return {
+      identity: { firebaseCustomToken },
+      signIn,
+      presence: { start: presenceStart, stop: () => undefined, resume: () => undefined },
+    };
+  },
 }));
 
 vi.mock("firebase/auth", () => ({
@@ -43,6 +49,8 @@ describe("ensurePlatformSession", () => {
     signIn.mockClear();
     signInWithCustomToken.mockClear();
     trackEvent.mockClear();
+    presenceStart.mockClear();
+    createPlatformOptions.length = 0;
     window.localStorage.clear();
   });
 

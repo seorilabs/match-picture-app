@@ -7,14 +7,12 @@ import { CoinBadge } from "../components/CoinBadge";
 import { StatsModal } from "../components/StatsModal";
 import { TutorialModal } from "../components/TutorialModal";
 import { SUPPORTED_LOCALES, type Locale } from "../i18n/messages";
+import { APP_VERSION } from "../platform/config";
 
 const LOCALE_LABELS: Record<Locale, string> = {
   ko: "한국어",
   en: "English",
 };
-// 릴리스 빌드는 RELEASE_VERSION을 주입하고, 그 외에는 package.json version을 쓴다.
-const APP_VERSION = import.meta.env.VITE_APP_VERSION || __APP_VERSION__;
-
 export function SettingsScreen({ onOpenShop }: { onOpenShop: () => void }) {
   const { profile, equippedPack } = useProfile();
   const {
