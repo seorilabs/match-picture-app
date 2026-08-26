@@ -79,13 +79,20 @@ Apps in Toss 배포를 위해 GitHub repository 또는 environment `apps-in-toss
 | 모드 | 진입 방법 | 덱 시드 |
 | --- | --- | --- |
 | 클래식 | 기본 | 매판 무작위 |
-| 오늘의 도전 | 시작 화면 모드 칩 | KST 날짜 기반 시드. 모든 사용자가 같은 "오늘의 덱"을 플레이 |
+| 오늘의 도전 | 시작 화면 모드 칩 / 홈의 "오늘의 도전" | KST 날짜 기반 시드. 모든 사용자가 같은 "오늘의 덱"을 플레이 |
+| 지난 도전(아카이브) | 홈의 "지난 도전" | 선택한 날짜의 데일리 시드(최근 14일) |
 | 도전장 | 공유 링크(`?challengeSeed=<uint32>&challengeTarget=<초>`) | 링크에 실린 시드. 보낸 사람과 같은 덱으로 대결 |
+| 스테이지 | 홈의 "스테이지 도전" | 스테이지 번호 기반 고정 시드. 별 1~3개로 평가 |
 
-- 결과 화면의 `SHARE` 버튼은 이번 판의 덱 시드와 기록을 담은 도전장 링크를 공유합니다. Apps in Toss 환경에서는 `getTossShareLink` + `share` 브릿지를 쓰고, 브라우저에서는 Web Share API → 클립보드 복사 순으로 fallback합니다.
-- 도전장 모드 기록은 글로벌 리더보드에 제출하지 않습니다(공유받은 고정 덱이라 공정성 문제).
+- 클래식은 난이도(쉬움/보통/어려움)를 고를 수 있고 선택은 프로필에 저장됩니다. 데일리·도전장은 공정성을 위해 보통 난이도로 고정됩니다.
+- 결과 화면의 공유 버튼은 이번 판의 덱 시드와 기록을 담은 도전장 링크를 공유합니다. 데일리 클리어는 정답을 노출하지 않는 라운드별 이모지 그리드로 공유됩니다. Apps in Toss 환경에서는 `getTossShareLink` + `share` 브릿지를 쓰고, 브라우저에서는 Web Share API → 클립보드 복사 순으로 fallback합니다.
+- 글로벌 리더보드 제출 정책(`src/game/submission.ts`)
+  - 도전장·스테이지: 제출하지 않습니다(공유 고정 덱 / 스테이지별 목표).
+  - 데일리: 그날의 **첫 클리어만** 제출합니다(`match-picture/daily-submitted/<YYYY-MM-DD>`). 재도전은 로컬 베스트만 갱신하고 결과 화면에 "연습 기록" 안내가 뜹니다.
+  - 지난 도전(아카이브): 제출하지 않습니다.
+  - 클래식: 코인 파워업을 쓴 판은 제출하지 않고 개인 베스트도 갱신하지 않습니다.
 - 베스트 기록은 클래식(`match-picture/best-seconds`)과 데일리(`match-picture/daily-best/<YYYY-MM-DD>`)에 각각 저장되어 결과 화면에서 신기록 여부를 보여줍니다.
-- 라운드가 진행될수록 심볼 위치가 기본 배치에서 점점 멀어져(최대 ±90/650 좌표) 위치 암기를 막습니다.
+- 라운드가 진행될수록 심볼 위치가 기본 배치에서 점점 멀어져(최대 ±90/650 좌표) 위치 암기를 막습니다. 배치는 덱 시드에서 파생된 결정적 RNG로 만들어져 같은 시드면 항상 같은 보드가 나오고, 심볼끼리 겹치지 않도록 최소 간격을 보장합니다.
 
 ## 심볼 테마(심볼팩)
 
@@ -148,11 +155,19 @@ location.reload();
 
 ```
 src/
-  App.tsx              게임 화면 셸 + 모달 + 네이티브 연동
+  App.tsx              Provider 트리(ErrorBoundary / i18n / 설정 / 프로필)
+  app/                 탭 셸, 루트 에러 경계
   components/          카드 UI, HUD, 모달 등 프레젠테이션 컴포넌트
-  game/                Deck 알고리즘 / 게임 룰 / React 상태 훅 + 단위 테스트
-  ait/                 Apps in Toss 브릿지 어댑터(스토리지, 리더보드, 리뷰 등)
+  screens/             홈(정원)·게임·상점·미션·설정 화면
+  game/                Deck 알고리즘 / 게임 룰 / 배치 / 난이도 / 스테이지 / 제출 정책 + 단위 테스트
+  state/               프로필·미션·정원·설정 상태(순수 로직 + Provider)
+  ait/                 Apps in Toss 브릿지 어댑터(스토리지, 리더보드, 광고, 리뷰 등)
+  native/              Capacitor 전용 어댑터(하드웨어 뒤로가기)
+  platform/            Seorilabs Platform 세션 교환 로직
+  firebase/            Analytics / Remote Config / 인증 진입점
 public/symbols/        Unity Resources/NotoEmoji에서 가져온 심볼 PNG
+public/audio/          효과음·BGM(scripts/generate-audio.mjs로 생성)
+ops/                   운영 문서(Play 데이터 안전 공시 source-of-truth 등)
 ```
 
 ## 참고 링크
