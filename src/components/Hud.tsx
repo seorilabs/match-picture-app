@@ -57,7 +57,7 @@ export function Hud({
             onClick={onOpenLeaderboard}
           >
             <span aria-hidden="true">
-              {leaderboardStatus === "opening" ? "..." : "RANK"}
+              {leaderboardStatus === "opening" ? "..." : t("hud.rank")}
             </span>
           </button>
         ) : null}

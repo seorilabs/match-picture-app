@@ -9,6 +9,7 @@ import {
 import { useProfile } from "../state/profileContext";
 import { useI18n } from "../i18n/i18nContext";
 import { trackEvent } from "../firebase/analytics";
+import { trackSpendCurrency } from "../firebase/gameEvents";
 import { CoinBadge } from "../components/CoinBadge";
 import { PackPreviewModal } from "../components/PackPreviewModal";
 
@@ -23,6 +24,7 @@ export function ShopScreen() {
     if (result.ok) {
       equip(pack.id);
       void trackEvent("pack_unlock", { pack: pack.id, price: pack.price });
+      trackSpendCurrency(`pack_${pack.id}`, pack.price);
       setMessage(t("shop.bought", { name: t(`pack.${pack.id}.label`) }));
     } else if (result.reason === "not-enough-coins") {
       setMessage(t("shop.notEnough"));

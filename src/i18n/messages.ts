@@ -72,9 +72,7 @@ const ko: Messages = {
   // 설정
   "settings.title": "설정",
   "settings.sound": "사운드",
-  "settings.soundHint": "게임 화면에서 조절",
   "settings.theme": "심볼 테마",
-  "settings.themeHint": "상점에서 장착",
   "settings.version": "버전",
   "settings.language": "언어",
 
@@ -110,6 +108,7 @@ const ko: Messages = {
   "hud.aria.openingRanking": "랭킹 여는 중",
   "hud.aria.rankingFailed": "랭킹 열기. 최근 실패: {msg}",
   "hud.aria.exit": "홈으로 나가기",
+  "hud.rank": "랭킹",
   "hud.aria.soundOff": "효과음 끄기",
   "hud.aria.soundOn": "효과음 켜기",
 
@@ -164,6 +163,142 @@ const ko: Messages = {
   "mission.play3.label": "게임 3판 플레이",
   "mission.fastClear.label": "{n}초 안에 클리어",
   "mission.daily.label": "오늘의 도전 완료",
+
+  // 난이도
+  "difficulty.label": "난이도",
+  "difficulty.easy": "쉬움",
+  "difficulty.normal": "보통",
+  "difficulty.hard": "어려움",
+  "difficulty.lockedMode": "데일리·도전장은 보통 난이도로 고정돼요.",
+
+  // 게임 화면
+  "game.open": "열기",
+  "game.loading": "준비 중",
+  "game.stage": "스테이지 {n}",
+  "game.pauseTitle": "일시정지",
+  "game.pauseBody": "화면을 벗어난 동안 시간이 멈췄어요.",
+  "game.resume": "탭해서 계속",
+  "game.penalty": "잠시 멈춤",
+  "game.aria.locked": "오답이에요. 잠시 입력이 잠깁니다.",
+  "game.aria.unlocked": "다시 누를 수 있어요.",
+
+  // 결과 화면(버튼/상태)
+  "result.share.idle": "공유하기",
+  "result.share.sharing": "공유 중...",
+  "result.share.shared": "공유했어요!",
+  "result.share.copied": "링크 복사됨",
+  "result.share.failed": "공유 실패",
+  "result.newBest": "신기록!",
+  "result.best": "베스트 {time}",
+  "result.win": "승리!",
+  "result.lose": "아쉬워요...",
+  "result.opening": "여는 중",
+  "result.ranking": "랭킹",
+  "result.rankingUnavailable": "랭킹을 열 수 없어요",
+  "result.retry": "다시 하기",
+  "result.classic": "클래식",
+  "result.exit": "나가기",
+  "result.accuracy": "정확도 {rate}% · 오답 {wrong}회",
+  "result.perfect": "무오답 클리어!",
+  "result.practice": "연습 기록이라 리더보드에 올리지 않았어요.",
+  "result.powerUpUnranked": "파워업을 사용한 판은 랭킹·베스트에 반영되지 않아요.",
+  "result.archived": "지난 도전 기록은 리더보드에 올리지 않아요.",
+  "result.nextDaily": "다음 도전까지 {time}",
+  "result.dailyOpen": "새 도전이 열렸어요!",
+  "result.droplets": "물방울 💧 +{n}",
+  "result.stars": "별 {n}/3",
+  "result.nextStage": "다음 스테이지 ▶",
+  "result.stageRetry": "스테이지 다시 하기",
+
+  // 홈(출석/정원/스테이지)
+  "home.streak": "🔥 {n}일 연속 출석",
+  "home.streakClaim": "오늘 보상 받기",
+  "home.streakDone": "오늘 보상 완료 · 내일 🪙 {n}",
+  "home.msg.streak": "출석 보상 🪙 +{n}",
+  "home.droplets": "물방울 💧 {n}",
+  "home.useDroplet": "💧 사용",
+  "home.aria.useDroplet": "{name}에 물방울 주기",
+  "home.msg.droplet": "물방울로 물을 줬어요 💧",
+  "home.msg.dropletMatured": "물방울로 다 자랐어요! 🪙 +{n}",
+  "home.msg.noDroplet": "물방울이 없어요. 게임을 클리어하면 모여요.",
+  "home.dailyDone": "오늘 완료 ✓",
+  "home.dailyNext": "새 도전까지 {time}",
+  "home.archive": "지난 도전",
+  "home.stage": "스테이지 도전",
+  "home.stageProgress": "⭐ {n}/{m}",
+  "home.stats": "내 기록",
+  "home.aria.dex": "식물 도감 열기",
+
+  // 식물 도감
+  "dex.title": "식물 도감",
+  "dex.subtitle": "다 키운 식물이 도감에 기록돼요. {n}/{m} 수집",
+  "dex.locked": "아직 못 만난 식물",
+  "dex.reward": "다 자라면 🪙 {n}",
+  "dex.water": "한 단계에 물 {n}번",
+
+  // 지난 데일리 아카이브
+  "archive.title": "지난 도전",
+  "archive.subtitle": "놓친 날의 덱을 다시 풀 수 있어요. 기록은 리더보드에 올라가지 않아요.",
+  "archive.today": "오늘",
+  "archive.cleared": "{time}",
+  "archive.notCleared": "미클리어",
+  "archive.sameDay": "당일 ⭐",
+  "archive.late": "사후",
+
+  // 내 기록
+  "stats.title": "내 기록",
+  "stats.clears": "총 클리어 {n}판",
+  "stats.accuracy": "정확도 {rate}%",
+  "stats.perfect": "무오답 클리어 {n}판",
+  "stats.byMode": "클래식 {classic} · 데일리 {daily} · 스테이지 {stage}",
+  "stats.bestClassic": "클래식 베스트 {time}",
+  "stats.distribution": "클리어 시간 분포",
+  "stats.bucket.under15": "15초 이하",
+  "stats.bucket.under20": "20초 이하",
+  "stats.bucket.under30": "30초 이하",
+  "stats.bucket.over30": "30초 초과",
+  "stats.empty": "아직 클리어 기록이 없어요.",
+
+  // 스테이지
+  "stage.title": "스테이지",
+  "stage.subtitle": "앞 스테이지를 클리어하면 다음이 열려요.",
+  "stage.locked": "잠김",
+  "stage.play": "도전",
+  "stage.goal": "{n}초 안에 별 2개",
+  "stage.rounds": "{n}라운드",
+  "stage.cleared": "클리어 ⭐{n}",
+
+  // 설정 추가 행
+  "settings.haptics": "진동",
+  "settings.on": "켜짐",
+  "settings.off": "꺼짐",
+  "settings.tutorial": "게임 방법",
+  "settings.tutorialAction": "다시 보기",
+  "settings.stats": "내 기록",
+  "settings.statsAction": "보기",
+  "settings.themeGo": "상점에서 바꾸기 ›",
+
+  // 튜토리얼(인터랙티브)
+  "tutorial.prompt": "아래 카드에서 위 카드와 같은 그림을 찾아 눌러보세요.",
+  "tutorial.correct": "바로 그거예요! 이렇게 찾으면 됩니다.",
+  "tutorial.wrong": "그 그림은 위 카드에 없어요. 다시 찾아볼까요?",
+  "tutorial.skip": "건너뛰기",
+  "tutorial.aria.symbol": "튜토리얼 심볼 {n}",
+
+  // 데일리 공유(스포일러 프리)
+  "share.daily.message":
+    "같은그림찾기 데일리 {date}\n⏱ {time}\n{grid}\n{link}",
+
+  // 오류 복구
+  "error.title": "문제가 생겼어요",
+  "error.body":
+    "화면을 그리는 중 문제가 생겼어요. 코인·정원·미션 기록은 그대로 저장돼 있어요.",
+  "error.retry": "다시 시작",
+
+  // 추가 미션 라벨
+  "mission.play5.label": "게임 5판 플레이",
+  "mission.comboMaster.label": "콤보 {c}회 이상 달성",
+  "mission.noMistake.label": "오답 없이 클리어",
 };
 
 const en: Messages = {
@@ -220,9 +355,7 @@ const en: Messages = {
 
   "settings.title": "Settings",
   "settings.sound": "Sound",
-  "settings.soundHint": "Adjust in game",
   "settings.theme": "Symbol theme",
-  "settings.themeHint": "Equip in Shop",
   "settings.version": "Version",
   "settings.language": "Language",
 
@@ -255,6 +388,7 @@ const en: Messages = {
   "hud.aria.openingRanking": "Opening ranking",
   "hud.aria.rankingFailed": "Open ranking. Last failed: {msg}",
   "hud.aria.exit": "Exit to home",
+  "hud.rank": "RANK",
   "hud.aria.soundOff": "Mute sound",
   "hud.aria.soundOn": "Unmute sound",
 
@@ -303,6 +437,131 @@ const en: Messages = {
   "mission.play3.label": "Play 3 games",
   "mission.fastClear.label": "Clear within {n}s",
   "mission.daily.label": "Complete the Daily Challenge",
+
+  "difficulty.label": "Difficulty",
+  "difficulty.easy": "Easy",
+  "difficulty.normal": "Normal",
+  "difficulty.hard": "Hard",
+  "difficulty.lockedMode": "Daily and Challenge always run on Normal.",
+
+  "game.open": "OPEN",
+  "game.loading": "Loading",
+  "game.stage": "Stage {n}",
+  "game.pauseTitle": "Paused",
+  "game.pauseBody": "The timer stopped while the app was in the background.",
+  "game.resume": "Tap to continue",
+  "game.penalty": "Locked",
+  "game.aria.locked": "Wrong tap. Input is locked for a moment.",
+  "game.aria.unlocked": "You can tap again.",
+
+  "result.share.idle": "SHARE",
+  "result.share.sharing": "...",
+  "result.share.shared": "SENT!",
+  "result.share.copied": "LINK COPIED",
+  "result.share.failed": "SHARE FAILED",
+  "result.newBest": "NEW BEST!",
+  "result.best": "BEST {time}",
+  "result.win": "WIN!",
+  "result.lose": "LOSE...",
+  "result.opening": "OPENING",
+  "result.ranking": "RANKING",
+  "result.rankingUnavailable": "RANKING UNAVAILABLE",
+  "result.retry": "RETRY",
+  "result.classic": "CLASSIC",
+  "result.exit": "EXIT",
+  "result.accuracy": "Accuracy {rate}% · {wrong} misses",
+  "result.perfect": "PERFECT CLEAR!",
+  "result.practice": "Practice run — not submitted to the leaderboard.",
+  "result.powerUpUnranked":
+    "Runs with power-ups are excluded from rankings and best records.",
+  "result.archived": "Archive runs are not submitted to the leaderboard.",
+  "result.nextDaily": "Next daily in {time}",
+  "result.dailyOpen": "A new daily is open!",
+  "result.droplets": "Droplets 💧 +{n}",
+  "result.stars": "Stars {n}/3",
+  "result.nextStage": "Next stage ▶",
+  "result.stageRetry": "Retry stage",
+
+  "home.streak": "🔥 {n}-day streak",
+  "home.streakClaim": "Claim today",
+  "home.streakDone": "Claimed · tomorrow 🪙 {n}",
+  "home.msg.streak": "Streak reward 🪙 +{n}",
+  "home.droplets": "Droplets 💧 {n}",
+  "home.useDroplet": "💧 Use",
+  "home.aria.useDroplet": "Use a droplet on {name}",
+  "home.msg.droplet": "Watered with a droplet 💧",
+  "home.msg.dropletMatured": "Fully grown with a droplet! 🪙 +{n}",
+  "home.msg.noDroplet": "No droplets. Clear games to earn them.",
+  "home.dailyDone": "Done today ✓",
+  "home.dailyNext": "New daily in {time}",
+  "home.archive": "Archive",
+  "home.stage": "Stage Mode",
+  "home.stageProgress": "⭐ {n}/{m}",
+  "home.stats": "My Stats",
+  "home.aria.dex": "Open the plant collection",
+
+  "dex.title": "Plant Collection",
+  "dex.subtitle": "Fully grown plants are recorded here. {n}/{m} collected",
+  "dex.locked": "Not discovered yet",
+  "dex.reward": "🪙 {n} when grown",
+  "dex.water": "{n} waters per stage",
+
+  "archive.title": "Daily Archive",
+  "archive.subtitle":
+    "Replay decks you missed. Archive runs are not submitted to the leaderboard.",
+  "archive.today": "Today",
+  "archive.cleared": "{time}",
+  "archive.notCleared": "Not cleared",
+  "archive.sameDay": "Same day ⭐",
+  "archive.late": "Late",
+
+  "stats.title": "My Stats",
+  "stats.clears": "{n} clears",
+  "stats.accuracy": "Accuracy {rate}%",
+  "stats.perfect": "{n} perfect clears",
+  "stats.byMode": "Classic {classic} · Daily {daily} · Stage {stage}",
+  "stats.bestClassic": "Classic best {time}",
+  "stats.distribution": "Clear time distribution",
+  "stats.bucket.under15": "≤15s",
+  "stats.bucket.under20": "≤20s",
+  "stats.bucket.under30": "≤30s",
+  "stats.bucket.over30": ">30s",
+  "stats.empty": "No clears yet.",
+
+  "stage.title": "Stages",
+  "stage.subtitle": "Clear a stage to unlock the next one.",
+  "stage.locked": "Locked",
+  "stage.play": "Play",
+  "stage.goal": "2 stars under {n}s",
+  "stage.rounds": "{n} rounds",
+  "stage.cleared": "Cleared ⭐{n}",
+
+  "settings.haptics": "Haptics",
+  "settings.on": "On",
+  "settings.off": "Off",
+  "settings.tutorial": "How to play",
+  "settings.tutorialAction": "Show again",
+  "settings.stats": "My stats",
+  "settings.statsAction": "View",
+  "settings.themeGo": "Change in Shop ›",
+
+  "tutorial.prompt": "Find the picture that appears on both cards and tap it below.",
+  "tutorial.correct": "That's it! This is how you play.",
+  "tutorial.wrong": "That one isn't on the top card. Try again!",
+  "tutorial.skip": "Skip",
+  "tutorial.aria.symbol": "Tutorial symbol {n}",
+
+  "share.daily.message":
+    "Match Picture Daily {date}\n⏱ {time}\n{grid}\n{link}",
+
+  "error.title": "Something went wrong",
+  "error.body":
+    "The screen failed to render. Your coins, garden and missions are still saved.",
+  "error.retry": "Restart",
+
+  "mission.play5.label": "Play 5 games",
+  "mission.comboMaster.label": "Reach a combo of {c}",
+  "mission.noMistake.label": "Clear without a miss",
 };
 
 export const messages: Record<Locale, Messages> = { ko, en };

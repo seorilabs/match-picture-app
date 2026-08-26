@@ -1,10 +1,13 @@
 import { describe, expect, it } from "vitest";
 
 import {
+  formatCountdown,
   formatDailyLabel,
   getDailySeed,
   getKstDateString,
+  msUntilNextDaily,
   parseChallengeParams,
+  recentDailyDates,
 } from "./mode";
 import { MAX_SEED } from "./rng";
 
@@ -85,5 +88,45 @@ describe("parseChallengeParams", () => {
     expect(
       parseChallengeParams("?challengeSeed=1&challengeTarget=100000"),
     ).toEqual({ seed: 1, targetSeconds: null });
+  });
+});
+
+describe("msUntilNextDaily / formatCountdown", () => {
+  it("KST 자정까지 남은 시간을 계산한다", () => {
+    // 2026-08-26 15:00Z = KST 2026-08-27 00:00 → 남은 시간 24시간(경계 직후)
+    expect(msUntilNextDaily(new Date("2026-08-26T15:00:00Z"))).toBe(
+      24 * 60 * 60 * 1000,
+    );
+    // 자정 1초 전
+    expect(msUntilNextDaily(new Date("2026-08-26T14:59:59Z"))).toBe(1000);
+    // 자정 1초 후
+    expect(msUntilNextDaily(new Date("2026-08-26T15:00:01Z"))).toBe(
+      24 * 60 * 60 * 1000 - 1000,
+    );
+  });
+
+  it("남은 시간을 HH:MM:SS로 표기한다", () => {
+    expect(formatCountdown(0)).toBe("00:00:00");
+    expect(formatCountdown(-5000)).toBe("00:00:00");
+    expect(formatCountdown(3 * 3600 * 1000 + 4 * 60 * 1000 + 5000)).toBe(
+      "03:04:05",
+    );
+  });
+});
+
+describe("recentDailyDates", () => {
+  it("오늘부터 과거로 날짜를 최신순으로 만든다", () => {
+    expect(recentDailyDates(3, new Date("2026-08-26T05:00:00Z"))).toEqual([
+      "2026-08-26",
+      "2026-08-25",
+      "2026-08-24",
+    ]);
+    expect(recentDailyDates(0)).toEqual([]);
+  });
+
+  it("만든 날짜는 모두 결정적인 시드를 가진다", () => {
+    const [today, yesterday] = recentDailyDates(2, new Date("2026-08-26T05:00:00Z"));
+    expect(getDailySeed(yesterday)).toBe(getDailySeed(yesterday));
+    expect(getDailySeed(today)).not.toBe(getDailySeed(yesterday));
   });
 });

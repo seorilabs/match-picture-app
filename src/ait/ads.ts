@@ -5,6 +5,8 @@ import {
   showFullScreenAd,
 } from "@apps-in-toss/web-framework";
 
+import { trackAdImpression } from "../firebase/gameEvents";
+
 /**
  * Vite 환경 변수 `VITE_AD_GROUP_ID`로 광고 그룹 ID를 주입합니다.
  * 값이 없거나 빈 문자열이면 광고 로딩/노출을 시도하지 않습니다.
@@ -104,6 +106,7 @@ export function useInterstitialAd(enabledByConfig = true): InterstitialApi {
       const settle = (value: boolean) => {
         if (resolved) return;
         resolved = true;
+        trackAdImpression(value ? "shown" : "failed");
         const next = dismissResolversRef.current.shift();
         next?.(value);
         // 다음 광고를 미리 로드합니다.

@@ -65,7 +65,23 @@ body,
   user-select: none;
   background-color: var(--unity-bg);
   background-image: url("/bg.png");
-  background-size: 100% 100%;
+  /* 100% 100% 스트레치는 화면 비율에 따라 배경을 왜곡시키므로 cover로 채운다. */
+  background-size: cover;
+  background-position: center;
+}
+
+/* 카드로 시선을 모으는 은은한 비네트. */
+.game-shell::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(
+    circle at 50% 46%,
+    rgba(0, 0, 0, 0) 42%,
+    rgba(0, 0, 0, 0.18) 100%
+  );
+  z-index: 0;
 }
 
 .hud {
@@ -318,6 +334,37 @@ body,
 
 .card-view {
   overflow: visible;
+  /* 실물 카드처럼 외곽 림 + 안쪽 얇은 링 + 면 하이라이트 + 테이블 그림자. */
+  background:
+    radial-gradient(
+        circle at 32% 26%,
+        rgba(255, 255, 255, 0.95) 0%,
+        rgba(255, 255, 255, 0) 58%
+      )
+      no-repeat,
+    var(--unity-card);
+  border: 5px solid var(--card-rim, #ffffff);
+  box-shadow:
+    inset 0 0 0 3px rgba(0, 0, 0, 0.06),
+    0 6px 0 rgba(0, 0, 0, 0.16),
+    0 10px 22px rgba(0, 0, 0, 0.22);
+}
+
+/* 모드별 카드 림 색: 지금 무슨 모드로 겨루는지 카드에서 바로 읽힌다. */
+.card-view.mode-classic {
+  --card-rim: #ffffff;
+}
+
+.card-view.mode-daily {
+  --card-rim: #f4d03f;
+}
+
+.card-view.mode-challenge {
+  --card-rim: #ef8f6a;
+}
+
+.card-view.mode-stage {
+  --card-rim: #7cc36a;
 }
 
 .card-placeholder {
@@ -329,25 +376,25 @@ body,
 
 .card-back {
   overflow: hidden;
+  /* 브랜드 심볼 실루엣을 반복한 뒷면 패턴. */
   background:
-    linear-gradient(135deg, rgba(255, 255, 255, 0.2) 25%, transparent 25%) 0 0 /
+    radial-gradient(circle at 22% 24%, rgba(0, 0, 0, 0.07) 0 9px, transparent 10px)
+      0 0 / 46px 46px,
+    radial-gradient(circle at 72% 62%, rgba(0, 0, 0, 0.05) 0 6px, transparent 7px)
+      0 0 / 46px 46px,
+    linear-gradient(135deg, rgba(255, 255, 255, 0.35) 25%, transparent 25%) 0 0 /
       28px 28px,
-    linear-gradient(135deg, transparent 75%, rgba(255, 255, 255, 0.18) 75%) 0
-      0 / 28px 28px,
-    #f0f0f0;
+    linear-gradient(135deg, transparent 75%, rgba(255, 255, 255, 0.3) 75%) 0 0 /
+      28px 28px,
+    #f4e9c8;
 }
 
 .card-back::before {
-  content: "?";
+  content: "";
   position: absolute;
-  inset: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: rgba(0, 0, 0, 0.16);
-  font-family: var(--unity-font);
-  font-size: clamp(70px, 24vw, 120px);
-  line-height: 1;
+  inset: 14px;
+  border-radius: 50%;
+  border: 3px dashed rgba(0, 0, 0, 0.12);
 }
 
 .ready-card-button {
@@ -1259,5 +1306,237 @@ body,
   .hud-icon {
     width: 36px;
     height: 36px;
+  }
+}
+
+/* 난이도 선택 칩 (모드 바 아래) */
+.difficulty-bar {
+  position: absolute;
+  top: calc(env(safe-area-inset-top) + var(--hud-height) + 56px);
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  z-index: 5;
+}
+
+.difficulty-chip {
+  appearance: none;
+  border: 3px solid rgba(0, 0, 0, 0.18);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.86);
+  color: #333333;
+  font-family: Arial, "Apple SD Gothic Neo", sans-serif;
+  font-size: 12px;
+  font-weight: 800;
+  line-height: 1;
+  padding: 7px 12px;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+
+.difficulty-chip.is-active {
+  background: #000000;
+  border-color: #000000;
+  color: var(--unity-yellow);
+}
+
+.difficulty-chip:disabled {
+  opacity: 0.45;
+  cursor: default;
+}
+
+.difficulty-note {
+  max-width: 42vw;
+  font-size: 10px;
+  font-weight: 700;
+  color: rgba(0, 0, 0, 0.55);
+  background: rgba(255, 255, 255, 0.75);
+  border-radius: 8px;
+  padding: 4px 6px;
+}
+
+/* 오답 패널티 잠금 표시 */
+.mine-section {
+  position: relative;
+}
+
+.mine-section.is-penalty .card-view {
+  filter: grayscale(0.7) brightness(0.78);
+  transition: filter 120ms ease-out;
+}
+
+.penalty-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  pointer-events: none;
+  animation: penalty-bump 220ms ease-out;
+  z-index: 3;
+}
+
+.penalty-ring {
+  width: 54px;
+  height: 54px;
+  border-radius: 50%;
+  border: 5px solid rgba(255, 255, 255, 0.85);
+  border-top-color: #d84a3a;
+  animation-name: penalty-spin;
+  animation-timing-function: linear;
+  animation-iteration-count: 1;
+}
+
+.penalty-label {
+  font-family: Arial, "Apple SD Gothic Neo", sans-serif;
+  font-size: 13px;
+  font-weight: 800;
+  color: #ffffff;
+  text-shadow: 0 2px 0 rgba(0, 0, 0, 0.35);
+}
+
+@keyframes penalty-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes penalty-bump {
+  0% {
+    transform: scale(1);
+  }
+  40% {
+    transform: scale(1.12);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+/* 자동 일시정지 오버레이 — 카드를 완전히 가려 정답 탐색에 악용되지 않게 한다. */
+.pause-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 40;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  background: rgba(8, 32, 42, 0.94);
+}
+
+.pause-panel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  text-align: center;
+  color: #ffffff;
+}
+
+.pause-title {
+  font-family: var(--unity-font);
+  font-size: 20px;
+}
+
+.pause-body {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.85);
+}
+
+/* 결과 화면 추가 정보 */
+.result-accuracy,
+.result-droplets,
+.result-countdown,
+.result-stars {
+  font-family: Arial, "Apple SD Gothic Neo", sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  color: #333333;
+  text-align: center;
+}
+
+.result-accuracy.is-perfect {
+  color: #249100;
+}
+
+.result-stars {
+  font-size: 20px;
+  letter-spacing: 2px;
+}
+
+.result-stars-label {
+  display: block;
+  font-size: 12px;
+  letter-spacing: 0;
+  color: #5a7a85;
+}
+
+.result-unranked {
+  font-size: 12px;
+  color: #8a6d3b;
+  text-align: center;
+}
+
+/* 튜토리얼 인터랙션 */
+.tutorial-symbol.is-interactive {
+  appearance: none;
+  border: none;
+  background: none;
+  padding: 0;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.tutorial-symbol.is-missed {
+  animation: tutorial-shake 320ms ease-out;
+}
+
+.tutorial-actions {
+  display: flex;
+  justify-content: center;
+}
+
+@keyframes tutorial-shake {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-6px);
+  }
+  75% {
+    transform: translateX(6px);
+  }
+}
+
+/* 스크린리더 전용 안내 */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .penalty-overlay,
+  .penalty-ring,
+  .tutorial-symbol.is-missed {
+    animation: none;
   }
 }

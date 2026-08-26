@@ -1,10 +1,13 @@
-import { describe, expect, it, vi } from "vitest";
+import { beforeEach, describe, expect, it, vi } from "vitest";
 
 import {
   canShowInterstitialAd,
   createInterstitialAdPolicyState,
+  getInterstitialAdPolicyState,
   recordCompletedGame,
   recordInterstitialShown,
+  resetInterstitialAdPolicyState,
+  setInterstitialAdPolicyState,
   showInterstitialAdIfAllowed,
 } from "./adPolicy";
 
@@ -112,6 +115,79 @@ describe("interstitial ad policy", () => {
     expect(shown).toEqual({
       completedGames: 3,
       lastShownAtMs: 60_000,
+    });
+  });
+});
+
+describe("세션 단위 정책 상태", () => {
+  beforeEach(() => {
+    resetInterstitialAdPolicyState();
+  });
+
+  it("화면이 언마운트/재마운트돼도 상태가 유지된다", () => {
+    // GameScreen 마운트 1: 1판 완료
+    setInterstitialAdPolicyState(
+      recordCompletedGame(getInterstitialAdPolicyState()),
+    );
+    // 홈 복귀(언마운트) 후 다시 진입해도 모듈 상태는 그대로다.
+    expect(getInterstitialAdPolicyState().completedGames).toBe(1);
+    setInterstitialAdPolicyState(
+      recordCompletedGame(getInterstitialAdPolicyState()),
+    );
+    setInterstitialAdPolicyState(
+      recordCompletedGame(getInterstitialAdPolicyState()),
+    );
+    expect(getInterstitialAdPolicyState().completedGames).toBe(3);
+  });
+
+  it("홈을 경유해 누적 3판이면 면제(2판)를 넘겨 광고를 노출한다", async () => {
+    const config = { minIntervalSeconds: 120, freeGames: 2 };
+    let shown = 0;
+    const show = async () => {
+      shown += 1;
+      return true;
+    };
+
+    for (let game = 0; game < 3; game++) {
+      setInterstitialAdPolicyState(
+        recordCompletedGame(getInterstitialAdPolicyState()),
+      );
+    }
+    setInterstitialAdPolicyState(
+      await showInterstitialAdIfAllowed({
+        ready: true,
+        state: getInterstitialAdPolicyState(),
+        config,
+        show,
+        clock: () => 1_000_000,
+      }),
+    );
+    expect(shown).toBe(1);
+
+    // 마지막 실제 노출 시각이 유지되어 최소 간격이 화면 왕복과 무관하게 적용된다.
+    setInterstitialAdPolicyState(
+      recordCompletedGame(getInterstitialAdPolicyState()),
+    );
+    setInterstitialAdPolicyState(
+      await showInterstitialAdIfAllowed({
+        ready: true,
+        state: getInterstitialAdPolicyState(),
+        config,
+        show,
+        clock: () => 1_000_000 + 60_000,
+      }),
+    );
+    expect(shown).toBe(1);
+  });
+
+  it("리셋하면 앱 프로세스 재시작처럼 초기화된다", () => {
+    setInterstitialAdPolicyState(
+      recordCompletedGame(getInterstitialAdPolicyState()),
+    );
+    resetInterstitialAdPolicyState();
+    expect(getInterstitialAdPolicyState()).toEqual({
+      completedGames: 0,
+      lastShownAtMs: null,
     });
   });
 });

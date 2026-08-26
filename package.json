@@ -17,6 +17,8 @@
     "lint": "eslint .",
     "format": "prettier --write .",
     "test": "vitest run",
+    "check:data-safety": "node scripts/check-data-safety.mjs",
+    "gen:audio": "node scripts/generate-audio.mjs",
     "test:release-version": "node --test scripts/*.node-test.mjs"
   },
   "dependencies": {

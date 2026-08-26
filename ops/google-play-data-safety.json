@@ -1,0 +1,65 @@
+{
+  "$comment": "Google Play Data safety 신고의 저장소 source-of-truth. Play Console 입력값은 이 파일과 일치해야 한다. 갱신 절차는 ops/google-play-data-safety.md 참고.",
+  "app": {
+    "package_name": "com.github.magicsih.MatchPictureUnity",
+    "listing": "https://play.google.com/store/apps/details?id=com.github.magicsih.MatchPictureUnity"
+  },
+  "reviewed_on": "2026-08-26",
+  "no_data_collected": false,
+  "data_shared_with_third_parties": false,
+  "collection": [
+    {
+      "category": "App activity",
+      "type": "App interactions",
+      "collected": true,
+      "shared": false,
+      "optional": false,
+      "purposes": ["Analytics"],
+      "sdk": "Firebase Analytics (GA4)",
+      "evidence": "src/firebase/analytics.ts, src/firebase/gameEvents.ts"
+    },
+    {
+      "category": "App activity",
+      "type": "Other user-generated content",
+      "collected": false,
+      "shared": false,
+      "optional": true,
+      "purposes": [],
+      "sdk": "-",
+      "evidence": "게임은 사용자 생성 콘텐츠를 수집하지 않는다."
+    },
+    {
+      "category": "App info and performance",
+      "type": "Crash logs",
+      "collected": true,
+      "shared": false,
+      "optional": false,
+      "purposes": ["Analytics"],
+      "sdk": "Firebase Analytics (js_error / react_render_error 이벤트)",
+      "evidence": "src/firebase/errorReporter.ts, src/app/ErrorBoundary.tsx"
+    },
+    {
+      "category": "Device or other IDs",
+      "type": "Device or other IDs",
+      "collected": true,
+      "shared": false,
+      "optional": false,
+      "purposes": ["Analytics", "Advertising or marketing"],
+      "sdk": "Firebase Analytics, Firebase Remote Config, AppsInToss 광고(전면형)",
+      "evidence": "src/firebase/analytics.ts, src/firebase/remoteConfig.ts, src/ait/ads.ts"
+    }
+  ],
+  "security_practices": {
+    "data_encrypted_in_transit": true,
+    "user_can_request_deletion": false,
+    "deletion_note": "계정 시스템이 없어 삭제 요청 대상 개인 데이터를 보관하지 않는다. 로컬 진행 상태는 앱 삭제로 제거된다."
+  },
+  "console_update": {
+    "required_when": [
+      "Firebase Analytics 이벤트가 추가/제거될 때",
+      "광고 SDK가 추가/변경될 때",
+      "측정 ID(measurementId)가 비활성화될 때"
+    ],
+    "evidence_location": "릴리스 이슈/PR에 Play Console Data safety 스크린샷 또는 readback 첨부"
+  }
+}

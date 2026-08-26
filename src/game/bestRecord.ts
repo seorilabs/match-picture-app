@@ -7,10 +7,25 @@ import type { GameMode } from "./mode";
 
 export const CLASSIC_BEST_KEY = "match-picture/best-seconds";
 const DAILY_BEST_PREFIX = "match-picture/daily-best/";
+const DAILY_SUBMITTED_PREFIX = "match-picture/daily-submitted/";
+const DAILY_LATE_PREFIX = "match-picture/daily-late/";
 
 /** 데일리 챌린지의 날짜별 베스트 기록 키입니다. */
 export function dailyBestKey(dateString: string): string {
   return `${DAILY_BEST_PREFIX}${dateString}`;
+}
+
+/**
+ * 그날의 데일리 기록을 이미 글로벌 리더보드에 올렸는지 기록하는 키입니다.
+ * 고정 덱을 반복 학습한 재도전 기록이 리더보드를 오염시키지 않게 합니다.
+ */
+export function dailySubmittedKey(dateString: string): string {
+  return `${DAILY_SUBMITTED_PREFIX}${dateString}`;
+}
+
+/** 발행 당일이 아니라 나중에 클리어한 데일리인지 표시하는 키입니다(아카이브 배지). */
+export function dailyLateClearKey(dateString: string): string {
+  return `${DAILY_LATE_PREFIX}${dateString}`;
 }
 
 /**
@@ -23,6 +38,7 @@ export function bestRecordKey(
 ): string | null {
   if (mode === "classic") return CLASSIC_BEST_KEY;
   if (mode === "daily") return dailyBestKey(dailyDateString);
+  // 도전장(공유 고정 덱)과 스테이지(스테이지별 별점으로 따로 기록)는 시간 기록을 남기지 않습니다.
   return null;
 }
 

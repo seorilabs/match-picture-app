@@ -8,6 +8,11 @@ describe("game_clear 이벤트", () => {
       mode: "daily",
       seconds: 13,
       maxCombo: 7,
+      powerUpUseCount: 0,
     });
+  });
+
+  it("파워업 사용 횟수를 payload에 담는다", () => {
+    expect(createGameClearEventPayload("classic", 20, 3, 2).powerUpUseCount).toBe(2);
   });
 });

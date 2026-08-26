@@ -1,4 +1,10 @@
 import { type Card } from "../game/deck";
+import type { GameMode } from "../game/mode";
+import {
+  arrangeSymbols,
+  placementRng,
+  type SymbolPlacement,
+} from "../game/placement";
 import { type SymbolPack } from "../symbols/packs";
 import { SymbolButton } from "./SymbolButton";
 
@@ -9,6 +15,10 @@ interface CardViewProps {
   pack: SymbolPack;
   /** 정답 심볼. `mine`일 때만 의미가 있고, 힌트 효과 표시에 사용합니다. */
   hint: string;
+  /** 이번 게임 덱 시드. 배치를 결정적으로 만드는 근거입니다. */
+  deckSeed: number | null;
+  /** 카드 테두리 색을 모드별로 구분합니다. */
+  mode?: GameMode;
   /** 코인 힌트로 정답을 즉시 강조하는지. */
   powerUpHintActive?: boolean;
   /** 코인 소거로 현재 라운드에서 비활성화한 오답 심볼. */
@@ -20,61 +30,9 @@ interface CardViewProps {
    * 위치 패턴 암기를 막고 난이도를 올립니다.
    */
   progress?: number;
+  /** 난이도별 흩뜨림 배수. */
+  jitterScale?: number;
   onPress: (symbol: string, origin: { x: number; y: number }) => void;
-}
-
-interface SymbolPlacement {
-  symbol: string;
-  rotate: number;
-  scale: number;
-  position: { x: number; y: number };
-}
-
-const UNITY_SYMBOL_POSITIONS: Array<{ x: number; y: number }> = [
-  { x: -217, y: 58 },
-  { x: 158, y: -93 },
-  { x: 84, y: 220 },
-  { x: -95, y: 215 },
-  { x: 2, y: -224 },
-  { x: -169, y: -116 },
-  { x: -1, y: 26 },
-  { x: 214, y: 70 },
-];
-
-/** Unity Card.prefab 650x650 좌표계에서 심볼 중심이 머물 수 있는 최대 반경. */
-const MAX_SYMBOL_RADIUS = 240;
-
-/** 진행률 1일 때 축마다 흔드는 최대 거리(650 좌표계 px). */
-const MAX_JITTER = 90;
-
-/** 기본 배치에서 진행률만큼 떨어진 위치를 만들되 카드 원 안에 머물게 합니다. */
-function jitterPosition(
-  base: { x: number; y: number },
-  progress: number,
-): { x: number; y: number } {
-  if (progress <= 0) return base;
-  const range = MAX_JITTER * Math.min(1, progress);
-  let x = base.x + (Math.random() * 2 - 1) * range;
-  let y = base.y + (Math.random() * 2 - 1) * range;
-  const distance = Math.hypot(x, y);
-  if (distance > MAX_SYMBOL_RADIUS) {
-    x = (x / distance) * MAX_SYMBOL_RADIUS;
-    y = (y / distance) * MAX_SYMBOL_RADIUS;
-  }
-  return { x, y };
-}
-
-/**
- * 매 라운드 카드가 바뀔 때마다 Unity의 `SetCardWithRotation`처럼 회전/스케일을
- * 랜덤하게 결정합니다.
- */
-function arrangeSymbols(card: Card, progress: number): SymbolPlacement[] {
-  return card.map((symbol, index) => ({
-    symbol,
-    rotate: Math.random() * 360 - 180,
-    scale: 0.85 + Math.random() * 0.55,
-    position: jitterPosition(UNITY_SYMBOL_POSITIONS[index], progress),
-  }));
 }
 
 /**
@@ -85,10 +43,20 @@ function arrangeSymbols(card: Card, progress: number): SymbolPlacement[] {
  */
 const placementCache = new WeakMap<Card, SymbolPlacement[]>();
 
-function getPlacements(card: Card, progress: number): SymbolPlacement[] {
+function getPlacements(
+  card: Card,
+  deckSeed: number | null,
+  progress: number,
+  jitterScale: number,
+): SymbolPlacement[] {
   const cached = placementCache.get(card);
   if (cached) return cached;
-  const placements = arrangeSymbols(card, progress);
+  // 시드가 아직 없는 상태(첫 렌더 직전)에서도 배치는 만들어져야 하므로 0으로 폴백합니다.
+  const placements = arrangeSymbols(card, {
+    progress,
+    jitterScale,
+    rng: placementRng(deckSeed ?? 0, card),
+  });
   placementCache.set(card, placements);
   return placements;
 }
@@ -98,16 +66,19 @@ export function CardView({
   variant,
   pack,
   hint,
+  deckSeed,
+  mode = "classic",
   powerUpHintActive = false,
   eliminatedSymbols = [],
   clickable,
   progress = 0,
+  jitterScale = 1,
   onPress,
 }: CardViewProps) {
-  const placements = getPlacements(card, progress);
+  const placements = getPlacements(card, deckSeed, progress, jitterScale);
 
   return (
-    <div className={`card-view ${variant}`}>
+    <div className={`card-view ${variant} mode-${mode}`}>
       {placements.map((placement, index) => (
         <SymbolButton
           key={`${variant}-${index}-${placement.symbol}`}

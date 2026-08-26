@@ -2,11 +2,14 @@ import { useProfile } from "../state/profileContext";
 import { useI18n } from "../i18n/i18nContext";
 import { CoinBadge } from "../components/CoinBadge";
 import {
+  COMBO_MASTER_THRESHOLD,
   FAST_CLEAR_THRESHOLD_SECONDS,
-  MISSION_DEFS,
   canClaim,
   isComplete,
+  missionDef,
+  missionState,
 } from "../state/missions";
+import { trackEarnCurrency } from "../firebase/gameEvents";
 
 export function MissionsScreen() {
   const { profile, missions, claimMission } = useProfile();
@@ -22,8 +25,9 @@ export function MissionsScreen() {
       <p className="screen-subtitle">{t("missions.subtitle")}</p>
 
       <ul className="mission-list">
-        {MISSION_DEFS.map((def) => {
-          const state = missions.states[def.id];
+        {missions.ids.map((id) => {
+          const def = missionDef(id);
+          const state = missionState(missions, def.id);
           const complete = isComplete(missions, def.id);
           const claimable = canClaim(missions, def.id);
           return (
@@ -32,6 +36,7 @@ export function MissionsScreen() {
                 <span className="mission-label">
                   {t(`mission.${def.id}.label`, {
                     n: FAST_CLEAR_THRESHOLD_SECONDS,
+                    c: COMBO_MASTER_THRESHOLD,
                   })}
                 </span>
                 <span className="mission-reward">
@@ -48,7 +53,10 @@ export function MissionsScreen() {
                 <button
                   type="button"
                   className="mission-button is-claim"
-                  onClick={() => claimMission(def.id)}
+                  onClick={() => {
+                    const reward = claimMission(def.id);
+                    trackEarnCurrency("mission", reward);
+                  }}
                 >
                   {t("missions.claim")}
                 </button>

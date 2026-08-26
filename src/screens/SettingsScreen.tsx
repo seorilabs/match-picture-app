@@ -1,20 +1,48 @@
+import { useState } from "react";
+
 import { useProfile } from "../state/profileContext";
+import { useSettings } from "../state/settingsContext";
 import { useI18n } from "../i18n/i18nContext";
 import { CoinBadge } from "../components/CoinBadge";
+import { StatsModal } from "../components/StatsModal";
+import { TutorialModal } from "../components/TutorialModal";
 import { SUPPORTED_LOCALES, type Locale } from "../i18n/messages";
 
 const LOCALE_LABELS: Record<Locale, string> = {
   ko: "한국어",
   en: "English",
 };
-const APP_VERSION = import.meta.env.VITE_APP_VERSION || "1.0.11";
+// 릴리스 빌드는 RELEASE_VERSION을 주입하고, 그 외에는 package.json version을 쓴다.
+const APP_VERSION = import.meta.env.VITE_APP_VERSION || __APP_VERSION__;
 
-/**
- * 사운드 토글은 현재 게임 화면(GameScreen)이 소유하고 있어, 추후 전역 설정으로 끌어올린다.
- */
-export function SettingsScreen() {
-  const { profile } = useProfile();
+export function SettingsScreen({ onOpenShop }: { onOpenShop: () => void }) {
+  const { profile, equippedPack } = useProfile();
+  const {
+    soundEnabled,
+    hapticsEnabled,
+    setSoundEnabled,
+    setHapticsEnabled,
+  } = useSettings();
   const { t, locale, setLocale } = useI18n();
+  const [tutorialOpen, setTutorialOpen] = useState(false);
+  const [statsOpen, setStatsOpen] = useState(false);
+
+  const renderToggle = (
+    label: string,
+    enabled: boolean,
+    onChange: (next: boolean) => void,
+  ) => (
+    <button
+      type="button"
+      className={`settings-toggle${enabled ? " is-on" : ""}`}
+      role="switch"
+      aria-checked={enabled}
+      aria-label={label}
+      onClick={() => onChange(!enabled)}
+    >
+      {enabled ? t("settings.on") : t("settings.off")}
+    </button>
+  );
 
   return (
     <div className="screen settings-screen">
@@ -46,17 +74,54 @@ export function SettingsScreen() {
         </li>
         <li className="settings-row">
           <span>{t("settings.sound")}</span>
-          <span className="settings-hint">{t("settings.soundHint")}</span>
+          {renderToggle(t("settings.sound"), soundEnabled, setSoundEnabled)}
+        </li>
+        <li className="settings-row">
+          <span>{t("settings.haptics")}</span>
+          {renderToggle(t("settings.haptics"), hapticsEnabled, setHapticsEnabled)}
         </li>
         <li className="settings-row">
           <span>{t("settings.theme")}</span>
-          <span className="settings-hint">{t("settings.themeHint")}</span>
+          <button type="button" className="settings-link" onClick={onOpenShop}>
+            {t(`pack.${equippedPack.id}.label`)} · {t("settings.themeGo")}
+          </button>
+        </li>
+        <li className="settings-row">
+          <span>{t("settings.tutorial")}</span>
+          <button
+            type="button"
+            className="settings-link"
+            onClick={() => setTutorialOpen(true)}
+          >
+            {t("settings.tutorialAction")}
+          </button>
+        </li>
+        <li className="settings-row">
+          <span>{t("settings.stats")}</span>
+          <button
+            type="button"
+            className="settings-link"
+            onClick={() => setStatsOpen(true)}
+          >
+            {t("settings.statsAction")}
+          </button>
         </li>
         <li className="settings-row">
           <span>{t("settings.version")}</span>
           <span className="settings-hint">{APP_VERSION}</span>
         </li>
       </ul>
+
+      <TutorialModal
+        open={tutorialOpen}
+        pack={equippedPack}
+        onClose={() => setTutorialOpen(false)}
+      />
+      <StatsModal
+        open={statsOpen}
+        classicBestSeconds={null}
+        onClose={() => setStatsOpen(false)}
+      />
     </div>
   );
 }

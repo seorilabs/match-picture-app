@@ -185,8 +185,11 @@ export interface FertilizeResult {
   applied: boolean;
 }
 
-/** 특정 화분에 물 +1 즉시(비료). 코인 차감은 호출부에서. */
-export function fertilize(garden: Garden, plotIndex: number): FertilizeResult {
+/**
+ * 특정 화분에 물 +1을 즉시 적용한다. 비용(코인 비료/물방울) 차감은 호출부에서 한다.
+ * 빈 화분이나 이미 다 자란 화분에는 적용되지 않는다(applied=false).
+ */
+export function waterPlot(garden: Garden, plotIndex: number): FertilizeResult {
   const plant = garden.plots[plotIndex];
   if (!plant) return { garden, reward: 0, matured: false, applied: false };
   const species = getSpecies(plant.speciesId);
@@ -210,6 +213,11 @@ export function fertilize(garden: Garden, plotIndex: number): FertilizeResult {
     matured: resolved.matured,
     applied: true,
   };
+}
+
+/** 코인 비료로 물 +1. `waterPlot`과 동일한 효과이며 가격만 호출부에서 다르다. */
+export function fertilize(garden: Garden, plotIndex: number): FertilizeResult {
+  return waterPlot(garden, plotIndex);
 }
 
 export function hasEmptyPlot(garden: Garden): boolean {

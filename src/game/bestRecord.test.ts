@@ -4,6 +4,9 @@ import {
   NEAR_MISS_THRESHOLD_SECONDS,
   bestGapSeconds,
   bestRecordKey,
+  dailyBestKey,
+  dailyLateClearKey,
+  dailySubmittedKey,
   isNearMiss,
   isNewBest,
   parseBestSeconds,
@@ -87,5 +90,28 @@ describe("isNearMiss", () => {
     expect(isNearMiss(30 + NEAR_MISS_THRESHOLD_SECONDS + 0.1, 30)).toBe(false);
     expect(isNearMiss(29, 30)).toBe(false);
     expect(isNearMiss(30, null)).toBe(false);
+  });
+});
+
+describe("데일리 제출/사후 클리어 키", () => {
+  it("날짜별로 분리된 키를 만든다", () => {
+    expect(dailySubmittedKey("2026-08-26")).toBe(
+      "match-picture/daily-submitted/2026-08-26",
+    );
+    expect(dailySubmittedKey("2026-08-26")).not.toBe(
+      dailySubmittedKey("2026-08-27"),
+    );
+    expect(dailyLateClearKey("2026-08-26")).toBe(
+      "match-picture/daily-late/2026-08-26",
+    );
+  });
+
+  it("베스트 키와 겹치지 않는다", () => {
+    expect(dailySubmittedKey("2026-08-26")).not.toBe(dailyBestKey("2026-08-26"));
+    expect(dailyLateClearKey("2026-08-26")).not.toBe(dailyBestKey("2026-08-26"));
+  });
+
+  it("스테이지 모드는 시간 기록을 남기지 않는다", () => {
+    expect(bestRecordKey("stage", "2026-08-26")).toBeNull();
   });
 });

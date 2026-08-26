@@ -8,48 +8,74 @@ import {
 } from "react";
 
 import { readItem, writeItem } from "../ait/storage";
+import { useVisibleCallback } from "../ait/visibility";
 import { SYMBOL_PACK_STORAGE_KEY, getSymbolPack } from "../symbols/packs";
 import { getKstDateString, type GameMode } from "../game/mode";
+import type { DifficultyId } from "../game/difficulty";
+import { applyStageClear, type StageClearResult } from "../game/stages";
 import {
   applyClear,
   claim as claimMissionPure,
   ensureToday,
-  type ClearInfo,
   type MissionId,
 } from "./missions";
 import {
   FERTILIZER_COST,
   ensureDailyReset as ensureGardenReset,
-  fertilize as fertilizePure,
   plantSeed as plantSeedPure,
   removePlant as removePlantPure,
   waterAll,
+  waterPlot,
 } from "./garden";
 import { getSpecies } from "../garden/species";
-import { ProfileContext, type ProfileContextValue } from "./profileContext";
+import {
+  ProfileContext,
+  type ClearRecord,
+  type ProfileContextValue,
+  type StreakClaimResult,
+} from "./profileContext";
 import {
   PROFILE_STORAGE_KEY,
+  applyClearStats,
+  awardDroplets,
   computeCoinReward,
   createDefaultProfile,
   equipPack,
   equippedPack as selectEquippedPack,
+  evaluateStreak,
   ownsPack,
   parseProfile,
   purchasePack,
   serializeProfile,
   spendCoins as spendProfileCoins,
+  spendDroplet,
   type Profile,
   type PurchaseResult,
   type SpendCoinsResult,
 } from "./profile";
 
+/** 날짜 경계를 놓치지 않기 위한 가벼운 주기 확인(1분). */
+const DATE_CHECK_INTERVAL_MS = 60 * 1000;
+
 export function ProfileProvider({ children }: { children: ReactNode }) {
   const [profile, setProfile] = useState<Profile>(createDefaultProfile);
   const [loading, setLoading] = useState(true);
-  // 미션 날짜 비교 기준. 세션 동안 고정(자정 넘김은 재실행 시 반영).
-  const [today] = useState(getKstDateString);
+  // 미션/물주기 날짜 비교 기준. 복귀·주기 확인으로 자정 경과를 반영한다.
+  const [today, setToday] = useState(getKstDateString);
   // 로드 완료 전에는 영속화하지 않아 기본값이 저장본을 덮어쓰지 않게 한다.
   const hydratedRef = useRef(false);
+
+  const refreshToday = useCallback(() => {
+    const current = getKstDateString();
+    setToday((previous) => (previous === current ? previous : current));
+  }, []);
+
+  useVisibleCallback(refreshToday);
+
+  useEffect(() => {
+    const timer = window.setInterval(refreshToday, DATE_CHECK_INTERVAL_MS);
+    return () => window.clearInterval(timer);
+  }, [refreshToday]);
 
   useEffect(() => {
     let cancelled = false;
@@ -88,6 +114,21 @@ export function ProfileProvider({ children }: { children: ReactNode }) {
     return () => {
       cancelled = true;
     };
+    // 최초 1회만 로드한다. 이후 날짜 변경은 아래 effect가 반영한다.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  // 날짜가 바뀌면 저장 상태 자체를 새 날짜로 리셋해 stale 적립을 막는다.
+  useEffect(() => {
+    if (!hydratedRef.current) return;
+    setProfile((current) => {
+      const missions = ensureToday(current.missions, today);
+      const garden = ensureGardenReset(current.garden, today);
+      if (missions === current.missions && garden === current.garden) {
+        return current;
+      }
+      return { ...current, missions, garden };
+    });
   }, [today]);
 
   // 프로필 변경 시 영속화(로드 완료 후에만).
@@ -105,14 +146,23 @@ export function ProfileProvider({ children }: { children: ReactNode }) {
   }, []);
 
   const awardClearCoins = useCallback(
-    (seconds: number, mode: GameMode, maxCombo: number) => {
-      const reward = computeCoinReward(seconds, mode, maxCombo);
-      if (reward > 0) {
-        setProfile((current) => ({
-          ...current,
-          coins: current.coins + reward,
-        }));
-      }
+    (
+      seconds: number,
+      mode: GameMode,
+      maxCombo: number,
+      difficulty?: DifficultyId,
+    ) => {
+      let reward = 0;
+      setProfile((current) => {
+        reward = computeCoinReward(
+          seconds,
+          mode,
+          maxCombo,
+          difficulty ?? current.difficulty,
+        );
+        if (reward <= 0) return current;
+        return { ...current, coins: current.coins + reward };
+      });
       return reward;
     },
     [],
@@ -144,12 +194,31 @@ export function ProfileProvider({ children }: { children: ReactNode }) {
     setProfile((current) => equipPack(current, packId));
   }, []);
 
+  const setDifficulty = useCallback((difficulty: DifficultyId) => {
+    setProfile((current) =>
+      current.difficulty === difficulty ? current : { ...current, difficulty },
+    );
+  }, []);
+
   const recordGameClear = useCallback(
-    (info: ClearInfo) => {
-      setProfile((current) => ({
-        ...current,
-        missions: applyClear(ensureToday(current.missions, today), info),
-      }));
+    (info: ClearRecord) => {
+      let gainedDroplets = 0;
+      setProfile((current) => {
+        const droplets = awardDroplets(current.droplets, info.mode, today);
+        gainedDroplets = droplets.gained;
+        return {
+          ...current,
+          missions: applyClear(ensureToday(current.missions, today), info),
+          stats: applyClearStats(current.stats, {
+            mode: info.mode,
+            seconds: info.seconds,
+            correctCount: info.correctCount,
+            wrongCount: info.wrongCount,
+          }),
+          droplets: droplets.droplets,
+        };
+      });
+      return gainedDroplets;
     },
     [today],
   );
@@ -170,6 +239,47 @@ export function ProfileProvider({ children }: { children: ReactNode }) {
       return reward;
     },
     [today],
+  );
+
+  const claimStreak = useCallback((): StreakClaimResult => {
+    let result: StreakClaimResult = { count: 0, reward: 0, claimed: false };
+    setProfile((current) => {
+      const evaluation = evaluateStreak(current.streak, today);
+      result = {
+        count: evaluation.streak.count,
+        reward: evaluation.reward,
+        claimed: evaluation.claimed,
+      };
+      if (!evaluation.claimed) return current;
+      return {
+        ...current,
+        streak: evaluation.streak,
+        coins: current.coins + evaluation.reward,
+      };
+    });
+    return result;
+  }, [today]);
+
+  const recordStageClear = useCallback(
+    (stageId: number, seconds: number, wrongCount: number): StageClearResult => {
+      let result: StageClearResult = {
+        progress: {},
+        stars: 0,
+        gainedStars: 0,
+        coins: 0,
+        unlockedStageId: null,
+      };
+      setProfile((current) => {
+        result = applyStageClear(current.stages, stageId, seconds, wrongCount);
+        return {
+          ...current,
+          stages: result.progress,
+          coins: current.coins + result.coins,
+        };
+      });
+      return result;
+    },
+    [],
   );
 
   const waterGarden = useCallback(() => {
@@ -231,7 +341,7 @@ export function ProfileProvider({ children }: { children: ReactNode }) {
         outcome = { ok: false, reward: 0, reason: "not-enough-coins" };
         return current;
       }
-      const result = fertilizePure(current.garden, plotIndex);
+      const result = waterPlot(current.garden, plotIndex);
       if (!result.applied) {
         outcome = { ok: false, reward: 0 };
         return current;
@@ -246,10 +356,38 @@ export function ProfileProvider({ children }: { children: ReactNode }) {
     return outcome;
   }, []);
 
+  const waterWithDroplet = useCallback((plotIndex: number) => {
+    let outcome: { ok: boolean; reward: number; reason?: "no-droplet" } = {
+      ok: false,
+      reward: 0,
+    };
+    setProfile((current) => {
+      const spent = spendDroplet(current.droplets);
+      if (!spent.ok) {
+        outcome = { ok: false, reward: 0, reason: "no-droplet" };
+        return current;
+      }
+      const result = waterPlot(current.garden, plotIndex);
+      if (!result.applied) {
+        outcome = { ok: false, reward: 0 };
+        return current;
+      }
+      outcome = { ok: true, reward: result.reward };
+      return {
+        ...current,
+        droplets: spent.droplets,
+        garden: result.garden,
+        coins: current.coins + result.reward,
+      };
+    });
+    return outcome;
+  }, []);
+
   const value = useMemo<ProfileContextValue>(
     () => ({
       profile,
       loading,
+      today,
       equippedPack: selectEquippedPack(profile),
       ownsPack: (packId: string) => ownsPack(profile, packId),
       awardClearCoins,
@@ -257,29 +395,37 @@ export function ProfileProvider({ children }: { children: ReactNode }) {
       spendCoins,
       buyPack,
       equip,
+      setDifficulty,
       missions: ensureToday(profile.missions, today),
       recordGameClear,
       claimMission,
+      claimStreak,
+      recordStageClear,
       garden: ensureGardenReset(profile.garden, today),
       waterGarden,
       plantSeed,
       removePlant,
       fertilizePlant,
+      waterWithDroplet,
     }),
     [
       addCoins,
       awardClearCoins,
       buyPack,
       claimMission,
+      claimStreak,
       equip,
       fertilizePlant,
       loading,
       plantSeed,
       profile,
       recordGameClear,
+      recordStageClear,
       removePlant,
+      setDifficulty,
       spendCoins,
       today,
+      waterWithDroplet,
       waterGarden,
     ],
   );

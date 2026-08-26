@@ -635,3 +635,417 @@
   opacity: 0.4;
   cursor: default;
 }
+
+/* 출석 스트릭 배너 */
+.streak-banner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 10px 14px;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.85);
+}
+
+.streak-label {
+  font-size: 14px;
+  font-weight: 800;
+  color: #0c3a49;
+}
+
+.streak-done {
+  font-size: 12px;
+  color: #5a7a85;
+}
+
+.streak-button {
+  appearance: none;
+  border: none;
+  border-radius: 10px;
+  padding: 8px 14px;
+  font-size: 13px;
+  font-weight: 800;
+  background: #f4d03f;
+  color: #1a1a1a;
+  cursor: pointer;
+}
+
+/* 홈 하단 보조 액션 */
+.home-secondary-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.home-secondary-actions .secondary-button {
+  flex: 1 1 30%;
+  font-size: 13px;
+  padding: 10px 8px;
+}
+
+.home-daily-countdown {
+  display: block;
+  text-align: center;
+  font-size: 12px;
+  font-weight: 700;
+  color: #2c5a68;
+}
+
+.garden-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.garden-dex-button {
+  appearance: none;
+  border: none;
+  background: rgba(255, 255, 255, 0.7);
+  border-radius: 10px;
+  padding: 6px 10px;
+  font-size: 13px;
+  font-weight: 700;
+  color: #2c5a68;
+  cursor: pointer;
+}
+
+.garden-droplets {
+  font-size: 13px;
+  font-weight: 700;
+  color: #2c5a68;
+}
+
+.garden-plot-droplet {
+  appearance: none;
+  border: none;
+  background: #2aa9d8;
+  color: #ffffff;
+  border-radius: 8px;
+  padding: 3px 9px;
+  font-size: 11px;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.garden-plot-droplet:disabled {
+  background: rgba(12, 58, 73, 0.15);
+  color: rgba(12, 58, 73, 0.55);
+  cursor: default;
+}
+
+/* 설정 토글/링크 */
+.settings-toggle {
+  appearance: none;
+  border: 2px solid rgba(12, 58, 73, 0.2);
+  border-radius: 999px;
+  padding: 6px 16px;
+  font-size: 13px;
+  font-weight: 800;
+  color: #5a7a85;
+  background: rgba(255, 255, 255, 0.8);
+  cursor: pointer;
+}
+
+.settings-toggle.is-on {
+  background: #2aa9d8;
+  border-color: #2aa9d8;
+  color: #ffffff;
+}
+
+.settings-link {
+  appearance: none;
+  border: none;
+  background: none;
+  padding: 0;
+  font-size: 13px;
+  font-weight: 700;
+  color: #2aa9d8;
+  cursor: pointer;
+  text-align: right;
+}
+
+/* 도감 / 통계 / 아카이브 / 스테이지 모달 공통 패널 */
+.dex-panel,
+.stats-panel,
+.archive-panel,
+.stage-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 16px;
+}
+
+.dex-head,
+.archive-head,
+.stage-head {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  text-align: center;
+}
+
+.dex-title,
+.stats-title,
+.archive-title,
+.stage-title {
+  font-size: 18px;
+  color: #0c3a49;
+}
+
+.dex-sub,
+.archive-sub,
+.stage-sub,
+.stage-total {
+  font-size: 12px;
+  color: #5a7a85;
+}
+
+.dex-grid {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  max-height: 50vh;
+  overflow-y: auto;
+}
+
+.dex-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  padding: 10px 6px;
+  border-radius: 12px;
+  background: rgba(12, 58, 73, 0.05);
+  text-align: center;
+}
+
+.dex-card.is-locked {
+  opacity: 0.55;
+  filter: grayscale(1);
+}
+
+.dex-emoji {
+  font-size: 28px;
+  line-height: 1;
+}
+
+.dex-name {
+  font-size: 12px;
+  font-weight: 800;
+  color: #0c3a49;
+}
+
+.dex-stages,
+.dex-meta {
+  font-size: 10px;
+  color: #5a7a85;
+}
+
+/* 내 기록 */
+.stats-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 13px;
+  color: #0c3a49;
+}
+
+.stats-empty {
+  margin: 0;
+  font-size: 13px;
+  color: #5a7a85;
+  text-align: center;
+}
+
+.stats-distribution {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.stats-subtitle {
+  font-size: 12px;
+  font-weight: 800;
+  color: #5a7a85;
+}
+
+.stats-bar-row {
+  display: grid;
+  grid-template-columns: 64px 1fr 28px;
+  align-items: center;
+  gap: 8px;
+  font-size: 11px;
+  color: #5a7a85;
+}
+
+.stats-bar-track {
+  height: 10px;
+  border-radius: 999px;
+  background: rgba(12, 58, 73, 0.08);
+  overflow: hidden;
+}
+
+.stats-bar-fill {
+  display: block;
+  height: 100%;
+  border-radius: 999px;
+  background: #2aa9d8;
+}
+
+.stats-bar-value {
+  text-align: right;
+  font-weight: 700;
+}
+
+/* 지난 데일리 아카이브 */
+.archive-grid {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px;
+  max-height: 50vh;
+  overflow-y: auto;
+}
+
+.archive-day {
+  width: 100%;
+  appearance: none;
+  border: 2px solid rgba(12, 58, 73, 0.12);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.9);
+  padding: 10px 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  cursor: pointer;
+}
+
+.archive-day.is-cleared {
+  border-color: #7cc36a;
+  background: rgba(124, 195, 106, 0.12);
+}
+
+.archive-date {
+  font-size: 14px;
+  font-weight: 800;
+  color: #0c3a49;
+}
+
+.archive-record {
+  font-size: 12px;
+  color: #5a7a85;
+}
+
+.archive-badge {
+  font-size: 10px;
+  font-weight: 800;
+  color: #2e7d32;
+}
+
+.archive-badge.is-late {
+  color: #8a6d3b;
+}
+
+/* 스테이지 목록 */
+.stage-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-height: 50vh;
+  overflow-y: auto;
+}
+
+.stage-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 10px 12px;
+  border-radius: 12px;
+  background: rgba(12, 58, 73, 0.05);
+}
+
+.stage-card.is-locked {
+  opacity: 0.5;
+}
+
+.stage-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.stage-name {
+  font-size: 14px;
+  font-weight: 800;
+  color: #0c3a49;
+}
+
+.stage-meta {
+  font-size: 11px;
+  color: #5a7a85;
+}
+
+.stage-stars {
+  font-size: 12px;
+}
+
+.stage-button {
+  appearance: none;
+  border: none;
+  border-radius: 10px;
+  padding: 9px 14px;
+  font-size: 13px;
+  font-weight: 800;
+  background: #f4d03f;
+  color: #1a1a1a;
+  cursor: pointer;
+}
+
+.stage-button:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+
+/* 루트 에러 폴백 */
+.error-fallback {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  padding: 24px;
+  text-align: center;
+  background: #6bbdd3;
+  color: #0c3a49;
+}
+
+.error-fallback-title {
+  margin: 0;
+  font-size: 20px;
+}
+
+.error-fallback-body {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.5;
+  max-width: 320px;
+}

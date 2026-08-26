@@ -2,7 +2,8 @@ import { Modal } from "./Modal";
 import { useProfile } from "../state/profileContext";
 import { useI18n } from "../i18n/i18nContext";
 import { hasEmptyPlot } from "../state/garden";
-import { PLANT_SPECIES } from "../garden/species";
+import { PLANT_SPECIES, getSpecies } from "../garden/species";
+import { trackSpendCurrency } from "../firebase/gameEvents";
 
 interface SeedPickerModalProps {
   open: boolean;
@@ -25,6 +26,7 @@ export function SeedPickerModal({
   const handlePlant = (speciesId: string, name: string) => {
     const result = plantSeed(speciesId);
     if (result.ok) {
+      trackSpendCurrency(`seed_${speciesId}`, getSpecies(speciesId).seedPrice);
       onPlanted(name);
       onClose();
     } else if (result.reason === "not-enough-coins") {
