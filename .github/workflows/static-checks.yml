@@ -11,6 +11,8 @@ on:
 
 permissions:
   contents: read
+  # @seorilabs/platform-sdk는 GitHub Packages(비공개)에서 받는다.
+  packages: read
 
 concurrency:
   group: static-checks-${{ github.ref }}
@@ -23,7 +25,10 @@ jobs:
     with:
       runs_on: ${{ github.event.repository.private && 'seorilabs-rpi-arm64' || 'ubuntu-latest' }}
       package_manager: npm
+      npm_registry_url: https://npm.pkg.github.com
+      npm_scope: "@seorilabs"
       install_command: "npm ci"
       check_command: |
         npm run lint
         npm test
+        npm run check:data-safety

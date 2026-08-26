@@ -39,6 +39,7 @@ on:
 
 permissions:
   contents: read
+  packages: read
   id-token: write
 
 jobs:
@@ -51,6 +52,10 @@ jobs:
       track: ${{ inputs.track }}
       release_status: ${{ inputs.release_status }}
       package_manager: npm
+      # @seorilabs/platform-sdk는 GitHub Packages(비공개)에서 받는다.
+      # 이 두 입력은 seorilabs/.github PR #33 병합 후에 유효하다.
+      npm_registry_url: https://npm.pkg.github.com
+      npm_scope: "@seorilabs"
       java_version: "21"
       android_dir: android
       prepare_script: scripts/prepare-native-release.mjs
