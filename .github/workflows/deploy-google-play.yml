@@ -44,7 +44,7 @@ permissions:
 
 jobs:
   google-play:
-    uses: seorilabs/.github/.github/workflows/rn-deploy-google-play.yml@main
+    uses: seorilabs/.github/.github/workflows/rn-deploy-google-play.yml@9afa357f9ba6c8d6a813c7cec7ad3d35c626bdd5
     secrets: inherit
     with:
       release_tag: ${{ inputs.release_tag }}
@@ -58,5 +58,3 @@ jobs:
       java_version: "21"
       android_dir: android
       prepare_script: scripts/prepare-native-release.mjs
-      version_script: scripts/resolve-release-version.mjs
-      upload_script: scripts/upload-google-play-internal.py

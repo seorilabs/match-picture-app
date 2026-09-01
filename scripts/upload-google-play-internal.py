@@ -59,6 +59,8 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--promote", action="store_true")
     parser.add_argument("--promote-from-track", default="internal")
     parser.add_argument("--promote-to-track", default="production")
+    # 승격 대상 build는 릴리즈 태그가 정한 versionCode 하나다. 트랙의 최신 build를 쓰지 않는다.
+    parser.add_argument("--promote-version-code", type=int)
     parser.add_argument("--rollout", type=float)
     parser.add_argument(
         "--release-notes-json",
@@ -108,16 +110,24 @@ def promote(edits, app_id: str, args: argparse.Namespace) -> None:
             )
             .execute()
         )
-        codes = [
+        codes = {
             int(code)
             for release in source.get("releases", [])
             for code in release.get("versionCodes", [])
-        ]
+        }
         if not codes:
             sys.exit(f"No versionCode on {args.promote_from_track}")
+        version_code = args.promote_version_code
+        if version_code is None:
+            sys.exit("--promote-version-code is required: the release tag decides the build")
+        if version_code not in codes:
+            sys.exit(
+                f"versionCode {version_code} is not on {args.promote_from_track}: "
+                f"{sorted(codes)}"
+            )
         release = {
             "name": args.release_name,
-            "versionCodes": [str(max(codes))],
+            "versionCodes": [str(version_code)],
             "status": args.release_status,
         }
         notes = release_notes(edits, app_id, edit_id, args.release_notes_json)
@@ -141,7 +151,7 @@ def promote(edits, app_id: str, args: argparse.Namespace) -> None:
         edits.commit(packageName=app_id, editId=edit_id).execute()
         print(
             f"Promoted {args.promote_from_track}->{args.promote_to_track}: "
-            f"versionCode={max(codes)} status={release['status']}"
+            f"versionCode={version_code} status={release['status']}"
         )
     except Exception:
         try:

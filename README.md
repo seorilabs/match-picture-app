@@ -32,7 +32,7 @@ adb reverse tcp:5173 tcp:5173
 
 ## GitHub Actions
 
-CI/CD는 Seorilabs org 재사용 워크플로우(`seorilabs/.github/.github/workflows/*.yml@main`)를 호출하는 얇은 caller들로 구성됩니다.
+CI/CD는 Seorilabs org 재사용 워크플로우(`seorilabs/.github/.github/workflows/*.yml@9afa357f9ba6c8d6a813c7cec7ad3d35c626bdd5`)를 호출하는 얇은 caller들로 구성됩니다. `uses` ref는 immutable commit SHA로 고정합니다.
 
 | Caller | 트리거 | 호출하는 org 워크플로우 | 역할 |
 | --- | --- | --- | --- |
@@ -47,7 +47,7 @@ CI/CD는 Seorilabs org 재사용 워크플로우(`seorilabs/.github/.github/work
 
 main push/PR은 정적 체크만 돌고, 마켓 배포는 명시적 dispatch로만 실행됩니다. Web/AIT와 태그 해석은 ARC 러너(`seorilabs-rpi-arm64`), Android release는 x64 Linux, Apple archive는 macOS 러너로 분리됩니다.
 
-릴리즈 버전은 workflow run 번호가 아니라 `vMAJOR.MINOR.PATCH` 태그가 기준입니다. `scripts/resolve-release-version.mjs`가 같은 태그에서 Android `versionName`/`versionCode`와 Apple marketing/build version을 함께 계산합니다. `v27.1` 같은 과거 2자리 태그와 `v27.1.NaN`은 릴리즈 후보로 사용하지 않습니다. 현재 마켓 기준은 Google Play `1.0.11`, App Store `1.0.4`이므로 다음 통합 patch 릴리즈는 `v1.0.12`입니다.
+릴리즈 버전은 workflow run 번호가 아니라 `vMAJOR.MINOR.PATCH` 태그가 기준입니다. 저장소는 버전을 계산하지 않습니다. 고정한 org 정본 commit SHA의 재사용 워크플로우가 같은 태그에서 Android `versionName`/`versionCode`와 Apple marketing/build version을 파생해 빌드에 주입하고, build 뒤 artifact에서 다시 읽어 대조합니다. `v27.1` 같은 과거 2자리 태그와 `v27.1.NaN`은 릴리즈 후보로 사용하지 않습니다. 현재 마켓 기준은 Google Play `1.0.11`, App Store `1.0.4`이므로 다음 통합 patch 릴리즈는 `v1.0.12`입니다.
 
 Apps in Toss 배포를 위해 GitHub repository 또는 environment `apps-in-toss`에 아래 값을 설정해야 합니다.
 
