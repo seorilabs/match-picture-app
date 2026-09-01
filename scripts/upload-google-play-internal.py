@@ -60,7 +60,14 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--promote-from-track", default="internal")
     parser.add_argument("--promote-to-track", default="production")
     # 승격 대상 build는 릴리즈 태그가 정한 versionCode 하나다. 트랙의 최신 build를 쓰지 않는다.
-    parser.add_argument("--promote-version-code", type=int)
+    parser.add_argument(
+        "--promote-version-code",
+        type=int,
+        help=(
+            "승격할 build의 versionCode. --promote와 함께 필수이며, 릴리즈 태그에서 파생한 "
+            "값이어야 한다. 원본 트랙에 그 build가 없으면 승격하지 않는다."
+        ),
+    )
     parser.add_argument("--rollout", type=float)
     parser.add_argument(
         "--release-notes-json",

@@ -40,20 +40,20 @@ CI/CD는 Seorilabs org 재사용 워크플로우(`seorilabs/.github/.github/work
 | `deploy-apps-in-toss.yml` | dispatch, `workflow_call` | `rn-deploy-ait.yml` | 루트에서 `.ait` 빌드 → AppsInToss 배포 |
 | `deploy-google-play.yml` | dispatch, `workflow_call` | `rn-deploy-google-play.yml` | Capacitor Android 동기화 → 서명 AAB → Google Play |
 | `promote-google-play.yml` | dispatch, `workflow_call` | `promote-google-play.yml` | 내부 트랙 빌드를 재빌드 없이 production으로 승격 |
-| `deploy-app-store.yml` | dispatch, `workflow_call` | `rn-deploy-app-store.yml` | Capacitor SPM iOS archive → App Store Connect |
-| `deploy-all.yml` | dispatch | repo caller 3종 | 동일 stable SemVer 태그를 세 마켓에 배포 |
+| `deploy-app-store.yml` | dispatch | — (비활성 human gate) | Apple archive는 Xcode Cloud 전용. GitHub Actions macOS 러너로 우회하지 않습니다 |
+| `deploy-all.yml` | dispatch | repo caller 2종 | 동일 stable SemVer 태그를 AIT와 Google Play에 배포 |
 | `release-tag.yml` | dispatch | `release-tag.yml` | 명시적 SemVer 릴리즈 태그 생성 |
 | `cleanup-actions-storage.yml` | dispatch | `cleanup-actions-storage.yml` | Actions 아티팩트/캐시 정리 |
 
-main push/PR은 정적 체크만 돌고, 마켓 배포는 명시적 dispatch로만 실행됩니다. Web/AIT와 태그 해석은 ARC 러너(`seorilabs-rpi-arm64`), Android release는 x64 Linux, Apple archive는 macOS 러너로 분리됩니다.
+main push/PR은 정적 체크만 돌고, 마켓 배포는 명시적 dispatch로만 실행됩니다. Web/AIT와 태그 해석은 ARC 러너(`seorilabs-rpi-arm64`), Android release는 x64 Linux로 분리됩니다. Apple archive·upload는 GitHub Actions macOS 러너를 쓰지 않고 Xcode Cloud가 표준 실행 환경입니다. `deploy-app-store.yml`은 `workflow_call`이 없는 비활성 human gate이고, 수동 dispatch하면 빌드 없이 안내 후 실패합니다. 파일 자체는 Backoffice의 마켓 타깃 감지(`appstore`) 때문에 남겨 둡니다.
 
 릴리즈 버전은 workflow run 번호가 아니라 `vMAJOR.MINOR.PATCH` 태그가 기준입니다. 저장소는 버전을 계산하지 않습니다. 고정한 org 정본 commit SHA의 재사용 워크플로우가 같은 태그에서 Android `versionName`/`versionCode`와 Apple marketing/build version을 파생해 빌드에 주입하고, build 뒤 artifact에서 다시 읽어 대조합니다. `v27.1` 같은 과거 2자리 태그와 `v27.1.NaN`은 릴리즈 후보로 사용하지 않습니다. 현재 마켓 기준은 Google Play `1.0.11`, App Store `1.0.4`이므로 다음 통합 patch 릴리즈는 `v1.0.12`입니다.
 
-Apps in Toss 배포를 위해 GitHub repository 또는 environment `apps-in-toss`에 아래 값을 설정해야 합니다.
+Apps in Toss 배포를 위해 GitHub repository 또는 environment `apps-in-toss`에 아래 값을 설정해야 합니다. caller 워크플로우는 `secrets: inherit`를 쓰지 않으므로, 새 secret이 필요해지면 org 재사용 워크플로우의 `workflow_call.secrets` 선언과 caller의 `secrets:` 매핑 양쪽에 이름을 추가해야 전달됩니다.
 
 | 이름 | 위치 | 설명 |
 | --- | --- | --- |
-| `APPS_IN_TOSS_API_KEY` | Secret | `ait deploy --api-key`에 사용할 Apps in Toss API key. org 재사용 워크플로우가 `secrets: inherit`로 읽습니다 |
+| `APPS_IN_TOSS_API_KEY` | Secret | `ait deploy --api-key`에 사용할 Apps in Toss API key. caller는 secret을 상속하지 않고, org 재사용 워크플로우가 선언한 이름만 `secrets:` 블록에서 1:1로 명시 전달합니다 |
 | `AIT_APP_DISPLAY_NAME` | Variable | Apps in Toss 콘솔 앱 정보에 제출한 앱 이름. `granite.config.ts`의 `brand.displayName`에 사용되며 배포 빌드에 필수 |
 | `AIT_BRAND_ICON_URL` | Variable | Apps in Toss 콘솔 앱 정보에 업로드한 앱 로고 이미지 URL. `granite.config.ts`의 `brand.icon`에 사용되며 배포 빌드에 필수 |
 | `VITE_AD_GROUP_ID` | **Variable** | 운영 전면 광고 그룹 ID. org 재사용 워크플로우는 secret을 `with:`로 받을 수 없어 caller가 이 값을 **Variable**로 `build_command`에 주입합니다. Secret으로만 있으면 배포 빌드에서 광고가 비활성화되므로 **Secret → Variable로 이전**해야 합니다 |
