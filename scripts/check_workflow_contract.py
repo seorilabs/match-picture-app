@@ -1,19 +1,23 @@
 #!/usr/bin/env python3
-"""org 재사용 워크플로우 caller 계약을 기계적으로 검사한다.
+"""org 재사용 워크플로우 caller 계약과 릴리즈 버전 authority 를 기계적으로 검사한다.
 
-계약(seorilabs/.github):
-- 모든 `uses:`는 immutable commit SHA로 고정한다. floating ref는 release binding의
-  config revision을 고정할 수 없다.
-- org 정본 호출은 승인된 authority commit 하나만 쓴다.
-- caller는 secret을 상속하지 않는다. called workflow가 선언한 이름만 1:1로 전달한다.
-- caller가 부여하는 권한은 called workflow가 선언한 권한보다 낮지 않아야 한다.
-- Apple archive/upload는 Xcode Cloud가 표준 실행 환경이다. GitHub Actions macOS 러너로
-  우회하지 않는다.
+계약(seorilabs/.github, release-version-authority-v1):
+- AC-1 모든 `uses:`는 immutable commit SHA로 고정한다. org 정본 호출은 승인된 authority
+  commit 하나만 쓴다. floating ref는 release binding의 config revision을 고정할 수 없다.
+- AC-2 caller는 제거된 version 입력(`version_name`, `version_code`, `version_script`)과
+  더 이상 존재하지 않는 `runs_on`을 넘기지 않는다.
+- AC-3 저장소 로컬 version resolver(`scripts/resolve-release-version.mjs`)를 두지 않는다.
+- AC-4 마켓 config JSON은 version authority를 갖지 않는다.
+- AC-5 caller는 secret을 상속하지 않는다. called workflow가 선언한 이름만 1:1로 전달한다.
+- AC-6 caller가 부여하는 권한은 called workflow가 선언한 권한보다 낮지 않아야 한다.
+- AC-7 Apple archive/upload는 Xcode Cloud가 표준 실행 환경이다. GitHub Actions macOS
+  러너로 우회하지 않는다.
 
 의존성 없이 python3만으로 동작한다.
 """
 from __future__ import annotations
 
+import json
 import re
 import sys
 from pathlib import Path
@@ -82,6 +86,20 @@ CENTRAL_CONTRACT = {
 }
 
 PERMISSION_RANK = {"none": 0, "read": 1, "write": 2}
+
+# 중앙 워크플로우가 더 이상 받지 않는 caller 입력. 남아 있으면 workflow_call 이 실패한다.
+REMOVED_VERSION_INPUTS = ("version_name", "version_code", "version_script")
+OBSOLETE_INPUTS_BY_WORKFLOW = {
+    "release-tag": ("runs_on",),
+    "godot-deploy-google-play": ("runs_on",),
+}
+# 저장소 로컬 version resolver. 파생 규칙이 중앙과 갈라지면 readback 이 fail-closed 된다.
+FORBIDDEN_RESOLVER = "scripts/resolve-release-version.mjs"
+# 마켓 config JSON 의 version authority. 값이 필요하면 태그 파생값을 주입한다.
+MARKET_CONFIG_VERSION_KEYS = (
+    ("play-store/google-play.config.json", ("versionName", "versionCode")),
+    ("app-store/app-store.config.json", ("version",)),
+)
 CENTRAL_USES = re.compile(
     r"^seorilabs/\.github/\.github/workflows/([a-z0-9-]+)\.yml@(\S+)$"
 )
@@ -147,11 +165,49 @@ def parse_workflow(path: Path):
     return lines, workflow_permissions, jobs
 
 
-def check_repository(root: Path):
+def parse_with_inputs(lines, start):
+    """caller job 하나가 넘기는 `with:` 입력 이름을 모은다."""
+    names = []
+    for line in lines[start:]:
+        if line.strip() == "" or line.lstrip().startswith("#"):
+            continue
+        if indent_of(line) <= 4:
+            break
+        match = re.match(r"^      ([a-z0-9_]+):", line)
+        if match is not None:
+            names.append(match.group(1))
+    return names
+
+
+def check_release_authority(root: Path):
+    """AC-3, AC-4: 저장소가 버전 authority 를 갖지 않는지 확인한다."""
     failures = []
+    if (root / FORBIDDEN_RESOLVER).exists():
+        failures.append(
+            f"{FORBIDDEN_RESOLVER}: 저장소 로컬 version resolver 는 authority 가 아니다. 제거한다."
+        )
+    for relative, keys in MARKET_CONFIG_VERSION_KEYS:
+        path = root / relative
+        if not path.exists():
+            continue
+        try:
+            release = json.loads(path.read_text(encoding="utf-8")).get("release") or {}
+        except json.JSONDecodeError as error:
+            failures.append(f"{relative}: JSON 을 읽을 수 없다: {error}")
+            continue
+        for key in keys:
+            if key in release:
+                failures.append(
+                    f"{relative}#release.{key}: 마켓 config JSON 은 version authority 가 아니다."
+                )
+    return failures
+
+
+def check_repository(root: Path):
+    failures = check_release_authority(root)
     workflows = sorted((root / ".github" / "workflows").glob("*.yml"))
     if not workflows:
-        return ["`.github/workflows`에 workflow가 없다."]
+        return failures + ["`.github/workflows`에 workflow가 없다."]
 
     for path in workflows:
         lines, workflow_permissions, jobs = parse_workflow(path)
@@ -195,6 +251,27 @@ def check_repository(root: Path):
                 failures.append(f"{name}: 계약에 없는 org workflow 를 호출한다: {central.group(1)}")
                 continue
 
+            passed_inputs = []
+            for index, line in enumerate(lines):
+                if line.strip().startswith("uses:") and target in line:
+                    for follow_index in range(index + 1, len(lines)):
+                        if re.match(r"^    with:\s*$", lines[follow_index]):
+                            passed_inputs = parse_with_inputs(lines, follow_index + 1)
+                            break
+                        if lines[follow_index].strip() and indent_of(lines[follow_index]) <= 2:
+                            break
+                    break
+            for input_name in passed_inputs:
+                if input_name in REMOVED_VERSION_INPUTS:
+                    failures.append(
+                        f"{name}: job {job['name']} 이 제거된 version 입력 {input_name} 을 넘긴다."
+                    )
+                elif input_name in OBSOLETE_INPUTS_BY_WORKFLOW.get(central.group(1), ()):
+                    failures.append(
+                        f"{name}: job {job['name']} 이 {central.group(1)} 에서 제거된 입력 "
+                        f"{input_name} 을 넘긴다."
+                    )
+
             declared = sorted(contract["secrets"])
             passed = sorted(job["secrets"] or [])
             if declared != passed:
@@ -222,7 +299,11 @@ def main() -> int:
     if failures:
         print(f"[workflow-contract] {len(failures)}건 실패", file=sys.stderr)
         return 1
-    print("[workflow-contract] OK — uses SHA 고정, secret 명시 전달, 권한 하한 충족")
+    print(
+        "[workflow-contract] OK — uses SHA 고정, 제거된 version 입력 없음, "
+        "저장소 로컬 resolver 없음, 마켓 config version authority 없음, "
+        "secret 명시 전달, 권한 하한 충족, macOS 우회 없음"
+    )
     return 0
 
 
