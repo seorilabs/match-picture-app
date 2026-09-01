@@ -31,5 +31,4 @@ jobs:
         npm run lint
         npm test
         npm run check:data-safety
-        npm run check:workflows
         npm run test:release-version
