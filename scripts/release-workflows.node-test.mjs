@@ -5,16 +5,26 @@ import test from "node:test";
 const workflow = (name) =>
   readFileSync(new URL(`../.github/workflows/${name}`, import.meta.url), "utf8");
 
-test("세 마켓의 표준 배포 workflow와 통합 호출을 유지한다", () => {
+test("deploy-all은 GitHub Actions에서 실행 가능한 마켓만 호출한다", () => {
   const all = workflow("deploy-all.yml");
 
-  for (const file of [
-    "deploy-apps-in-toss.yml",
-    "deploy-google-play.yml",
-    "deploy-app-store.yml",
-  ]) {
+  for (const file of ["deploy-apps-in-toss.yml", "deploy-google-play.yml"]) {
     assert.match(all, new RegExp(`uses: \\.\\/.github\\/workflows\\/${file}`));
   }
+
+  // Apple archive의 표준 실행 환경은 Xcode Cloud다. GitHub macOS 러너로 우회하지 않는다.
+  assert.doesNotMatch(all, /deploy-app-store\.yml/);
+  assert.doesNotMatch(all, /deploy_app_store/);
+});
+
+test("App Store caller는 macOS 우회 없이 명시적 human gate로 남는다", () => {
+  const appStore = workflow("deploy-app-store.yml");
+
+  assert.doesNotMatch(appStore, /^  workflow_call:/m);
+  assert.doesNotMatch(appStore, /runs-on:\s*macos/);
+  assert.doesNotMatch(appStore, /rn-deploy-app-store/);
+  assert.match(appStore, /Xcode Cloud/);
+  assert.match(appStore, /exit 1/);
 });
 
 test("AppsInToss 배포 workflow는 org 재사용 계약을 유지한다", () => {
@@ -22,7 +32,42 @@ test("AppsInToss 배포 workflow는 org 재사용 계약을 유지한다", () =>
 
   assert.match(
     ait,
-    /uses: seorilabs\/\.github\/\.github\/workflows\/rn-deploy-ait\.yml@main/,
+    /uses: seorilabs\/\.github\/\.github\/workflows\/rn-deploy-ait\.yml@[0-9a-f]{40}/,
   );
   assert.match(ait, /release_tag: \$\{\{ inputs\.release_tag \}\}/);
+});
+
+test("org 재사용 workflow 호출은 모두 immutable commit SHA로 고정한다", () => {
+  // floating ref는 release binding의 config revision을 고정할 수 없어
+  // release-version-authority-v1에서 즉시 결함으로 본다.
+  for (const file of [
+    "cleanup-actions-storage.yml",
+    "deploy-app-store.yml",
+    "deploy-apps-in-toss.yml",
+    "deploy-google-play.yml",
+    "promote-google-play.yml",
+    "release-tag.yml",
+    "static-checks.yml",
+  ]) {
+    for (const line of workflow(file).split("\n")) {
+      const match = /uses:\s*(seorilabs\/\.github\/\S+)/.exec(line);
+      if (match !== null) {
+        assert.match(match[1], /@[0-9a-f]{40}$/, `${file}: ${match[1]}`);
+      }
+    }
+  }
+});
+
+test("마켓 배포 caller는 제거된 version 입력을 넘기지 않는다", () => {
+  // 버전은 stable SemVer 태그가 유일한 authority이고 중앙 워크플로우가 파생해 주입한다.
+  for (const file of [
+    "deploy-app-store.yml",
+    "deploy-apps-in-toss.yml",
+    "deploy-google-play.yml",
+  ]) {
+    const text = workflow(file);
+    for (const input of ["version_name", "version_code", "version_script"]) {
+      assert.doesNotMatch(text, new RegExp(`^\\s+${input}:`, "m"), `${file}: ${input}`);
+    }
+  }
 });

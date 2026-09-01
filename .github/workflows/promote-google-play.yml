@@ -52,8 +52,7 @@ concurrency:
 
 jobs:
   promote:
-    uses: seorilabs/.github/.github/workflows/promote-google-play.yml@main
-    secrets: inherit
+    uses: seorilabs/.github/.github/workflows/promote-google-play.yml@9afa357f9ba6c8d6a813c7cec7ad3d35c626bdd5
     with:
       release_tag: ${{ inputs.release_tag }}
       from_track: ${{ inputs.from_track }}
