@@ -5,16 +5,26 @@ import test from "node:test";
 const workflow = (name) =>
   readFileSync(new URL(`../.github/workflows/${name}`, import.meta.url), "utf8");
 
-test("세 마켓의 표준 배포 workflow와 통합 호출을 유지한다", () => {
+test("deploy-all은 GitHub Actions에서 실행 가능한 마켓만 호출한다", () => {
   const all = workflow("deploy-all.yml");
 
-  for (const file of [
-    "deploy-apps-in-toss.yml",
-    "deploy-google-play.yml",
-    "deploy-app-store.yml",
-  ]) {
+  for (const file of ["deploy-apps-in-toss.yml", "deploy-google-play.yml"]) {
     assert.match(all, new RegExp(`uses: \\.\\/.github\\/workflows\\/${file}`));
   }
+
+  // Apple archive의 표준 실행 환경은 Xcode Cloud다. GitHub macOS 러너로 우회하지 않는다.
+  assert.doesNotMatch(all, /deploy-app-store\.yml/);
+  assert.doesNotMatch(all, /deploy_app_store/);
+});
+
+test("App Store caller는 macOS 우회 없이 명시적 human gate로 남는다", () => {
+  const appStore = workflow("deploy-app-store.yml");
+
+  assert.doesNotMatch(appStore, /^  workflow_call:/m);
+  assert.doesNotMatch(appStore, /runs-on:\s*macos/);
+  assert.doesNotMatch(appStore, /rn-deploy-app-store/);
+  assert.match(appStore, /Xcode Cloud/);
+  assert.match(appStore, /exit 1/);
 });
 
 test("AppsInToss 배포 workflow는 org 재사용 계약을 유지한다", () => {

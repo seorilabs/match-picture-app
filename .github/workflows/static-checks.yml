@@ -21,7 +21,6 @@ concurrency:
 jobs:
   checks:
     uses: seorilabs/.github/.github/workflows/rn-static-checks.yml@9afa357f9ba6c8d6a813c7cec7ad3d35c626bdd5
-    secrets: inherit
     with:
       runs_on: ${{ github.event.repository.private && 'seorilabs-rpi-arm64' || 'ubuntu-latest' }}
       package_manager: npm
@@ -32,3 +31,4 @@ jobs:
         npm run lint
         npm test
         npm run check:data-safety
+        npm run check:workflows

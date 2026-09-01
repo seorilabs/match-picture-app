@@ -19,7 +19,8 @@
     "test": "vitest run",
     "check:data-safety": "node scripts/check-data-safety.mjs",
     "gen:audio": "node scripts/generate-audio.mjs",
-    "test:release-version": "node --test scripts/*.node-test.mjs"
+    "test:release-version": "node --test scripts/*.node-test.mjs",
+    "check:workflows": "python3 scripts/check_workflow_contract.py"
   },
   "dependencies": {
     "@apps-in-toss/web-framework": "^2.10.7",

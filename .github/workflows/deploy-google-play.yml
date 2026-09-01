@@ -36,6 +36,16 @@ on:
       release_status:
         type: string
         default: completed
+    # caller 는 secret 을 상속하지 않는다. 아래 이름만 1:1 로 명시 전달한다.
+    secrets:
+      FIREBASE_ANDROID_GOOGLE_SERVICES_JSON_BASE64:
+        required: false
+      GOOGLE_PLAY_UPLOAD_KEYSTORE_BASE64:
+        required: false
+      GOOGLE_PLAY_UPLOAD_KEYSTORE_PASSWORD:
+        required: false
+      GOOGLE_PLAY_UPLOAD_KEY_PASSWORD:
+        required: false
 
 permissions:
   contents: read
@@ -45,7 +55,11 @@ permissions:
 jobs:
   google-play:
     uses: seorilabs/.github/.github/workflows/rn-deploy-google-play.yml@9afa357f9ba6c8d6a813c7cec7ad3d35c626bdd5
-    secrets: inherit
+    secrets:
+      FIREBASE_ANDROID_GOOGLE_SERVICES_JSON_BASE64: ${{ secrets.FIREBASE_ANDROID_GOOGLE_SERVICES_JSON_BASE64 }}
+      GOOGLE_PLAY_UPLOAD_KEYSTORE_BASE64: ${{ secrets.GOOGLE_PLAY_UPLOAD_KEYSTORE_BASE64 }}
+      GOOGLE_PLAY_UPLOAD_KEYSTORE_PASSWORD: ${{ secrets.GOOGLE_PLAY_UPLOAD_KEYSTORE_PASSWORD }}
+      GOOGLE_PLAY_UPLOAD_KEY_PASSWORD: ${{ secrets.GOOGLE_PLAY_UPLOAD_KEY_PASSWORD }}
     with:
       release_tag: ${{ inputs.release_tag }}
       upload: ${{ inputs.upload }}

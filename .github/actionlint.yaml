@@ -1,0 +1,7 @@
+# actionlint 설정: Seorilabs 커스텀 러너 라벨을 known 으로 등록해 false positive 를 막는다.
+self-hosted-runner:
+  labels:
+    - seorilabs-rpi-arm64
+    - seorilabs-rpi-arm64-dind
+    - seorilabs-x64-android
+    - macos-26
