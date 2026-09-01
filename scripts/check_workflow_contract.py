@@ -12,6 +12,10 @@
 - AC-6 caller가 부여하는 권한은 called workflow가 선언한 권한보다 낮지 않아야 한다.
 - AC-7 Apple archive/upload는 Xcode Cloud가 표준 실행 환경이다. GitHub Actions macOS
   러너로 우회하지 않는다.
+- AC-8 Godot 배포 caller는 주입 대상 export preset 선택자를 명시한다. 선택자가 없으면
+  중앙 워크플로우가 fail-closed한다.
+- AC-9 Xcode Cloud 버전 주입은 저장소 resolver 대신 불변 중앙 commit의 정본 helper를
+  sha256 검증 후 실행한다.
 
 의존성 없이 python3만으로 동작한다.
 """
@@ -92,6 +96,11 @@ REMOVED_VERSION_INPUTS = ("version_name", "version_code", "version_script")
 OBSOLETE_INPUTS_BY_WORKFLOW = {
     "release-tag": ("runs_on",),
     "godot-deploy-google-play": ("runs_on",),
+}
+# 주입 대상과 export 대상 preset 이 다르면 중앙 워크플로우가 fail-closed 한다.
+REQUIRED_PRESET_INPUT = {
+    "godot-deploy-google-play": "android_export_preset",
+    "godot-deploy-app-store": "ios_export_preset",
 }
 # 저장소 로컬 version resolver. 파생 규칙이 중앙과 갈라지면 readback 이 fail-closed 된다.
 FORBIDDEN_RESOLVER = "scripts/resolve-release-version.mjs"
@@ -203,8 +212,35 @@ def check_release_authority(root: Path):
     return failures
 
 
+def check_xcode_cloud_scripts(root: Path):
+    """AC-9: Xcode Cloud 버전 주입이 불변 중앙 commit 의 helper 를 checksum 검증 후 쓰는지 본다."""
+    failures = []
+    scripts = [
+        path
+        for path in root.rglob("ci_pre_xcodebuild.sh")
+        if "node_modules" not in path.parts
+    ]
+    for path in scripts:
+        relative = path.relative_to(root)
+        text = path.read_text(encoding="utf-8")
+        # 같은 디렉터리의 sourced helper 도 함께 본다.
+        for sibling in ("release-authority.sh",):
+            candidate = path.parent / sibling
+            if candidate.exists():
+                text += candidate.read_text(encoding="utf-8")
+        if FORBIDDEN_RESOLVER.split("/")[-1] in text:
+            failures.append(f"{relative}: 저장소 로컬 version resolver 를 실행한다.")
+        if AUTHORITY_SHA not in text:
+            failures.append(f"{relative}: 승인된 authority commit 을 참조하지 않는다.")
+        if re.search(r"[0-9a-f]{64}", text) is None:
+            failures.append(f"{relative}: org 정본 helper 의 sha256 상수가 없다.")
+        if "sha256 불일치" not in text:
+            failures.append(f"{relative}: sha256 대조 실패 시 중단하는 경로가 없다.")
+    return failures
+
+
 def check_repository(root: Path):
-    failures = check_release_authority(root)
+    failures = check_release_authority(root) + check_xcode_cloud_scripts(root)
     workflows = sorted((root / ".github" / "workflows").glob("*.yml"))
     if not workflows:
         return failures + ["`.github/workflows`에 workflow가 없다."]
@@ -271,6 +307,13 @@ def check_repository(root: Path):
                         f"{name}: job {job['name']} 이 {central.group(1)} 에서 제거된 입력 "
                         f"{input_name} 을 넘긴다."
                     )
+
+            required_preset = REQUIRED_PRESET_INPUT.get(central.group(1))
+            if required_preset is not None and required_preset not in passed_inputs:
+                failures.append(
+                    f"{name}: job {job['name']} 이 {central.group(1)} 의 export preset 선택자 "
+                    f"{required_preset} 을 명시하지 않는다."
+                )
 
             declared = sorted(contract["secrets"])
             passed = sorted(job["secrets"] or [])
