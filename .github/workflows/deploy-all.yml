@@ -69,6 +69,7 @@ jobs:
     secrets:
       APPS_IN_TOSS_API_KEY: ${{ secrets.APPS_IN_TOSS_API_KEY }}
       VITE_FIREBASE_API_KEY: ${{ secrets.VITE_FIREBASE_API_KEY }}
+      VITE_AD_GROUP_ID: ${{ secrets.VITE_AD_GROUP_ID }}
     with:
       release_tag: ${{ needs.resolve.outputs.tag }}
       memo: ${{ inputs.memo }}

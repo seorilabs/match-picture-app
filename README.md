@@ -56,7 +56,7 @@ Apps in Toss 배포를 위해 GitHub repository 또는 environment `apps-in-toss
 | `APPS_IN_TOSS_API_KEY` | Secret | `ait deploy --api-key`에 사용할 Apps in Toss API key. caller는 secret을 상속하지 않고, org 재사용 워크플로우가 선언한 이름만 `secrets:` 블록에서 1:1로 명시 전달합니다 |
 | `AIT_APP_DISPLAY_NAME` | Variable | Apps in Toss 콘솔 앱 정보에 제출한 앱 이름. `granite.config.ts`의 `brand.displayName`에 사용되며 배포 빌드에 필수 |
 | `AIT_BRAND_ICON_URL` | Variable | Apps in Toss 콘솔 앱 정보에 업로드한 앱 로고 이미지 URL. `granite.config.ts`의 `brand.icon`에 사용되며 배포 빌드에 필수 |
-| `VITE_AD_GROUP_ID` | **Variable** | 운영 전면 광고 그룹 ID. reusable workflow 호출의 `with:`에서는 `secrets` 컨텍스트를 쓸 수 없으므로 caller가 이 값을 **Variable**로 `build_command`에 주입합니다. 값이 비면 `isInterstitialSupported()`가 false가 되어 배포 빌드에서 광고가 노출되지 않습니다. 광고 그룹 ID는 클라이언트 번들에 그대로 실려 나가는 공개 식별자라 Secret이 아니라 Variable이 맞습니다 |
+| `VITE_AD_GROUP_ID` | Secret | 운영 전면 광고 그룹 ID. caller가 `secrets:`로 넘기면 org 재사용 워크플로우가 **빌드 step의 env로만** 주입합니다(설치·업로드 step에는 전달하지 않음). 값이 비면 `isInterstitialSupported()`가 false가 되어 배포 빌드에서 광고가 노출되지 않으므로, caller는 `require_ad_group_id: true`로 그런 빌드가 조용히 나가지 않게 막습니다. `build_command`에서 다시 대입하면 주입된 값을 덮어쓰니 건드리지 마세요 |
 
 배포는 GitHub Actions의 `Deploy AppsInToss` workflow를 `Run workflow`로 실행합니다(또는 `Release Tag`로 태그를 찍어 트리거). 루트에서 `npm run build`로 `match-picture-app.ait`를 만든 뒤 업로드/배포합니다.
 
