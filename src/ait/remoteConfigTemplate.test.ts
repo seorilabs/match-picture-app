@@ -31,7 +31,9 @@ function templateValue(key: string): boolean | number {
   }
   if (parameter?.valueType === "BOOLEAN") return raw === "true";
   if (parameter?.valueType === "NUMBER") return Number(raw);
-  throw new Error(`${key}의 valueType(${parameter?.valueType})을 다루지 않는다`);
+  throw new Error(
+    `${key}의 valueType(${parameter?.valueType})을 다루지 않는다`,
+  );
 }
 
 describe("remoteconfig.template.json", () => {
