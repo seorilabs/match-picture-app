@@ -71,3 +71,19 @@ test("마켓 배포 caller는 제거된 version 입력을 넘기지 않는다", 
     }
   }
 });
+
+test("AIT caller의 artifact_path는 단일 .ait glob이다", () => {
+  // org 재사용 workflow는 이 값을 ARTIFACT_GLOB으로 확장해 "정확히 한 개"를 요구한다.
+  // 여러 줄이나 dist/** 같은 광범위 glob을 넘기면 빌드 성공 뒤 산출물 해석에서 실패한다.
+  const ait = workflow("deploy-apps-in-toss.yml");
+
+  const match = /^\s*artifact_path:\s*(.*)$/m.exec(ait);
+  assert.notEqual(match, null, "artifact_path를 명시해야 한다");
+
+  const value = match[1].trim();
+  assert.doesNotMatch(value, /^[|>]/, "블록 스칼라로 여러 줄을 넘기면 안 된다");
+
+  const glob = value.replace(/^["']|["']$/g, "");
+  assert.match(glob, /\.ait$/, `단일 .ait glob이어야 한다: ${glob}`);
+  assert.doesNotMatch(glob, /\*\*/, `재귀 glob은 여러 개로 확장된다: ${glob}`);
+});
