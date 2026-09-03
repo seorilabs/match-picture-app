@@ -56,9 +56,7 @@ Apps in Toss 배포를 위해 GitHub repository 또는 environment `apps-in-toss
 | `APPS_IN_TOSS_API_KEY` | Secret | `ait deploy --api-key`에 사용할 Apps in Toss API key. caller는 secret을 상속하지 않고, org 재사용 워크플로우가 선언한 이름만 `secrets:` 블록에서 1:1로 명시 전달합니다 |
 | `AIT_APP_DISPLAY_NAME` | Variable | Apps in Toss 콘솔 앱 정보에 제출한 앱 이름. `granite.config.ts`의 `brand.displayName`에 사용되며 배포 빌드에 필수 |
 | `AIT_BRAND_ICON_URL` | Variable | Apps in Toss 콘솔 앱 정보에 업로드한 앱 로고 이미지 URL. `granite.config.ts`의 `brand.icon`에 사용되며 배포 빌드에 필수 |
-| `VITE_AD_GROUP_ID` | **Variable** | 운영 전면 광고 그룹 ID. org 재사용 워크플로우는 secret을 `with:`로 받을 수 없어 caller가 이 값을 **Variable**로 `build_command`에 주입합니다. Secret으로만 있으면 배포 빌드에서 광고가 비활성화되므로 **Secret → Variable로 이전**해야 합니다 |
-| `VITE_REMOTE_CONFIG_URL` | Variable | 선택값. 기본값은 `https://config.vzyx.xyz/match-picture/launch-config.json` |
-| `VITE_REMOTE_CONFIG_FALLBACK_URL` | Variable | 선택값. 독립 fallback host가 있을 때만 설정 |
+| `VITE_AD_GROUP_ID` | Secret | 운영 전면 광고 그룹 ID. caller가 `secrets:`로 넘기면 org 재사용 워크플로우가 **빌드 step의 env로만** 주입합니다(설치·업로드 step에는 전달하지 않음). 값이 비면 `isInterstitialSupported()`가 false가 되어 배포 빌드에서 광고가 노출되지 않으므로, caller는 `require_ad_group_id: true`로 그런 빌드가 조용히 나가지 않게 막습니다. `build_command`에서 다시 대입하면 주입된 값을 덮어쓰니 건드리지 마세요 |
 
 배포는 GitHub Actions의 `Deploy AppsInToss` workflow를 `Run workflow`로 실행합니다(또는 `Release Tag`로 태그를 찍어 트리거). 루트에서 `npm run build`로 `match-picture-app.ait`를 만든 뒤 업로드/배포합니다.
 
@@ -69,8 +67,6 @@ Apps in Toss 배포를 위해 GitHub repository 또는 environment `apps-in-toss
 | `AIT_APP_DISPLAY_NAME` | Apps in Toss 콘솔 앱 정보에 제출한 앱 이름입니다. 공백 포함 여부까지 콘솔 값과 정확히 같아야 하며, `npm run build`에서는 필수입니다. `npm run dev`에서는 없으면 `같은그림찾기`를 사용합니다. |
 | `AIT_BRAND_ICON_URL` | Apps in Toss 콘솔 앱 정보에 업로드한 앱 로고 이미지 URL입니다. 콘솔에서 업로드한 로고를 우클릭해 링크를 복사한 값을 넣어야 하며, `npm run build`에서는 필수입니다. `npm run dev`에서는 없으면 `public/icon.png`를 사용합니다. |
 | `VITE_AD_GROUP_ID` | Apps in Toss 통합 광고(전면형) 그룹 ID. 콘솔에서 발급한 운영 ID를 `.env.production.local`에 설정합니다. 없으면 광고 노출이 비활성화됩니다. |
-| `VITE_REMOTE_CONFIG_URL` | 선택값. 출시 후 기능을 끄기 위한 public HTTPS JSON URL입니다. 운영 기본값은 `https://config.vzyx.xyz/match-picture/launch-config.json`입니다. 쉼표로 여러 URL을 넣을 수 있습니다. |
-| `VITE_REMOTE_CONFIG_FALLBACK_URL` | 선택값. 기본 URL이 내려갔을 때 추가로 시도할 public HTTPS JSON URL입니다. 같은 k8s 클러스터가 아닌 독립 호스트를 쓸 때만 설정합니다. 쉼표로 여러 URL을 넣을 수 있습니다. |
 
 리더보드는 기본 활성화되어 있으며, 게임 클리어 시 점수를 제출하고 상단 HUD의 `RANK` 버튼과 결과 화면의 `RANKING` 버튼에서 열 수 있습니다. 콘솔에서 게임 센터/리더보드 설정이 완료되어 있어야 실제 토스 앱에서 정상 동작합니다.
 
@@ -119,17 +115,17 @@ node scripts/generate-food-pack.mjs
 
 새 테마를 추가하려면 57개 에셋(`001`~`057`)을 `public/` 아래 디렉토리에 두고 `src/symbols/packs.ts`의 `SYMBOL_PACKS`에 항목을 추가하면 됩니다. 덱/룰 로직은 심볼 ID만 다루므로 코드 변경은 매니페스트 한 줄입니다.
 
-출시 후 리더보드, 리뷰 요청, 전면 광고를 긴급 비활성화하려면 `VITE_REMOTE_CONFIG_URL`이 가리키는 JSON을 아래처럼 바꿉니다. 해당 URL은 앱 WebView에서 `fetch`로 읽기 때문에 HTTPS와 CORS 허용이 필요합니다. 원격 설정을 성공적으로 읽으면 앱 Storage/localStorage에 마지막 성공값을 저장하고, 이후 설정 서버가 내려가면 저장된 값을 fallback으로 사용합니다.
+출시 후 기능 kill-switch와 전면 광고 빈도는 **Firebase Remote Config**(프로젝트 `match-picture-app`)로 제어합니다. 정본은 `remoteconfig.template.json`이고, 반영은 `firebase deploy --only remoteconfig`입니다. RC를 읽지 못하는 환경에서는 `src/ait/launchConfig.ts`의 기본값으로 떨어집니다.
 
-```json
-{
-  "leaderboardEnabled": false,
-  "reviewRequestEnabled": false,
-  "interstitialAdEnabled": false
-}
-```
+| 파라미터 | 타입 | 기본값 | 설명 |
+| --- | --- | --- | --- |
+| `leaderboardEnabled` | BOOLEAN | `true` | 리더보드 노출/제출 kill-switch |
+| `reviewRequestEnabled` | BOOLEAN | `true` | 앱 리뷰 요청 kill-switch |
+| `interstitialAdEnabled` | BOOLEAN | `true` | 전면 광고 kill-switch |
+| `interstitialMinIntervalSeconds` | NUMBER | `120` | 전면 광고 최소 노출 간격(초) |
+| `interstitialFreeGames` | NUMBER | `2` | 세션 시작 후 전면 광고 면제 게임 수 |
 
-현재 k8s 운영 구성은 [ops/k8s/match-picture-config.yaml](/Users/syous/Repositories/seorilabs/match-picture-app/ops/k8s/match-picture-config.yaml)에 기록되어 있습니다. ConfigMap의 `launch-config.json`만 바꾸면 nginx가 같은 URL로 새 값을 서빙합니다.
+전면 광고를 긴급 중단하려면 `interstitialAdEnabled`를 `false`로 바꿔 배포하면 되고, 재배포 없이 빈도만 조절하려면 `interstitialMinIntervalSeconds`/`interstitialFreeGames`를 올립니다. kill-switch 전파를 위해 클라이언트 `minimumFetchIntervalMillis`는 1시간입니다(`src/firebase/remoteConfig.ts`).
 
 개발 서버 세션에서만 한 번 맞추면 클리어되게 하려면 현재 URL에 `debugTotalCards=1`을 붙입니다. 이 값은 `npm run dev`에서만 동작하고 production build에서는 무시됩니다.
 

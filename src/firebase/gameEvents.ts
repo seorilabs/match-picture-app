@@ -71,8 +71,16 @@ export function trackSpendCurrency(itemName: string, value: number): void {
 
 export type AdImpressionResult = "shown" | "failed";
 
+/**
+ * GA4 예약어 회피: `ad_impression`은 App 스트림에서만 허용되는 이름이라
+ * 이 앱의 Web 스트림에서 로깅하면 수집되지 않는다. 세 표면(토스/Capacitor/브라우저)
+ * 모두 Firebase Web SDK로 보내므로 커스텀 이름을 쓴다.
+ * https://developers.google.com/analytics/devguides/collection/protocol/ga4/reference
+ */
+export const AD_IMPRESSION_EVENT = "interstitial_ad_impression";
+
 export function trackAdImpression(result: AdImpressionResult): void {
-  void trackEvent("ad_impression", {
+  void trackEvent(AD_IMPRESSION_EVENT, {
     ad_format: "interstitial",
     ad_platform: "apps_in_toss",
     result,

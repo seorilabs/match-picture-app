@@ -1,10 +1,10 @@
 # AIT(.ait) 빌드 + AppsInToss 배포 — ARC. org 재사용 워크플로우 호출.
 # dispatch 직접 실행 또는 deploy-all.yml에서 workflow_call.
 # 빌드는 저장소 루트(granite.config.ts)에서 실행. build_command에 AIT_APP_DISPLAY_NAME/
-# AIT_BRAND_ICON_URL/VITE_AD_GROUP_ID(vars)를 명시적으로 주입한다 — granite.config.ts가
-# release build에서 display name/icon이 없으면 throw 하고, 재사용 워크플로우는 Firebase vars만
-# 주입하기 때문. secret은 reusable with:로 전달 불가하므로 VITE_AD_GROUP_ID는 repository
-# Variable 이어야 광고가 빌드에 포함된다(README 참고).
+# AIT_BRAND_ICON_URL(vars)을 명시적으로 주입한다 — granite.config.ts가 release build에서
+# display name/icon이 없으면 throw 하기 때문.
+# VITE_AD_GROUP_ID는 org 재사용 워크플로우가 secret을 받아 빌드 step env로만 주입한다.
+# build_command에서 다시 대입하면 그 값을 덮어쓰므로 건드리지 않는다.
 name: Deploy AppsInToss
 
 on:
@@ -36,6 +36,8 @@ on:
         required: false
       VITE_FIREBASE_API_KEY:
         required: false
+      VITE_AD_GROUP_ID:
+        required: false
 
 permissions:
   contents: read
@@ -43,10 +45,11 @@ permissions:
 
 jobs:
   ait:
-    uses: seorilabs/.github/.github/workflows/rn-deploy-ait.yml@9afa357f9ba6c8d6a813c7cec7ad3d35c626bdd5
+    uses: seorilabs/.github/.github/workflows/rn-deploy-ait.yml@c6fa1c5b029028b95434a63cae47e373d788fa82
     secrets:
       APPS_IN_TOSS_API_KEY: ${{ secrets.APPS_IN_TOSS_API_KEY }}
       VITE_FIREBASE_API_KEY: ${{ secrets.VITE_FIREBASE_API_KEY }}
+      VITE_AD_GROUP_ID: ${{ secrets.VITE_AD_GROUP_ID }}
     with:
       release_tag: ${{ inputs.release_tag }}
       memo: ${{ inputs.memo }}
@@ -56,7 +59,9 @@ jobs:
       npm_registry_url: https://npm.pkg.github.com
       npm_scope: "@seorilabs"
       install_command: "npm ci"
-      build_command: "AIT_APP_DISPLAY_NAME='${{ vars.AIT_APP_DISPLAY_NAME }}' AIT_BRAND_ICON_URL='${{ vars.AIT_BRAND_ICON_URL }}' VITE_AD_GROUP_ID='${{ vars.VITE_AD_GROUP_ID }}' npm run build"
+      # 광고 식별자가 비면 광고 없는 빌드가 조용히 나가므로 릴리즈에서 막는다.
+      require_ad_group_id: true
+      build_command: "AIT_APP_DISPLAY_NAME='${{ vars.AIT_APP_DISPLAY_NAME }}' AIT_BRAND_ICON_URL='${{ vars.AIT_BRAND_ICON_URL }}' npm run build"
       artifact_path: |
         match-picture-app.ait
         dist/**
