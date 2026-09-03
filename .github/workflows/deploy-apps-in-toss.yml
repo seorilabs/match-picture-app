@@ -62,6 +62,6 @@ jobs:
       # 광고 식별자가 비면 광고 없는 빌드가 조용히 나가므로 릴리즈에서 막는다.
       require_ad_group_id: true
       build_command: "AIT_APP_DISPLAY_NAME='${{ vars.AIT_APP_DISPLAY_NAME }}' AIT_BRAND_ICON_URL='${{ vars.AIT_BRAND_ICON_URL }}' npm run build"
-      artifact_path: |
-        match-picture-app.ait
-        dist/**
+      # org 재사용 워크플로우 계약: 정확히 한 개로 해석되는 .ait glob이어야 한다.
+      # 여러 줄을 넘기면 dist/** 까지 확장돼 "정확히 하나여야 함"에서 빌드가 실패한다.
+      artifact_path: "match-picture-app.ait"
