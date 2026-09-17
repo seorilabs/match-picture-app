@@ -32,19 +32,21 @@ test("AppsInToss 배포 workflow는 org 재사용 계약을 유지한다", () =>
 
   assert.match(
     ait,
-    /uses: seorilabs\/\.github\/\.github\/workflows\/rn-deploy-ait\.yml@[0-9a-f]{40}/,
+    /uses: seorilabs\/\.github\/\.github\/workflows\/rn-deploy-ait\.yml@main/,
   );
   assert.match(ait, /release_tag: \$\{\{ inputs\.release_tag \}\}/);
 });
 
-test("org 재사용 workflow 호출은 모두 immutable commit SHA로 고정한다", () => {
-  // floating ref는 release binding의 config revision을 고정할 수 없어
-  // release-version-authority-v1에서 즉시 결함으로 본다.
+test("org 재사용 workflow 호출은 모두 중앙 정본 main을 가리킨다", () => {
+  // caller는 org 정본의 현재 계약을 따른다. SHA로 핀하면 중앙에서 계약을 고쳐도
+  // 저장소마다 ref를 갱신해야 반영돼 정본이 갈라진다. 임의 브랜치나 fork를 막기 위해
+  // 허용 ref는 main 하나로 고정한다.
   for (const file of [
     "cleanup-actions-storage.yml",
     "deploy-app-store.yml",
     "deploy-apps-in-toss.yml",
     "deploy-google-play.yml",
+    "init-release-version-ledger.yml",
     "promote-google-play.yml",
     "release-tag.yml",
     "static-checks.yml",
@@ -52,7 +54,7 @@ test("org 재사용 workflow 호출은 모두 immutable commit SHA로 고정한�
     for (const line of workflow(file).split("\n")) {
       const match = /uses:\s*(seorilabs\/\.github\/\S+)/.exec(line);
       if (match !== null) {
-        assert.match(match[1], /@[0-9a-f]{40}$/, `${file}: ${match[1]}`);
+        assert.match(match[1], /@main$/, `${file}: ${match[1]}`);
       }
     }
   }
