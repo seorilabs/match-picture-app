@@ -41,6 +41,8 @@ on:
 
 permissions:
   contents: read
+  # org 재사용 워크플로우가 자체 선언한 권한이라 caller도 같이 부여해야 한다.
+  # 좁히면 workflow 시작 단계에서 startup_failure 가 된다.
   packages: read
 
 jobs:
@@ -55,9 +57,6 @@ jobs:
       memo: ${{ inputs.memo }}
       ait_dir: "."
       package_manager: npm
-      # @seorilabs/platform-sdk는 GitHub Packages(비공개)에서 받는다.
-      npm_registry_url: https://npm.pkg.github.com
-      npm_scope: "@seorilabs"
       install_command: "npm ci"
       # 광고 식별자가 비면 광고 없는 빌드가 조용히 나가므로 릴리즈에서 막는다.
       require_ad_group_id: true

@@ -68,11 +68,7 @@ import {
 import { useDisableIosSwipeBack } from "../ait/navigation";
 import { useHiddenCallback } from "../ait/visibility";
 import { useBackHandler } from "../native/backButton";
-import {
-  getDefaultLaunchConfig,
-  loadCachedLaunchConfig,
-  loadLaunchConfig,
-} from "../ait/launchConfig";
+import { LAUNCH_CONFIG } from "../ait/launchConfig";
 import { getDebugSessionTotalCards } from "../debug/sessionConfig";
 import { useProfile } from "../state/profileContext";
 import { useSettings } from "../state/settingsContext";
@@ -126,7 +122,6 @@ export function GameScreen({
   const { soundEnabled, toggleSound, haptic } = useSettings();
   const { t } = useI18n();
 
-  const [launchConfig, setLaunchConfig] = useState(getDefaultLaunchConfig);
   const [debugTotalCards] = useState(getDebugSessionTotalCards);
   const [mode, setMode] = useState<GameMode>(initialMode);
   const [stageId, setStageId] = useState<number | null>(initialStageId);
@@ -229,7 +224,7 @@ export function GameScreen({
   const [penaltyBump, setPenaltyBump] = useState(0);
 
   const { ready: adReady, show: showAd } = useInterstitialAd(
-    launchConfig.interstitialAdEnabled,
+    LAUNCH_CONFIG.interstitialAdEnabled,
   );
   // 게임 화면이 살아있는 동안 화면 항상 켜짐.
   useScreenAwake(true);
@@ -316,21 +311,6 @@ export function GameScreen({
   }, [symbolPack]);
 
   useEffect(() => {
-    let cancelled = false;
-    void loadCachedLaunchConfig().then((config) => {
-      if (cancelled || config === null) return;
-      setLaunchConfig(config);
-    });
-    void loadLaunchConfig().then((config) => {
-      if (cancelled) return;
-      setLaunchConfig(config);
-    });
-    return () => {
-      cancelled = true;
-    };
-  }, []);
-
-  useEffect(() => {
     if (soundEnabled) {
       preloadEffectSounds();
     } else {
@@ -384,7 +364,7 @@ export function GameScreen({
 
     const decision = decideSubmission({
       mode,
-      leaderboardEnabled: launchConfig.leaderboardEnabled,
+      leaderboardEnabled: LAUNCH_CONFIG.leaderboardEnabled,
       powerUpUseCount,
       dailyAlreadySubmitted: dailySubmitted,
       archivedDaily,
@@ -467,7 +447,6 @@ export function GameScreen({
     dailySubmitted,
     difficulty.id,
     haptic,
-    launchConfig.leaderboardEnabled,
     maxCombo,
     mode,
     powerUpUseCount,
@@ -485,7 +464,7 @@ export function GameScreen({
     if (status !== "finished" || resultSeconds === null) return;
     const decision = decideSubmission({
       mode,
-      leaderboardEnabled: launchConfig.leaderboardEnabled,
+      leaderboardEnabled: LAUNCH_CONFIG.leaderboardEnabled,
       powerUpUseCount,
       dailyAlreadySubmitted: dailySubmitted,
       archivedDaily,
@@ -511,7 +490,7 @@ export function GameScreen({
         }
       });
     }
-    if (launchConfig.reviewRequestEnabled && !reviewRequestedRef.current) {
+    if (LAUNCH_CONFIG.reviewRequestEnabled && !reviewRequestedRef.current) {
       reviewRequestedRef.current = true;
       void requestReviewIfSupported();
     }
@@ -519,8 +498,6 @@ export function GameScreen({
     archivedDaily,
     dailyDateString,
     dailySubmitted,
-    launchConfig.leaderboardEnabled,
-    launchConfig.reviewRequestEnabled,
     mode,
     powerUpUseCount,
     resultSeconds,
@@ -545,8 +522,8 @@ export function GameScreen({
         ready: adReady,
         state: getInterstitialAdPolicyState(),
         config: {
-          minIntervalSeconds: launchConfig.interstitialMinIntervalSeconds,
-          freeGames: launchConfig.interstitialFreeGames,
+          minIntervalSeconds: LAUNCH_CONFIG.interstitialMinIntervalSeconds,
+          freeGames: LAUNCH_CONFIG.interstitialFreeGames,
         },
         show: showAd,
       }),
@@ -554,8 +531,6 @@ export function GameScreen({
     retryGame();
   }, [
     adReady,
-    launchConfig.interstitialFreeGames,
-    launchConfig.interstitialMinIntervalSeconds,
     retryGame,
     showAd,
     soundEnabled,
@@ -755,7 +730,7 @@ export function GameScreen({
         remaining={remaining}
         elapsedSeconds={elapsedSeconds}
         soundEnabled={soundEnabled}
-        leaderboardEnabled={launchConfig.leaderboardEnabled}
+        leaderboardEnabled={LAUNCH_CONFIG.leaderboardEnabled}
         leaderboardStatus={leaderboardStatus}
         leaderboardMessage={leaderboardMessage}
         onToggleSound={toggleSound}
@@ -1020,7 +995,7 @@ export function GameScreen({
         onShare={handleShare}
         onPlayClassic={handlePlayClassic}
         leaderboardEnabled={
-          launchConfig.leaderboardEnabled &&
+          LAUNCH_CONFIG.leaderboardEnabled &&
           mode !== "challenge" &&
           mode !== "stage"
         }

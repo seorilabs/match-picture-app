@@ -49,8 +49,9 @@ on:
 
 permissions:
   contents: read
-  packages: read
   id-token: write
+  # org 재사용 워크플로우가 자체 선언한 권한이라 caller도 같이 부여해야 한다.
+  packages: read
 
 jobs:
   google-play:
@@ -66,9 +67,6 @@ jobs:
       track: ${{ inputs.track }}
       release_status: ${{ inputs.release_status }}
       package_manager: npm
-      # @seorilabs/platform-sdk는 GitHub Packages(비공개)에서 받는다.
-      npm_registry_url: https://npm.pkg.github.com
-      npm_scope: "@seorilabs"
       java_version: "21"
       android_dir: android
       prepare_script: scripts/prepare-native-release.mjs

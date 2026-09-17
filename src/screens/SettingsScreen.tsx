@@ -7,7 +7,7 @@ import { CoinBadge } from "../components/CoinBadge";
 import { StatsModal } from "../components/StatsModal";
 import { TutorialModal } from "../components/TutorialModal";
 import { SUPPORTED_LOCALES, type Locale } from "../i18n/messages";
-import { APP_VERSION } from "../platform/config";
+import { APP_VERSION } from "../app/version";
 
 const LOCALE_LABELS: Record<Locale, string> = {
   ko: "한국어",

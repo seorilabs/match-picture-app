@@ -34,13 +34,7 @@ Play 공개 listing이 `No data collected`로 남아 있는 동안에도 앱은 
 | --- | --- | --- | --- | --- |
 | App activity / App interactions | O | X | Analytics | `src/firebase/analytics.ts`, `src/firebase/gameEvents.ts` |
 | App info and performance / Crash logs | O | X | Analytics | `src/firebase/errorReporter.ts`, `src/app/ErrorBoundary.tsx` |
-| Device or other IDs | O | X | Analytics, 광고 | `src/firebase/remoteConfig.ts`, `src/ait/ads.ts` |
+| Device or other IDs | O | X | Analytics, 광고 | `src/firebase/app.ts`, `src/ait/ads.ts` |
 
 전송 구간 암호화(TLS)는 Firebase/AppsInToss SDK 기본 동작이며, 계정 시스템이 없어
 삭제 요청 대상 개인 데이터는 보관하지 않는다(로컬 진행 상태는 앱 삭제로 제거).
-
-## Presence heartbeat (#74)
-
-`@seorilabs/platform-sdk`의 Presence는 기본 비활성(`VITE_PLATFORM_PRESENCE` 미설정)이라 네트워크 호출이 없습니다.
-활성화하면 표면(`platform`)과 출시 버전(`appVersion`)만 전송하며 사용자 ID·광고 ID·세션 ID 등 PII는 싣지 않습니다.
-활성 릴리스를 낼 때 이 문서와 `ops/google-play-data-safety.json`의 공시 항목을 함께 재검토하세요.
