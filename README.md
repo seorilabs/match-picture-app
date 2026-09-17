@@ -44,6 +44,7 @@ CI/CD는 Seorilabs org 재사용 워크플로우(`seorilabs/.github/.github/work
 | `deploy-all.yml` | dispatch | repo caller 2종 | 동일 stable SemVer 태그를 AIT와 Google Play에 배포 |
 | `release-tag.yml` | dispatch | `release-tag.yml` | 명시적 SemVer 릴리즈 태그 생성 |
 | `cleanup-actions-storage.yml` | dispatch | `cleanup-actions-storage.yml` | Actions 아티팩트/캐시 정리 |
+| `init-release-version-ledger.yml` | dispatch | `init-release-version-ledger.yml` | 릴리스 번호 원장 초기화. 저장소당 한 번만 실행하며, Android `versionCode`를 순차 할당할 기준 번호를 정합니다 |
 
 main push/PR은 정적 체크만 돌고, 마켓 배포는 명시적 dispatch로만 실행됩니다. Web/AIT와 태그 해석은 ARC 러너(`seorilabs-rpi-arm64`), Android release는 x64 Linux로 분리됩니다. Apple archive·upload는 GitHub Actions macOS 러너를 쓰지 않고 Xcode Cloud가 표준 실행 환경입니다. `deploy-app-store.yml`은 `workflow_call`이 없는 비활성 human gate이고, 수동 dispatch하면 빌드 없이 안내 후 실패합니다. 파일 자체는 Backoffice의 마켓 타깃 감지(`appstore`) 때문에 남겨 둡니다.
 
