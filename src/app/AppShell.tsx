@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useState } from "react";
 
 import { TabBar, type TabId } from "./TabBar";
 import { HomeScreen } from "../screens/HomeScreen";
@@ -11,11 +11,6 @@ import {
   type GameMode,
 } from "../game/mode";
 import { useBackHandler } from "../native/backButton";
-import { useVisibleCallback } from "../ait/visibility";
-import {
-  resumePlatformPresence,
-  stopPlatformPresence,
-} from "../firebase/auth";
 
 interface GameEntry {
   mode: GameMode;
@@ -26,16 +21,6 @@ interface GameEntry {
 export function AppShell() {
   const [activeTab, setActiveTab] = useState<TabId>("home");
 
-  // Presence heartbeat lifecycle: 복귀 시 재개, 앱 이탈 시 정지.
-  // 비활성(기본)이면 두 호출 모두 no-op이라 네트워크가 발생하지 않는다.
-  useVisibleCallback(resumePlatformPresence);
-  useEffect(() => {
-    window.addEventListener("pagehide", stopPlatformPresence);
-    return () => {
-      window.removeEventListener("pagehide", stopPlatformPresence);
-      stopPlatformPresence();
-    };
-  }, []);
   // 도전장 파라미터는 앱 시작 시 한 번만 소비한다(쿼리는 즉시 주소에서 제거).
   const [challengeParams] = useState(consumeChallengeParamsFromLocation);
   const [game, setGame] = useState<GameEntry | null>(() =>

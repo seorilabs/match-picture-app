@@ -70,7 +70,7 @@ export async function showInterstitialAdIfAllowed({
 }
 
 /**
- * 전면 광고 빈도 캡은 RemoteConfig 설명대로 "앱 세션" 단위 계약이다.
+ * 전면 광고 빈도 캡은 `LAUNCH_CONFIG` 설명대로 "앱 세션" 단위 계약이다.
  * 게임 화면이 마운트/언마운트를 반복해도 상태가 유지되도록 모듈 스코프에 보관한다.
  * (영속 저장은 하지 않는다. 앱 프로세스를 다시 띄우면 초기화되는 것이 맞다.)
  */

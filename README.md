@@ -116,17 +116,19 @@ node scripts/generate-food-pack.mjs
 
 새 테마를 추가하려면 57개 에셋(`001`~`057`)을 `public/` 아래 디렉토리에 두고 `src/symbols/packs.ts`의 `SYMBOL_PACKS`에 항목을 추가하면 됩니다. 덱/룰 로직은 심볼 ID만 다루므로 코드 변경은 매니페스트 한 줄입니다.
 
-출시 후 기능 kill-switch와 전면 광고 빈도는 **Firebase Remote Config**(프로젝트 `match-picture-app`)로 제어합니다. 정본은 `remoteconfig.template.json`이고, 반영은 `firebase deploy --only remoteconfig`입니다. RC를 읽지 못하는 환경에서는 `src/ait/launchConfig.ts`의 기본값으로 떨어집니다.
+## 운영 스위치
 
-| 파라미터 | 타입 | 기본값 | 설명 |
-| --- | --- | --- | --- |
-| `leaderboardEnabled` | BOOLEAN | `true` | 리더보드 노출/제출 kill-switch |
-| `reviewRequestEnabled` | BOOLEAN | `true` | 앱 리뷰 요청 kill-switch |
-| `interstitialAdEnabled` | BOOLEAN | `true` | 전면 광고 kill-switch |
-| `interstitialMinIntervalSeconds` | NUMBER | `120` | 전면 광고 최소 노출 간격(초) |
-| `interstitialFreeGames` | NUMBER | `2` | 세션 시작 후 전면 광고 면제 게임 수 |
+기능 kill-switch와 전면 광고 빈도는 `src/ait/launchConfig.ts`의 **빌드 타임 상수**입니다. 이 앱의 유일한 백엔드 의존은 GA4 계측이라 원격 설정 소스를 두지 않습니다.
 
-전면 광고를 긴급 중단하려면 `interstitialAdEnabled`를 `false`로 바꿔 배포하면 되고, 재배포 없이 빈도만 조절하려면 `interstitialMinIntervalSeconds`/`interstitialFreeGames`를 올립니다. kill-switch 전파를 위해 클라이언트 `minimumFetchIntervalMillis`는 1시간입니다(`src/firebase/remoteConfig.ts`).
+| 상수 | 기본값 | 설명 |
+| --- | --- | --- |
+| `leaderboardEnabled` | `true` | 리더보드 노출/제출 |
+| `reviewRequestEnabled` | `true` | 앱 리뷰 요청 |
+| `interstitialAdEnabled` | `true` | 전면 광고 노출 |
+| `interstitialMinIntervalSeconds` | `120` | 전면 광고 최소 노출 간격(초) |
+| `interstitialFreeGames` | `2` | 세션 시작 후 전면 광고 면제 게임 수 |
+
+값을 바꾸려면 상수를 수정하고 재배포해야 합니다. **원격으로 끌 수 없으므로 광고 사고 대응에는 스토어 심사 시간이 포함됩니다.**
 
 개발 서버 세션에서만 한 번 맞추면 클리어되게 하려면 현재 URL에 `debugTotalCards=1`을 붙입니다. 이 값은 `npm run dev`에서만 동작하고 production build에서는 무시됩니다.
 
@@ -153,18 +155,17 @@ location.reload();
 ```
 src/
   App.tsx              Provider 트리(ErrorBoundary / i18n / 설정 / 프로필)
-  app/                 탭 셸, 루트 에러 경계
+  app/                 탭 셸, 루트 에러 경계, 앱 버전 상수
   components/          카드 UI, HUD, 모달 등 프레젠테이션 컴포넌트
   screens/             홈(정원)·게임·상점·미션·설정 화면
   game/                Deck 알고리즘 / 게임 룰 / 배치 / 난이도 / 스테이지 / 제출 정책 + 단위 테스트
   state/               프로필·미션·정원·설정 상태(순수 로직 + Provider)
   ait/                 Apps in Toss 브릿지 어댑터(스토리지, 리더보드, 광고, 리뷰 등)
   native/              Capacitor 전용 어댑터(하드웨어 뒤로가기)
-  platform/            Seorilabs Platform 세션 교환 로직
-  firebase/            Analytics / Remote Config / 인증 진입점
+  firebase/            GA4 Analytics 진입점
 public/symbols/        Unity Resources/NotoEmoji에서 가져온 심볼 PNG
 public/audio/          효과음·BGM(scripts/generate-audio.mjs로 생성)
-ops/                   운영 문서(Play 데이터 안전 공시 source-of-truth 등)
+ops/                   운영 문서(Play 데이터 안전 공시 source-of-truth)
 ```
 
 ## 참고 링크

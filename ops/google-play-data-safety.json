@@ -4,7 +4,7 @@
     "package_name": "com.github.magicsih.MatchPictureUnity",
     "listing": "https://play.google.com/store/apps/details?id=com.github.magicsih.MatchPictureUnity"
   },
-  "reviewed_on": "2026-08-26",
+  "reviewed_on": "2026-09-18",
   "no_data_collected": false,
   "data_shared_with_third_parties": false,
   "collection": [
@@ -46,7 +46,7 @@
       "optional": false,
       "purposes": ["Analytics", "Advertising or marketing"],
       "sdk": "Firebase Analytics, Firebase Remote Config, AppsInToss 광고(전면형)",
-      "evidence": "src/firebase/analytics.ts, src/firebase/remoteConfig.ts, src/ait/ads.ts"
+      "evidence": "src/firebase/analytics.ts, src/firebase/app.ts, src/ait/ads.ts"
     }
   ],
   "security_practices": {

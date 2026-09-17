@@ -41,7 +41,6 @@ on:
 
 permissions:
   contents: read
-  packages: read
 
 jobs:
   ait:
@@ -55,9 +54,6 @@ jobs:
       memo: ${{ inputs.memo }}
       ait_dir: "."
       package_manager: npm
-      # @seorilabs/platform-sdk는 GitHub Packages(비공개)에서 받는다.
-      npm_registry_url: https://npm.pkg.github.com
-      npm_scope: "@seorilabs"
       install_command: "npm ci"
       # 광고 식별자가 비면 광고 없는 빌드가 조용히 나가므로 릴리즈에서 막는다.
       require_ad_group_id: true
