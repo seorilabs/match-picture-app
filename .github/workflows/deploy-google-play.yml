@@ -50,6 +50,8 @@ on:
 permissions:
   contents: read
   id-token: write
+  # org 재사용 워크플로우가 자체 선언한 권한이라 caller도 같이 부여해야 한다.
+  packages: read
 
 jobs:
   google-play:
