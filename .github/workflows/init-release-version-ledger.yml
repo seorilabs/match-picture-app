@@ -1,0 +1,38 @@
+# 릴리스 번호 원장 초기화. 저장소당 한 번만 실행한다.
+# Android versionCode는 태그 파생이 아니라 이 원장이 순차 할당한다.
+# 기준 번호를 추측하지 않는다. 검증된 근거가 없으면 NEEDS_INPUT으로 멈춘다.
+name: Initialize Release Version Ledger
+
+on:
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: "판정만 하고 원장을 만들지 않는다"
+        type: boolean
+        default: true
+      play_readback_base64:
+        description: "read-google-play-version-codes.py 결과 JSON의 base64 (legacy 앱만)"
+        type: string
+        required: false
+        default: ""
+      attestation_base64:
+        description: "사람이 관측한 최대 versionCode 증명 JSON의 base64"
+        type: string
+        required: false
+        default: ""
+      accept_attestation:
+        description: "attestation을 기준 번호 근거로 받아들인다"
+        type: boolean
+        default: false
+
+permissions:
+  contents: write
+
+jobs:
+  initialize:
+    uses: seorilabs/.github/.github/workflows/init-release-version-ledger.yml@main
+    with:
+      dry_run: ${{ inputs.dry_run }}
+      play_readback_base64: ${{ inputs.play_readback_base64 }}
+      attestation_base64: ${{ inputs.attestation_base64 }}
+      accept_attestation: ${{ inputs.accept_attestation }}
