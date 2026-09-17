@@ -54,7 +54,7 @@ permissions:
 
 jobs:
   google-play:
-    uses: seorilabs/.github/.github/workflows/rn-deploy-google-play.yml@9afa357f9ba6c8d6a813c7cec7ad3d35c626bdd5
+    uses: seorilabs/.github/.github/workflows/rn-deploy-google-play.yml@main
     secrets:
       FIREBASE_ANDROID_GOOGLE_SERVICES_JSON_BASE64: ${{ secrets.FIREBASE_ANDROID_GOOGLE_SERVICES_JSON_BASE64 }}
       GOOGLE_PLAY_UPLOAD_KEYSTORE_BASE64: ${{ secrets.GOOGLE_PLAY_UPLOAD_KEYSTORE_BASE64 }}
