@@ -25,4 +25,4 @@ jobs:
       delete_artifacts: ${{ inputs.delete_artifacts }}
       delete_caches: ${{ inputs.delete_caches }}
       dry_run: ${{ inputs.dry_run }}
-      runs_on: ${{ github.event.repository.private && 'seorilabs-rpi-arm64' || 'ubuntu-latest' }}
+      runs_on: ubuntu-latest
