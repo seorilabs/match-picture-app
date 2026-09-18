@@ -1,13 +1,13 @@
 {
   "schemaVersion": 1,
   "release": {
-    "lastTag": "v1.0.17",
-    "lastSourceSha": "8a4794dad2e534dd9888557caec43dd4191de92a",
-    "marketingVersion": "1.0.17"
+    "lastTag": null,
+    "lastSourceSha": null,
+    "marketingVersion": null
   },
   "android": {
     "authority": "github-ledger",
-    "lastVersionCode": 1001000017,
+    "lastVersionCode": 15,
     "legacyFallbackSealed": true
   },
   "ios": {
@@ -16,30 +16,14 @@
     "lastObservedTag": null
   },
   "provenance": {
-    "initializedAt": "2026-09-17T16:54:17Z",
+    "initializedAt": "2026-09-18T05:48:03Z",
     "initializedBy": "release-version-ledger-init-v1",
-    "initializedFromWorkflowSha": "8cd3684077b368b8ffd768e98781d4772b43ae73",
+    "initializedFromWorkflowSha": "0dd3212febffc09175ebae9461f2a20291e4bdf2",
     "authorityRevision": "26721fdbf3cdde6da01b8af05f7d867bfe71a40e7180f1bc1f6c903df4aa9422",
     "baseline": {
-      "androidVersionCode": 1001000016,
+      "androidVersionCode": 15,
       "rule": "max-of-verified-sources",
       "sources": [
-        {
-          "kind": "tag-receipt",
-          "androidVersionCode": 1001000015,
-          "tag": "v1.0.15",
-          "tagObject": "9988aeeb498f1b4724a32161b30c810e1692abcf",
-          "sourceSha": "bc65c91213e610660b4aee62e38ddbb221dad0f1",
-          "receiptAuthorityRevision": "5daeca364a98da1f7bdcca32d31aeba51caeaf2c1f7fc4abf7365f023962e4db"
-        },
-        {
-          "kind": "tag-receipt",
-          "androidVersionCode": 1001000016,
-          "tag": "v1.0.16",
-          "tagObject": "9219b3d90b8e47b123eb81d86ef626544a7e802c",
-          "sourceSha": "fc002fda6158530890763b051542481bc1de0b2d",
-          "receiptAuthorityRevision": "5daeca364a98da1f7bdcca32d31aeba51caeaf2c1f7fc4abf7365f023962e4db"
-        },
         {
           "kind": "google-play-bundles-list",
           "androidVersionCode": 15,
