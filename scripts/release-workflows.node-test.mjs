@@ -89,3 +89,20 @@ test("AIT caller의 artifact_path는 단일 .ait glob이다", () => {
   assert.match(glob, /\.ait$/, `단일 .ait glob이어야 한다: ${glob}`);
   assert.doesNotMatch(glob, /\*\*/, `재귀 glob은 여러 개로 확장된다: ${glob}`);
 });
+
+test("Google Play caller는 package_name을 정본과 같은 값으로 넘긴다", () => {
+  // org 재사용 workflow는 빌드된 AAB의 package identity를 이 값과 대조하고,
+  // 비어 있으면 업로드를 거부한다("Backoffice package_name binding이 없다").
+  // 서명까지 끝난 뒤 마지막 step에서 실패하므로 정적으로 막는다.
+  const play = workflow("deploy-google-play.yml");
+
+  const match = /^\s*package_name:\s*(.*)$/m.exec(play);
+  assert.notEqual(match, null, "package_name을 명시해야 한다");
+
+  const declared = match[1].trim().replace(/^["']|["']$/g, "");
+  const config = JSON.parse(
+    readFileSync(new URL("../play-store/google-play.config.json", import.meta.url), "utf8"),
+  );
+
+  assert.equal(declared, config.packageName, "caller와 google-play.config.json이 어긋난다");
+});
