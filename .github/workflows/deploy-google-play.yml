@@ -66,6 +66,10 @@ jobs:
       upload: ${{ inputs.upload }}
       track: ${{ inputs.track }}
       release_status: ${{ inputs.release_status }}
+      # 빌드된 AAB의 package identity를 업로드 직전에 대조하는 값이다. 비우면 org
+      # 재사용 워크플로우가 업로드를 거부한다. play-store/google-play.config.json의
+      # packageName, android/app/build.gradle의 applicationId와 같아야 한다.
+      package_name: "com.github.magicsih.MatchPictureUnity"
       package_manager: npm
       java_version: "21"
       android_dir: android

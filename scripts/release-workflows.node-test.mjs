@@ -89,3 +89,45 @@ test("AIT caller의 artifact_path는 단일 .ait glob이다", () => {
   assert.match(glob, /\.ait$/, `단일 .ait glob이어야 한다: ${glob}`);
   assert.doesNotMatch(glob, /\*\*/, `재귀 glob은 여러 개로 확장된다: ${glob}`);
 });
+
+/**
+ * caller job의 `with:` 블록에서만 입력값을 읽는다.
+ * 파일 전체를 훑으면 `with:`에서 빠진 뒤에도 다른 위치의 동명 키에 걸려
+ * 테스트가 회귀를 놓친다.
+ */
+function callerInput(file, job, key) {
+  let inJob = false;
+  let inWith = false;
+
+  for (const line of workflow(file).split("\n")) {
+    if (/^ {2}\S.*:\s*$/.test(line)) {
+      inJob = line.trim() === `${job}:`;
+      inWith = false;
+      continue;
+    }
+    if (inJob && /^ {4}\S.*:\s*$/.test(line)) {
+      inWith = line.trim() === "with:";
+      continue;
+    }
+    if (inJob && inWith) {
+      const match = new RegExp(`^ {6}${key}:\\s*(.*)$`).exec(line);
+      if (match !== null) return match[1].trim();
+    }
+  }
+  return null;
+}
+
+test("Google Play caller는 package_name을 정본과 같은 값으로 넘긴다", () => {
+  // org 재사용 workflow는 빌드된 AAB의 package identity를 이 값과 대조하고,
+  // 비어 있으면 업로드를 거부한다("Backoffice package_name binding이 없다").
+  // 서명까지 끝난 뒤 마지막 step에서 실패하므로 정적으로 막는다.
+  const value = callerInput("deploy-google-play.yml", "google-play", "package_name");
+  assert.notEqual(value, null, "jobs.google-play.with.package_name을 명시해야 한다");
+
+  const declared = value.replace(/^["']|["']$/g, "");
+  const config = JSON.parse(
+    readFileSync(new URL("../play-store/google-play.config.json", import.meta.url), "utf8"),
+  );
+
+  assert.equal(declared, config.packageName, "caller와 google-play.config.json이 어긋난다");
+});
