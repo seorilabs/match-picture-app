@@ -23,7 +23,7 @@ jobs:
   checks:
     uses: seorilabs/.github/.github/workflows/rn-static-checks.yml@main
     with:
-      runs_on: ${{ github.event.repository.private && 'seorilabs-rpi-arm64' || 'ubuntu-latest' }}
+      runs_on: ubuntu-latest
       package_manager: npm
       install_command: "npm ci"
       check_command: |

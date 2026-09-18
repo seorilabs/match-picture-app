@@ -19,7 +19,7 @@ permissions:
 jobs:
   disabled:
     name: App Store release needs an approved Xcode Cloud binding
-    runs-on: ${{ github.event.repository.private && 'seorilabs-rpi-arm64' || 'ubuntu-latest' }}
+    runs-on: ubuntu-latest
     timeout-minutes: 5
     steps:
       - shell: bash

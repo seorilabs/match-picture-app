@@ -38,7 +38,7 @@ concurrency:
 jobs:
   resolve:
     name: Resolve stable release tag
-    runs-on: ${{ github.event.repository.private && 'seorilabs-rpi-arm64' || 'ubuntu-latest' }}
+    runs-on: ubuntu-latest
     timeout-minutes: 10
     outputs:
       tag: ${{ steps.tag.outputs.tag }}
