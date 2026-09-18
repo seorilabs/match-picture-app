@@ -1,4 +1,4 @@
-# AIT(.ait) 빌드 + AppsInToss 배포 — ARC. org 재사용 워크플로우 호출.
+# AIT(.ait) 빌드 + AppsInToss 배포. org 재사용 워크플로우 호출.
 # dispatch 직접 실행 또는 deploy-all.yml에서 workflow_call.
 # 빌드는 저장소 루트(granite.config.ts)에서 실행. build_command에 AIT_APP_DISPLAY_NAME/
 # AIT_BRAND_ICON_URL(vars)을 명시적으로 주입한다 — granite.config.ts가 release build에서
@@ -20,6 +20,11 @@ on:
         type: string
         required: false
         default: ""
+      upload:
+        description: "false면 .ait 빌드만 하고 AppsInToss에 올리지 않는다(배포 경로 점검용)."
+        type: boolean
+        required: false
+        default: true
   workflow_call:
     inputs:
       release_tag:
@@ -30,6 +35,10 @@ on:
         type: string
         required: false
         default: ""
+      upload:
+        type: boolean
+        required: false
+        default: true
     # caller 는 secret 을 상속하지 않는다. 아래 이름만 1:1 로 명시 전달한다.
     secrets:
       APPS_IN_TOSS_API_KEY:
@@ -55,6 +64,7 @@ jobs:
     with:
       release_tag: ${{ inputs.release_tag }}
       memo: ${{ inputs.memo }}
+      upload: ${{ inputs.upload }}
       ait_dir: "."
       package_manager: npm
       install_command: "npm ci"
