@@ -1,4 +1,4 @@
-# Capacitor Android AAB + Google Play 업로드. Android release는 x64 Linux 재사용 워크플로우가 담당한다.
+# Godot Android AAB + Google Play 업로드. org 재사용 워크플로우 호출.
 name: Deploy Google Play
 
 on:
@@ -38,7 +38,7 @@ on:
         default: completed
     # caller 는 secret 을 상속하지 않는다. 아래 이름만 1:1 로 명시 전달한다.
     secrets:
-      FIREBASE_ANDROID_GOOGLE_SERVICES_JSON_BASE64:
+      GODOT_ANALYTICS_CONFIG_JSON_BASE64:
         required: false
       GOOGLE_PLAY_UPLOAD_KEYSTORE_BASE64:
         required: false
@@ -55,9 +55,9 @@ permissions:
 
 jobs:
   google-play:
-    uses: seorilabs/.github/.github/workflows/rn-deploy-google-play.yml@main
+    uses: seorilabs/.github/.github/workflows/godot-deploy-google-play.yml@main
     secrets:
-      FIREBASE_ANDROID_GOOGLE_SERVICES_JSON_BASE64: ${{ secrets.FIREBASE_ANDROID_GOOGLE_SERVICES_JSON_BASE64 }}
+      GODOT_ANALYTICS_CONFIG_JSON_BASE64: ${{ secrets.GODOT_ANALYTICS_CONFIG_JSON_BASE64 }}
       GOOGLE_PLAY_UPLOAD_KEYSTORE_BASE64: ${{ secrets.GOOGLE_PLAY_UPLOAD_KEYSTORE_BASE64 }}
       GOOGLE_PLAY_UPLOAD_KEYSTORE_PASSWORD: ${{ secrets.GOOGLE_PLAY_UPLOAD_KEYSTORE_PASSWORD }}
       GOOGLE_PLAY_UPLOAD_KEY_PASSWORD: ${{ secrets.GOOGLE_PLAY_UPLOAD_KEY_PASSWORD }}
@@ -68,9 +68,11 @@ jobs:
       release_status: ${{ inputs.release_status }}
       # 빌드된 AAB의 package identity를 업로드 직전에 대조하는 값이다. 비우면 org
       # 재사용 워크플로우가 업로드를 거부한다. play-store/google-play.config.json의
-      # packageName, android/app/build.gradle의 applicationId와 같아야 한다.
+      # packageName, export_presets.cfg의 package/unique_name과 같아야 한다.
       package_name: "com.github.magicsih.MatchPictureUnity"
-      package_manager: npm
-      java_version: "21"
-      android_dir: android
-      prepare_script: scripts/prepare-native-release.mjs
+      project_dir: godot
+      scripts_dir: tools
+      aab_name: match-picture-app
+      android_export_preset: Android
+      godot_version: "4.7.2"
+      godot_status: stable

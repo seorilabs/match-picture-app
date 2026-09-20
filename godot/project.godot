@@ -23,6 +23,7 @@ run/main_scene="res://scenes/main.tscn"
 ; 안드로이드 백키 기본값은 어디서 눌러도 앱을 끄는 것이다. 여기서 끄고
 ; src/ui/main.gd 가 원본 Unity 의 우선순위대로 화면을 한 단계씩 되돌린다.
 config/quit_on_go_back=false
+config/icon="res://assets/icons/launcher/icon-1024.png"
 config/features=PackedStringArray("4.7", "GL Compatibility")
 boot_splash/bg_color=Color(0.270588, 0.580392, 0.709804, 1)
 boot_splash/show_image=true

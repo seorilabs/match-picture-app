@@ -3,11 +3,12 @@
   "private": true,
   "description": "같은그림찾기 — 도블 방식 심볼 찾기 타임어택. Godot 4.7 + AppsInToss/Google Play/App Store.",
   "scripts": {
-    "check": "npm run check:godot && npm run check:core-boundary && npm run check:sfx && npm run check:data-safety",
+    "check": "npm run check:godot && npm run check:core-boundary && npm run check:sfx && npm run check:data-safety && npm run check:workflow-contract",
     "check:godot": "bash scripts/godot_quality_gate.sh --project godot --smoke-scene res://tests/core_test_runner.tscn --smoke-scene res://tests/test_runner.tscn --smoke-scene res://tests/play_through.tscn",
     "check:core-boundary": "python3 tools/check_core_boundary.py",
     "check:sfx": "python3 tools/generate_sfx.py --check",
     "check:data-safety": "python3 tools/check_data_safety.py",
+    "check:workflow-contract": "python3 tools/check_release_workflow_contract.py",
     "capture": "godot --path godot res://tests/capture_screens.tscn",
     "gen:sfx": "python3 tools/generate_sfx.py"
   }
