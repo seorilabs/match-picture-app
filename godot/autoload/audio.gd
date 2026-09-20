@@ -39,6 +39,10 @@ func play_wrong() -> void:
 func _play(player: AudioStreamPlayer) -> void:
 	if _muted or player == null or player.stream == null:
 		return
+	# 헤드리스에서는 소리를 내지 않는다. 재생 중인 채로 종료하면
+	# "resources still in use at exit" 가 찍히고 CI 로그 게이트가 실패로 처리한다.
+	if Platform.surface() == Platform.Surface.HEADLESS:
+		return
 	player.play()
 
 

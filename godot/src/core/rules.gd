@@ -54,6 +54,12 @@ const HUD_HEIGHT := 100.0
 ## 카드를 그릴 때 곱하는 기본 배율. 원본 VerticalLayoutGroup 의 localScale 이다.
 const CARD_RENDER_SCALE := 0.9
 
+## 상대 카드와 내 카드 사이 간격.
+const CARD_GAP := 40.0
+
+## 카드 좌우로 남기는 최소 여백.
+const CARD_SIDE_MARGIN := 16.0
+
 
 ## 타이머 표시 문자열. 원본은 소수점을 버리고 999 에서 고정했다.
 static func format_seconds(seconds: float) -> String:

@@ -46,10 +46,12 @@ func allows_sdk_calls() -> bool:
 
 
 func _detect() -> Surface:
-	if OS.has_feature("editor"):
-		return Surface.EDITOR
+	# headless 판정이 editor 보다 먼저다. CI 와 로컬 테스트는 에디터 바이너리를
+	# --headless 로 돌리므로, 순서를 바꾸면 헤드리스가 EDITOR 로 잡힌다.
 	if DisplayServer.get_name() == "headless":
 		return Surface.HEADLESS
+	if OS.has_feature("editor"):
+		return Surface.EDITOR
 	match OS.get_name():
 		"Web":
 			return Surface.WEB

@@ -7,7 +7,7 @@ extends RefCounted
 ##
 ## 원본 `Assets/Scripts/GameSceneManager.cs` 의 진행을 그대로 옮겼다.
 
-signal round_started(round: MpRound)
+signal round_started(next_round: MpRound)
 signal judged(symbol: String, correct: bool)
 signal hint_started()
 signal finished(seconds: float)

@@ -11,6 +11,7 @@ func _ready() -> void:
 	print("[smoke] 시작")
 
 	_check_autoloads()
+	_check_surface()
 	_check_fonts()
 	_check_audio()
 
@@ -27,6 +28,15 @@ func _check_autoloads() -> void:
 	_check(Ui != null, "Ui autoload 가 있다")
 	_check(Audio != null, "Audio autoload 가 있다")
 	_check(Locale.SUPPORTED.has(Locale.current_locale()), "로케일이 지원 목록 안에 있다")
+
+
+## CI 와 로컬 테스트는 에디터 바이너리를 --headless 로 돌린다. Platform 이 이것을
+## EDITOR 로 잡으면 어댑터가 no-op 으로 빠지지 않아, 헤드리스에서 효과음이 재생된 채
+## 종료되고 "resources still in use at exit" 가 찍힌다. 실제로 그렇게 깨진 적이 있다.
+func _check_surface() -> void:
+	_check(Platform.surface() == Platform.Surface.HEADLESS, "헤드리스를 HEADLESS 로 판정한다")
+	_check(not Platform.is_web(), "헤드리스는 웹이 아니다")
+	_check(not Platform.is_ait(), "헤드리스는 앱인토스가 아니다")
 
 
 ## 한글 폰트가 붙지 않으면 앱인토스에서 라벨이 통째로 두부(□)가 된다.
