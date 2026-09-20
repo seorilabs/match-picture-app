@@ -38,6 +38,11 @@ func _ready() -> void:
 	else:
 		_tutorial.show_overlay()
 
+	# 앱인토스에서는 하드웨어 백이 래퍼를 거쳐 들어온다.
+	Platform.set_ait_back_handler(go_back)
+	# 첫 화면이 섰으니 래퍼의 로딩 덮개를 걷는다.
+	Platform.notify_ait_ready()
+
 
 func _build_background() -> void:
 	var layer := CanvasLayer.new()

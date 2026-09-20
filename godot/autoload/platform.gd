@@ -44,13 +44,43 @@ func is_ait() -> bool:
 ##
 ## 값은 CSS 뷰포트 픽셀이라 그대로 쓰면 안 된다. MpSafeArea 가 논리 뷰포트로 환산한다.
 func ait_safe_area_payload() -> Dictionary:
-	if not is_ait():
-		return {}
-	var bridge: Variant = JavaScriptBridge.get_interface("__mpBridge")
+	var bridge := _bridge()
 	if bridge == null:
 		return {}
 	var payload: Variant = bridge.safeArea()
 	return payload if payload is Dictionary else {}
+
+
+## 앱인토스 래퍼가 걸어 둔 로딩 덮개를 걷는다. 첫 화면을 세운 뒤 한 번 부른다.
+##
+## 래퍼가 engine.startGame() 의 Promise 를 기다리지 않는 이유가 여기 있다. 그 Promise 는
+## 게임이 실제로 화면을 세운 시점과 일치하지 않아서, 커스텀 Web 템플릿에서는 게임이
+## 멀쩡히 도는데도 덮개가 남았다.
+func notify_ait_ready() -> void:
+	var bridge := _bridge()
+	if bridge != null:
+		bridge.notifyReady()
+
+
+## 안드로이드 하드웨어 백을 래퍼에서 받아 게임으로 넘긴다.
+##
+## 웹에서는 NOTIFICATION_WM_GO_BACK_REQUEST 가 오지 않으므로 이 경로가 유일하다.
+## 콜백 참조를 들고 있지 않으면 수거되어 눌러도 아무 일도 일어나지 않는다.
+var _back_callback: JavaScriptObject = null
+
+
+func set_ait_back_handler(handler: Callable) -> void:
+	var bridge := _bridge()
+	if bridge == null:
+		return
+	_back_callback = JavaScriptBridge.create_callback(func(_args: Array) -> void: handler.call())
+	bridge.setBackHandler(_back_callback)
+
+
+func _bridge() -> JavaScriptObject:
+	if not is_ait():
+		return null
+	return JavaScriptBridge.get_interface("__mpBridge")
 
 
 ## 헤드리스와 에디터에서는 SDK 호출을 전부 no-op 으로 돌린다.
