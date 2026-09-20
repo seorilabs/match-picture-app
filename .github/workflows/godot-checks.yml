@@ -38,3 +38,4 @@ jobs:
           --smoke-scene res://tests/play_through.tscn
         python3 tools/check_core_boundary.py
         python3 tools/generate_sfx.py --check
+        python3 tools/check_data_safety.py

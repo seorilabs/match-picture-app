@@ -16,6 +16,7 @@ func _ready() -> void:
 	_check_audio()
 	_check_translations()
 	_check_storage()
+	_check_adapter_wiring()
 
 	print("[smoke] 검사 %d건, 실패 %d건" % [_checks, _failures.size()])
 	for failure in _failures:
@@ -54,6 +55,28 @@ func _check_fonts() -> void:
 func _check_audio() -> void:
 	_check(ResourceLoader.exists(Audio.CORRECT_PATH), "정답 효과음 파일이 있다")
 	_check(ResourceLoader.exists(Audio.WRONG_PATH), "오답 효과음 파일이 있다")
+
+
+## 어댑터 주입이 화면 조립보다 앞에 있어야 한다.
+##
+## 순서가 뒤집히면 세이브를 읽거나 화면을 만들면서 나가는 이벤트가 보낼 곳이 없어
+## 조용히 사라진다. 조직 내 다른 게임에서 이벤트가 28일간 0건이던 원인이 이것이었다.
+## 실행해서는 잡기 어려운 종류라 소스를 그대로 읽어 확인한다.
+func _check_adapter_wiring() -> void:
+	var source := FileAccess.get_file_as_string("res://src/ui/main.gd")
+	_check(not source.is_empty(), "main.gd 를 읽을 수 있다")
+	if source.is_empty():
+		return
+
+	var ready_at := source.find("func _ready() -> void:")
+	var install_at := source.find("_install_adapters()", ready_at)
+	var build_at := source.find("_build_game_layer()", ready_at)
+	var open_event_at := source.find("MpAnalyticsEvents.GAME_OPEN", ready_at)
+
+	_check(ready_at >= 0, "main.gd 에 _ready 가 있다")
+	_check(install_at > ready_at, "_ready 가 어댑터를 주입한다")
+	_check(build_at > install_at, "어댑터 주입이 화면 조립보다 앞에 있다")
+	_check(open_event_at > install_at, "game_open 이 어댑터 주입 뒤에 나간다")
 
 
 ## 세이브는 tmp 에 전부 쓴 뒤 rename 하고 직전 내용을 .bak 한 세대만 남긴다.

@@ -16,6 +16,7 @@ var _stage: Control
 var _opponent_card: MpCardView
 var _mine_card: MpCardView
 var _judge_mark: MpJudgeMark
+var _last_seconds := 0.0
 
 
 func _init(library: MpSymbolLibrary) -> void:
@@ -51,6 +52,15 @@ func _init(library: MpSymbolLibrary) -> void:
 	_stage.add_child(_judge_mark)
 
 	_stage.resized.connect(_layout_cards)
+
+
+## 결과 화면과 공유 문구가 쓰는 마지막 기록.
+func last_seconds() -> float:
+	return _last_seconds
+
+
+func wrong_count() -> int:
+	return _game.wrong_count() if _game != null else 0
 
 
 func start_new_game() -> void:
@@ -146,6 +156,7 @@ func _on_hint_started() -> void:
 
 
 func _on_finished(seconds: float) -> void:
+	_last_seconds = seconds
 	_mine_card.set_interactive(false)
 	_mine_card.stop_hints()
 	_hud.set_deck_label(_game.deck_label())

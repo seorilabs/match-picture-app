@@ -6,12 +6,15 @@ extends Control
 
 signal retry_pressed()
 signal share_pressed()
+signal leaderboard_pressed()
 signal settings_pressed()
 signal exit_pressed()
 
 var _seconds_label: Label
 var _best_label: Label
 var _panel: PanelContainer
+var _share_button: Button
+var _leaderboard_button: Button
 
 
 func _init() -> void:
@@ -51,10 +54,15 @@ func _init() -> void:
 	retry.pressed.connect(func() -> void: retry_pressed.emit())
 	column.add_child(retry)
 
-	var share := MpUiKit.make_button("RESULT_SHARE", MpUiKit.PANEL_BORDER)
-	share.add_theme_color_override("font_color", MpUiKit.TEXT_LIGHT)
-	share.pressed.connect(func() -> void: share_pressed.emit())
-	column.add_child(share)
+	_leaderboard_button = MpUiKit.make_button("RESULT_LEADERBOARD", MpUiKit.PANEL_BORDER)
+	_leaderboard_button.add_theme_color_override("font_color", MpUiKit.TEXT_LIGHT)
+	_leaderboard_button.pressed.connect(func() -> void: leaderboard_pressed.emit())
+	column.add_child(_leaderboard_button)
+
+	_share_button = MpUiKit.make_button("RESULT_SHARE", MpUiKit.PANEL_BORDER)
+	_share_button.add_theme_color_override("font_color", MpUiKit.TEXT_LIGHT)
+	_share_button.pressed.connect(func() -> void: share_pressed.emit())
+	column.add_child(_share_button)
 
 	var quit_button := MpUiKit.make_button("RESULT_EXIT", MpUiKit.PANEL_BORDER)
 	quit_button.add_theme_color_override("font_color", MpUiKit.TEXT_LIGHT)
@@ -67,7 +75,16 @@ func _init() -> void:
 	column.add_child(settings)
 
 
-func show_result(seconds: float, best_seconds: float, is_new_best: bool) -> void:
+## 순위표와 공유는 표면이 지원할 때만 그린다. 눌러도 아무 일이 없는 버튼을 두지 않는다.
+func show_result(
+	seconds: float,
+	best_seconds: float,
+	is_new_best: bool,
+	leaderboard_available: bool = false,
+	share_available: bool = false
+) -> void:
+	_leaderboard_button.visible = leaderboard_available
+	_share_button.visible = share_available
 	_seconds_label.text = MpRules.format_seconds(seconds)
 	if is_new_best:
 		_best_label.text = "RESULT_NEW_BEST"

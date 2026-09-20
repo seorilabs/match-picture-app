@@ -44,7 +44,7 @@ func is_ait() -> bool:
 ##
 ## 값은 CSS 뷰포트 픽셀이라 그대로 쓰면 안 된다. MpSafeArea 가 논리 뷰포트로 환산한다.
 func ait_safe_area_payload() -> Dictionary:
-	var bridge := _bridge()
+	var bridge := ait_bridge()
 	if bridge == null:
 		return {}
 	var payload: Variant = bridge.safeArea()
@@ -57,7 +57,7 @@ func ait_safe_area_payload() -> Dictionary:
 ## 게임이 실제로 화면을 세운 시점과 일치하지 않아서, 커스텀 Web 템플릿에서는 게임이
 ## 멀쩡히 도는데도 덮개가 남았다.
 func notify_ait_ready() -> void:
-	var bridge := _bridge()
+	var bridge := ait_bridge()
 	if bridge != null:
 		bridge.notifyReady()
 
@@ -70,14 +70,15 @@ var _back_callback: JavaScriptObject = null
 
 
 func set_ait_back_handler(handler: Callable) -> void:
-	var bridge := _bridge()
+	var bridge := ait_bridge()
 	if bridge == null:
 		return
 	_back_callback = JavaScriptBridge.create_callback(func(_args: Array) -> void: handler.call())
 	bridge.setBackHandler(_back_callback)
 
 
-func _bridge() -> JavaScriptObject:
+## 어댑터가 쓰는 브리지 손잡이. 앱인토스가 아니면 null 이다.
+func ait_bridge() -> JavaScriptObject:
 	if not is_ait():
 		return null
 	return JavaScriptBridge.get_interface("__mpBridge")

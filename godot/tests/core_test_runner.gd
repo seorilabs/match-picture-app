@@ -32,6 +32,8 @@ func _ready() -> void:
 	_test_timer_semantics()
 	print("[core-test] > _test_best_record")
 	_test_best_record()
+	print("[core-test] > _test_analytics_contract")
+	_test_analytics_contract()
 
 	print("[core-test] 검사 %d건, 실패 %d건" % [_checks, _failures.size()])
 	for failure in _failures:
@@ -268,6 +270,46 @@ func _test_best_record() -> void:
 	check(fast > slow, "짧은 기록이 더 높은 점수가 된다")
 	check_eq(fast, 980000, "20초는 980000점이다")
 	check(MpBestRecord.to_leaderboard_score(2000.0) >= 0, "표시 상한을 넘겨도 점수가 음수가 되지 않는다")
+
+
+func _test_analytics_contract() -> void:
+	# 이름을 바꾸면 그때부터 쌓인 GA4 리포트가 조용히 끊긴다. 웹 구현에서 쓰던 이름을
+	# 그대로 승계했는지 못으로 박아 둔다.
+	check_eq(MpAnalyticsEvents.GAME_OPEN, "game_open", "game_open 이름 유지")
+	check_eq(MpAnalyticsEvents.LEVEL_START, "level_start", "level_start 이름 유지")
+	check_eq(MpAnalyticsEvents.LEVEL_END, "level_end", "level_end 이름 유지")
+	# GA4 앱 스트림의 예약어 ad_impression 을 피한 이름이다. 되돌리면 이벤트가 먹힌다.
+	check_eq(
+		MpAnalyticsEvents.INTERSTITIAL_AD_IMPRESSION,
+		"interstitial_ad_impression",
+		"전면광고 이벤트가 GA4 예약어를 피한 이름을 유지한다"
+	)
+
+	var names: Array[String] = []
+	var lengths_ok := true
+	var charset_ok := true
+	for name in MpAnalyticsEvents.ALLOWED_PARAMS:
+		names.append(name)
+		# GA4 이벤트 이름은 40자 이내, 영숫자와 밑줄만 쓴다.
+		if String(name).length() > 40:
+			lengths_ok = false
+		if not String(name).is_valid_identifier():
+			charset_ok = false
+	check(names.size() >= 11, "계약에 이벤트가 11개 이상 있다")
+	check(lengths_ok, "모든 이벤트 이름이 GA4 상한 40자 안에 있다")
+	check(charset_ok, "모든 이벤트 이름이 영숫자와 밑줄만 쓴다")
+
+	check(MpAnalyticsEvents.is_known("level_end"), "계약에 있는 이름을 안다")
+	check(not MpAnalyticsEvents.is_known("made_up_event"), "계약에 없는 이름은 모른다")
+
+	# 계약 밖 키는 걸러진다. 오타 하나로 GA4 에 쓰레기 차원이 생기면 되돌리기 어렵다.
+	var cleaned := MpAnalyticsEvents.sanitize(
+		MpAnalyticsEvents.LEVEL_END,
+		{"seconds": 23, "wrong_count": 1, "oops_typo": "x"}
+	)
+	check(cleaned.has("seconds") and cleaned.has("wrong_count"), "허용된 키는 남는다")
+	check(not cleaned.has("oops_typo"), "계약에 없는 키는 걸러진다")
+	check_eq(MpAnalyticsEvents.sanitize("made_up_event", {"a": 1}).size(), 0, "모르는 이벤트는 전부 걸러진다")
 
 
 func _rng() -> RandomNumberGenerator:

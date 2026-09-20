@@ -24,6 +24,11 @@ type MpBridge = {
   closeApp: () => void
   // 게임이 첫 화면을 세운 뒤 직접 부른다. 로딩 덮개를 걷는 신호다.
   notifyReady: () => void
+  leaderboardSupported: () => boolean
+  submitScore: (score: number) => string
+  openLeaderboard: () => string
+  shareSupported: () => boolean
+  shareText: (message: string) => string
 }
 
 declare global {
@@ -80,5 +85,10 @@ export function installMpBridge() {
     setBackHandler: (handler: () => void) => window.__mpNav?.setBackHandler(handler),
     closeApp: () => window.__mpNav?.closeApp(),
     notifyReady: () => readyResolve?.(),
+    leaderboardSupported: () => window.__mpGameCenter?.leaderboardSupported() ?? false,
+    submitScore: (score: number) => window.__mpGameCenter?.submitScore(score) ?? 'UNSUPPORTED',
+    openLeaderboard: () => window.__mpGameCenter?.openLeaderboard() ?? 'UNSUPPORTED',
+    shareSupported: () => window.__mpGameCenter?.shareSupported() ?? false,
+    shareText: (message: string) => window.__mpGameCenter?.shareText(message) ?? 'UNSUPPORTED',
   }
 }
