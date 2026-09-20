@@ -14,10 +14,21 @@ log_file="${log_dir}/godot-web-export.log"
 
 echo "[godot-web] exporting ${preset} to ${index_path}" >&2
 
+limit="${GODOT_COMMAND_TIMEOUT_SECONDS:-900}"
 set +e
-godot --headless --path "${project_dir}" --export-release "${preset}" "${index_path}" 2>&1 | tee "${log_file}"
+# 파스 에러가 나면 headless Godot 이 종료하지 않고 남는다. 명령마다 상한을 건다.
+if command -v timeout >/dev/null 2>&1; then
+  timeout --kill-after=10s "${limit}s" godot --headless --path "${project_dir}" --export-release "${preset}" "${index_path}" 2>&1 | tee "${log_file}"
+else
+  perl -e 'alarm shift; exec @ARGV' "${limit}" godot --headless --path "${project_dir}" --export-release "${preset}" "${index_path}" 2>&1 | tee "${log_file}"
+fi
 status="${PIPESTATUS[0]}"
 set -e
+
+if [ "${status}" -eq 124 ] || [ "${status}" -eq 137 ] || [ "${status}" -eq 142 ]; then
+  echo "[godot-web] export 가 ${limit}초 안에 끝나지 않아 강제 종료됐다. Log: ${log_file}" >&2
+  exit 1
+fi
 
 if [ "${status}" -ne 0 ]; then
   echo "[godot-web] export failed with exit ${status}. Log: ${log_file}" >&2
