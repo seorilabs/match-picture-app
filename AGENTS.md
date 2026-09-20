@@ -1,25 +1,42 @@
-# Codex Agent 지침
-
-이 파일은 `.cursor/rules/project-context.mdc`와 동일한 프로젝트 공통 지침입니다.
-프로젝트 수준 지침을 변경할 때는 두 파일을 함께 갱신합니다.
+# Agent 지침
 
 개인 환경의 절대 경로나 비공개 문서 위치는 `AGENTS.local.md`에만 기록합니다.
 `AGENTS.local.md`는 git에 커밋하지 않습니다.
 
 ## 프로젝트 컨텍스트
 
-이 프로젝트는 Unity 원본 프로젝트를 Apps in Toss WebView/Granite 기반 앱으로 포팅하는 작업입니다.
+2020년 Unity로 만든 「같은그림찾기」의 핵심 게임성만 Godot 4.7로 다시 구현한 것입니다.
 
-작업을 시작하기 전에 다음 컨텍스트를 우선 확인합니다.
+한 번 웹(React + Apps in Toss WebView)으로 포팅한 적이 있고, 그 뒤 자동 이슈 발굴이
+만든 이슈들이 일괄 반영되면서 정원·코인·상점·심볼팩·미션·스테이지·난이도 같은
+메타게임이 27가지 쌓였습니다. 원래 기획 정본은 단일 모드 / 난이도 없음 / 심볼 1종 /
+평가 지표는 클리어 시간 하나였고, 이 저장소는 그 기준선으로 되돌린 결과입니다.
+웹 구현은 git 히스토리에 남아 있습니다.
+
+작업을 시작하기 전에 다음을 확인합니다.
 
 - 원본 Unity 프로젝트: 로컬 위치는 `AGENTS.local.md`를 확인합니다.
 - 설계/계획 문서: Obsidian 볼트 루트 기준 `프로젝트/같은그림찾기`
-- Apps in Toss 문서 인덱스: `.cursor/skills/apps-in-toss.md`
 
 ## 작업 원칙
 
-- 기능을 구현하기 전에 원본 Unity 프로젝트의 실제 동작과 에셋 구조를 먼저 확인합니다.
-- 요구사항이나 구현 우선순위가 불분명하면 설계/계획 문서를 먼저 확인합니다.
-- 원본 소스와 Obsidian 문서는 참고용으로 다루며, 명시 요청이 없으면 수정하지 않습니다.
-- 현재 프로젝트의 구조, TypeScript/React/Vite 스타일, Apps in Toss WebView/Granite 제약에 맞춰 최소 범위로 반영합니다.
-- Apps in Toss 관련 API나 정책 판단이 필요하면 `.cursor/skills/apps-in-toss.md`와 공식 Apps in Toss 문서를 함께 확인합니다.
+- **기능을 더하기 전에 원본에 있었는지 확인합니다.** 없던 것을 더하려면 그 이유를
+  먼저 사용자와 합의합니다. 이 저장소가 존재하는 이유가 기능 덜어내기입니다.
+- 게임 규칙을 바꾸기 전에 원본 Unity의 실제 동작을 확인합니다. 상수의 출처는
+  `godot/src/core/rules.gd` 주석에 원본 파일 경로와 함께 적혀 있습니다.
+- 원본의 quirk 두 가지는 의도적으로 보존돼 있습니다. 덱이 11장인 것(정답 10회의 근거)과
+  셔플이 인덱스 1에서 멈추는 것입니다. "버그 수정"으로 고치지 않습니다.
+- 규칙은 `godot/src/core/`에만 둡니다. 노드도 파일도 플랫폼 SDK도 모르는 순수 코드라야
+  하고, `tools/check_core_boundary.py`가 이것을 강제합니다.
+- 플랫폼 SDK 호출은 `godot/src/platform/` 어댑터에만 둡니다. 포트 인터페이스는
+  `godot/src/core/ports/`에 있습니다.
+- 원본 소스와 Obsidian 문서는 참고용이며, 명시 요청이 없으면 수정하지 않습니다.
+- Apps in Toss API나 정책 판단이 필요하면 공식 문서를 함께 확인합니다.
+
+## 검증
+
+`npm run check` 하나로 품질 게이트, 코어 경계, 효과음 재현성을 모두 돕니다.
+개별 항목과 화면 캡처는 `README.md`를 참고하세요.
+
+헤드리스 Godot은 `SCRIPT ERROR`를 찍고도 exit 0으로 끝납니다. 종료 코드만 보고
+성공을 판단하지 마세요. `scripts/godot_quality_gate.sh`가 로그를 다시 검사합니다.

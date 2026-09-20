@@ -1,29 +1,86 @@
-# App Store(iOS) 배포는 GitHub Actions macOS 러너로 실행하지 않는다. org 계약은 Apple
-# archive·upload의 표준 실행 환경을 Xcode Cloud로 고정한다(액션 미닛 쿼타, 서명 경계).
+# Godot iOS export → xcarchive → .ipa → App Store Connect 업로드.
 #
-# 이 저장소는 아직 Xcode Cloud provider binding이 없다. 그래서 macOS 러너로 우회하지 않고
-# 명시적 human gate만 남긴다. 파일 자체는 삭제하지 않는다: Backoffice의 마켓 타깃 감지가
-# `.github/workflows/deploy-app-store.yml` 존재로 "appstore"를 판정하므로 파일이 없으면
-# App Store 배포 옵션이 사라진다.
+# 이 저장소는 public 이라 중앙 재사용 워크플로우가 GitHub-hosted macOS 러너(macos-26)를
+# 그대로 쓴다. Xcode Cloud provider binding 이 필요 없다. 웹뷰 포팅 시절 이 파일은
+# "Xcode Cloud 미연결" 로 즉시 exit 1 하는 비활성 게이트였고, Godot 전환으로 열렸다.
 #
-# workflow_call을 제거해 deploy-all 등에서 호출할 수 없고, 수동 dispatch는 빌드 없이
-# 즉시 안내 후 실패한다(ARC 러너, 쿼타 소모 없음).
-name: Deploy App Store (disabled — needs Xcode Cloud binding)
+# Backoffice 의 마켓 타깃 감지가 app-store/app-store.config.json 과 이 파일의 존재로
+# appstore 를 판정한다. 파일 이름을 바꾸면 App Store 배포 옵션이 사라진다.
+name: Deploy App Store
 
 on:
   workflow_dispatch:
+    inputs:
+      release_tag:
+        description: "배포할 stable SemVer 태그(vX.Y.Z)"
+        type: string
+        required: false
+        default: ""
+      upload:
+        description: "false면 xcarchive/.ipa 만 만들고 App Store Connect 에 올리지 않는다."
+        type: choice
+        options: ["false", "true"]
+        default: "false"
+  workflow_call:
+    inputs:
+      release_tag:
+        type: string
+        required: false
+        default: ""
+      upload:
+        type: boolean
+        required: false
+        default: false
+    # caller 는 secret 을 상속하지 않는다. 아래 이름만 1:1 로 명시 전달한다.
+    # org secret 은 visibility 가 private 이라 public 저장소에서 해석되지 않는다.
+    # 저장소 또는 app-store environment 스코프에 등록돼 있어야 한다.
+    secrets:
+      APPLE_DISTRIBUTION_CERTIFICATE_BASE64:
+        required: false
+      APPLE_DISTRIBUTION_CERTIFICATE_PASSWORD:
+        required: false
+      APPLE_KEYCHAIN_PASSWORD:
+        required: false
+      APPLE_PROVISIONING_PROFILE_BASE64:
+        required: false
+      APP_STORE_CONNECT_API_KEY_ID:
+        required: false
+      APP_STORE_CONNECT_ISSUER_ID:
+        required: false
+      APP_STORE_CONNECT_PRIVATE_KEY_BASE64:
+        required: false
+      GODOT_ANALYTICS_CONFIG_JSON_BASE64:
+        required: false
 
 permissions:
   contents: read
 
+concurrency:
+  group: app-store-deploy-${{ inputs.release_tag || github.ref }}
+  cancel-in-progress: false
+
 jobs:
-  disabled:
-    name: App Store release needs an approved Xcode Cloud binding
-    runs-on: ubuntu-latest
-    timeout-minutes: 5
-    steps:
-      - shell: bash
-        run: |
-          echo "::error::App Store(iOS) 배포는 Xcode Cloud로만 실행합니다. 이 저장소에는 아직 Xcode Cloud provider binding이 없습니다."
-          echo "GitHub Actions macOS 러너로 우회하지 않습니다. Xcode Cloud workflow 연결과 배포 승인을 먼저 받으세요."
-          exit 1
+  app-store:
+    uses: seorilabs/.github/.github/workflows/godot-deploy-app-store.yml@main
+    secrets:
+      APPLE_DISTRIBUTION_CERTIFICATE_BASE64: ${{ secrets.APPLE_DISTRIBUTION_CERTIFICATE_BASE64 }}
+      APPLE_DISTRIBUTION_CERTIFICATE_PASSWORD: ${{ secrets.APPLE_DISTRIBUTION_CERTIFICATE_PASSWORD }}
+      APPLE_KEYCHAIN_PASSWORD: ${{ secrets.APPLE_KEYCHAIN_PASSWORD }}
+      APPLE_PROVISIONING_PROFILE_BASE64: ${{ secrets.APPLE_PROVISIONING_PROFILE_BASE64 }}
+      APP_STORE_CONNECT_API_KEY_ID: ${{ secrets.APP_STORE_CONNECT_API_KEY_ID }}
+      APP_STORE_CONNECT_ISSUER_ID: ${{ secrets.APP_STORE_CONNECT_ISSUER_ID }}
+      APP_STORE_CONNECT_PRIVATE_KEY_BASE64: ${{ secrets.APP_STORE_CONNECT_PRIVATE_KEY_BASE64 }}
+      GODOT_ANALYTICS_CONFIG_JSON_BASE64: ${{ secrets.GODOT_ANALYTICS_CONFIG_JSON_BASE64 }}
+    with:
+      release_tag: ${{ inputs.release_tag }}
+      upload: ${{ inputs.upload == true || inputs.upload == 'true' }}
+      # 검증한 archive identity 와 같아야 한다. app-store/app-store.config.json 의
+      # bundleId, export_presets.cfg 의 application/bundle_identifier 와 같은 값이다.
+      bundle_id: com.github.magicsih.MatchSymbol
+      project_dir: godot
+      scripts_dir: tools
+      ios_export_preset: iOS
+      xcode_project_path: release-artifacts/ios/xcode/match-picture-app.xcodeproj
+      export_options_plist: app-store/exportOptions.plist
+      godot_version: "4.7.2"
+      godot_status: stable

@@ -1,0 +1,111 @@
+class_name MpUiKit
+extends RefCounted
+## 화면 부품의 색과 크기를 한 곳에 모은다.
+##
+## 색은 원본 Unity 에서 뽑은 값이다. 배경 그라데이션은 원본이 1x3 픽셀 PNG 를 늘려
+## 쓰던 것이라 이미지를 옮기지 않고 GradientTexture2D 로 다시 만든다.
+
+const BG_EDGE := Color("4594B5")
+const BG_CENTER := Color("70CFF7")
+
+const TEXT_LIGHT := Color("FFFFFF")
+const TEXT_DARK := Color("143C4E")
+const CORRECT := Color("4CD964")
+const WRONG := Color("FF3B30")
+const PANEL := Color("FFFFFF")
+const PANEL_BORDER := Color("4594B5")
+const BUTTON := Color("F4D03F")
+const BUTTON_TEXT := Color("143C4E")
+
+const FONT_HUD := 36
+const FONT_MARK := 180
+const FONT_RESULT := 96
+const FONT_BUTTON := 40
+const FONT_BODY := 34
+
+const PANEL_RADIUS := 24
+const PANEL_BORDER_WIDTH := 6
+
+## 카드 배경. 원본은 Unity 기본 UISprite(둥근 사각형)를 흰색 불투명으로 650x650 에
+## Simple 로 늘려 썼다. 32px 스프라이트를 20배 늘린 만큼 모서리도 크게 둥글어진다.
+const CARD_BG := Color("FFFFFF")
+const CARD_CORNER_RADIUS := 162
+
+
+## 원본 배경. 위아래가 짙고 가운데가 밝은 세로 그라데이션이다.
+static func background_texture() -> GradientTexture2D:
+	var gradient := Gradient.new()
+	gradient.set_offset(0, 0.0)
+	gradient.set_color(0, BG_EDGE)
+	gradient.set_offset(1, 1.0)
+	gradient.set_color(1, BG_EDGE)
+	gradient.add_point(0.5, BG_CENTER)
+
+	var texture := GradientTexture2D.new()
+	texture.gradient = gradient
+	texture.fill_from = Vector2(0.0, 0.0)
+	texture.fill_to = Vector2(0.0, 1.0)
+	texture.width = 8
+	texture.height = 256
+	return texture
+
+
+static func card_style() -> StyleBoxFlat:
+	var style := StyleBoxFlat.new()
+	style.bg_color = CARD_BG
+	style.set_corner_radius_all(CARD_CORNER_RADIUS)
+	return style
+
+
+static func panel_style() -> StyleBoxFlat:
+	var style := StyleBoxFlat.new()
+	style.bg_color = PANEL
+	style.border_color = PANEL_BORDER
+	style.set_border_width_all(PANEL_BORDER_WIDTH)
+	style.set_corner_radius_all(PANEL_RADIUS)
+	style.set_content_margin_all(28.0)
+	return style
+
+
+static func button_style(fill: Color) -> StyleBoxFlat:
+	var style := StyleBoxFlat.new()
+	style.bg_color = fill
+	style.set_corner_radius_all(16)
+	style.set_content_margin_all(18.0)
+	return style
+
+
+## 화면 폭에 맞춰 버튼을 만든다. 터치 목표를 충분히 크게 두려고 최소 높이를 준다.
+static func make_button(text: String, fill: Color = BUTTON) -> Button:
+	var button := Button.new()
+	button.text = text
+	button.custom_minimum_size = Vector2(0.0, 96.0)
+	button.add_theme_font_size_override("font_size", FONT_BUTTON)
+	button.add_theme_color_override("font_color", BUTTON_TEXT)
+	button.add_theme_color_override("font_hover_color", BUTTON_TEXT)
+	button.add_theme_color_override("font_pressed_color", BUTTON_TEXT)
+	button.add_theme_stylebox_override("normal", button_style(fill))
+	button.add_theme_stylebox_override("hover", button_style(fill.lightened(0.08)))
+	button.add_theme_stylebox_override("pressed", button_style(fill.darkened(0.12)))
+	button.add_theme_stylebox_override("focus", StyleBoxEmpty.new())
+	return button
+
+
+## 숫자와 기호는 픽셀 폰트로 그린다. 원본의 8비트 느낌이 남는 곳이다.
+static func make_pixel_label(text: String, size: int, color: Color = TEXT_LIGHT) -> Label:
+	var label := Label.new()
+	label.text = text
+	label.add_theme_font_size_override("font_size", size)
+	label.add_theme_color_override("font_color", color)
+	if Ui.pixel_font != null:
+		label.add_theme_font_override("font", Ui.pixel_font)
+	return label
+
+
+## 단어 라벨. 한국어와 영어 모두 도현체로 그린다.
+static func make_word_label(text: String, size: int, color: Color = TEXT_DARK) -> Label:
+	var label := Label.new()
+	label.text = text
+	label.add_theme_font_size_override("font_size", size)
+	label.add_theme_color_override("font_color", color)
+	return label

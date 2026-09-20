@@ -1,0 +1,67 @@
+# NOTICE
+
+## 0. Scope of the MIT license
+
+The MIT license in `LICENSE` covers the source code of this repository.
+
+It does NOT cover the branding and store listing assets in section 1, and it
+does NOT cover the third-party components in section 2. Those sections are part
+of the licensing terms of this repository, not a summary of them.
+
+## 1. Assets not covered by the MIT license
+
+The following are original works of Seori Labs and are **not** licensed under
+the MIT license in `LICENSE`. All rights are reserved. Do not copy, reuse,
+redistribute, or create derivative works from them without written permission.
+
+- `godot/assets/branding/**` — Seori Labs branding and boot splash
+- `apps-in-toss/assets/**` — AppsInToss listing logo, thumbnail, screenshots
+- `play-store/assets/**`, `play-store/screenshots/**` — Google Play listing assets
+- `app-store/assets/**`, `app-store/screenshots/**` — App Store listing assets
+
+The names "Seori Labs", "같은그림찾기", "같은 그림 찾기", and "Match Picture",
+and the associated logos, are not licensed for use by the MIT license.
+
+## 2. Third-party components
+
+This repository vendors the following third-party components. Each remains
+under its own license, and the MIT license in `LICENSE` does not apply to them.
+The sound effects are not listed here because they are generated in-repo — see
+the note below.
+
+| Path | Component | License |
+| --- | --- | --- |
+| `godot/assets/symbols/*.png` | Noto Color Emoji — Google | Apache License 2.0 — see `godot/assets/LICENSE-Apache-2.0.txt` |
+| `godot/assets/icons/*.png` | Noto Color Emoji — Google | Apache License 2.0 — see `godot/assets/LICENSE-Apache-2.0.txt` |
+| `godot/assets/fonts/DoHyeon-Regular.ttf` | Do Hyeon typeface | SIL Open Font License 1.1 — see `godot/assets/fonts/OFL-DoHyeon.txt` |
+| `godot/assets/fonts/PressStart2P-Regular.ttf` | Press Start 2P typeface — Cody Boisclair | SIL Open Font License 1.1 — see `godot/assets/fonts/OFL-PressStart2P.txt` |
+
+The Godot engine itself is not vendored here. Build scripts download the engine
+and its export templates from the upstream release at build time.
+
+### Note on the emoji symbol artwork
+
+The 57 card symbols and the 3 HUD icons come from Google's Noto Color Emoji.
+Per the upstream README, "Tools and most image resources are under the Apache
+license, version 2.0" (https://github.com/googlefonts/noto-emoji).
+
+The provenance is established by the original Unity project, which stored these
+files under `Assets/Resources/NotoEmoji/` and added them in a commit titled
+"Added emoji fonts". The files are not byte-identical to the upstream 128px
+PNGs: 14 of the 57 are 136×128 indexed-color PNGs and one carries an
+`Adobe ImageReady` text chunk, so they were re-saved after download. A
+pixel-level comparison against the upstream release has not been performed.
+
+### Note on the sound effects
+
+`godot/assets/audio/correct.wav` and `wrong.wav` are original works of Seori Labs
+and are covered by the MIT license in `LICENSE`, like the rest of the source. They
+are not recordings: `tools/generate_sfx.py` synthesises them from a deterministic
+physical model, so the script and the audio are the same artifact. Running
+`python3 tools/generate_sfx.py --check` verifies that the committed WAVs still
+match what the code produces.
+
+They replace two files that the original Unity project added in 2020 as
+`wood_plank_flicks.wav` and `instrument_strum.wav`. Neither that repository nor
+this one recorded where those came from, and no attribution or license text
+accompanied them, so they were not carried over.

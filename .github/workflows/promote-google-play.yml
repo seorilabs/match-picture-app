@@ -54,9 +54,10 @@ jobs:
   promote:
     uses: seorilabs/.github/.github/workflows/promote-google-play.yml@main
     with:
+      # 업로드 직전에 대조하는 값. 비우면 중앙 워크플로우가 승격을 거부한다.
+      package_name: "com.github.magicsih.MatchPictureUnity"
       release_tag: ${{ inputs.release_tag }}
       from_track: ${{ inputs.from_track }}
       to_track: ${{ inputs.to_track }}
       release_status: ${{ inputs.release_status }}
       rollout: ${{ inputs.rollout }}
-      upload_script: scripts/upload-google-play-internal.py

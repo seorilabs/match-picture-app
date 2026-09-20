@@ -1,0 +1,5 @@
+{
+  "$comment": "GA4 Measurement Protocol 설정. 이 파일의 값은 로컬 개발용 빈 껍데기다. 릴리스에서는 중앙 워크플로가 GODOT_ANALYTICS_CONFIG_JSON_BASE64 secret 을 이 경로로 복원한다. 실제 값을 여기 커밋하지 않는다.",
+  "measurement_id": "",
+  "api_secret": ""
+}

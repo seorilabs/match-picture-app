@@ -1,10 +1,10 @@
 {
-  "$comment": "Google Play Data safety 신고의 저장소 source-of-truth. Play Console 입력값은 이 파일과 일치해야 한다. 갱신 절차는 ops/google-play-data-safety.md 참고.",
+  "$comment": "Google Play Data safety 신고의 저장소 source-of-truth. Play Console 입력값은 이 파일과 일치해야 한다. 코드와 이 파일이 어긋나면 tools/check_data_safety.py 가 CI 에서 막는다. 갱신 절차는 ops/google-play-data-safety.md 참고.",
   "app": {
     "package_name": "com.github.magicsih.MatchPictureUnity",
     "listing": "https://play.google.com/store/apps/details?id=com.github.magicsih.MatchPictureUnity"
   },
-  "reviewed_on": "2026-09-18",
+  "reviewed_on": "2026-09-20",
   "no_data_collected": false,
   "data_shared_with_third_parties": false,
   "collection": [
@@ -14,9 +14,11 @@
       "collected": true,
       "shared": false,
       "optional": false,
-      "purposes": ["Analytics"],
-      "sdk": "Firebase Analytics (GA4)",
-      "evidence": "src/firebase/analytics.ts, src/firebase/gameEvents.ts"
+      "purposes": [
+        "Analytics"
+      ],
+      "sdk": "GA4 Measurement Protocol (Godot 에서 직접 전송)",
+      "evidence": "godot/src/platform/ga4_analytics.gd, godot/src/core/analytics_events.gd"
     },
     {
       "category": "App activity",
@@ -34,9 +36,11 @@
       "collected": true,
       "shared": false,
       "optional": false,
-      "purposes": ["Analytics"],
-      "sdk": "Firebase Analytics (js_error / react_render_error 이벤트)",
-      "evidence": "src/firebase/errorReporter.ts, src/app/ErrorBoundary.tsx"
+      "purposes": [
+        "Analytics"
+      ],
+      "sdk": "GA4 Measurement Protocol (script_error 이벤트)",
+      "evidence": "godot/src/core/analytics_events.gd, godot/src/platform/ga4_analytics.gd"
     },
     {
       "category": "Device or other IDs",
@@ -44,9 +48,12 @@
       "collected": true,
       "shared": false,
       "optional": false,
-      "purposes": ["Analytics", "Advertising or marketing"],
-      "sdk": "Firebase Analytics, Firebase Remote Config, AppsInToss 광고(전면형)",
-      "evidence": "src/firebase/analytics.ts, src/firebase/app.ts, src/ait/ads.ts"
+      "purposes": [
+        "Analytics",
+        "Advertising or marketing"
+      ],
+      "sdk": "GA4 client_id(앱이 생성해 기기에 저장), 앱인토스 통합 광고",
+      "evidence": "godot/src/platform/ga4_analytics.gd, ait/apps-in-toss-web/src/tossFullScreenAdRuntime.ts"
     }
   ],
   "security_practices": {

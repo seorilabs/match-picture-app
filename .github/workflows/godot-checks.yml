@@ -1,0 +1,42 @@
+# main 정적 품질 게이트 — org 재사용 워크플로우 호출.
+# 무거운 빌드/배포 금지(태그/배포는 deploy-*.yml). 설계: seorilabs/.github docs/ci-cd.
+name: Godot Checks
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  # org 재사용 워크플로우가 자체 선언한 권한이라 caller도 같이 부여해야 한다.
+  # 좁히면 workflow 시작 단계에서 startup_failure 가 된다.
+  packages: read
+
+concurrency:
+  group: godot-checks-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  checks:
+    uses: seorilabs/.github/.github/workflows/godot-checks.yml@main
+    with:
+      # public 저장소는 ARC 러너를 받지 못한다. 기본값(seorilabs-x64)을 그대로 두면
+      # job 이 러너를 잡지 못한 채 큐에 남는다.
+      runs_on: ubuntu-latest
+      project_dir: godot
+      # 중앙 기본값은 4.6.3 이다. 조직 표준 버전을 명시한다.
+      godot_version: "4.7.2"
+      godot_status: stable
+      check_command: |
+        bash scripts/godot_quality_gate.sh \
+          --project godot \
+          --smoke-scene res://tests/core_test_runner.tscn \
+          --smoke-scene res://tests/test_runner.tscn \
+          --smoke-scene res://tests/play_through.tscn
+        python3 tools/check_core_boundary.py
+        python3 tools/generate_sfx.py --check
+        python3 tools/check_data_safety.py
+        python3 tools/check_release_workflow_contract.py

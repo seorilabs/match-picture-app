@@ -1,0 +1,50 @@
+.app-shell {
+  display: flex;
+  width: 100%;
+  height: 100svh;
+  min-height: 100svh;
+  flex-direction: column;
+  overflow: hidden;
+  background: #f9fbfb;
+}
+
+.godot-shell {
+  position: relative;
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow: hidden;
+  background: #f9fbfb;
+  touch-action: none;
+}
+
+#godot-canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+  outline: none;
+}
+
+.status {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  padding: 24px;
+  color: #10252d;
+  background: #f9fbfb;
+  font: 500 15px/1.45 system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  text-align: center;
+}
+
+.status-symbol {
+  display: block;
+  width: min(64vw, 320px);
+  height: auto;
+}
+
+.status-error {
+  color: #8a2020;
+}
