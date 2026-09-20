@@ -1,0 +1,75 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+
+config_version=5
+
+[application]
+
+; 홈 화면 아이콘 밑에 붙는 라벨이라 짧게 둔다.
+; iOS 는 이 값이 그대로 CFBundleDisplayName 이 된다.
+; Android 라벨은 export preset 의 package/name 이 따로 정한다.
+; 앱인토스 표시명 "같은 그림 찾기" 는 granite.config.ts 가 따로 가진다.
+config/name="같은그림찾기"
+config/name_localized={
+"ko": "같은그림찾기",
+"en": "Match Picture"
+}
+config/description="상단 카드와 하단 카드에 함께 들어 있는 심볼 하나를 찾는 도블 방식 타임어택"
+; 릴리스 버전 정본은 GitHub 태그 vX.Y.Z 하나뿐이다. 이 값은 로컬 개발용 placeholder 이고
+; 중앙 워크플로가 태그에서 파생해 덮어쓴다(contracts/release-version-authority.yaml).
+config/version="2.0.0"
+run/main_scene="res://scenes/main.tscn"
+; 안드로이드 백키 기본값은 어디서 눌러도 앱을 끄는 것이다. 여기서 끄고
+; src/ui/main.gd 가 원본 Unity 의 우선순위대로 화면을 한 단계씩 되돌린다.
+config/quit_on_go_back=false
+config/features=PackedStringArray("4.7", "GL Compatibility")
+boot_splash/bg_color=Color(0.270588, 0.580392, 0.709804, 1)
+boot_splash/show_image=true
+boot_splash/image="res://assets/branding/seori-labs-boot-splash-1024.png"
+boot_splash/stretch_mode=1
+boot_splash/use_filter=true
+boot_splash/minimum_display_time=0
+
+[autoload]
+
+; 의존 방향대로 세운다. Platform(표면 판정) → Save(user:// 저장) → Locale(저장된 언어를
+; 읽어 TranslationServer 에 적용) → Ui(로케일이 정해진 뒤 테마 조립) → Audio.
+Platform="*res://autoload/platform.gd"
+Save="*res://autoload/save.gd"
+Locale="*res://autoload/locale.gd"
+Ui="*res://autoload/ui.gd"
+Audio="*res://autoload/audio.gd"
+
+[display]
+
+; 원본 Unity CanvasScaler(referenceResolution 2960x1440, ScreenMatchMode.Shrink)를
+; Godot 에서 재현하는 값이다. stretch=expand 기준 648x1440 이면
+; 16:9~20:9 구간에서 캔버스 높이가 1440 으로 고정되고 폭만 648~810 으로 변한다.
+; keep_height 를 쓰면 21:9 에서 폭이 617 로 잘려 카드 가장자리가 사라진다.
+window/size/viewport_width=648
+window/size/viewport_height=1440
+window/stretch/mode="canvas_items"
+window/stretch/aspect="expand"
+window/handheld/orientation=1
+
+; 기본 폰트는 여기서 지정하지 않는다. 부팅 시점 로드가 첫 import 보다 앞서서
+; clean 체크아웃마다 ERROR 를 남기고 CI 로그 게이트가 required check 를 red 로 만든다.
+; autoload/ui.gd 가 import 이후에 ThemeDB.fallback_font 로 붙인다.
+
+[input_devices]
+
+pointing/emulate_touch_from_mouse=true
+
+[internationalization]
+
+locale/fallback="ko"
+locale/include_text_server_data=true
+
+[rendering]
+
+; 2D 전용 게임이고 앱인토스 WebView 호환성이 가장 넓은 경로다.
+renderer/rendering_method="gl_compatibility"
+renderer/rendering_method.mobile="gl_compatibility"
+textures/vram_compression/import_etc2_astc=true
+environment/defaults/default_clear_color=Color(0.270588, 0.580392, 0.709804, 1)

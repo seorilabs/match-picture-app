@@ -38,9 +38,9 @@ Thumbs.db
 AGENTS.local.md
 
 # Android signing — NEVER commit keystore or passwords
-android/keystore.properties
-android/key.properties
-android/keystore/
+**/keystore.properties
+**/key.properties
+**/keystore/
 *.keystore
 *.jks
 
@@ -55,3 +55,13 @@ tmp/
 temp/
 
 *.ait
+
+# Godot
+# .godot/ 는 import 캐시라 커밋하지 않는다. CI 는 매번 clean 에서 import 한다.
+godot/.godot/
+# Gradle build template 은 tools/install_android_build_template.sh 가 설치한다.
+godot/android/
+*.translation
+
+# Godot export 산출물
+release-artifacts/
