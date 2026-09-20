@@ -26,6 +26,8 @@ and the associated logos, are not licensed for use by the MIT license.
 
 This repository vendors the following third-party components. Each remains
 under its own license, and the MIT license in `LICENSE` does not apply to them.
+The sound effects are not listed here because they are generated in-repo — see
+the note below.
 
 | Path | Component | License |
 | --- | --- | --- |
@@ -33,7 +35,6 @@ under its own license, and the MIT license in `LICENSE` does not apply to them.
 | `godot/assets/icons/*.png` | Noto Color Emoji — Google | Apache License 2.0 — see `godot/assets/LICENSE-Apache-2.0.txt` |
 | `godot/assets/fonts/DoHyeon-Regular.ttf` | Do Hyeon typeface | SIL Open Font License 1.1 — see `godot/assets/fonts/OFL-DoHyeon.txt` |
 | `godot/assets/fonts/PressStart2P-Regular.ttf` | Press Start 2P typeface — Cody Boisclair | SIL Open Font License 1.1 — see `godot/assets/fonts/OFL-PressStart2P.txt` |
-| `godot/assets/audio/correct.wav`, `godot/assets/audio/wrong.wav` | Sound effects of unrecorded origin — see the note below | Unverified |
 
 The Godot engine itself is not vendored here. Build scripts download the engine
 and its export templates from the upstream release at build time.
@@ -53,10 +54,14 @@ pixel-level comparison against the upstream release has not been performed.
 
 ### Note on the sound effects
 
-The two sound effects were added to the original Unity project in 2020 under the
-filenames `wood_plank_flicks.wav` and `instrument_strum.wav`. Neither that
-repository nor this one records where they came from, and no attribution or
-license text accompanied them. They ship in the App Store and Google Play
-releases that have been public since 2020. Treat the license column above as
-unverified rather than as a claim of permission, and replace these files with
-assets of known provenance if the origin cannot be established.
+`godot/assets/audio/correct.wav` and `wrong.wav` are original works of Seori Labs
+and are covered by the MIT license in `LICENSE`, like the rest of the source. They
+are not recordings: `tools/generate_sfx.py` synthesises them from a deterministic
+physical model, so the script and the audio are the same artifact. Running
+`python3 tools/generate_sfx.py --check` verifies that the committed WAVs still
+match what the code produces.
+
+They replace two files that the original Unity project added in 2020 as
+`wood_plank_flicks.wav` and `instrument_strum.wav`. Neither that repository nor
+this one recorded where those came from, and no attribution or license text
+accompanied them, so they were not carried over.

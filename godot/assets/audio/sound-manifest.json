@@ -1,0 +1,19 @@
+{
+  "source": "procedural",
+  "note": "외부 사운드를 받아오지 않고 tools/generate_sfx.py 가 저장소 안에서 합성한다. 결정론적이라 같은 코드가 같은 WAV 를 만든다. 원본 Unity 의 효과음 2개는 출처가 어디에도 기록돼 있지 않아 교체했다.",
+  "sample_rate": 44100,
+  "tracks": [
+    {
+      "name": "correct",
+      "type": "oneshot",
+      "duration": 0.45,
+      "intent": "정답. 나무를 튕긴 뒤 두 음이 올라간다. 원본 wood_plank_flicks.wav 의 마른 타격 성격을 잇는다."
+    },
+    {
+      "name": "wrong",
+      "type": "oneshot",
+      "duration": 0.6,
+      "intent": "오답. 낮아지는 두 개의 부드러운 나무 음. 1.5초 입력 잠금 동안 울리므로 날카로운 buzzer 를 쓰지 않는다."
+    }
+  ]
+}
