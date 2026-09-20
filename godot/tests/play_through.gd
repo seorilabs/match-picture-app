@@ -38,10 +38,19 @@ func _play_one_game() -> void:
 
 	var screen: MpGameScreen = main.get("_game_screen")
 	var popup: MpResultPopup = main.get("_result_popup")
+	var tutorial: MpTutorialOverlay = main.get("_tutorial")
 	_check(screen != null, "게임 화면이 조립됐다")
 	_check(popup != null and not popup.visible, "시작 시 결과 화면은 숨어 있다")
-	if screen == null:
+	if screen == null or tutorial == null:
 		return
+
+	# 처음 켠 사람에게는 설명이 먼저 뜬다. 닫아야 판이 시작된다.
+	_check(tutorial.visible, "최초 실행에는 설명이 뜬다")
+	_check(not bool(Save.get_value("has_played", false)), "아직 플레이 기록이 없다")
+	tutorial._on_close()
+	await get_tree().process_frame
+	_check(not tutorial.visible, "설명을 닫으면 사라진다")
+	_check(bool(Save.get_value("has_played", false)), "설명을 닫으면 플레이 기록이 남는다")
 
 	var game: MpGameState = screen.get("_game")
 	var mine: MpCardView = screen.get("_mine_card")
@@ -75,6 +84,22 @@ func _play_one_game() -> void:
 		await get_tree().process_frame
 	_check(game.state() == MpGameState.State.PLAYING, "잠금이 풀리고 같은 문제로 돌아온다")
 	_check(game.current_round() == first_round, "오답 뒤에도 같은 문제다")
+
+	# 뒤로가기 우선순위. 원본 Update() 의 순서를 그대로 지키는지 본다.
+	var quit_confirm: MpQuitConfirm = main.get("_quit_confirm")
+	var settings: MpSettingsPopup = main.get("_settings")
+	main.call("go_back")
+	await get_tree().process_frame
+	_check(quit_confirm.visible, "게임 중 뒤로가기는 종료 확인을 띄운다")
+	settings.show_settings()
+	await get_tree().process_frame
+	main.call("go_back")
+	await get_tree().process_frame
+	_check(not settings.visible, "설정이 열려 있으면 그것부터 닫는다")
+	_check(quit_confirm.visible, "설정을 닫아도 종료 확인은 남는다")
+	main.call("go_back")
+	await get_tree().process_frame
+	_check(not quit_confirm.visible, "다시 누르면 종료 확인이 닫힌다")
 
 	# 정답만 눌러 끝까지 간다.
 	var guard := 0

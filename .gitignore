@@ -61,7 +61,11 @@ temp/
 godot/.godot/
 # Gradle build template 은 tools/install_android_build_template.sh 가 설치한다.
 godot/android/
+# CSV 에서 유도되는 import 산출물이지만 부팅 시점에 필요하다. 커밋하지 않으면
+# clean 체크아웃의 첫 실행이 "Cannot open file" ERROR 를 남기고 로그 게이트가
+# required check 를 red 로 만든다. lizard-tycoon 도 같은 이유로 커밋한다.
 *.translation
+!/godot/i18n/*.translation
 
 # Godot export 산출물
 release-artifacts/

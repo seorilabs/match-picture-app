@@ -1,0 +1,26 @@
+keys,ko,en
+RESULT_BEST,최고 기록 {0},BEST {0}
+RESULT_NEW_BEST,최고 기록 경신,NEW BEST
+RESULT_RETRY,다시하기,RETRY
+RESULT_SHARE,공유하기,SHARE
+RESULT_LEADERBOARD,순위표,RANKING
+RESULT_EXIT,나가기,EXIT
+QUIT_TITLE,그만할까요?,QUIT?
+QUIT_YES,네,YES
+QUIT_NO,아니요,NO
+TUTORIAL_TITLE,같은 그림 찾기,FIND THE MATCH
+TUTORIAL_BODY,위아래 카드에 똑같이 들어 있는 그림은 하나뿐이에요. 아래 카드에서 찾아 눌러 주세요.,Only one picture appears on both cards. Find it on the bottom card and tap it.
+TUTORIAL_CLOSE,시작하기,START
+SHARE_MESSAGE,내 기록은 {0}초예요. 이길 수 있나요?,My record is {0} seconds. Can you beat me?
+SHARE_FAILED,공유하지 못했어요.,Could not share.
+LEADERBOARD_UNSUPPORTED,이 앱에서는 순위표를 열 수 없어요.,Ranking is not available here.
+LEADERBOARD_FAILED,순위표를 열지 못했어요.,Could not open the ranking.
+SETTINGS_TITLE,설정,SETTINGS
+SETTINGS_LANGUAGE,언어,LANGUAGE
+SETTINGS_SOUND,소리,SOUND
+SETTINGS_CLOSE,닫기,CLOSE
+SETTINGS_SOUND_ON,켜짐,ON
+SETTINGS_SOUND_OFF,꺼짐,OFF
+LANG_AUTO,기기 설정,SYSTEM
+LANG_KO,한국어,한국어
+LANG_EN,English,English

@@ -47,13 +47,28 @@ func _capture(size: Vector2i) -> void:
 	await RenderingServer.frame_post_draw
 	_save(viewport, "game-%dx%d.png" % [size.x, size.y])
 
-	# 결과 화면도 같은 비율에서 확인한다. 실제 판을 끝내는 대신 팝업만 띄운다.
+	# 나머지 화면도 같은 비율에서 확인한다. 실제 판을 끝내는 대신 팝업만 띄운다.
 	if scene.has_method("show_result_for_capture"):
 		scene.call("show_result_for_capture", 23.4, 30.0, false)
 		for i in 6:
 			await get_tree().process_frame
 		await RenderingServer.frame_post_draw
 		_save(viewport, "result-%dx%d.png" % [size.x, size.y])
+		scene.call("show_result_for_capture", 19.2, 30.0, true)
+		for i in 4:
+			await get_tree().process_frame
+		await RenderingServer.frame_post_draw
+		_save(viewport, "result-best-%dx%d.png" % [size.x, size.y])
+
+	if scene.has_method("show_overlay_for_capture"):
+		for overlay in ["tutorial", "settings", "quit"]:
+			scene.call("show_overlay_for_capture", overlay)
+			for i in 4:
+				await get_tree().process_frame
+			await RenderingServer.frame_post_draw
+			_save(viewport, "%s-%dx%d.png" % [overlay, size.x, size.y])
+			scene.call("go_back")
+			await get_tree().process_frame
 
 	viewport.queue_free()
 

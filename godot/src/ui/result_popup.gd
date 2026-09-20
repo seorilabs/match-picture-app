@@ -6,6 +6,7 @@ extends Control
 
 signal retry_pressed()
 signal share_pressed()
+signal settings_pressed()
 signal exit_pressed()
 
 var _seconds_label: Label
@@ -46,28 +47,35 @@ func _init() -> void:
 	_best_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	column.add_child(_best_label)
 
-	var retry := MpUiKit.make_button("RETRY")
+	var retry := MpUiKit.make_button("RESULT_RETRY")
 	retry.pressed.connect(func() -> void: retry_pressed.emit())
 	column.add_child(retry)
 
-	var share := MpUiKit.make_button("SHARE", MpUiKit.PANEL_BORDER)
+	var share := MpUiKit.make_button("RESULT_SHARE", MpUiKit.PANEL_BORDER)
 	share.add_theme_color_override("font_color", MpUiKit.TEXT_LIGHT)
 	share.pressed.connect(func() -> void: share_pressed.emit())
 	column.add_child(share)
 
-	var quit_button := MpUiKit.make_button("EXIT", MpUiKit.PANEL_BORDER)
+	var quit_button := MpUiKit.make_button("RESULT_EXIT", MpUiKit.PANEL_BORDER)
 	quit_button.add_theme_color_override("font_color", MpUiKit.TEXT_LIGHT)
 	quit_button.pressed.connect(func() -> void: exit_pressed.emit())
 	column.add_child(quit_button)
+
+	var settings := MpUiKit.make_button("SETTINGS_TITLE", MpUiKit.PANEL_BORDER)
+	settings.add_theme_color_override("font_color", MpUiKit.TEXT_LIGHT)
+	settings.pressed.connect(func() -> void: settings_pressed.emit())
+	column.add_child(settings)
 
 
 func show_result(seconds: float, best_seconds: float, is_new_best: bool) -> void:
 	_seconds_label.text = MpRules.format_seconds(seconds)
 	if is_new_best:
-		_best_label.text = "NEW BEST"
+		_best_label.text = "RESULT_NEW_BEST"
 		_best_label.add_theme_color_override("font_color", MpUiKit.CORRECT)
 	elif MpBestRecord.has_record(best_seconds):
-		_best_label.text = "BEST %s" % MpRules.format_seconds(best_seconds)
+		# 값이 끼는 문구라 여기서 조립한다. 조립한 문자열은 자동 번역 대상이 아니므로
+		# 결과 화면을 띄울 때마다 현재 로케일로 다시 만든다.
+		_best_label.text = tr("RESULT_BEST").format([MpRules.format_seconds(best_seconds)])
 		_best_label.add_theme_color_override("font_color", MpUiKit.TEXT_DARK)
 	else:
 		_best_label.text = ""

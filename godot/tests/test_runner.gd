@@ -14,6 +14,7 @@ func _ready() -> void:
 	_check_surface()
 	_check_fonts()
 	_check_audio()
+	_check_translations()
 
 	print("[smoke] 검사 %d건, 실패 %d건" % [_checks, _failures.size()])
 	for failure in _failures:
@@ -52,6 +53,36 @@ func _check_fonts() -> void:
 func _check_audio() -> void:
 	_check(ResourceLoader.exists(Audio.CORRECT_PATH), "정답 효과음 파일이 있다")
 	_check(ResourceLoader.exists(Audio.WRONG_PATH), "오답 효과음 파일이 있다")
+
+
+## 번역 키가 화면에 그대로 노출되는 것을 막는다. CSV 를 직접 읽어 모든 키를 본다.
+func _check_translations() -> void:
+	var file := FileAccess.open("res://i18n/translations.csv", FileAccess.READ)
+	if file == null:
+		_check(false, "번역 CSV 를 읽을 수 있다")
+		return
+
+	var keys: Array[String] = []
+	var header := file.get_csv_line()
+	_check(header.size() >= 3 and header[0] == "keys", "번역 CSV 머리글이 keys,ko,en 이다")
+	while not file.eof_reached():
+		var row := file.get_csv_line()
+		if row.size() >= 3 and not row[0].is_empty():
+			keys.append(row[0])
+			_check(not row[1].is_empty(), "%s 에 한국어 문구가 있다" % row[0])
+			_check(not row[2].is_empty(), "%s 에 영어 문구가 있다" % row[0])
+	file.close()
+	_check(keys.size() > 0, "번역 키가 하나 이상 있다")
+
+	var original := TranslationServer.get_locale()
+	for locale in Locale.SUPPORTED:
+		TranslationServer.set_locale(locale)
+		var missing: Array[String] = []
+		for key in keys:
+			if tr(key) == key:
+				missing.append(key)
+		_check(missing.is_empty(), "%s 로케일에 빠진 번역이 없다: %s" % [locale, ", ".join(missing)])
+	TranslationServer.set_locale(original)
 
 
 func _check(condition: bool, label: String) -> void:

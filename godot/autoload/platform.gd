@@ -40,6 +40,19 @@ func is_ait() -> bool:
 	return JavaScriptBridge.get_interface("__mpBridge") != null
 
 
+## 앱인토스 래퍼가 알려 주는 안전 영역. 브리지가 없으면 빈 Dictionary 다.
+##
+## 값은 CSS 뷰포트 픽셀이라 그대로 쓰면 안 된다. MpSafeArea 가 논리 뷰포트로 환산한다.
+func ait_safe_area_payload() -> Dictionary:
+	if not is_ait():
+		return {}
+	var bridge: Variant = JavaScriptBridge.get_interface("__mpBridge")
+	if bridge == null:
+		return {}
+	var payload: Variant = bridge.safeArea()
+	return payload if payload is Dictionary else {}
+
+
 ## 헤드리스와 에디터에서는 SDK 호출을 전부 no-op 으로 돌린다.
 func allows_sdk_calls() -> bool:
 	return _surface != Surface.HEADLESS and _surface != Surface.EDITOR

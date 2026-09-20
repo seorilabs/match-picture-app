@@ -64,6 +64,7 @@ pointing/emulate_touch_from_mouse=true
 [internationalization]
 
 locale/fallback="ko"
+locale/translations=PackedStringArray("res://i18n/translations.ko.translation", "res://i18n/translations.en.translation")
 locale/include_text_server_data=true
 
 [rendering]
