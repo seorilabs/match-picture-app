@@ -23,27 +23,55 @@ Godot 4.7로 만들고 앱인토스 · Google Play · App Store 세 곳에 냅�
 ## 구조
 
 ```
-godot/            Godot 프로젝트 (project_dir)
-  src/core/       게임 규칙. 노드도 파일도 SDK도 모르는 순수 코드
-  src/core/ports/ 저장·계측·광고·리더보드·공유 포트 인터페이스
-  src/platform/   포트 구현. 여기서만 SDK를 안다
-  src/ui/         화면. 코어가 알린 것을 그림과 소리로 옮기기만 한다
-  autoload/       Platform → Save → Locale → Ui → Audio (의존 순서)
-  tests/          코어 · 엔진 스모크 · 통합 플레이 · 화면 캡처
-scripts/          Godot 실행과 export 게이트
-tools/            경계 · 공시 · 효과음 검사기
+godot/                    Godot 프로젝트 (project_dir)
+  src/core/               게임 규칙. 노드도 파일도 SDK도 모르는 순수 코드
+  src/core/ports/         저장·계측·광고·순위표·공유 포트 인터페이스
+  src/platform/           포트 구현. 여기서만 SDK를 안다
+  src/ui/                 화면. 코어가 알린 것을 그림과 소리로 옮기기만 한다
+  autoload/               Platform → Save → Locale → Ui → Audio (의존 순서)
+  tests/                  코어 · 엔진 스모크 · 통합 플레이 · 화면 캡처
+  export_templates/       커스텀 Web 템플릿 (tools/build_web_template.sh 산출물)
+  analytics.config.json   GA4 설정. 릴리스에서는 CI가 주입한다
+ait/apps-in-toss-web/     앱인토스 래퍼. Godot Web export를 감싸 .ait를 만든다
+scripts/                  Godot 실행과 export 게이트
+tools/                    검사기와 빌드 도구
+app-store/ play-store/    스토어 설정과 서명 옵션
+ops/                      Play 데이터 안전 공시 원장
 ```
 
 경계는 도구가 강제합니다. `godot/src/core/`가 `FileAccess`나 `OS.` 같은 것에 손을 대면
 `tools/check_core_boundary.py`가 막습니다. 규칙이 순수해야 화면 없이 게임 한 판을
 헤드리스로 완주시킬 수 있습니다.
 
+플랫폼 기능은 포트 뒤에 있습니다. 순위표·광고·공유는 앱인토스에서만 실제 구현이
+꽂히고, 지원하지 않는 표면에서는 포트 기본 구현이 no-op을 맡습니다. 화면은
+`is_available()`만 보고 버튼을 그릴지 정하므로, Play Games Services나 GameKit을
+나중에 채울 때 화면 코드는 건드리지 않습니다.
+
+계측은 Godot이 GA4 Measurement Protocol로 직접 보냅니다. 세 표면이 같은 코드로 같은
+이벤트를 보내야 지표를 비교할 수 있기 때문이고, 그래서 래퍼에는 Firebase SDK가
+없습니다. 이벤트 이름과 파라미터는 `godot/src/core/analytics_events.gd`가 계약으로
+가지며, 계약을 통과하지 못한 것은 나가지 않습니다.
+
 ## 돌려 보기
 
 ```bash
-godot --path godot                  # 실제로 플레이
-npm run check                       # 품질 게이트 + 코어 경계 + 효과음 재현성
-npm run capture                     # 세 화면비로 렌더링해 godot/build/qa/ 에 PNG
+godot --path godot     # 실제로 플레이
+npm run check          # 게이트 전체 — 아래 검사를 한 번에 돈다
+npm run capture        # 세 화면비로 렌더링해 godot/build/qa/ 에 PNG
+```
+
+`npm run check`가 도는 것: Godot 품질 게이트(import·compile·테스트 3종), 코어 경계,
+효과음 재현성, Play 데이터 안전 공시 정합성, 배포 워크플로 계약.
+
+앱인토스 번들을 만들고 브라우저에서 확인하려면:
+
+```bash
+GODOT_WEB_OUTPUT_DIR=build/web bash scripts/export_godot_web.sh
+npm --prefix ait/apps-in-toss-web ci
+npm --prefix ait/apps-in-toss-web run build      # .ait 생성 + 브랜드/키 검사
+npm --prefix ait/apps-in-toss-web run build:web  # 미리보기용 웹 번들
+npm --prefix ait/apps-in-toss-web exec vite preview -- --port 4173
 ```
 
 캡처에 강제 여백을 줘서 노치·제스처 바에 잘리는지 볼 수 있습니다.
@@ -65,6 +93,18 @@ godot --path godot res://tests/capture_screens.tscn -- --safe-area=0,140,0,90
 성공이라 판단하지 마세요. `scripts/godot_quality_gate.sh`가 로그를 다시 검사하고,
 파스 에러로 프로세스가 남는 것을 막기 위해 명령마다 시간 상한을 겁니다.
 
+### 커스텀 Web 템플릿
+
+`godot/export_templates/web_release.zip`은 3D·물리3D·XR과 안 쓰는 이미지 포맷 모듈을
+뺀 Godot Web 템플릿입니다. wasm이 37.7MB에서 27.3MB로, `.ait`가 18.2MB에서 14.7MB로
+줄어듭니다. 다시 만들려면 `tools/build_web_template.sh`를 보세요.
+
+Emscripten은 Godot 4.7.2 공식 Web 빌드와 같은 **4.0.11**로 맞춰야 합니다. 버전이
+어긋나면 export는 되는데 브라우저에서 링크 오류로 멈춥니다.
+
+**`javascript_eval=no`는 쓰지 마세요.** 그 플래그는 `JavaScriptBridge`의
+`get_interface()`까지 함께 제거하는데, 그 함수가 앱인토스 래퍼와 주고받는 창구입니다.
+
 ## 릴리스
 
 **버전 정본은 GitHub 릴리스 태그 `vX.Y.Z` 하나뿐입니다.** 저장소는 버전을 계산하지
@@ -84,6 +124,11 @@ main push/PR은 정적 게이트만 돕니다. 마켓 배포는 명시적 dispat
 | 앱인토스 | `match-picture-app` | 주 배포 경로 |
 | Google Play | `com.github.magicsih.MatchPictureUnity` | 구 Unity 앱 승계 |
 | App Store | `com.github.magicsih.MatchSymbol` (앱 ID 1528539634) | 2020년 Unity 빌드 1.0.4가 공개 중 |
+
+App Store 배포 경로는 이 저장소가 public이라 GitHub-hosted macOS 러너로 돕니다.
+Xcode Cloud 바인딩이 필요 없습니다. 다만 org secret은 visibility가 private이라 public
+저장소에서 해석되지 않으므로, Apple 자격증명은 저장소 또는 `app-store` environment
+스코프에 등록돼 있어야 합니다.
 
 Android와 iOS의 스토어 식별자가 서로 다릅니다. 의도된 것이고 바꾸면 기존 등록을
 잃습니다.
