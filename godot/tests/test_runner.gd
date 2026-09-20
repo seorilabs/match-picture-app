@@ -15,6 +15,7 @@ func _ready() -> void:
 	_check_fonts()
 	_check_audio()
 	_check_translations()
+	_check_storage()
 
 	print("[smoke] 검사 %d건, 실패 %d건" % [_checks, _failures.size()])
 	for failure in _failures:
@@ -55,6 +56,32 @@ func _check_audio() -> void:
 	_check(ResourceLoader.exists(Audio.WRONG_PATH), "오답 효과음 파일이 있다")
 
 
+## 세이브는 tmp 에 전부 쓴 뒤 rename 하고 직전 내용을 .bak 한 세대만 남긴다.
+## 게임 도중 앱이 죽어도 반쯤 쓰인 파일이 정본 자리에 남지 않아야 한다.
+func _check_storage() -> void:
+	var path := "user://test_storage_%d.save" % Time.get_ticks_usec()
+	var storage := MpFileStorage.new(path)
+
+	_check(storage.read().is_empty(), "없는 파일을 읽으면 비어 있다")
+	_check(storage.write({"best_seconds": 12.5}), "쓰기가 성공한다")
+	_check_eq(float(storage.read().get("best_seconds", 0.0)), 12.5, "쓴 값을 그대로 읽는다")
+
+	_check(storage.write({"best_seconds": 9.0}), "덮어쓰기가 성공한다")
+	_check_eq(float(storage.read().get("best_seconds", 0.0)), 9.0, "덮어쓴 값을 읽는다")
+	_check(FileAccess.file_exists(path + MpFileStorage.BAK_SUFFIX), "직전 내용이 .bak 로 남는다")
+	_check(not FileAccess.file_exists(path + MpFileStorage.TMP_SUFFIX), "임시 파일이 남지 않는다")
+
+	# 정본이 깨져도 직전 세대로 돌아갈 수 있어야 한다.
+	var broken := FileAccess.open(path, FileAccess.WRITE)
+	if broken != null:
+		broken.store_string("{ 이건 JSON 이 아니다")
+		broken.close()
+	_check_eq(float(storage.read().get("best_seconds", 0.0)), 12.5, "정본이 깨지면 .bak 으로 되돌린다")
+
+	DirAccess.remove_absolute(ProjectSettings.globalize_path(path))
+	DirAccess.remove_absolute(ProjectSettings.globalize_path(path + MpFileStorage.BAK_SUFFIX))
+
+
 ## 번역 키가 화면에 그대로 노출되는 것을 막는다. CSV 를 직접 읽어 모든 키를 본다.
 func _check_translations() -> void:
 	var file := FileAccess.open("res://i18n/translations.csv", FileAccess.READ)
@@ -89,3 +116,9 @@ func _check(condition: bool, label: String) -> void:
 	_checks += 1
 	if not condition:
 		_failures.append(label)
+
+
+func _check_eq(actual: Variant, expected: Variant, label: String) -> void:
+	_checks += 1
+	if actual != expected:
+		_failures.append("%s — 기대 %s, 실제 %s" % [label, expected, actual])

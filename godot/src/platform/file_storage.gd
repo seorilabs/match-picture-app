@@ -49,5 +49,10 @@ func _read_json(path: String) -> Dictionary:
 		return {}
 	var raw := file.get_as_text()
 	file.close()
-	var parsed: Variant = JSON.parse_string(raw)
-	return parsed if parsed is Dictionary else {}
+	# JSON.parse_string 은 실패할 때 ERROR 를 찍는다. 세이브가 깨진 것은 .bak 으로
+	# 되돌리면 되는 상황이라 콘솔에 남길 이유가 없고, CI 로그 게이트가 그 한 줄을
+	# 빌드 실패로 읽는다. 에러를 값으로 받는 쪽을 쓴다.
+	var json := JSON.new()
+	if json.parse(raw) != OK:
+		return {}
+	return json.data if json.data is Dictionary else {}
