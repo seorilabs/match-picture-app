@@ -37,20 +37,14 @@ func _init(library: MpSymbolLibrary) -> void:
 	set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	mouse_filter = Control.MOUSE_FILTER_IGNORE
 
-	var column := VBoxContainer.new()
-	column.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
-	column.add_theme_constant_override("separation", 0)
-	column.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	add_child(column)
-
-	_hud = MpHud.new()
-	column.add_child(_hud)
-
+	# 무대는 HUD 높이만큼 비우고 시작한다. 카드 배율과 자리를 재는 기준이 이 크기라,
+	# 여기를 건드리면 카드가 커지거나 작아진다.
 	_stage = Control.new()
-	_stage.size_flags_vertical = Control.SIZE_EXPAND_FILL
+	_stage.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	_stage.offset_top = MpRules.HUD_HEIGHT
 	_stage.clip_contents = false
 	_stage.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	column.add_child(_stage)
+	add_child(_stage)
 
 	_opponent_card = MpCardView.new()
 	_opponent_card.set_interactive(false)
@@ -65,6 +59,13 @@ func _init(library: MpSymbolLibrary) -> void:
 	_stage.add_child(_opponent_mark)
 	_mine_mark = MpJudgeMark.new()
 	_stage.add_child(_mine_mark)
+
+	# HUD 는 카드보다 뒤에 붙어야 위에 그려진다. 새 카드가 위에서 미끄러져 들어올 때
+	# 그 자리를 지나가는데, 그동안 남은 카드 수와 초가 가려지면 안 된다.
+	_hud = MpHud.new()
+	_hud.set_anchors_and_offsets_preset(Control.PRESET_TOP_WIDE)
+	_hud.offset_bottom = MpRules.HUD_HEIGHT
+	add_child(_hud)
 
 	_stage.resized.connect(_on_stage_resized)
 
@@ -124,6 +125,11 @@ func _layout_cards() -> void:
 		card.scale = Vector2(layout.factor, layout.factor)
 	_opponent_card.position = layout.opponent_position
 	_mine_card.position = layout.mine_position
+
+	# HUD 를 상단 카드 바로 위에 붙인다. 화면 맨 위에 고정해 두면 앱인토스처럼 게임이
+	# 상태 표시줄 아래까지 그려지는 표면에서 숫자가 그 밑으로 들어가 읽히지 않는다.
+	# 카드를 세로 가운데로 맞추고 남는 위쪽 여유만큼 HUD 가 함께 내려온다.
+	_hud.position.y = maxf(0.0, _stage.position.y + layout.opponent_position.y - MpRules.HUD_HEIGHT)
 
 	# O/X 마크는 심볼을 따라다니므로 여기서 자를 잡아 줄 필요가 없다.
 

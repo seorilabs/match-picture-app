@@ -27,25 +27,26 @@ func _init() -> void:
 	custom_minimum_size = Vector2(0.0, MpRules.HUD_HEIGHT)
 	mouse_filter = Control.MOUSE_FILTER_IGNORE
 
-	var row := HBoxContainer.new()
-	row.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
-	# 최고 기록 줄이 시간보다 길어 여백 없이는 화면 가장자리에 붙는다.
-	# 카드 좌우 여백과 같은 값을 써서 HUD 와 보드의 세로선을 맞춘다.
-	row.offset_left = MpRules.CARD_SIDE_MARGIN
-	row.offset_right = -MpRules.CARD_SIDE_MARGIN
-	row.add_theme_constant_override("separation", 12)
-	row.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	add_child(row)
+	# 남은 카드는 왼쪽 끝. 카드 좌우 여백과 같은 값을 써서 보드와 세로선을 맞춘다.
+	var left_row := HBoxContainer.new()
+	left_row.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	left_row.offset_left = MpRules.CARD_SIDE_MARGIN
+	left_row.offset_right = -MpRules.CARD_SIDE_MARGIN
+	left_row.alignment = BoxContainer.ALIGNMENT_BEGIN
+	left_row.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	add_child(left_row)
 
 	var deck_group := _make_group("res://assets/icons/joker.png")
 	_deck_label = _make_value_label(str(MpRules.TOTAL_CARDS))
 	deck_group.add_child(_deck_label)
-	row.add_child(deck_group)
+	left_row.add_child(deck_group)
 
-	var spacer := Control.new()
-	spacer.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	spacer.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	row.add_child(spacer)
+	# 시간은 화면 정중앙에 둔다. 같은 행의 왼쪽 묶음과 폭을 나눠 쓰면 남은 카드 수가
+	# 10 에서 9 로 줄 때 시간이 옆으로 밀린다. 가운데 정렬을 따로 걸어 고정한다.
+	var center := CenterContainer.new()
+	center.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	center.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	add_child(center)
 
 	# 시간 아래에 최고 기록을 붙인다. 기록이 없으면 줄째로 숨어 원래 HUD 와 같아진다.
 	var stack := VBoxContainer.new()
@@ -53,16 +54,17 @@ func _init() -> void:
 	stack.mouse_filter = Control.MOUSE_FILTER_IGNORE
 
 	_time_label = _make_value_label(MpRules.format_seconds(0.0))
+	_time_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	stack.add_child(_time_label)
 
 	_best_label = MpUiKit.make_pixel_label("", MpUiKit.FONT_HUD_SUB)
-	_best_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
+	_best_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	_best_label.visible = false
 	stack.add_child(_best_label)
 
 	var time_group := _make_group("res://assets/icons/stopwatch.png")
 	time_group.add_child(stack)
-	row.add_child(time_group)
+	center.add_child(time_group)
 
 
 func set_deck_label(text: String) -> void:
