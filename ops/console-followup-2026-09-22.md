@@ -48,7 +48,7 @@ GameCenterKit의 `authenticated(ok, error)`와 `is_authenticated()`, GodotPlayGa
 | --- | --- | --- | --- |
 | AdMob 카탈로그 lifecycle | 사람 필요 | 정본 `~/.config/seorilabs/catalog/apps.yaml`의 `app/match-picture-app/admob/public-identifiers`는 현재 `lifecycle: archived`다. 반면 credential 파일의 `ADMOB_LIFECYCLE=live`는 이전 작업이 바꾼 값이라 정본과 어긋난다. 이번 작업에서 `ILHWAN (Well known geek)` Chrome 프로필로 AdMob 대상 URL을 열어 readback을 재시도했지만, 공유 Chrome 창이 관찰 직후 사라져 대상 앱 화면을 현재값으로 다시 읽지 못했다. | 현재 콘솔 화면에서 앱 ID `ca-app-pub-9932778305312246~8514815775`와 `com.github.magicsih.MatchPictureUnity`가 보이는 앱인지 재확인한 뒤에만 `apps.yaml`을 `live`로 바꾸고 두 카탈로그 값을 일치시킨다. 그 전에는 정본을 `archived`로 유지한다. |
 | 비개인화 AdMob 요청 코드 | 완료 | Poing v5.1.0의 `AdRequest.extras`가 공통 Google network extra 사전으로 전달되는 것을 vendored `godot/addons/admob/gdscript/src/api/core/AdRequest.gd`와 iOS payload의 `GADExtras` 변환으로 확인했다. `admob_interstitial_ads.gd`의 모든 전면광고 load 요청은 이제 `request.extras = {"npa": "1"}`을 설정하며, UMP 동의 흐름은 그대로다. | `tools/check_admob_bundle.py`가 이 exact extra를 검사하도록 추가했다. 이는 Android와 iOS 소스 계약 확인이며, 새 빌드 배포나 실기기 광고 QA는 아직 하지 않았다. |
-| App Store App Privacy | 사람 필요 | 제품 결정은 추적=아니오, ATT 미구현이다. 위 비개인화 extra와 코드상 `ATTrackingManager`·`requestTrackingAuthorization`·`NSUserTrackingUsageDescription`·IDFA 직접 호출 부재가 그 결정을 뒷받침한다. 다만 App Store Connect의 독립 브라우저 컨텍스트를 확보하지 못해 저장·제출과 화면 readback은 하지 않았다. | Apple의 Tracking=아니오를 입력해야 한다. Google Mobile Ads SDK 문서는 IP 기반 대략 위치, 기기 ID, 광고 데이터, 앱 상호작용, 비사용자 연결 crash log, 사용자 연결 performance data를 신고 후보로 제시하고, GA4 코드는 저장된 임의 client ID·게임 이벤트·오류 메시지를 전송한다. 각 후보의 App Store "연결됨" 및 목적 분류가 확정된 뒤 입력한다. |
+| App Store App Privacy | 사람 필요 | 제품 결정은 추적=아니오, ATT 미구현이다. 비개인화 `npa=1` 요청과 코드상 `ATTrackingManager`·`requestTrackingAuthorization`·`NSUserTrackingUsageDescription`·IDFA 직접 호출 부재가 그 결정을 뒷받침한다. Google의 Mobile Ads SDK 공개 문서는 IP가 대략 위치 추정에 쓰일 수 있다고 하며 NPA 구성의 예외를 두지 않아 Coarse Location도 신고 대상으로 정했다. | 아래의 승인된 값으로 App Store Connect에 입력할 준비는 됐지만, 독립 브라우저 컨텍스트를 확보하지 못해 저장·제출과 화면 readback은 하지 않았다. 추적은 모든 항목에서 아니오, 모든 수집 항목은 사용자와 연결 안 됨이다. |
 | Play Data safety | 사람 필요 | Play Console에서 개발자 계정 `Seolee Apps`와 대상 앱 `Match Picture` · `com.github.magicsih.MatchPictureUnity`를 앞선 세션에서 확인했다. 원장은 전송 중 암호화=예, 삭제 요청=아니요, App interactions=수집·비공유·Analytics, Crash logs=수집·비공유·Analytics, Device or other IDs=수집·공유·Analytics 및 Advertising or marketing을 지정한다. 공유 Chrome에는 독점 가능한 별도 프로필·컨텍스트가 없고, 대상 탭이 아닌 상태에서 양식을 건드리지 않았다. | 대상 화면이 `Match Picture`인지 매 단계 확인할 수 있는 세션에서 정책 및 프로그램 → 앱 콘텐츠 → 데이터 보안 → 관리로 들어가 위 값을 저장·제출한 뒤 같은 화면 readback을 남긴다. 특히 Device or other IDs의 공유=함을 유지한다. |
 
 ### 개인정보 판단에 사용한 공식 근거
@@ -57,3 +57,19 @@ GameCenterKit의 `authenticated(ok, error)`와 `is_authenticated()`, GodotPlayGa
 - [Google Mobile Ads SDK의 App Store 데이터 공개](https://developers.google.com/admob/ios/privacy/data-disclosure): SDK가 수집할 수 있는 기기 식별자, 광고 데이터, 앱 상호작용, 진단 및 성능 데이터를 설명하고 앱 개발자가 신고를 최신으로 유지하도록 요구한다.
 - [Google Mobile Ads SDK의 iOS IDFA 안내](https://developers.google.com/admob/ios/privacy/strategies): UMP와 ATT의 관계 및 ATT 거절 시 IDFA 전송 제한을 설명한다.
 - [Google Mobile Ads SDK의 비개인화 광고 요청](https://developers.google.com/admob/android/next-gen/migration/migrate-ad-requests): Google network extra `npa` 값 `1`로 비개인화 광고를 요청하는 방법을 설명한다.
+
+### App Store App Privacy 입력값 — 미제출
+
+App Store Connect에서 Tracking은 `아니오`로 답한다. 아래 항목은 모두 수집함, 사용자와
+연결 안 됨, 추적 안 함으로 입력한다. 이 표는 코드와 Google Mobile Ads SDK의 공식 공개
+안내를 근거로 한 입력값이며, 아직 Console 저장·제출·readback은 없다.
+
+| Apple 데이터 유형 | 목적 | 근거 |
+| --- | --- | --- |
+| Location / Coarse Location | 제3자 광고 | Google Mobile Ads SDK가 IP 주소로 기기의 대략 위치를 추정할 수 있다고 명시한다. NPA는 과거 행동 기반 타기팅만 끄며 이 수집을 제외하지 않는다. |
+| Identifiers / Device ID | 제3자 광고, 분석 | NPA에서도 빈도 제한과 집계 리포팅에 기기 식별자를 쓰며, 앱은 `ga4_analytics.gd`에서 임의 client ID를 기기에 보관·전송한다. |
+| Usage Data / Product Interaction | 분석, 제3자 광고 | `analytics_events.gd`의 게임 이벤트와 전면광고 노출 이벤트, Google Mobile Ads SDK의 앱 상호작용 수집이다. |
+| Diagnostics / Crash Data | 분석 | `script_error` 이벤트가 최대 100자의 오류 메시지를 GA4로 전송한다. |
+| Diagnostics / Performance Data | 분석 | Google Mobile Ads SDK가 앱 시작 시간·멈춤·에너지 사용량 같은 성능 데이터를 수집할 수 있다고 명시한다. |
+
+수집하지 않는 항목은 연락처, 신원, 건강, 금융, 사용자 콘텐츠, 검색 기록, 구매 내역이다.
