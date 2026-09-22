@@ -32,7 +32,13 @@ REQUIRED_PAYLOADS = [
     "godot/addons/gamecenter/bin/libgamecenter.macos.template_release.universal.dylib",
 ]
 
-WEB_EXCLUDES = ["addons/GodotPlayGameServices/**", "addons/gamecenter/**"]
+# Play Games addon 은 bin/ 의 .aar 만 뺀다. addon 을 통째로 빼면 project.godot 의
+# `GodotPlayGameServices="*uid://..."` autoload 가 가리킬 스크립트가 pck 에서 사라져
+# 부팅이 `Unrecognized UID` + `Failed to instantiate an autoload` 로 죽는다.
+# Web 과 iOS 둘 다 해당한다. Android 는 .aar 가 필요하므로 아무것도 빼지 않는다.
+PLAY_GAMES_BINARY_EXCLUDE = "addons/GodotPlayGameServices/bin/**"
+PLAY_GAMES_WHOLE_ADDON_EXCLUDE = "addons/GodotPlayGameServices/**"
+WEB_EXCLUDES = [PLAY_GAMES_BINARY_EXCLUDE, "addons/gamecenter/**"]
 GAME_CENTER_RUNTIME_DESCRIPTOR = "godot/addons/gamecenter/bin/gamecenter.gdextension"
 GAME_CENTER_IGNORED_DIRECTORY = "godot/addons/gamecenter/bin/.gdignore"
 GAME_CENTER_EXPORT_HOOKS = [
@@ -188,11 +194,15 @@ def main() -> int:
         for needle in WEB_EXCLUDES:
             if needle not in excludes:
                 problems.append(f"Web export 가 네이티브 순위표 바이너리를 빼지 않는다: {needle}")
+        if PLAY_GAMES_WHOLE_ADDON_EXCLUDE in excludes:
+            problems.append("Web export 가 Play Games addon 을 통째로 빼서 autoload 가 죽는다")
 
     if android is None or "addons/gamecenter/**" not in android:
         problems.append("Android export 가 iOS GameCenterKit 을 빼지 않는다")
-    if ios is None or "addons/GodotPlayGameServices/**" not in ios:
-        problems.append("iOS export 가 Android Play Games 플러그인을 빼지 않는다")
+    if ios is None or PLAY_GAMES_BINARY_EXCLUDE not in ios:
+        problems.append("iOS export 가 Android Play Games 바이너리를 빼지 않는다")
+    if ios is not None and PLAY_GAMES_WHOLE_ADDON_EXCLUDE in ios:
+        problems.append("iOS export 가 Play Games addon 을 통째로 빼서 autoload 가 죽는다")
 
     if problems:
         return fail(problems)
