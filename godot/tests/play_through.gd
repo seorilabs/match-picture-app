@@ -29,6 +29,31 @@ func _ready() -> void:
 	get_tree().quit(1 if not _failures.is_empty() else 0)
 
 
+## 오버레이 한가운데를 실제로 한 번 누른다.
+##
+## 뷰포트에 넣어야 Godot 의 GUI 픽 경로를 그대로 타고, 막이 이벤트를 가로채는
+## 종류의 버그가 드러난다. 직접 `_gui_input` 을 부르면 그 경로를 건너뛴다.
+##
+## 손가락 한 번에 마우스와 터치가 같이 도착하는 것까지 재현한다. `project.godot`
+## 의 `pointing/emulate_touch_from_mouse` 때문에 브라우저에서 실제로 그렇게 오고,
+## 그때 두 종류를 다 세면 탭 한 번에 두 단계가 넘어간다.
+func _tap_center_of(control: Control) -> void:
+	var center := control.get_global_rect().get_center()
+	var press := InputEventMouseButton.new()
+	press.button_index = MOUSE_BUTTON_LEFT
+	press.pressed = true
+	press.position = center
+	press.global_position = center
+	# `in_local_coords = true`. 이것을 빼면 뷰포트가 창→캔버스 변환을 한 번 더 걸어서
+	# 헤드리스의 작은 창 기준으로 좌표가 수십 배 밖으로 날아간다.
+	get_viewport().push_input(press, true)
+	var touch := InputEventScreenTouch.new()
+	touch.pressed = true
+	touch.position = center
+	get_viewport().push_input(touch, true)
+	await get_tree().process_frame
+
+
 func _play_one_game() -> void:
 	var main: Node = load("res://scenes/main.tscn").instantiate()
 	_main = main
@@ -57,6 +82,26 @@ func _play_one_game() -> void:
 	# 처음 켠 사람에게는 설명이 먼저 뜬다. 닫아야 판이 시작된다.
 	_check(tutorial.visible, "최초 실행에는 설명이 뜬다")
 	_check(not bool(Save.get_value("has_played", false)), "아직 플레이 기록이 없다")
+
+	# 탭으로 단계가 넘어가는지 본다. `_gui_input` 을 직접 부르면 안 된다. 실제로
+	# 깨졌던 것은 함수가 아니라 입력이 그 함수까지 오는 경로였다. 반투명 막이
+	# MOUSE_FILTER_STOP 이라 탭을 먼저 먹고 전파를 끊어서, 화면 어디를 눌러도
+	# 1/3 에서 움직이지 않았다. 뷰포트에 넣어 실제 라우팅을 타게 한다.
+	_check(tutorial.get("_step") == MpTutorialOverlay.Step.CARDS, "설명은 첫 단계에서 시작한다")
+	await _tap_center_of(tutorial)
+	_check(
+		tutorial.get("_step") == MpTutorialOverlay.Step.MATCH,
+		"설명에서 한 번 탭하면 한 단계만 넘어간다")
+	await _tap_center_of(tutorial)
+	_check(
+		tutorial.get("_step") == MpTutorialOverlay.Step.TAP,
+		"한 번 더 탭하면 마지막 단계다")
+	await _tap_center_of(tutorial)
+	_check(
+		tutorial.get("_step") == MpTutorialOverlay.Step.TAP,
+		"마지막 단계에서는 탭으로 넘어가지 않는다")
+	_check(tutorial.visible, "마지막 단계에서 탭해도 설명이 닫히지 않는다")
+
 	tutorial._on_close()
 	await get_tree().process_frame
 	_check(not tutorial.visible, "설명을 닫으면 사라진다")
