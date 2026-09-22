@@ -4,9 +4,9 @@
     "package_name": "com.github.magicsih.MatchPictureUnity",
     "listing": "https://play.google.com/store/apps/details?id=com.github.magicsih.MatchPictureUnity"
   },
-  "reviewed_on": "2026-09-20",
+  "reviewed_on": "2026-09-22",
   "no_data_collected": false,
-  "data_shared_with_third_parties": false,
+  "data_shared_with_third_parties": true,
   "collection": [
     {
       "category": "App activity",
@@ -46,14 +46,14 @@
       "category": "Device or other IDs",
       "type": "Device or other IDs",
       "collected": true,
-      "shared": false,
+      "shared": true,
       "optional": false,
       "purposes": [
         "Analytics",
         "Advertising or marketing"
       ],
-      "sdk": "GA4 client_id(앱이 생성해 기기에 저장), 앱인토스 통합 광고",
-      "evidence": "godot/src/platform/ga4_analytics.gd, ait/apps-in-toss-web/src/tossFullScreenAdRuntime.ts"
+      "sdk": "GA4 client_id(앱이 생성해 기기에 저장), 앱인토스 통합 광고, Google AdMob(Android·iOS 네이티브 빌드)",
+      "evidence": "godot/src/platform/ga4_analytics.gd, ait/apps-in-toss-web/src/tossFullScreenAdRuntime.ts, godot/src/platform/admob_interstitial_ads.gd"
     }
   ],
   "security_practices": {
