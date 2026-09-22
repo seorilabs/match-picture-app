@@ -226,6 +226,9 @@ func _on_game_finished(seconds: float) -> void:
 		})
 
 	_submit_score(seconds)
+	# 네이티브 인증은 비동기다. 결과를 연 순간의 사용 가능 여부를 고정해 두어, 인증이
+	# 나중에 끝나도 이미 떠 있는 팝업에 새 행동을 끼워 넣지 않는다. 다음 판 결과에서는
+	# 최신 인증 상태를 다시 읽는다.
 	_result_popup.show_result(
 		seconds, best, is_new_best,
 		_leaderboard.is_available(), _share.is_available(), splits)

@@ -7,6 +7,32 @@ var _failures: Array[String] = []
 var _checks := 0
 
 
+class FakeGameCenter:
+	extends RefCounted
+
+	signal authenticated(ok: bool, error: String)
+
+	var authenticate_calls := 0
+	var currently_authenticated := false
+
+	func is_authenticated() -> bool:
+		return currently_authenticated
+
+	func authenticate() -> void:
+		authenticate_calls += 1
+
+
+class FakePlayGames:
+	extends RefCounted
+
+	signal userAuthenticated(authenticated: bool)
+
+	var authentication_checks := 0
+
+	func isAuthenticated() -> void:
+		authentication_checks += 1
+
+
 func _ready() -> void:
 	print("[smoke] 시작")
 
@@ -16,7 +42,8 @@ func _ready() -> void:
 	_check_audio()
 	_check_translations()
 	_check_storage()
-	_check_native_leaderboard_defaults()
+	_check_native_leaderboard_configuration()
+	_check_native_leaderboard_authentication()
 	_check_adapter_wiring()
 
 	print("[smoke] 검사 %d건, 실패 %d건" % [_checks, _failures.size()])
@@ -106,13 +133,41 @@ func _check_storage() -> void:
 	DirAccess.remove_absolute(ProjectSettings.globalize_path(path + MpFileStorage.BAK_SUFFIX))
 
 
-## 콘솔 ID 를 아직 넣지 않은 기본 빌드는 네이티브 순위표를 켜면 안 된다.
+## 라이브 콘솔에서 재확인한 ID를 넣은 뒤에는 두 네이티브 포트가 같은 설정 파일을 읽어야 한다.
 ## 실제 결과 팝업의 버튼 노출은 play_through.gd 가 한 판을 끝낸 뒤 다시 확인한다.
-func _check_native_leaderboard_defaults() -> void:
-	_check(not MpGooglePlayLeaderboard.has_configured_ids(), "비어 있는 Play Games ID 는 순위표를 끈다")
-	_check(not MpGameCenterLeaderboard.has_configured_id(), "비어 있는 Game Center ID 는 순위표를 끈다")
-	_check(not MpGooglePlayLeaderboard.new().is_available(), "빈 Play Games ID 에서는 포트가 비활성화된다")
-	_check(not MpGameCenterLeaderboard.new().is_available(), "빈 Game Center ID 에서는 포트가 비활성화된다")
+func _check_native_leaderboard_configuration() -> void:
+	_check(MpGooglePlayLeaderboard.has_configured_ids(), "Play Games ID 두 개가 구성됐다")
+	_check(MpGameCenterLeaderboard.has_configured_id(), "Game Center ID 가 구성됐다")
+	_check(not MpGooglePlayLeaderboard.new().is_available(), "헤드리스에는 Android Play Games singleton 이 없다")
+	_check(not MpGameCenterLeaderboard.new().is_available(), "헤드리스에는 iOS Game Center singleton 이 없다")
+
+
+## 콘솔 ID 와 네이티브 singleton 이 있어도, 인증 결과 전에는 결과 화면에 쓸 수 없다.
+## 플랫폼 가드는 실제 headless 실행을 계속 막고, 아래 fake는 iOS/Android 인증 신호만 분리한다.
+func _check_native_leaderboard_authentication() -> void:
+	var fake_game_center := FakeGameCenter.new()
+	var game_center := MpGameCenterLeaderboard.new(fake_game_center)
+	_check(fake_game_center.authenticate_calls == 1, "Game Center 인증을 시작한다")
+	_check(not game_center.is_authenticated(), "Game Center 인증 전에는 false 다")
+	_check(not game_center._is_available_on(Platform.Surface.IOS), "Game Center 인증 전에는 iOS 순위표를 열지 않는다")
+	fake_game_center.authenticated.emit(true, "")
+	_check(game_center.is_authenticated(), "Game Center 인증 성공 뒤에만 true 다")
+	_check(game_center._is_available_on(Platform.Surface.IOS), "Game Center 인증 성공 뒤에 iOS 순위표를 연다")
+	fake_game_center.authenticated.emit(false, "missing entitlement")
+	_check(not game_center.is_authenticated(), "Game Center 인증 실패는 다시 false 다")
+	_check(not game_center._is_available_on(Platform.Surface.IOS), "Game Center 인증 실패 뒤에는 iOS 순위표를 닫는다")
+
+	var fake_play_games := FakePlayGames.new()
+	var play_games := MpGooglePlayLeaderboard.new(fake_play_games)
+	_check(fake_play_games.authentication_checks == 1, "Play Games 로그인 상태를 조회한다")
+	_check(not play_games.is_authenticated(), "Play Games 응답 전에는 false 다")
+	_check(not play_games._is_available_on(Platform.Surface.ANDROID), "Play Games 응답 전에는 Android 순위표를 열지 않는다")
+	fake_play_games.userAuthenticated.emit(true)
+	_check(play_games.is_authenticated(), "Play Games 로그인 성공 뒤에만 true 다")
+	_check(play_games._is_available_on(Platform.Surface.ANDROID), "Play Games 로그인 성공 뒤에 Android 순위표를 연다")
+	fake_play_games.userAuthenticated.emit(false)
+	_check(not play_games.is_authenticated(), "Play Games 로그인 거절·실패는 false 다")
+	_check(not play_games._is_available_on(Platform.Surface.ANDROID), "Play Games 로그인 거절·실패 뒤에는 Android 순위표를 닫는다")
 
 
 ## 번역 키가 화면에 그대로 노출되는 것을 막는다. CSV 를 직접 읽어 모든 키를 본다.

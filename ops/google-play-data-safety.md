@@ -24,17 +24,18 @@ Play 공개 listing이 `No data collected`로 남아 있는 동안에도 앱은 
 
 1. 계측/SDK 변경 PR에서 `ops/google-play-data-safety.json`을 함께 수정한다.
 2. `npm run check:data-safety`가 통과하는지 확인한다.
-3. Play Console → 앱 콘텐츠 → 데이터 보안에서 같은 내용으로 신고를 갱신한다.
-   (계정 권한이 필요한 수동 작업이라 저장소 자동화 대상이 아니다.)
+3. Play Console → 정책 및 프로그램 → 앱 콘텐츠 → 데이터 보안에서 같은 내용으로 신고를 갱신한다.
+   Android Publisher API의 `applications.dataSafety`는 검토 완료된 Console CSV를 쓰는 POST만
+   제공하고 현재 신고를 읽는 API는 제공하지 않는다. 이 JSON을 임의 CSV로 바꾸어 자동 제출하지 않는다.
 4. 갱신 근거(Data safety 화면 스크린샷 또는 Console readback)를 릴리스 이슈/PR에 남긴다.
 
 ## 현재 신고 요약
 
 | 항목 | 수집 | 공유 | 목적 | 근거 |
 | --- | --- | --- | --- | --- |
-| App activity / App interactions | O | X | Analytics | `src/firebase/analytics.ts`, `src/firebase/gameEvents.ts` |
-| App info and performance / Crash logs | O | X | Analytics | `src/firebase/errorReporter.ts`, `src/app/ErrorBoundary.tsx` |
-| Device or other IDs | O | X | Analytics, 광고 | `src/firebase/app.ts`, `src/ait/ads.ts` |
+| App activity / App interactions | O | X | Analytics | `godot/src/platform/ga4_analytics.gd`, `godot/src/core/analytics_events.gd` |
+| App info and performance / Crash logs | O | X | Analytics | `godot/src/core/analytics_events.gd`, `godot/src/platform/ga4_analytics.gd` |
+| Device or other IDs | O | O | Analytics, 광고 | `godot/src/platform/ga4_analytics.gd`, `godot/src/platform/admob_interstitial_ads.gd` |
 
 전송 구간 암호화(TLS)는 Firebase/AppsInToss SDK 기본 동작이며, 계정 시스템이 없어
 삭제 요청 대상 개인 데이터는 보관하지 않는다(로컬 진행 상태는 앱 삭제로 제거).
