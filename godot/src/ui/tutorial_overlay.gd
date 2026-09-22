@@ -73,7 +73,10 @@ func _init(library: MpSymbolLibrary) -> void:
 	var shade := ColorRect.new()
 	shade.color = Color(1.0, 1.0, 1.0, 0.392)
 	shade.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
-	shade.mouse_filter = Control.MOUSE_FILTER_STOP
+	# IGNORE 여야 한다. STOP 이면 막이 탭을 자기가 먹고 거기서 전파가 끊겨,
+	# 아래 `_gui_input` 이 아예 불리지 않는다. 뒤쪽 게임 화면을 막는 것은
+	# 이 오버레이 자신이 MOUSE_FILTER_STOP 이라 이미 된다.
+	shade.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	add_child(shade)
 
 	# 예시 카드가 실제 카드와 같은 자리에 오도록, 무대 rect 를 받아 그대로 쓴다.
@@ -160,11 +163,13 @@ func _build_steps() -> void:
 func _gui_input(event: InputEvent) -> void:
 	if not visible or _step == LAST_STEP:
 		return
-	var pressed: bool = (
-		(event is InputEventScreenTouch and (event as InputEventScreenTouch).pressed)
-		or (event is InputEventMouseButton and (event as InputEventMouseButton).pressed)
-	)
-	if not pressed:
+	# 마우스 눌림만 본다. 터치도 같이 받으면 탭 한 번에 두 단계가 넘어간다.
+	# `project.godot` 의 `pointing/emulate_touch_from_mouse` 가 켜져 있어 클릭
+	# 하나가 마우스와 터치 양쪽으로 도착하고, 반대로 터치 기기에서는 엔진 기본값
+	# `emulate_mouse_from_touch` 가 터치를 마우스로 바꿔 준다. 어느 쪽이든 마우스
+	# 이벤트는 정확히 한 번 온다. 화면의 다른 Button 들도 같은 경로로 동작한다.
+	var mouse := event as InputEventMouseButton
+	if mouse == null or not mouse.pressed:
 		return
 	accept_event()
 	_show_step((_step + 1) as Step)
@@ -177,7 +182,9 @@ func _show_step(step: Step) -> void:
 	_finger.visible = step >= Step.TAP
 	_hint.visible = step != LAST_STEP
 	_start_button.visible = step == LAST_STEP
-	_progress.text = "%d/%d · %s" % [step + 1, LAST_STEP + 1, tr("TUTORIAL_NEXT")]
+	# 구분자는 도현체에 있는 글자만 쓴다. 가운뎃점(U+00B7)은 이 폰트의 유니코드
+	# cmap 에 없어서 두부 상자로 그려진다. tools/check_font_coverage.py 가 막는다.
+	_progress.text = "%d/%d | %s" % [step + 1, LAST_STEP + 1, tr("TUTORIAL_NEXT")]
 	match step:
 		Step.CARDS:
 			_hint_label.text = "TUTORIAL_STEP_CARDS"
