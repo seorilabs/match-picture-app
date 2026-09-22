@@ -27,6 +27,13 @@ var _current: MpRound = null
 var _elapsed := 0.0
 var _timer_running := false
 
+## 라운드별 소요 시간.
+##
+## 초시계가 첫 정답 뒤에 켜지므로 1라운드는 측정되지 않는다. 정답 10회 중
+## 2~10라운드 9개가 남고, 이 9개의 합이 곧 최종 기록이다.
+var _splits: Array[float] = []
+var _last_split_at := 0.0
+
 var _round_elapsed := 0.0
 var _hint_active := false
 var _lock_remaining := 0.0
@@ -45,6 +52,11 @@ func current_round() -> MpRound:
 
 func elapsed_seconds() -> float:
 	return _elapsed
+
+
+## 라운드별 소요 시간 사본. 판이 끝나면 9개다.
+func splits() -> Array[float]:
+	return _splits.duplicate()
 
 
 func correct_count() -> int:
@@ -84,6 +96,8 @@ func start(rng: RandomNumberGenerator) -> bool:
 	_state = State.PLAYING
 	_elapsed = 0.0
 	_timer_running = false
+	_splits.clear()
+	_last_split_at = 0.0
 	_correct_count = 0
 	_wrong_count = 0
 	_reset_round()
@@ -140,8 +154,12 @@ func _advance_hint(delta: float) -> void:
 
 func _finish_pulse() -> void:
 	# 원본은 첫 정답의 판정 연출이 끝나는 시점에 초시계를 켰다.
+	# 그래서 1라운드에는 잴 구간이 없고, 2라운드부터 직전 정답 이후 걸린 시간을 남긴다.
 	if not _timer_running:
 		_timer_running = true
+	else:
+		_splits.append(_elapsed - _last_split_at)
+	_last_split_at = _elapsed
 
 	_correct_count += 1
 

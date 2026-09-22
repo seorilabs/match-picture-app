@@ -44,6 +44,16 @@ func _play_one_game() -> void:
 	if screen == null or tutorial == null:
 		return
 
+	# 앱을 켜면 타이틀이 먼저다. 시작을 눌러야 그 다음이 진행된다.
+	var title: MpTitleScreen = main.get("_title")
+	_check(title != null and title.visible, "앱을 켜면 타이틀이 먼저 뜬다")
+	_check(not tutorial.visible, "타이틀에서는 설명이 아직 뜨지 않는다")
+	if title == null:
+		return
+	title.start_pressed.emit()
+	await get_tree().process_frame
+	_check(not title.visible, "시작을 누르면 타이틀이 닫힌다")
+
 	# 처음 켠 사람에게는 설명이 먼저 뜬다. 닫아야 판이 시작된다.
 	_check(tutorial.visible, "최초 실행에는 설명이 뜬다")
 	_check(not bool(Save.get_value("has_played", false)), "아직 플레이 기록이 없다")

@@ -44,6 +44,7 @@ func _defaults() -> Dictionary:
 		"schema": SCHEMA_VERSION,
 		"has_played": false,
 		"best_seconds": 0.0,
+		"best_splits": [],
 		"clear_count": 0,
 		"language": "auto",
 		"muted": false,

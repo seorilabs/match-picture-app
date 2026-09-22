@@ -30,6 +30,8 @@ func _ready() -> void:
 	_test_game_flow()
 	print("[core-test] > _test_timer_semantics")
 	_test_timer_semantics()
+	print("[core-test] > _test_splits")
+	_test_splits()
 	print("[core-test] > _test_best_record")
 	_test_best_record()
 	print("[core-test] > _test_analytics_contract")
@@ -248,6 +250,34 @@ func _test_timer_semantics() -> void:
 	check(game.elapsed_seconds() > running, "오답 잠금 중에도 타이머는 계속 흐른다")
 
 
+## 구간 기록. 초시계가 첫 정답 뒤에 켜지므로 1라운드는 측정되지 않는다.
+func _test_splits() -> void:
+	var game := MpGameState.new()
+	game.start(_rng())
+	check_eq(game.splits(), [] as Array[float], "시작할 때는 구간이 없다")
+
+	var guard := 0
+	while game.state() != MpGameState.State.FINISHED and guard < 100000:
+		guard += 1
+		if game.accepts_input():
+			# 라운드마다 다른 시간이 걸리게 조금씩 기다렸다가 누른다.
+			for i in game.splits().size() + 1:
+				game.advance(STEP)
+			game.judge(game.current_round().hint)
+		game.advance(STEP)
+
+	var splits := game.splits()
+	check_eq(splits.size(), MpRules.TOTAL_CARDS - 1, "정답 10회에 측정 구간은 9개다")
+
+	var total := 0.0
+	for split in splits:
+		check(split > 0.0, "구간은 0보다 크다")
+		total += split
+	check(
+		absf(total - game.elapsed_seconds()) < 0.001,
+		"구간의 합이 최종 기록과 같다")
+
+
 func _test_best_record() -> void:
 	check(not MpBestRecord.has_record(MpBestRecord.NO_RECORD), "0은 기록 없음을 뜻한다")
 	check(MpBestRecord.is_new_best(30.0, MpBestRecord.NO_RECORD), "첫 기록은 언제나 신기록이다")
@@ -257,12 +287,32 @@ func _test_best_record() -> void:
 	# 표시용으로 정수로 깎으면 23.9와 23.1이 같은 기록이 된다. 실수 그대로 판정한다.
 	check(MpBestRecord.is_new_best(23.1, 23.9), "소수점 차이도 신기록으로 잡는다")
 
-	var merged := MpBestRecord.merge({"best_seconds": 30.0, "clear_count": 2}, 25.0)
+	var fresh_splits: Array[float] = [2.0, 3.0]
+	var merged := MpBestRecord.merge({"best_seconds": 30.0, "clear_count": 2}, 25.0, fresh_splits)
 	check_eq(merged["best_seconds"], 25.0, "신기록이면 갱신한다")
 	check_eq(merged["clear_count"], 3, "클리어 수를 센다")
-	var kept := MpBestRecord.merge({"best_seconds": 20.0, "clear_count": 1}, 25.0)
+	check_eq(merged[MpBestRecord.BEST_SPLITS_KEY], fresh_splits, "신기록이면 구간 기록도 갱신한다")
+
+	var old_splits: Array[float] = [1.0, 1.5]
+	var previous := {"best_seconds": 20.0, "clear_count": 1, "best_splits": old_splits}
+	var kept := MpBestRecord.merge(previous, 25.0, fresh_splits)
 	check_eq(kept["best_seconds"], 20.0, "신기록이 아니면 기존 기록을 지킨다")
 	check_eq(kept["clear_count"], 2, "신기록이 아니어도 클리어 수는 센다")
+	check_eq(kept[MpBestRecord.BEST_SPLITS_KEY], old_splits, "신기록이 아니면 구간 기록도 지킨다")
+
+	# 구간 기록이 생기기 전 세이브에는 키가 아예 없다. 그래도 저장할 수 있어야 한다.
+	var legacy := MpBestRecord.merge({"best_seconds": 20.0, "clear_count": 1}, 25.0, fresh_splits)
+	check_eq(legacy[MpBestRecord.BEST_SPLITS_KEY], [] as Array[float], "예전 세이브는 빈 구간으로 채운다")
+	check_eq(MpBestRecord.splits_from({}), [] as Array[float], "키가 없으면 빈 배열이다")
+	# JSON 을 거치면 타입이 풀리고 정수로 내려오는 값이 섞인다.
+	check_eq(
+		MpBestRecord.splits_from({"best_splits": [1, 2.5, "깨진 값"]}),
+		[1.0, 2.5] as Array[float],
+		"숫자가 아닌 값은 버리고 읽는다")
+	check_eq(
+		MpBestRecord.to_cumulative([2.0, 3.0, 1.5] as Array[float]),
+		[2.0, 5.0, 6.5] as Array[float],
+		"구간을 누적 시간표로 바꾼다")
 
 	# 앱인토스 게임센터가 내림차순만 지원해서 뒤집어 보낸다. 짧은 기록이 큰 점수다.
 	var fast := MpBestRecord.to_leaderboard_score(20.0)

@@ -61,6 +61,17 @@ const CARD_GAP := 40.0
 const CARD_SIDE_MARGIN := 16.0
 
 
+## 최고 기록 대비 차이 표기. 앞서면 "-1.4s", 뒤지면 "+0.8s" 다.
+##
+## 픽셀 폰트에 ASCII 글리프만 있어 부호도 ASCII 로 쓴다. 초 단위 한 자리까지 보이는
+## 이유는 라운드 하나가 보통 2~5초라 정수로 깎으면 차이가 0 으로 뭉개지기 때문이다.
+static func format_delta_seconds(delta: float) -> String:
+	var rounded := snappedf(delta, 0.1)
+	if absf(rounded) < 0.05:
+		return "0.0s"
+	return "%+.1fs" % rounded
+
+
 ## 타이머 표시 문자열. 원본은 소수점을 버리고 999 에서 고정했다.
 static func format_seconds(seconds: float) -> String:
 	var truncated := int(floor(seconds))

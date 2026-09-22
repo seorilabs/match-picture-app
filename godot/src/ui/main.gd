@@ -14,6 +14,7 @@ var _share: MpSharePort
 var _retry_count := 0
 var _safe_area_root: MarginContainer
 var _game_screen: MpGameScreen
+var _title: MpTitleScreen
 var _result_popup: MpResultPopup
 var _tutorial: MpTutorialOverlay
 var _quit_confirm: MpQuitConfirm
@@ -48,12 +49,9 @@ func _ready() -> void:
 		"has_best": MpBestRecord.has_record(best),
 	})
 
-	# 원본은 최초 실행에만 설명을 보여 주고, 닫으면 그때 판을 시작했다.
-	if has_played:
-		_start_game(false)
-	else:
-		_analytics.log_event(MpAnalyticsEvents.TUTORIAL_BEGIN, {})
-		_tutorial.show_overlay()
+	# 타이틀에서 시작을 눌러야 판이 돈다. 원본은 곧장 시작했지만, 겨룰 기록을 한 번
+	# 보고 들어가는 편이 기록 게임답다. 설명은 원본대로 최초 1회만 그 뒤에 끼어든다.
+	_title.show_title(best, int(Save.get_value(MpBestRecord.CLEAR_COUNT_KEY, 0)))
 
 	# 앱인토스에서는 하드웨어 백이 래퍼를 거쳐 들어온다.
 	Platform.set_ait_back_handler(go_back)
@@ -109,6 +107,11 @@ func _build_overlays() -> void:
 	layer.layer = 2
 	add_child(layer)
 
+	# 타이틀을 가장 먼저 붙여 설정·종료 확인 같은 팝업이 그 위에 뜨게 한다.
+	_title = MpTitleScreen.new()
+	_title.start_pressed.connect(_on_title_start)
+	layer.add_child(_title)
+
 	_result_popup = MpResultPopup.new()
 	_result_popup.retry_pressed.connect(_on_retry)
 	_result_popup.settings_pressed.connect(_on_open_settings)
@@ -117,9 +120,12 @@ func _build_overlays() -> void:
 	_result_popup.exit_pressed.connect(_on_request_quit)
 	layer.add_child(_result_popup)
 
-	_tutorial = MpTutorialOverlay.new()
+	# 안내는 실제 카드와 같은 자리에 예시 카드를 깔아야 해서 무대 rect 를 따라간다.
+	_tutorial = MpTutorialOverlay.new(_library)
 	_tutorial.closed.connect(_on_tutorial_closed)
 	layer.add_child(_tutorial)
+	_game_screen.stage_rect_changed.connect(_tutorial.set_stage_rect)
+	_tutorial.set_stage_rect(_game_screen.stage_rect())
 
 	_settings = MpSettingsPopup.new()
 	layer.add_child(_settings)
@@ -159,7 +165,18 @@ func go_back() -> void:
 		_tutorial.visible = false
 		_on_tutorial_closed()
 		return
+	# 타이틀에서 뒤로가기는 앱을 끄는 것과 같다. 최상위와 같은 처리로 흘려보낸다.
 	_quit_confirm.show_confirm()
+
+
+## 타이틀에서 시작을 눌렀을 때. 최초 실행이면 설명을 한 번 거친다.
+func _on_title_start() -> void:
+	_title.hide_title()
+	if bool(Save.get_value(HAS_PLAYED_KEY, false)):
+		_start_game(false)
+		return
+	_analytics.log_event(MpAnalyticsEvents.TUTORIAL_BEGIN, {})
+	_tutorial.show_overlay()
 
 
 func _on_tutorial_closed() -> void:
@@ -173,6 +190,10 @@ func _start_game(is_retry: bool) -> void:
 		"deck_size": MpRules.TOTAL_CARDS,
 		"is_retry": is_retry,
 	})
+	# 겨룰 기록을 먼저 넣어야 첫 프레임부터 HUD 에 보인다.
+	_game_screen.set_best_record(
+		float(Save.get_value(MpBestRecord.BEST_KEY, MpBestRecord.NO_RECORD)),
+		MpBestRecord.splits_from(Save.snapshot()))
 	_game_screen.start_new_game()
 
 
@@ -186,8 +207,9 @@ func _on_game_finished(seconds: float) -> void:
 		"wrong_count": _game_screen.wrong_count(),
 	})
 
-	var merged := MpBestRecord.merge(Save.snapshot(), seconds)
-	for key in [MpBestRecord.BEST_KEY, MpBestRecord.CLEAR_COUNT_KEY]:
+	var splits := _game_screen.splits()
+	var merged := MpBestRecord.merge(Save.snapshot(), seconds, splits)
+	for key in [MpBestRecord.BEST_KEY, MpBestRecord.BEST_SPLITS_KEY, MpBestRecord.CLEAR_COUNT_KEY]:
 		Save.set_value(key, merged[key])
 
 	if is_new_best:
@@ -197,7 +219,9 @@ func _on_game_finished(seconds: float) -> void:
 		})
 
 	_submit_score(seconds)
-	_result_popup.show_result(seconds, best, is_new_best, _leaderboard.is_available(), _share.is_available())
+	_result_popup.show_result(
+		seconds, best, is_new_best,
+		_leaderboard.is_available(), _share.is_available(), splits)
 
 
 ## 기록은 끝날 때마다 올린다. 게임센터가 더 좋은 기록만 남긴다.
@@ -213,7 +237,15 @@ func _submit_score(seconds: float) -> void:
 ## tests/capture_screens.gd 가 결과 화면을 같은 비율에서 찍기 위해 쓴다.
 ## 실제 판을 끝까지 돌리지 않고 팝업만 띄운다.
 func show_result_for_capture(seconds: float, best_seconds: float, is_new_best: bool) -> void:
-	_result_popup.show_result(seconds, best_seconds, is_new_best)
+	# 구간 막대까지 보이게 표본 구간을 넣는다. 실제 판에서는 코어가 잰 값이 온다.
+	var sample: Array[float] = [2.4, 4.8, 1.9, 3.1, 2.2, 5.6, 2.0, 3.4, 2.7]
+	_result_popup.show_result(seconds, best_seconds, is_new_best, false, false, sample)
+
+
+## tests/capture_screens.gd 가 게임 화면을 찍으려면 타이틀을 먼저 지나야 한다.
+func start_game_for_capture() -> void:
+	_title.hide_title()
+	_start_game(false)
 
 
 func show_overlay_for_capture(name: String) -> void:

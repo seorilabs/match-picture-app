@@ -8,9 +8,9 @@ RESULT_EXIT,나가기,EXIT
 QUIT_TITLE,그만할까요?,QUIT?
 QUIT_YES,네,YES
 QUIT_NO,아니요,NO
-TUTORIAL_TITLE,같은 그림 찾기,FIND THE MATCH
-TUTORIAL_BODY,위아래 카드에 똑같이 들어 있는 그림은 하나뿐이에요. 아래 카드에서 찾아 눌러 주세요.,Only one picture appears on both cards. Find it on the bottom card and tap it.
-TUTORIAL_CLOSE,시작하기,START
+TITLE_NAME,같은 그림 찾기,MATCH PICTURE
+TITLE_START,시작하기,START
+TITLE_CLEARS,{0}판 클리어,{0} CLEARS
 SHARE_MESSAGE,내 기록은 {0}초예요. 이길 수 있나요?,My record is {0} seconds. Can you beat me?
 SHARE_FAILED,공유하지 못했어요.,Could not share.
 LEADERBOARD_UNSUPPORTED,이 앱에서는 순위표를 열 수 없어요.,Ranking is not available here.
