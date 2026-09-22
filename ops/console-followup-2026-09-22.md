@@ -22,6 +22,15 @@
 - Play Data safety: API 쓰기 엔드포인트는 존재하지만 안전한 현재값 조회나 JSON 변환 API가 없다.
   검토된 Console CSV가 있을 때만 API 쓰기가 가능하다.
 
+## 인증 노출 계약 후속 수정
+
+PR #98은 순위표 ID가 구성됐다는 사실과 사용자가 지금 순위표를 열 수 있다는 상태를 분리한다.
+GameCenterKit의 `authenticated(ok, error)`와 `is_authenticated()`, GodotPlayGameServices의
+`userAuthenticated(bool)`가 성공을 알리기 전에는 두 포트 모두 사용할 수 없다고 답한다.
+인증이 결과 팝업을 연 뒤에 끝나면 그 팝업에는 버튼을 뒤늦게 추가하지 않고, 다음 판 결과에서
+최신 상태를 읽는다. 이미 표시한 결과의 행동 수를 바꾸지 않으면서도 눌러도 동작하지 않는 버튼을
+만들지 않는 fail-closed 선택이다.
+
 ## 공식 근거
 
 - [Play Games Services Publishing API](https://developers.google.com/games/services/publishing/api/leaderboardConfigurations)
