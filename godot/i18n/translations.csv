@@ -8,6 +8,9 @@ RESULT_EXIT,나가기,EXIT
 QUIT_TITLE,그만할까요?,QUIT?
 QUIT_YES,네,YES
 QUIT_NO,아니요,NO
+TUTORIAL_NEXT,탭하면 다음,TAP TO CONTINUE
+TUTORIAL_STEP_CARDS,위아래 카드에 그림이 8개씩 있어요,Each card shows 8 pictures
+TUTORIAL_STEP_MATCH,양쪽에 다 있는 그림은 하나뿐이에요,Only one picture is on both cards
 TITLE_NAME,같은 그림 찾기,MATCH PICTURE
 TITLE_START,시작하기,START
 TITLE_CLEARS,{0}판 클리어,{0} CLEARS
