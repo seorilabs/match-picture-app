@@ -137,6 +137,9 @@ func _play_one_game() -> void:
 
 	await get_tree().process_frame
 	_check(popup.visible, "끝나면 결과 화면이 뜬다")
+	var leaderboard_button := popup.get("_leaderboard_button") as Button
+	_check(leaderboard_button != null and not leaderboard_button.visible,
+		"순위표 ID 가 비어 있으면 결과 화면에 순위표 버튼이 없다")
 
 	# 기록이 저장됐는지. 원본에는 없던 기능이라 여기서 확인해 둔다.
 	var saved := float(Save.get_value(MpBestRecord.BEST_KEY, MpBestRecord.NO_RECORD))

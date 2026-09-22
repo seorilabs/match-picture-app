@@ -16,6 +16,7 @@ func _ready() -> void:
 	_check_audio()
 	_check_translations()
 	_check_storage()
+	_check_native_leaderboard_defaults()
 	_check_adapter_wiring()
 
 	print("[smoke] 검사 %d건, 실패 %d건" % [_checks, _failures.size()])
@@ -103,6 +104,15 @@ func _check_storage() -> void:
 
 	DirAccess.remove_absolute(ProjectSettings.globalize_path(path))
 	DirAccess.remove_absolute(ProjectSettings.globalize_path(path + MpFileStorage.BAK_SUFFIX))
+
+
+## 콘솔 ID 를 아직 넣지 않은 기본 빌드는 네이티브 순위표를 켜면 안 된다.
+## 실제 결과 팝업의 버튼 노출은 play_through.gd 가 한 판을 끝낸 뒤 다시 확인한다.
+func _check_native_leaderboard_defaults() -> void:
+	_check(not MpGooglePlayLeaderboard.has_configured_ids(), "비어 있는 Play Games ID 는 순위표를 끈다")
+	_check(not MpGameCenterLeaderboard.has_configured_id(), "비어 있는 Game Center ID 는 순위표를 끈다")
+	_check(not MpGooglePlayLeaderboard.new().is_available(), "빈 Play Games ID 에서는 포트가 비활성화된다")
+	_check(not MpGameCenterLeaderboard.new().is_available(), "빈 Game Center ID 에서는 포트가 비활성화된다")
 
 
 ## 번역 키가 화면에 그대로 노출되는 것을 막는다. CSV 를 직접 읽어 모든 키를 본다.
