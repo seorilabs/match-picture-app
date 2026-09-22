@@ -2,17 +2,25 @@ class_name MpTutorialOverlay
 extends Control
 ## 최초 1회만 뜨는 안내.
 ##
-## 원본 `GameScene.unity` 의 PanelTutorial 을 되살린 것이다. 글자가 한 자도 없었다.
-## 반투명 흰 막 위에 예시 카드 두 장을 실제 카드와 같은 자리에 깔고, 두 카드에 함께
-## 들어 있는 그림에 O 를 찍고, 아래 카드의 그 그림을 손가락이 가리킨다. 규칙을 문장
-## 대신 그림으로 보여 주므로 번역할 문구가 없다.
+## 원본 `GameScene.unity` 의 PanelTutorial 을 바탕으로 한다. 반투명 흰 막 위에 예시
+## 카드 두 장을 실제 카드와 같은 자리에 깔고, 두 카드에 함께 들어 있는 그림에 O 를
+## 찍고, 아래 카드의 그 그림을 손가락이 가리킨다. 좌표와 크기는 원본 씬에서 옮겼다.
 ##
-## 원본은 PlayerPrefs["HasPlayed"] 로 한 번만 보여 줬다. 기획 정본이 "인터랙티브
-## 튜토리얼은 추가하지 않는다" 고 못박아 둔 자리라, 정지된 그림 한 장에서 끝낸다.
+## 원본과 다른 점은 이것을 한 장에 다 보여 주지 않고 세 단계로 나눈 것이다. 한 장에
+## 몰아 놓으면 무엇을 보라는 것인지, 어떻게 닫는 것인지가 드러나지 않았다. 단계마다
+## 다음으로 가는 방법을 화면에 적어 둔다.
+##
+## 기획 정본은 "게임 위에 단계별 오버레이를 얹는 인터랙티브 튜토리얼은 추가하지
+## 않는다" 고 적어 두었다. 이 단계 방식은 그 문구와 겹치며 사용자 결정으로 들어왔다.
+## 실제 판 위가 아니라 예시 판 위에서만 돌고, 탭으로 넘길 뿐 조작을 가르치지 않는다.
 
 signal closed()
 
 const FINGER_PATH := "res://assets/icons/finger.png"
+
+## 안내 띠가 차지하는 화면 아래쪽 높이와 좌우·아래 여백.
+const STEP_BAR_HEIGHT := 240.0
+const STEP_MARGIN := 24.0
 
 ## 손가락 그림 한 변. 원본 PanelMine 안 Image 가 150x150 이었다. 카드 좌표계 값이다.
 const FINGER_SIZE := 150.0
@@ -21,14 +29,15 @@ const FINGER_SIZE := 150.0
 ## 손끝이 O 안으로 들어가 그림을 짚는 모양이 된다.
 const FINGER_DROP := 84.0
 
-## 안내의 O 상자 한 변. 원본은 심볼(100) 위에 300x300 / 250pt 로 큼직하게 씌워
-## 그림을 가리지 않고 감쌌다. 판정용 마크(MARK_SIZE)를 이만큼 키워 쓴다.
-const ANSWER_MARK_SIZE := 300.0
+## 안내의 O 상자 한 변. 심볼 한 변(100)의 두 배다.
+##
+## 원본은 300 이었지만 그 크기로는 O 가 카드의 절반을 덮어 무엇을 가리키는지보다
+## 동그라미가 먼저 보였다. 심볼을 감싸되 이웃 그림을 침범하지 않는 선으로 줄인다.
+const ANSWER_MARK_SIZE := 200.0
 
-## 닫기 버튼 한 변과 무대 오른쪽 위에서 띄우는 거리.
-## 원본 Button 은 100x100 에 우상단 기준 (-60, -160) 이었고, 그중 100 은 HUD 몫이다.
-const CLOSE_SIZE := 100.0
-const CLOSE_INSET := 60.0
+## 안내 단계. 카드 → 같은 그림 → 누를 자리 순으로 하나씩 더해 보여 준다.
+enum Step { CARDS, MATCH, TAP }
+const LAST_STEP := Step.TAP
 
 ## 예시 카드를 뽑는 씨앗. 안내 그림은 언제 켜도 같아야 한다.
 const EXAMPLE_SEED := 20200704
@@ -46,7 +55,12 @@ var _mine_card: MpCardView
 var _opponent_mark: MpJudgeMark
 var _mine_mark: MpJudgeMark
 var _finger: TextureRect
+var _hint: PanelContainer
+var _hint_label: Label
+var _progress: Label
+var _start_button: Button
 var _answer := ""
+var _step: Step = Step.CARDS
 
 
 func _init(library: MpSymbolLibrary) -> void:
@@ -88,16 +102,89 @@ func _init(library: MpSymbolLibrary) -> void:
 			_finger.texture = loaded
 	_board.add_child(_finger)
 
-	var close := MpUiKit.make_icon_button("X")
-	close.set_anchors_preset(Control.PRESET_TOP_RIGHT)
-	close.offset_left = -CLOSE_INSET - CLOSE_SIZE
-	close.offset_right = -CLOSE_INSET
-	close.offset_top = CLOSE_INSET
-	close.offset_bottom = CLOSE_INSET + CLOSE_SIZE
-	close.pressed.connect(_on_close)
-	_board.add_child(close)
-
+	_build_steps()
 	_build_example()
+
+
+## 카드 아래에 겹쳐 놓는 안내 띠와 시작 버튼.
+##
+## 카드 두 장이 무대를 거의 다 채워서 아래에 빈 자리가 없다. 카드 위에 반투명 띠를
+## 깔고 그 위에 글자를 얹는다.
+func _build_steps() -> void:
+	# 전체 화면 여백 컨테이너 안에 두면 띠가 화면 밖으로 밀리지 않는다.
+	var frame := MarginContainer.new()
+	frame.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	frame.add_theme_constant_override("margin_left", int(STEP_MARGIN))
+	frame.add_theme_constant_override("margin_right", int(STEP_MARGIN))
+	frame.add_theme_constant_override("margin_bottom", int(STEP_MARGIN))
+	frame.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	add_child(frame)
+
+	var column := VBoxContainer.new()
+	column.alignment = BoxContainer.ALIGNMENT_END
+	column.add_theme_constant_override("separation", 12)
+	column.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	frame.add_child(column)
+
+	_hint = PanelContainer.new()
+	_hint.add_theme_stylebox_override("panel", MpUiKit.hint_style())
+	_hint.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	column.add_child(_hint)
+
+	# 문구와 진행 표시를 세로로 쌓는다. 한 줄에 붙이면 한국어 문장이 폭을 넘긴다.
+	var stack := VBoxContainer.new()
+	stack.add_theme_constant_override("separation", 6)
+	stack.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	_hint.add_child(stack)
+
+	_hint_label = MpUiKit.make_word_label("", MpUiKit.FONT_BODY, MpUiKit.TEXT_LIGHT)
+	_hint_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	_hint_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	_hint_label.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	stack.add_child(_hint_label)
+
+	# 몇 단계 중 몇 번째인지와, 어떻게 넘기는지. 숫자와 한글이 한 줄에 섞이므로
+	# 픽셀 폰트를 쓰지 않는다.
+	_progress = MpUiKit.make_word_label("", MpUiKit.FONT_HUD_SUB, MpUiKit.TEXT_LIGHT)
+	_progress.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	_progress.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	stack.add_child(_progress)
+
+	_start_button = MpUiKit.make_button("TITLE_START")
+	_start_button.pressed.connect(_on_close)
+	column.add_child(_start_button)
+
+
+## 마지막 단계 전에는 화면 아무 곳이나 눌러 다음으로 간다.
+## 어디를 눌러야 하는지 찾게 만들지 않으려고 판정 영역을 화면 전체로 둔다.
+func _gui_input(event: InputEvent) -> void:
+	if not visible or _step == LAST_STEP:
+		return
+	var pressed: bool = (
+		(event is InputEventScreenTouch and (event as InputEventScreenTouch).pressed)
+		or (event is InputEventMouseButton and (event as InputEventMouseButton).pressed)
+	)
+	if not pressed:
+		return
+	accept_event()
+	_show_step((_step + 1) as Step)
+
+
+func _show_step(step: Step) -> void:
+	_step = step
+	_opponent_mark.visible = step >= Step.MATCH
+	_mine_mark.visible = step >= Step.MATCH
+	_finger.visible = step >= Step.TAP
+	_hint.visible = step != LAST_STEP
+	_start_button.visible = step == LAST_STEP
+	_progress.text = "%d/%d · %s" % [step + 1, LAST_STEP + 1, tr("TUTORIAL_NEXT")]
+	match step:
+		Step.CARDS:
+			_hint_label.text = "TUTORIAL_STEP_CARDS"
+		Step.MATCH:
+			_hint_label.text = "TUTORIAL_STEP_MATCH"
+		_:
+			pass
 
 
 ## 게임 화면이 카드를 놓는 자리를 그대로 받아 예시 카드를 맞춘다.
@@ -111,6 +198,7 @@ func set_stage_rect(rect: Rect2) -> void:
 
 func show_overlay() -> void:
 	visible = true
+	_show_step(Step.CARDS)
 	# 숨어 있는 동안에는 마크가 심볼 자리를 재지 못한다. 보이고 나서 다시 찍는다.
 	_layout()
 
@@ -180,6 +268,10 @@ func _layout() -> void:
 		_mine_card.find_symbol(_answer), "O", MpUiKit.CORRECT, 0.0, false)
 
 	_place_finger(layout.factor)
+	# show_on_symbol 과 _place_finger 가 visible 을 켜므로 단계 가시성을 다시 씌운다.
+	_opponent_mark.visible = _step >= Step.MATCH
+	_mine_mark.visible = _step >= Step.MATCH
+	_finger.visible = _step >= Step.TAP
 
 
 ## 아래 카드의 정답 그림 바로 아래에 손가락을 놓는다. 손끝이 위를 가리키는 그림이다.

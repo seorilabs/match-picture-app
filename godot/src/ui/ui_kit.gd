@@ -64,6 +64,15 @@ static func card_style() -> StyleBoxFlat:
 	return style
 
 
+## 카드 위에 글자를 얹는 반투명 띠. 흰 카드 위에서도 글자가 읽히게 어둡게 깐다.
+static func hint_style() -> StyleBoxFlat:
+	var style := StyleBoxFlat.new()
+	style.bg_color = Color(TEXT_DARK, 0.82)
+	style.set_corner_radius_all(PANEL_RADIUS)
+	style.set_content_margin_all(20.0)
+	return style
+
+
 static func panel_style() -> StyleBoxFlat:
 	var style := StyleBoxFlat.new()
 	style.bg_color = PANEL
