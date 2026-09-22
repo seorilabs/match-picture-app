@@ -79,6 +79,23 @@ func _play_one_game() -> void:
 	await get_tree().process_frame
 	_check(not title.visible, "시작을 누르면 타이틀이 닫힌다")
 
+	# 안전영역은 앱인토스에서 뒤늦게 올라온다. 그때 창 크기는 그대로라 `size_changed`
+	# 가 오지 않으므로, 시작할 때 한 번만 읽으면 0 인 채로 굳는다. 여백을 일부러 틀어
+	# 놓고 아무것도 건드리지 않은 채 주기가 지나면 제자리로 돌아오는지 본다.
+	var safe_root: MarginContainer = main.get("_safe_area_root")
+	_check(safe_root != null, "안전영역 루트가 있다")
+	if safe_root != null:
+		var expected := int(MpSafeArea.insets(get_window()).y)
+		safe_root.add_theme_constant_override("margin_top", expected + 123)
+		main.set("_applied_insets", Vector4(-1.0, -1.0, -1.0, -1.0))
+		# main.gd 에는 class_name 이 없다. 주기를 테스트에 베끼면 따로 놀기 때문에
+		# 스크립트 상수를 그대로 읽는다.
+		var poll := float(main.get_script().get_script_constant_map()["SAFE_AREA_POLL_SECONDS"])
+		await get_tree().create_timer(poll + 0.3).timeout
+		_check(
+			safe_root.get_theme_constant("margin_top") == expected,
+			"창 크기가 그대로여도 안전영역을 다시 읽어 여백을 맞춘다")
+
 	# 처음 켠 사람에게는 설명이 먼저 뜬다. 닫아야 판이 시작된다.
 	_check(tutorial.visible, "최초 실행에는 설명이 뜬다")
 	_check(not bool(Save.get_value("has_played", false)), "아직 플레이 기록이 없다")
