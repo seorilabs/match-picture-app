@@ -26,8 +26,9 @@ REQUIRED_PAYLOADS = [
     "godot/addons/GodotPlayGameServices/bin/debug/GodotPlayGameServices-debug.aar",
     "godot/addons/GodotPlayGameServices/bin/release/GodotPlayGameServices-release.aar",
     "godot/addons/gamecenter/bin/libgamecenter.ios.xcframework/Info.plist",
+    # 시뮬레이터 슬라이스(83MB)는 넣지 않는다. 이 저장소의 iOS 경로는 CI 에서
+    # archive 만 만들고 시뮬레이터로 돌리지 않는다. 필요해지면 릴리스에서 다시 받는다.
     "godot/addons/gamecenter/bin/libgamecenter.ios.xcframework/ios-arm64/libgamecenter.ios.template_release.arm64.a",
-    "godot/addons/gamecenter/bin/libgamecenter.ios.xcframework/ios-arm64_x86_64-simulator/libgamecenter.ios.template_release.universal.simulator.a",
     "godot/addons/gamecenter/bin/libgamecenter.macos.template_release.universal.dylib",
 ]
 
