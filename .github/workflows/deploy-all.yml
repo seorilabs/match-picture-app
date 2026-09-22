@@ -34,6 +34,9 @@ on:
 permissions:
   contents: read
   id-token: write
+  # 호출하는 재사용 워크플로우들이 packages: read 를 선언한다. 재사용 워크플로우는
+  # caller 권한을 넓힐 수 없어서, 여기서 빠지면 job 이 뜨기도 전에 startup_failure 가 된다.
+  packages: read
 
 concurrency:
   group: deploy-all-${{ inputs.release_tag || github.ref }}
