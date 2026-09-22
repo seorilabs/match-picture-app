@@ -9,31 +9,26 @@ import { defineConfig } from '@apps-in-toss/web-framework/config'
 export default defineConfig({
   // 앱인토스 콘솔에 등록된 앱 식별자. 바꾸면 기존 등록을 잃는다.
   appName: 'match-picture-app',
+
   brand: {
-    // 콘솔 등록명. Android/iOS 표시명 '같은그림찾기'(붙여쓰기)와 다르다.
-    displayName: '같은 그림 찾기',
-    primaryColor: '#F4D03F',
-    // 콘솔에 등록·승인된 600x600 아이콘과 같은 URL.
-    icon: 'https://static.toss.im/appsintoss/38345/eb5bfd71-a58c-4952-b20c-49815186e1f7.png',
+    primaryColor: '#F4D03F'
   },
-  web: {
-    host: 'localhost',
-    port: 5173,
-    commands: {
-      dev: 'npm run dev:web',
-      build: 'npm run build:web',
-    },
-  },
-  webViewProps: {
-    // 게임이므로 당겨서 새로고침과 바운스를 모두 끈다. 카드를 누르려다 화면이
-    // 끌려가면 오답이 된다.
+
+  webView: {
+    // 이 키가 빠지면 토스 웹뷰에서 Godot wasm 이 instantiate 되지 않고 스플래시에서
+    // 멈춘다. engine.init() 이 resolve 도 reject 도 하지 않는다. SDK 3.x 타입에는
+    // 없지만 CLI 가 bundle.json 에 그대로 실어 플랫폼까지 전달한다.
+    // ait migrate v3 가 이 키를 지우므로 검사기(check-ait-brand-contract.mjs)가 못 박는다.
+    // seorilabs/lucid-chess 가 이것 때문에 커밋 8개를 태웠다.
     type: 'game',
     bounces: false,
     pullToRefreshEnabled: false,
     overScrollMode: 'never',
-    allowsBackForwardNavigationGestures: false,
+    allowsBackForwardNavigationGestures: false
   },
+
   // 진행은 기기 로컬 저장이라 외부 권한을 요청하지 않는다.
   permissions: [],
-  outdir: 'dist',
+
+  webBundleDir: 'dist'
 })

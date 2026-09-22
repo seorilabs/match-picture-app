@@ -47,7 +47,7 @@ AdMob 에디터 플러그인을 켜면서 `project.godot`은 엔진이 소유하
 
 | 값 | 이유 |
 |---|---|
-| `config/name` = "같은그림찾기" | 홈 화면 아이콘 라벨이라 짧게 둡니다. iOS는 이 값이 그대로 `CFBundleDisplayName`이 됩니다. Android 라벨은 export preset의 `package/name`이, 앱인토스 표시명은 `granite.config.ts`가 따로 가집니다 |
+| `config/name` = "같은그림찾기" | 홈 화면 아이콘 라벨이라 짧게 둡니다. iOS는 이 값이 그대로 `CFBundleDisplayName`이 됩니다. Android 라벨은 export preset의 `package/name`이, 앱인토스 표시명은 콘솔이 가집니다(SDK 3.x부터 설정 파일에 없습니다) |
 | `config/version` = "2.0.0" | 로컬 개발용 placeholder입니다. 릴리스 버전 정본은 GitHub 태그 하나뿐이고 중앙 워크플로가 덮어씁니다 |
 | `config/quit_on_go_back` = false | 안드로이드 백키 기본값은 어디서 눌러도 앱을 끄는 것입니다. 꺼 두고 `src/ui/main.gd`가 원본 Unity 순서대로 화면을 한 단계씩 되돌립니다 |
 | viewport 648x1440, stretch `expand` | 원본 Unity CanvasScaler(referenceResolution 2960x1440, Shrink)를 재현한 값입니다. 16:9~20:9에서 캔버스 높이가 1440으로 고정되고 폭만 648~810으로 변합니다. `keep_height`를 쓰면 21:9에서 폭이 617로 잘려 카드 가장자리가 사라집니다 |
