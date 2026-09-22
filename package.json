@@ -11,6 +11,7 @@
     "check:data-safety": "python3 tools/check_data_safety.py",
     "check:workflow-contract": "python3 tools/check_release_workflow_contract.py",
     "capture": "godot --path godot res://tests/capture_screens.tscn",
+    "capture:store": "godot --path godot res://tests/capture_store_screens.tscn",
     "gen:sfx": "python3 tools/generate_sfx.py",
     "check:admob": "python3 tools/check_admob_bundle.py",
     "check:leaderboard": "python3 tools/check_leaderboard_bundle.py"
