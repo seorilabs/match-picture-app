@@ -37,3 +37,20 @@ GameCenterKit의 `authenticated(ok, error)`와 `is_authenticated()`, GodotPlayGa
 - [App Store Connect Game Center leaderboard 생성](https://developer.apple.com/documentation/appstoreconnectapi/post-v1-gamecenterleaderboards)
 - [AdMob 앱 숨김·표시](https://support.google.com/admob/answer/6061403)
 - [Android Publisher Data safety](https://developers.google.com/android-publisher/api-ref/rest/v3/applications/dataSafety)
+
+## 이번 요청의 콘솔 공시·표시 상태
+
+아래 표는 이 문서 상단의 과거 순위표 작업과 별개로, 이번 공시·표시 작업을 다시
+확인한 결과다. `완료`는 해당 콘솔 화면을 변경 뒤 다시 읽어 확인한 경우에만 썼다.
+
+| 항목 | 상태 | 확인 근거 | 결과와 남은 조치 |
+| --- | --- | --- | --- |
+| Play Data safety | 사람 필요 | Play Console에서 개발자 계정 `Seolee Apps`와 대상 앱 `Match Picture` · `com.github.magicsih.MatchPictureUnity`를 다시 확인했다. 원장은 전송 중 암호화=예, 삭제 요청=아니요, App interactions=수집·비공유·Analytics, Crash logs=수집·비공유·Analytics, Device or other IDs=수집·공유·Analytics 및 Advertising or marketing을 지정한다. 다만 같은 공유 Chrome 창이 작업 도중 다른 앱 `Lucid Reversi`로 전환돼 대상 양식의 저장·제출을 안전하게 계속할 수 없었으며, 제출이나 다른 앱의 데이터 보안 변경은 하지 않았다. | 대상 앱을 단독으로 제어할 수 있는 Console 세션에서 위 값을 입력하고 저장·제출한 뒤, 같은 데이터 보안 화면의 readback을 남겨야 한다. 특히 Device or other IDs의 공유=함을 유지한다. |
+| App Store App Privacy | 사람 필요 | `admob_interstitial_ads.gd`는 UMP 동의 뒤 Google Mobile Ads를 초기화하고 iOS 광고 단위를 로드한다. `ga4_analytics.gd`는 저장된 임의 `analytics_client_id`, 게임 이벤트와 최대 100자의 오류 메시지를 Google Analytics Measurement Protocol로 보낸다. 코드와 앱 설정에는 `ATTrackingManager`, `requestTrackingAuthorization`, `NSUserTrackingUsageDescription`, IDFA 직접 호출이 없다. Apple은 타사 SDK의 수집도 신고 대상이며 다른 회사의 데이터와 결합해 추적하면 ATT 권한이 필요하다고 설명하고, Google은 Mobile Ads SDK의 실제 수집 항목이 설정과 광고 게재 방식에 따라 달라질 수 있다고 설명한다. | 현재 광고가 개인 맞춤형 추적을 하는지, 또는 ATT 없이 비추적 광고만 게재하도록 확정할지의 제품 결정을 받아야 한다. 그 결정과 실제 SDK 설정을 확인하기 전에는 App Store Connect의 Tracking 답이나 데이터 유형을 추측해 입력하지 않는다. |
+| AdMob 앱 표시 | 완료 | AdMob을 `ILHWAN (Well known geek)` 계정으로 다시 읽었다. Apps의 보이는 앱 목록과 대상 설정 화면에서 `같은 그림 찾기`, 앱 ID `ca-app-pub-9932778305312246~8514815775`, 패키지 `com.github.magicsih.MatchPictureUnity`, 앱 확인됨, 승인 상태 준비됨을 확인했다. 이 앱은 이미 보이는 앱이어서 숨김 목록에서 Show를 실행할 대상이 없었다. | `~/.config/seorilabs/admob/match-picture-app/public-identifiers.env`의 `ADMOB_LIFECYCLE`을 `archived`에서 `live`로 변경하고 다시 읽어 `live`를 확인했다. 이 카탈로그 변경은 커밋하지 않는다. |
+
+### 개인정보 판단에 사용한 공식 근거
+
+- [Apple User Privacy and Data Use](https://developer.apple.com/app-store/user-privacy-and-data-use/): 타사 SDK 데이터도 앱 개인정보 신고에 포함하며, 다른 회사 데이터와 결합한 추적에는 ATT 권한이 필요하다고 명시한다.
+- [Google Mobile Ads SDK의 App Store 데이터 공개](https://developers.google.com/admob/ios/privacy/data-disclosure): SDK가 수집할 수 있는 기기 식별자, 광고 데이터, 앱 상호작용, 진단 및 성능 데이터를 설명하고 앱 개발자가 신고를 최신으로 유지하도록 요구한다.
+- [Google Mobile Ads SDK의 iOS IDFA 안내](https://developers.google.com/admob/ios/privacy/strategies): UMP와 ATT의 관계 및 ATT 거절 시 IDFA 전송 제한을 설명한다.
