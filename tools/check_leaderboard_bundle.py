@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
-"""vendoring 한 네이티브 순위표 플러그인과 비활성 기본값을 검사한다.
+"""vendoring 한 네이티브 순위표 플러그인과 확정된 콘솔 ID 구성을 검사한다.
 
-콘솔 ID 는 저장소에 만들거나 추측하지 않는다. 둘 중 하나라도 비어 있으면 어댑터가
-is_available() == false 로 남는 것이 이 검사의 핵심 계약이다.
+콘솔에서 재조회한 공개 ID만 저장소에 넣는다. Play Games ID 두 개와 Game Center ID가
+모두 있어야 하며, Android 내보내기 값은 Play Games 프로젝트 ID와 일치해야 한다.
 
 실행: python3 tools/check_leaderboard_bundle.py
 """
@@ -139,7 +139,14 @@ def main() -> int:
 
     play_project_id = optional_identifier(config, problems, "play_games", "project_id")
     play_leaderboard_id = optional_identifier(config, problems, "play_games", "leaderboard_id")
-    optional_identifier(config, problems, "game_center", "leaderboard_id")
+    game_center_leaderboard_id = optional_identifier(config, problems, "game_center", "leaderboard_id")
+
+    if not play_project_id:
+        problems.append("Play Games project ID 가 비어 있다")
+    if not play_leaderboard_id:
+        problems.append("Play Games leaderboard ID 가 비어 있다")
+    if not game_center_leaderboard_id:
+        problems.append("Game Center leaderboard ID 가 비어 있다")
 
     if "GodotPlayGameServices/plugin.cfg" not in project or "gamecenter/plugin.cfg" not in project:
         problems.append("ProjectSettings 가 두 순위표 export 플러그인을 켜지 않는다")
@@ -165,15 +172,10 @@ def main() -> int:
         else:
             plugin_enabled = plugin_match.group(1) == "true"
 
-    if bool(play_project_id) != bool(play_leaderboard_id):
-        problems.append("Play Games project ID 와 leaderboard ID 는 함께 넣거나 함께 비운다")
-    elif play_project_id:
-        if android_game_id != play_project_id:
-            problems.append("Android export 와 순위표 설정 파일의 Play Games project ID 가 다르다")
-        if plugin_enabled is not True:
-            problems.append("설정된 Play Games ID 에서는 Android export 플러그인을 켠다")
-    elif android_game_id or plugin_enabled is not False:
-        problems.append("비어 있는 Play Games ID 에서는 Android export 플러그인과 game ID 를 끈다")
+    if play_project_id and android_game_id != play_project_id:
+        problems.append("Android export 와 순위표 설정 파일의 Play Games project ID 가 다르다")
+    if plugin_enabled is not True:
+        problems.append("확정된 Play Games ID 에서는 Android export 플러그인을 켠다")
     if ios is None or "entitlements/game_center=true" not in ios:
         problems.append("iOS export 가 Game Center entitlement 를 켜지 않는다")
 
@@ -195,7 +197,7 @@ def main() -> int:
     if problems:
         return fail(problems)
     print(
-        "[leaderboard] OK — Play Games %s, GameCenterKit %s, payload %d개, 기본 ID 비어 있음"
+        "[leaderboard] OK — Play Games %s, GameCenterKit %s, payload %d개, 라이브 ID 구성됨"
         % (PLAY_GAMES_VERSION, GAME_CENTER_VERSION, len(REQUIRED_PAYLOADS))
     )
     return 0

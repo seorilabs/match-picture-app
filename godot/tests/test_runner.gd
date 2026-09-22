@@ -16,7 +16,7 @@ func _ready() -> void:
 	_check_audio()
 	_check_translations()
 	_check_storage()
-	_check_native_leaderboard_defaults()
+	_check_native_leaderboard_configuration()
 	_check_adapter_wiring()
 
 	print("[smoke] 검사 %d건, 실패 %d건" % [_checks, _failures.size()])
@@ -106,13 +106,13 @@ func _check_storage() -> void:
 	DirAccess.remove_absolute(ProjectSettings.globalize_path(path + MpFileStorage.BAK_SUFFIX))
 
 
-## 콘솔 ID 를 아직 넣지 않은 기본 빌드는 네이티브 순위표를 켜면 안 된다.
+## 라이브 콘솔에서 재확인한 ID를 넣은 뒤에는 두 네이티브 포트가 같은 설정 파일을 읽어야 한다.
 ## 실제 결과 팝업의 버튼 노출은 play_through.gd 가 한 판을 끝낸 뒤 다시 확인한다.
-func _check_native_leaderboard_defaults() -> void:
-	_check(not MpGooglePlayLeaderboard.has_configured_ids(), "비어 있는 Play Games ID 는 순위표를 끈다")
-	_check(not MpGameCenterLeaderboard.has_configured_id(), "비어 있는 Game Center ID 는 순위표를 끈다")
-	_check(not MpGooglePlayLeaderboard.new().is_available(), "빈 Play Games ID 에서는 포트가 비활성화된다")
-	_check(not MpGameCenterLeaderboard.new().is_available(), "빈 Game Center ID 에서는 포트가 비활성화된다")
+func _check_native_leaderboard_configuration() -> void:
+	_check(MpGooglePlayLeaderboard.has_configured_ids(), "Play Games ID 두 개가 구성됐다")
+	_check(MpGameCenterLeaderboard.has_configured_id(), "Game Center ID 가 구성됐다")
+	_check(not MpGooglePlayLeaderboard.new().is_available(), "헤드리스에는 Android Play Games singleton 이 없다")
+	_check(not MpGameCenterLeaderboard.new().is_available(), "헤드리스에는 iOS Game Center singleton 이 없다")
 
 
 ## 번역 키가 화면에 그대로 노출되는 것을 막는다. CSV 를 직접 읽어 모든 키를 본다.

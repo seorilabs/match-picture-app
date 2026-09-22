@@ -63,8 +63,9 @@ Google Play는 Play Games Services, App Store는 GameKit을 씁니다. 화면은
 `is_available()`만 보고 버튼을 그리므로, 콘솔 ID 또는 해당 네이티브 플러그인이 없으면
 순위표 버튼·점수 제출 모두 꺼지고 포트 기본 no-op이 맡습니다.
 
-네이티브 순위표 ID는 빈 값으로 커밋합니다. 콘솔에서 리더보드를 만든 뒤에만 아래 값을
-넣습니다. ID를 추측하거나 다른 앱 값을 재사용하면 안 됩니다.
+네이티브 순위표 ID는 콘솔에서 생성 또는 재조회한 뒤에만 넣습니다. 현재 이 저장소의
+값은 2026-09-22에 해당 콘솔에서 다시 확인한 공개 ID이며, ID를 추측하거나 다른 앱 값을
+재사용하면 안 됩니다.
 
 | 마켓 | 필요한 콘솔 입력 | 넣을 곳 |
 |---|---|---|
@@ -77,7 +78,7 @@ GameCenterKit의 iOS 전용 바이너리와 설명자는 `bin/.gdignore` 아래�
 읽지 않게 하고, iOS export 훅이 원래 `res://addons/gamecenter/gamecenter.gdextension` 경로로
 설명자를 넣고 XCFramework·초기화 심볼·GameKit.framework를 Xcode 프로젝트에 다시 넣습니다.
 Web(.ait) 및 반대 네이티브 마켓 내보내기는 해당 바이너리를 제외하며,
-`tools/check_leaderboard_bundle.py`가 버전·payload·빈 기본 ID·내보내기 제외를 검사합니다.
+`tools/check_leaderboard_bundle.py`가 버전·payload·확정 ID·내보내기 일치·플랫폼별 제외를 검사합니다.
 
 전면광고는 표면마다 다른 SDK를 씁니다. 앱인토스는 토스 광고를, Google Play와
 App Store는 원본 Unity와 같은 Google AdMob을 씁니다. 화면 코드는 `MpInterstitialAdPort`
