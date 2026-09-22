@@ -41,6 +41,7 @@ EXPECTED = {
     "godot/src/platform/admob_interstitial_ads.gd": [
         'ANDROID_AD_UNIT_ID := "ca-app-pub-9932778305312246/8323244087"',
         'IOS_AD_UNIT_ID := "ca-app-pub-9932778305312246/8756953389"',
+        'request.extras = {"npa": "1"}',
     ],
 }
 
