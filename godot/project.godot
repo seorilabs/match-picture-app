@@ -37,6 +37,7 @@ Save="*res://autoload/save.gd"
 Locale="*res://autoload/locale.gd"
 Ui="*res://autoload/ui.gd"
 Audio="*res://autoload/audio.gd"
+GodotPlayGameServices="*uid://b10vuhuji5mvb"
 
 [display]
 
@@ -48,7 +49,7 @@ window/handheld/orientation=1
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/admob/plugin.cfg")
+enabled=PackedStringArray("res://addons/admob/plugin.cfg", "res://addons/GodotPlayGameServices/plugin.cfg", "res://addons/gamecenter/plugin.cfg")
 
 [input_devices]
 

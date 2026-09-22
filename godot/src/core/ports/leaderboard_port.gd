@@ -2,9 +2,9 @@ class_name MpLeaderboardPort
 extends RefCounted
 ## 순위표 추상.
 ##
-## v1 은 앱인토스 게임센터만 붙는다. Play Games Services 와 GameKit 은 같은 인터페이스
-## 뒤에서 UNSUPPORTED 를 돌려주고, 결과 화면은 is_available() 이 false 면 버튼을
-## 아예 그리지 않는다. 나중에 채울 때 화면 코드는 건드리지 않는다.
+## 앱인토스는 Game Center 브리지를, Google Play 는 Play Games Services 를, App Store 는
+## GameKit 을 이 인터페이스 뒤에 둔다. 설정 파일 또는 현재 표면이 지원하지 않으면
+## is_available() 이 false 가 되어 결과 화면이 버튼을 아예 그리지 않는다.
 
 enum Result {
 	SUCCESS,

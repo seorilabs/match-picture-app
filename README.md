@@ -58,10 +58,26 @@ AdMob 에디터 플러그인을 켜면서 `project.godot`은 엔진이 소유하
 `tools/check_core_boundary.py`가 막습니다. 규칙이 순수해야 화면 없이 게임 한 판을
 헤드리스로 완주시킬 수 있습니다.
 
-플랫폼 기능은 포트 뒤에 있습니다. 순위표·광고·공유는 앱인토스에서만 실제 구현이
-꽂히고, 지원하지 않는 표면에서는 포트 기본 구현이 no-op을 맡습니다. 화면은
-`is_available()`만 보고 버튼을 그릴지 정하므로, Play Games Services나 GameKit을
-나중에 채울 때 화면 코드는 건드리지 않습니다.
+플랫폼 기능은 포트 뒤에 있습니다. 앱인토스는 기존 게임센터 브리지를 그대로 쓰고,
+Google Play는 Play Games Services, App Store는 GameKit을 씁니다. 화면은
+`is_available()`만 보고 버튼을 그리므로, 콘솔 ID 또는 해당 네이티브 플러그인이 없으면
+순위표 버튼·점수 제출 모두 꺼지고 포트 기본 no-op이 맡습니다.
+
+네이티브 순위표 ID는 빈 값으로 커밋합니다. 콘솔에서 리더보드를 만든 뒤에만 아래 값을
+넣습니다. ID를 추측하거나 다른 앱 값을 재사용하면 안 됩니다.
+
+| 마켓 | 필요한 콘솔 입력 | 넣을 곳 |
+|---|---|---|
+| Google Play | `PLAY_GAMES_PROJECT_ID`, `PLAY_GAMES_LEADERBOARD_ID` | 각각 `godot/leaderboard.config.json`의 `play_games.project_id`, `play_games.leaderboard_id`; 같은 프로젝트 ID를 `godot/export_presets.cfg`의 `godot_play_game_services/game_id`에 넣고 `plugins/GodotPlayGameServices=true`로 켬 |
+| App Store | `GAME_CENTER_LEADERBOARD_ID` | `godot/leaderboard.config.json`의 `game_center.leaderboard_id` |
+
+Google Play 플러그인(GodotPlayGameServices v3.4.0)은 Android AAR 두 개를,
+GameCenterKit v1.0.1은 iOS GameKit GDExtension을 각각 `godot/addons/`에 넣어 둡니다.
+GameCenterKit의 iOS 전용 바이너리와 설명자는 `bin/.gdignore` 아래에 두어 Linux 에디터가
+읽지 않게 하고, iOS export 훅이 원래 `res://addons/gamecenter/gamecenter.gdextension` 경로로
+설명자를 넣고 XCFramework·초기화 심볼·GameKit.framework를 Xcode 프로젝트에 다시 넣습니다.
+Web(.ait) 및 반대 네이티브 마켓 내보내기는 해당 바이너리를 제외하며,
+`tools/check_leaderboard_bundle.py`가 버전·payload·빈 기본 ID·내보내기 제외를 검사합니다.
 
 전면광고는 표면마다 다른 SDK를 씁니다. 앱인토스는 토스 광고를, Google Play와
 App Store는 원본 Unity와 같은 Google AdMob을 씁니다. 화면 코드는 `MpInterstitialAdPort`
@@ -83,7 +99,8 @@ npm run capture        # 세 화면비로 렌더링해 godot/build/qa/ 에 PNG
 ```
 
 `npm run check`가 도는 것: Godot 품질 게이트(import·compile·테스트 3종), 코어 경계,
-효과음 재현성, Play 데이터 안전 공시 정합성, 배포 워크플로 계약.
+효과음 재현성, AdMob·순위표 네이티브 번들 계약, Play 데이터 안전 공시 정합성, 배포
+워크플로 계약.
 
 앱인토스 번들을 만들고 브라우저에서 확인하려면:
 
