@@ -2,6 +2,7 @@ import { cp, mkdir, readdir, readFile, rm, stat, writeFile } from 'node:fs/promi
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import {
+  disableJavaScriptBridgeEval,
   neutralizeGeminiKeyFalsePositiveSource,
   relaxEmscriptenSafariGate,
 } from '../src/godotLoaderSanitizer.ts'
@@ -108,10 +109,20 @@ async function neutralizeGeminiKeyFalsePositive(loaderPath) {
   // 같은 로더에 두 가지를 손본다. 하나는 위의 심사 오탐, 다른 하나는 emscripten 의
   // Safari 버전 게이트다. 후자는 Android WebView 를 Safari 4.0 으로 오인해 막는다.
   const withoutFalsePositive = neutralizeGeminiKeyFalsePositiveSource(source)
-  const { source: patchedSource, patched } = relaxEmscriptenSafariGate(withoutFalsePositive)
+  const { source: withRelaxedGate, patched } = relaxEmscriptenSafariGate(withoutFalsePositive)
   if (patched) {
     console.log('[sync-godot-web] emscripten Safari 게이트를 Chrome/ 제외로 완화했다.')
   }
+  // 심사가 문자열 실행 경로를 반려한다. 자세한 사정은 sanitizer 주석에 적어 뒀다.
+  const { source: patchedSource, patched: evalPatched } = disableJavaScriptBridgeEval(withRelaxedGate)
+  if (!evalPatched) {
+    throw new Error(
+      'Godot 로더에서 JavaScriptBridge eval 본문을 찾지 못했다. ' +
+        'Godot 버전이 바뀌어 패턴이 달라졌을 수 있다. scripts/check-no-eval.sh 가 뒤에서 한 번 더 막지만 ' +
+        '여기서 멈추는 편이 원인을 빨리 찾는다.',
+    )
+  }
+  console.log('[sync-godot-web] JavaScriptBridge 의 문자열 실행 경로를 막았다.')
   if (patchedSource !== source) {
     await writeFile(loaderPath, patchedSource)
     return true
@@ -204,22 +215,10 @@ await rm(targetDir, { recursive: true, force: true })
 await mkdir(targetDir, { recursive: true })
 await cp(sourceDir, targetDir, { recursive: true })
 await writeFile(path.join(targetDir, '.gitkeep'), '')
-// 코드 실행 브리지 패치는 쓰지 않는다.
-//
-// 이 패치는 로더의 godot_js_eval 을 죽이고, 짝이 되는 wasm import 이름도 함께 바꿔야
-// 성립한다. 우리 커스텀 Web 템플릿의 wasm 에는 그 이름이 평문으로 남아 있지 않아
-// wasm 쪽 치환이 0건이 되고, 로더만 바뀌어 "_godot_js_eval is not defined" 로
-// 캔버스가 검은 화면이 된다. 실제로 그렇게 깨지는 것을 브라우저에서 확인했다.
-//
-// 패치 없이도 .ait 안에 eval( 토큰은 없고(scripts/check-no-google-api-key.sh 와 같은
-// 방식으로 확인), 조직 내 선례도 패치 없이 심사를 통과했다.
-const disabledCodeExecutionShim = false
 const neutralizedGeminiFalsePositive = await neutralizeGeminiKeyFalsePositive(path.join(targetDir, loaderFile))
 const enabledInsecureSandboxAudioFallback = await enableInsecureSandboxAudioFallback(
   path.join(targetDir, loaderFile),
 )
-// 위와 같은 이유로 wasm 쪽 짝 치환도 하지 않는다.
-const patchedWasmBridgeStrings = 0
 
 const html = await readFile(path.join(sourceDir, htmlFile), 'utf8')
 const { config, threadsEnabled } = parseGodotConfig(html)
@@ -237,15 +236,9 @@ await writeFile(generatedPath, generated)
 
 console.log(`Synced Godot Web export to ${path.relative(wrapperRoot, targetDir)}`)
 console.log(`Generated ${path.relative(wrapperRoot, generatedPath)} using ${loaderFile}`)
-if (disabledCodeExecutionShim) {
-  console.log(`Disabled Godot browser code execution shim in ${path.join('public', 'godot', loaderFile)}`)
-}
 if (neutralizedGeminiFalsePositive) {
   console.log(`Neutralized AppsInToss Gemini-key false positive (FAQ.html) in ${path.join('public', 'godot', loaderFile)}`)
 }
 if (enabledInsecureSandboxAudioFallback) {
   console.log(`Enabled Godot audio fallback for insecure AppsInToss sandbox in ${path.join('public', 'godot', loaderFile)}`)
-}
-if (patchedWasmBridgeStrings > 0) {
-  console.log(`Patched ${patchedWasmBridgeStrings} Godot Web bridge string(s) in ${path.join('public', 'godot', `${executableName}.wasm`)}`)
 }
