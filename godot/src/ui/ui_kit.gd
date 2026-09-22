@@ -104,6 +104,9 @@ static func make_button(text: String, fill: Color = BUTTON) -> Button:
 	button.add_theme_stylebox_override("hover", button_style(fill.lightened(0.08)))
 	button.add_theme_stylebox_override("pressed", button_style(fill.darkened(0.12)))
 	button.add_theme_stylebox_override("focus", StyleBoxEmpty.new())
+	# 라벨과 같은 이유로 버튼도 폰트를 직접 지정한다.
+	if Ui.word_font != null:
+		button.add_theme_font_override("font", Ui.word_font)
 	return button
 
 
@@ -134,4 +137,9 @@ static func make_word_label(text: String, size: int, color: Color = TEXT_DARK) -
 	label.text = text
 	label.add_theme_font_size_override("font_size", size)
 	label.add_theme_color_override("font_color", color)
+	# Web 내보내기는 Theme.default_font 를 쓰지 않는다. 테마에만 기대면 한글이
+	# 코드포인트 상자로 그려진다(네이티브는 멀쩡해서 늦게 드러난다).
+	# make_pixel_label 은 원래 직접 지정해서 무사했다. 같은 방식으로 못 박는다.
+	if Ui.word_font != null:
+		label.add_theme_font_override("font", Ui.word_font)
 	return label
