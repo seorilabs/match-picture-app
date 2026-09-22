@@ -6,6 +6,13 @@ extends Node
 
 const HAS_PLAYED_KEY := "has_played"
 
+## 안전영역을 다시 읽는 주기(초).
+##
+## 앱인토스 래퍼는 SDK 구독과 CSS env() 로 값을 늦게 갱신한다. 그런데 그때 창 크기는
+## 그대로라 `size_changed` 가 오지 않는다. 한 번만 읽으면 0 인 채로 굳어서 게임이
+## 상태 표시줄과 제스처 바 밑까지 그려진다.
+const SAFE_AREA_POLL_SECONDS := 1.0
+
 var _library := MpSymbolLibrary.new()
 var _analytics: MpAnalyticsPort
 var _ads: MpInterstitialAdPort
@@ -13,6 +20,10 @@ var _leaderboard: MpLeaderboardPort
 var _share: MpSharePort
 var _retry_count := 0
 var _safe_area_root: MarginContainer
+## 마지막으로 적용한 안전영역. 초당 한 번 도는 확인이 값이 그대로일 때 theme
+## override 를 헛돌리지 않게 한다. 처음에는 실제 값이 될 수 없는 음수를 넣어
+## 첫 적용이 반드시 돌게 한다.
+var _applied_insets := Vector4(-1.0, -1.0, -1.0, -1.0)
 var _game_screen: MpGameScreen
 var _title: MpTitleScreen
 var _result_popup: MpResultPopup
@@ -38,6 +49,14 @@ func _ready() -> void:
 	if window != null:
 		window.size_changed.connect(_apply_safe_area)
 	_apply_safe_area()
+
+	# 창 크기가 그대로여도 안전영역은 뒤늦게 올라온다. 값이 바뀔 때만 실제로 적용되므로
+	# 평소에는 읽기만 하고 끝난다.
+	var safe_area_timer := Timer.new()
+	safe_area_timer.wait_time = SAFE_AREA_POLL_SECONDS
+	safe_area_timer.timeout.connect(_apply_safe_area)
+	add_child(safe_area_timer)
+	safe_area_timer.start()
 
 	if OS.is_debug_build():
 		print("[ui] ", MpSafeArea.describe(window))
@@ -146,6 +165,9 @@ func _apply_safe_area() -> void:
 	if _safe_area_root == null:
 		return
 	var insets := MpSafeArea.insets(get_window())
+	if insets.is_equal_approx(_applied_insets):
+		return
+	_applied_insets = insets
 	_safe_area_root.add_theme_constant_override("margin_left", int(insets.x))
 	_safe_area_root.add_theme_constant_override("margin_top", int(insets.y))
 	_safe_area_root.add_theme_constant_override("margin_right", int(insets.z))
