@@ -18,6 +18,7 @@ var _surface: Surface = Surface.DESKTOP
 
 func _ready() -> void:
 	_surface = _detect()
+	_keep_screen_on()
 
 
 func surface() -> Surface:
@@ -87,6 +88,20 @@ func ait_bridge() -> JavaScriptObject:
 ## 헤드리스와 에디터에서는 SDK 호출을 전부 no-op 으로 돌린다.
 func allows_sdk_calls() -> bool:
 	return _surface != Surface.HEADLESS and _surface != Surface.EDITOR
+
+
+## 플레이 중 기기가 자동으로 잠기지 않게 한다.
+##
+## 원본 `GameSceneManager.cs` 가 Screen.sleepTimeout = NeverSleep 으로 걸어 두던 것이다.
+## 카드를 들여다보는 동안 입력이 없어 화면이 꺼지면 초시계는 계속 흐른다.
+##
+## 웹은 여기서 손대지 않는다. 앱인토스 래퍼가 Screen Wake Lock API 로 이미 잡고 있고
+## (ait/apps-in-toss-web/src/screenWakeRuntime.ts), Godot Web 내보내기 자체는 이 요청을
+## 할 수 없다. 헤드리스·에디터는 SDK 호출 금지 대상과 같은 이유로 건너뛴다.
+func _keep_screen_on() -> void:
+	if is_web() or not allows_sdk_calls():
+		return
+	DisplayServer.screen_set_keep_on(true)
 
 
 func _detect() -> Surface:

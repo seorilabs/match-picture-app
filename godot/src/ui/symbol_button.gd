@@ -48,6 +48,20 @@ func setup(p_symbol: String, texture: Texture2D, spot: MpSymbolSpot) -> void:
 	stop_hint()
 
 
+## 심볼 중심의 화면 좌표.
+##
+## Control.global_position 은 중심이 아니라 회전·배율까지 반영된 좌상단이다. 심볼은
+## 중심을 pivot 으로 잡고 ±180도 회전하므로 좌상단은 각도마다 딴 자리로 간다.
+## 중심은 회전·펄스 내내 제자리라, 위에 무언가를 붙일 때 기준으로 삼는다.
+func global_center() -> Vector2:
+	return get_global_transform() * (size / 2.0)
+
+
+## 카드 좌표계에서 본 심볼 중심. 카드 안에 무언가를 놓을 때 쓴다.
+func center_in_card() -> Vector2:
+	return position + pivot_offset
+
+
 func set_interactive(value: bool) -> void:
 	disabled = not value
 	mouse_filter = Control.MOUSE_FILTER_STOP if value else Control.MOUSE_FILTER_IGNORE

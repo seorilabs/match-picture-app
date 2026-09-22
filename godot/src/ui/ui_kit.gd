@@ -18,9 +18,16 @@ const BUTTON := Color("F4D03F")
 const BUTTON_TEXT := Color("143C4E")
 
 const FONT_HUD := 36
-const FONT_MARK := 180
+## HUD 둘째 줄. 최고 기록과 페이스 차이가 여기 들어간다.
+const FONT_HUD_SUB := 24
+## 심볼 위에 겹쳐 띄우는 O/X 글자 크기. 마크 상자(120px) 안에 들어간다.
+const FONT_MARK_SYMBOL := 100
 const FONT_RESULT := 96
+## 타이틀 화면의 게임 이름. 한국어 다섯 글자가 440 폭 안에 들어가는 크기다.
+const FONT_TITLE := 64
 const FONT_BUTTON := 40
+## 글자 하나만 들어가는 정사각 버튼. 최초 실행 안내의 닫기(X) 가 쓴다.
+const FONT_ICON_BUTTON := 48
 const FONT_BODY := 34
 
 const PANEL_RADIUS := 24
@@ -88,6 +95,16 @@ static func make_button(text: String, fill: Color = BUTTON) -> Button:
 	button.add_theme_stylebox_override("hover", button_style(fill.lightened(0.08)))
 	button.add_theme_stylebox_override("pressed", button_style(fill.darkened(0.12)))
 	button.add_theme_stylebox_override("focus", StyleBoxEmpty.new())
+	return button
+
+
+## 기호 하나만 들어가는 정사각 버튼. 원본 닫기 버튼도 100x100 에 글자 하나였다.
+static func make_icon_button(text: String, side: float = 100.0) -> Button:
+	var button := make_button(text)
+	button.custom_minimum_size = Vector2(side, side)
+	button.add_theme_font_size_override("font_size", FONT_ICON_BUTTON)
+	if Ui.pixel_font != null:
+		button.add_theme_font_override("font", Ui.pixel_font)
 	return button
 
 

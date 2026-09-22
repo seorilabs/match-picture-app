@@ -41,6 +41,14 @@ func _capture(size: Vector2i) -> void:
 	var scene: Node = load("res://scenes/main.tscn").instantiate()
 	viewport.add_child(scene)
 
+	# 앱을 켜면 타이틀이 먼저다. 찍고 나서 시작을 눌러 게임 화면으로 넘어간다.
+	for i in 8:
+		await get_tree().process_frame
+	await RenderingServer.frame_post_draw
+	_save(viewport, "title-%dx%d.png" % [size.x, size.y])
+	if scene.has_method("start_game_for_capture"):
+		scene.call("start_game_for_capture")
+
 	# 레이아웃이 자리를 잡고 첫 라운드가 그려질 때까지 몇 프레임 흘린다.
 	for i in 12:
 		await get_tree().process_frame

@@ -2,7 +2,7 @@ class_name MpResultPopup
 extends Control
 ## 한 판이 끝나고 뜨는 기록 화면.
 ##
-## 원본은 걸린 초와 RETRY / SHARE / EXIT 만 있었다. 개인 기록을 더한다.
+## 원본은 걸린 초와 RETRY / SHARE / EXIT 만 있었다. 개인 기록과 구간 막대를 더한다.
 
 signal retry_pressed()
 signal share_pressed()
@@ -12,6 +12,7 @@ signal exit_pressed()
 
 var _seconds_label: Label
 var _best_label: Label
+var _split_bars: MpSplitBars
 var _panel: PanelContainer
 var _share_button: Button
 var _leaderboard_button: Button
@@ -50,6 +51,9 @@ func _init() -> void:
 	_best_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	column.add_child(_best_label)
 
+	_split_bars = MpSplitBars.new()
+	column.add_child(_split_bars)
+
 	var retry := MpUiKit.make_button("RESULT_RETRY")
 	retry.pressed.connect(func() -> void: retry_pressed.emit())
 	column.add_child(retry)
@@ -81,10 +85,12 @@ func show_result(
 	best_seconds: float,
 	is_new_best: bool,
 	leaderboard_available: bool = false,
-	share_available: bool = false
+	share_available: bool = false,
+	splits: Array[float] = []
 ) -> void:
 	_leaderboard_button.visible = leaderboard_available
 	_share_button.visible = share_available
+	_split_bars.set_splits(splits)
 	_seconds_label.text = MpRules.format_seconds(seconds)
 	if is_new_best:
 		_best_label.text = "RESULT_NEW_BEST"
