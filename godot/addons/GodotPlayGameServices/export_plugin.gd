@@ -37,6 +37,8 @@ class AndroidExportPlugin extends EditorExportPlugin:
 
 
 	func _export_begin(features: PackedStringArray, is_debug: bool, path: String, flags: int) -> void:
+		if not _supports_platform(get_export_platform()):
+			return
 		var id = get_option("godot_play_game_services/game_id")
 		if id == "":
 			printerr("[{plugin_name}] Export [Game id] is empty.".format({"plugin_name": _plugin_name}))

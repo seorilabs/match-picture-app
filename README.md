@@ -73,6 +73,9 @@ Google Play는 Play Games Services, App Store는 GameKit을 씁니다. 화면은
 
 Google Play 플러그인(GodotPlayGameServices v3.4.0)은 Android AAR 두 개를,
 GameCenterKit v1.0.1은 iOS GameKit GDExtension을 각각 `godot/addons/`에 넣어 둡니다.
+GameCenterKit의 iOS 전용 바이너리와 설명자는 `bin/.gdignore` 아래에 두어 Linux 에디터가
+읽지 않게 하고, iOS export 훅이 원래 `res://addons/gamecenter/gamecenter.gdextension` 경로로
+설명자를 넣고 XCFramework·초기화 심볼·GameKit.framework를 Xcode 프로젝트에 다시 넣습니다.
 Web(.ait) 및 반대 네이티브 마켓 내보내기는 해당 바이너리를 제외하며,
 `tools/check_leaderboard_bundle.py`가 버전·payload·빈 기본 ID·내보내기 제외를 검사합니다.
 

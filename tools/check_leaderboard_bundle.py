@@ -32,6 +32,15 @@ REQUIRED_PAYLOADS = [
 ]
 
 WEB_EXCLUDES = ["addons/GodotPlayGameServices/**", "addons/gamecenter/**"]
+GAME_CENTER_RUNTIME_DESCRIPTOR = "godot/addons/gamecenter/bin/gamecenter.gdextension"
+GAME_CENTER_IGNORED_DIRECTORY = "godot/addons/gamecenter/bin/.gdignore"
+GAME_CENTER_EXPORT_HOOKS = [
+    "add_file(EXPORTED_DESCRIPTOR_PATH, descriptor, false)",
+    "add_shared_object(IOS_XCFRAMEWORK_PATH, PackedStringArray([\"ios\"]), \"\")",
+    "add_apple_embedded_platform_cpp_code(",
+    "add_apple_embedded_platform_linker_flags(\"-Wl,-U,_%s\" % ENTRY_SYMBOL)",
+    "add_apple_embedded_platform_framework(\"GameKit.framework\")",
+]
 
 
 def fail(problems: list[str]) -> int:
@@ -104,6 +113,28 @@ def main() -> int:
         path = ROOT / relative
         if not path.is_file() or path.stat().st_size <= 64:
             problems.append(f"네이티브 payload 가 비었거나 없다: {relative}")
+
+    game_center_descriptor = ROOT / GAME_CENTER_RUNTIME_DESCRIPTOR
+    if not game_center_descriptor.is_file():
+        problems.append("GameCenterKit iOS GDExtension 설명자가 bin 에 없다")
+    elif 'ios.release = "res://addons/gamecenter/bin/libgamecenter.ios.xcframework"' not in game_center_descriptor.read_text(encoding="utf-8"):
+        problems.append("GameCenterKit iOS 설명자가 XCFramework 를 가리키지 않는다")
+    if not (ROOT / GAME_CENTER_IGNORED_DIRECTORY).is_file():
+        problems.append("GameCenterKit bin 을 에디터 GDExtension 스캔에서 뺄 .gdignore 가 없다")
+    if (ROOT / "godot/addons/gamecenter/gamecenter.gdextension").exists():
+        problems.append("GameCenterKit 설명자를 bin 밖에 두면 Linux 에디터가 iOS 라이브러리를 읽는다")
+    game_center_exporter = (ROOT / "godot/addons/gamecenter/plugin.gd")
+    if not game_center_exporter.is_file():
+        problems.append("GameCenterKit iOS export 훅이 없다")
+    else:
+        exporter_source = game_center_exporter.read_text(encoding="utf-8")
+        for hook in GAME_CENTER_EXPORT_HOOKS:
+            if hook not in exporter_source:
+                problems.append(f"GameCenterKit iOS export 훅이 빠졌다: {hook}")
+
+    play_games_exporter = ROOT / "godot/addons/GodotPlayGameServices/export_plugin.gd"
+    if 'if not _supports_platform(get_export_platform()):' not in play_games_exporter.read_text(encoding="utf-8"):
+        problems.append("Play Games exporter 가 Android 밖의 export 를 건드린다")
 
     play_project_id = optional_identifier(config, problems, "play_games", "project_id")
     play_leaderboard_id = optional_identifier(config, problems, "play_games", "leaderboard_id")
