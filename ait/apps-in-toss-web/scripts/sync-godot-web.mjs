@@ -1,7 +1,10 @@
 import { cp, mkdir, readdir, readFile, rm, stat, writeFile } from 'node:fs/promises'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
-import { neutralizeGeminiKeyFalsePositiveSource } from '../src/godotLoaderSanitizer.ts'
+import {
+  neutralizeGeminiKeyFalsePositiveSource,
+  relaxEmscriptenSafariGate,
+} from '../src/godotLoaderSanitizer.ts'
 
 const wrapperRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
 const repoRoot = path.resolve(wrapperRoot, '..', '..')
@@ -102,9 +105,15 @@ async function neutralizeGeminiKeyFalsePositive(loaderPath) {
   // 길이 조건 보강 예정). 해당 문자열은 emscripten의 abort() 진단 메시지 안에만 있어
   // 런타임 동작에 영향이 없으므로 `AQ.` 시퀀스를 깨뜨려 오탐을 무력화한다.
   const source = await readFile(loaderPath, 'utf8')
-  const sanitized = neutralizeGeminiKeyFalsePositiveSource(source)
-  if (sanitized !== source) {
-    await writeFile(loaderPath, sanitized)
+  // 같은 로더에 두 가지를 손본다. 하나는 위의 심사 오탐, 다른 하나는 emscripten 의
+  // Safari 버전 게이트다. 후자는 Android WebView 를 Safari 4.0 으로 오인해 막는다.
+  const withoutFalsePositive = neutralizeGeminiKeyFalsePositiveSource(source)
+  const { source: patchedSource, patched } = relaxEmscriptenSafariGate(withoutFalsePositive)
+  if (patched) {
+    console.log('[sync-godot-web] emscripten Safari 게이트를 Chrome/ 제외로 완화했다.')
+  }
+  if (patchedSource !== source) {
+    await writeFile(loaderPath, patchedSource)
     return true
   }
   return false

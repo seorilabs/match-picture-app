@@ -6,9 +6,9 @@
   "scripts": {
     "sync:godot": "node scripts/sync-godot-web.mjs",
     "dev:web": "npm run sync:godot && vite --host 0.0.0.0",
-    "dev": "npm run sync:godot && granite dev --host 0.0.0.0",
+    "dev": "npm run dev:web",
     "build:web": "npm run sync:godot && tsc -b && vite build",
-    "build": "ait build && npm run check:brand && npm run check:no-google-api-key",
+    "build": "npm run build:web && ait build && npm run check:brand && npm run check:no-google-api-key",
     "check:brand": "node scripts/check-ait-brand-contract.mjs",
     "check:no-google-api-key": "bash scripts/check-no-google-api-key.sh",
     "lint": "eslint .",
@@ -17,11 +17,12 @@
     "test": "vitest run --passWithNoTests"
   },
   "dependencies": {
-    "@apps-in-toss/web-framework": "^2.10.7",
+    "@apps-in-toss/web-framework": "^3.5.0",
     "react": "^19.2.6",
     "react-dom": "^19.2.6"
   },
   "devDependencies": {
+    "@apps-in-toss/devtools": "^3.5.0",
     "@eslint/js": "^10.0.1",
     "@types/node": "^24.12.3",
     "@types/react": "^19.2.14",

@@ -1,9 +1,9 @@
 # Godot Web export → AIT(.ait) 빌드 → AppsInToss 배포. org 재사용 워크플로우 호출.
 # dispatch 직접 실행 또는 deploy-all.yml에서 workflow_call.
 #
-# 래퍼(ait/apps-in-toss-web)의 granite.config.ts는 displayName과 icon을 리터럴로 들고
-# 있다. 중앙 워크플로우는 `npm run build`만 실행하고 그 값을 주입하지 않으므로,
-# 환경변수에 기대면 릴리즈 빌드가 반드시 실패한다.
+# 래퍼(ait/apps-in-toss-web)는 SDK 3.x 의 apps-in-toss.config.ts 를 쓴다. 표시명과
+# 아이콘은 3.x 스키마에 없고 콘솔이 가진다. 중앙 워크플로우는 `npm run build`만
+# 실행하므로 웹 번들 빌드와 계약 검사를 그 스크립트가 직접 엮는다.
 name: Deploy AppsInToss
 
 on:
