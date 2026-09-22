@@ -40,6 +40,20 @@ app-store/ play-store/    스토어 설정과 서명 옵션
 ops/                      Play 데이터 안전 공시 원장
 ```
 
+### project.godot 값이 그런 이유
+
+AdMob 에디터 플러그인을 켜면서 `project.godot`은 엔진이 소유하게 됐습니다. Godot이
+저장할 때마다 주석과 기본값 항목을 지우므로, 설명을 파일 안에 둘 수 없어 여기 옮깁니다.
+
+| 값 | 이유 |
+|---|---|
+| `config/name` = "같은그림찾기" | 홈 화면 아이콘 라벨이라 짧게 둡니다. iOS는 이 값이 그대로 `CFBundleDisplayName`이 됩니다. Android 라벨은 export preset의 `package/name`이, 앱인토스 표시명은 `granite.config.ts`가 따로 가집니다 |
+| `config/version` = "2.0.0" | 로컬 개발용 placeholder입니다. 릴리스 버전 정본은 GitHub 태그 하나뿐이고 중앙 워크플로가 덮어씁니다 |
+| `config/quit_on_go_back` = false | 안드로이드 백키 기본값은 어디서 눌러도 앱을 끄는 것입니다. 꺼 두고 `src/ui/main.gd`가 원본 Unity 순서대로 화면을 한 단계씩 되돌립니다 |
+| viewport 648x1440, stretch `expand` | 원본 Unity CanvasScaler(referenceResolution 2960x1440, Shrink)를 재현한 값입니다. 16:9~20:9에서 캔버스 높이가 1440으로 고정되고 폭만 648~810으로 변합니다. `keep_height`를 쓰면 21:9에서 폭이 617로 잘려 카드 가장자리가 사라집니다 |
+| autoload 순서 | 의존 방향입니다. Platform(표면 판정) → Save(user:// 저장) → Locale(저장된 언어 적용) → Ui(로케일 확정 후 테마 조립) → Audio |
+| 기본 폰트 미지정 | 부팅 시점 로드가 첫 import보다 앞서서 clean 체크아웃마다 ERROR를 남깁니다. `autoload/ui.gd`가 import 이후에 `ThemeDB.fallback_font`로 붙입니다 |
+
 경계는 도구가 강제합니다. `godot/src/core/`가 `FileAccess`나 `OS.` 같은 것에 손을 대면
 `tools/check_core_boundary.py`가 막습니다. 규칙이 순수해야 화면 없이 게임 한 판을
 헤드리스로 완주시킬 수 있습니다.
@@ -48,6 +62,12 @@ ops/                      Play 데이터 안전 공시 원장
 꽂히고, 지원하지 않는 표면에서는 포트 기본 구현이 no-op을 맡습니다. 화면은
 `is_available()`만 보고 버튼을 그릴지 정하므로, Play Games Services나 GameKit을
 나중에 채울 때 화면 코드는 건드리지 않습니다.
+
+전면광고는 표면마다 다른 SDK를 씁니다. 앱인토스는 토스 광고를, Google Play와
+App Store는 원본 Unity와 같은 Google AdMob을 씁니다. 화면 코드는 `MpInterstitialAdPort`
+하나만 보고, 어느 쪽이 꽂혔는지 모릅니다. AdMob 플러그인(Poing Studios v5.1.0)은
+`godot/addons/admob/`에 바이너리까지 넣어 두었고, 광고를 요청하기 전에 UMP 동의를
+먼저 받습니다.
 
 계측은 Godot이 GA4 Measurement Protocol로 직접 보냅니다. 세 표면이 같은 코드로 같은
 이벤트를 보내야 지표를 비교할 수 있기 때문이고, 그래서 래퍼에는 Firebase SDK가

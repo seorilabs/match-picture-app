@@ -35,6 +35,8 @@ the note below.
 | `godot/assets/icons/*.png` | Noto Color Emoji — Google | Apache License 2.0 — see `godot/assets/LICENSE-Apache-2.0.txt` |
 | `godot/assets/fonts/DoHyeon-Regular.ttf` | Do Hyeon typeface | SIL Open Font License 1.1 — see `godot/assets/fonts/OFL-DoHyeon.txt` |
 | `godot/assets/fonts/PressStart2P-Regular.ttf` | Press Start 2P typeface — Cody Boisclair | SIL Open Font License 1.1 — see `godot/assets/fonts/OFL-PressStart2P.txt` |
+| `godot/addons/admob/` | Godot AdMob Plugin v5.1.0 — Poing Studios | MIT — see `godot/addons/admob/LICENSE` |
+| `godot/addons/admob/android/bin/**`, `godot/addons/admob/ios/bin/**` | Prebuilt AdMob plugin binaries for Godot 4.7.2 — Poing Studios | MIT — see `godot/addons/admob/LICENSE` |
 
 The Godot engine itself is not vendored here. Build scripts download the engine
 and its export templates from the upstream release at build time.

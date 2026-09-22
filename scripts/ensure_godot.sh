@@ -9,7 +9,7 @@ Usage:
   ensure_godot.sh [--with-export-templates]
 
 Environment:
-  GODOT_VERSION defaults to 4.6.3
+  GODOT_VERSION defaults to 4.7.2
   GODOT_STATUS defaults to stable
 USAGE
 }
@@ -32,7 +32,7 @@ while [ "$#" -gt 0 ]; do
   esac
 done
 
-godot_version="${GODOT_VERSION:-4.6.3}"
+godot_version="${GODOT_VERSION:-4.7.2}"
 godot_status="${GODOT_STATUS:-stable}"
 
 ensure_linux_godot() {

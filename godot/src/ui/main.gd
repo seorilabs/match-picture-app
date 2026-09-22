@@ -67,10 +67,12 @@ func _install_adapters() -> void:
 		_ads = MpAitInterstitialAds.new()
 		_leaderboard = MpAitLeaderboard.new()
 		_share = MpAitShare.new()
-	else:
-		_ads = MpInterstitialAdPort.new()
-		_leaderboard = MpLeaderboardPort.new()
-		_share = MpSharePort.new()
+		return
+	_leaderboard = MpLeaderboardPort.new()
+	_share = MpSharePort.new()
+	# Google Play 와 App Store 빌드는 원본과 같이 AdMob 을 쓴다. 어댑터를 만드는 순간
+	# UMP 동의부터 시작하므로, SDK 가 없는 데스크톱·헤드리스에서는 꽂지 않는다.
+	_ads = MpAdMobInterstitialAds.new() if Platform.is_mobile() else MpInterstitialAdPort.new()
 
 
 func _build_background() -> void:
