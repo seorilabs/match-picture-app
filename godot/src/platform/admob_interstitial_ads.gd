@@ -97,6 +97,10 @@ func _load() -> void:
 	if not _ready or _loading or _ad != null:
 		return
 	_loading = true
+	# Poing v5.1.0은 AdRequest.extras를 Google 네트워크 extra로 보낸다.
+	# npa=1은 Android와 iOS 모두 비개인화 광고만 요청한다. UMP 동의 흐름은 별개로 유지한다.
+	var request := AdRequest.new()
+	request.extras = {"npa": "1"}
 	_load_callback = InterstitialAdLoadCallback.new()
 	_load_callback.on_ad_loaded = func(ad: InterstitialAd) -> void:
 		_loading = false
@@ -105,7 +109,7 @@ func _load() -> void:
 	_load_callback.on_ad_failed_to_load = func(_error: LoadAdError) -> void:
 		# 재시도하지 않는다. 다음 판이 끝나면 어차피 다시 부른다.
 		_loading = false
-	_loader.load(_ad_unit_id(), AdRequest.new(), _load_callback)
+	_loader.load(_ad_unit_id(), request, _load_callback)
 
 
 ## 닫히거나 실패하면 네이티브 자원을 반드시 풀어 준다. 그러지 않으면 다음 광고가 샌다.
