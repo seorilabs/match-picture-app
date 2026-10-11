@@ -37,6 +37,7 @@ var _failed := false
 
 
 func _ready() -> void:
+	Save.use_storage(MpMemoryStorage.new())
 	for locale in LOCALES:
 		DirAccess.make_dir_recursive_absolute(
 			ProjectSettings.globalize_path("%s/%s" % [OUT_DIR, locale]))

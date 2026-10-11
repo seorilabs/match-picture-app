@@ -23,6 +23,7 @@ var _failed := false
 
 
 func _ready() -> void:
+	Save.use_storage(MpMemoryStorage.new())
 	DirAccess.make_dir_recursive_absolute(ProjectSettings.globalize_path(OUT_DIR))
 	for size in SIZES:
 		await _capture(size)

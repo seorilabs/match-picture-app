@@ -23,7 +23,7 @@ const POST_SCORE := "post_score"
 const LEADERBOARD_OPEN := "leaderboard_open"
 ## 기록을 공유했다.
 const SHARE := "share"
-## 전면광고를 띄웠다.
+## 전면광고 요청/건너뛰기. REQUESTED는 실제 노출 성공을 뜻하지 않는다.
 ##
 ## GA4 앱 스트림의 예약어 ad_impression 을 피한 이름이다. 웹 구현에서 확인한 회피책이고
 ## 이름을 바꾸면 그때부터 쌓인 지표가 끊긴다.

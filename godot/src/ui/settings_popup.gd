@@ -3,14 +3,17 @@ extends Control
 ## 언어와 소리.
 ##
 ## 원본에는 없던 화면이다. 한국어와 영어를 넣었으니 기기 설정과 다르게 고를 수단이
-## 있어야 하고, 소리는 조용한 곳에서 끌 수 있어야 한다. 그 둘만 둔다.
+## 있어야 하고, 소리는 조용한 곳에서 끌 수 있어야 한다. 네이티브 개인정보 선택도 여기서 연다.
 
 signal closed()
+signal privacy_pressed()
 
 const LANGUAGE_KEYS := {"auto": "LANG_AUTO", "ko": "LANG_KO", "en": "LANG_EN"}
 
 var _language_buttons: Dictionary = {}
 var _sound_button: Button
+var _privacy_button: Button
+var _privacy_error: Label
 
 
 func _init() -> void:
@@ -56,18 +59,32 @@ func _init() -> void:
 	_sound_button.pressed.connect(_on_sound_pressed)
 	column.add_child(_sound_button)
 
+	_privacy_button = MpUiKit.make_button("SETTINGS_AD_PRIVACY", MpUiKit.PANEL_BORDER)
+	_privacy_button.add_theme_color_override("font_color", MpUiKit.TEXT_LIGHT)
+	_privacy_button.visible = false
+	_privacy_button.pressed.connect(func() -> void: privacy_pressed.emit())
+	column.add_child(_privacy_button)
+	_privacy_error = MpUiKit.make_word_label("SETTINGS_AD_PRIVACY_FAILED", MpUiKit.FONT_BODY, MpUiKit.WRONG)
+	_privacy_error.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	_privacy_error.visible = false
+	column.add_child(_privacy_error)
+
 	var close := MpUiKit.make_button("SETTINGS_CLOSE")
 	close.pressed.connect(_on_close)
 	column.add_child(close)
 
 
 func show_settings() -> void:
+	_privacy_error.visible = false
 	_refresh()
 	visible = true
 
 
 func dismiss() -> void:
+	if not visible:
+		return
 	visible = false
+	closed.emit()
 
 
 ## 고른 항목을 눌러 둔 것처럼 보이게 한다. 라디오 버튼 부품을 따로 쓰지 않는다.
@@ -97,4 +114,13 @@ func _on_sound_pressed() -> void:
 
 func _on_close() -> void:
 	dismiss()
-	closed.emit()
+
+
+func configure_privacy_options(required: bool, busy: bool = false) -> void:
+	_privacy_button.visible = required
+	_privacy_button.disabled = busy
+	_privacy_button.text = "SETTINGS_AD_PRIVACY_OPENING" if busy else "SETTINGS_AD_PRIVACY"
+
+
+func finish_privacy_options(success: bool) -> void:
+	_privacy_error.visible = not success

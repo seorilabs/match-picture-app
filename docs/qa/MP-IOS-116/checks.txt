@@ -1,0 +1,118 @@
+
+> check
+> npm run check:godot && npm run check:core-boundary && npm run check:font-coverage && npm run check:sfx && npm run check:admob && npm run check:leaderboard && npm run check:data-safety && npm run check:workflow-contract
+
+
+> check:godot
+> bash scripts/godot_quality_gate.sh --project godot --smoke-scene res://tests/core_test_runner.tscn --smoke-scene res://tests/test_runner.tscn --smoke-scene res://tests/play_through.tscn --smoke-scene res://tests/release_stability.tscn
+
+[godot-quality] running import: godot --headless --path godot --import --quit
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+[   0% ] [90m[1mfirst_scan_filesystem[22m | Started 프로젝트 초기화 (5 steps)[39m[0m
+[   0% ] [90m[1mfirst_scan_filesystem[22m | 파일 구조 스캔 중...[39m[0m
+[  16% ] [90m[1mfirst_scan_filesystem[22m | 전역 클래스 이름을 불러오는 중...[39m[0m
+[  33% ] [90m[1mfirst_scan_filesystem[22m | GDExtensions 검증 중...[39m[0m
+[  50% ] [90m[1mfirst_scan_filesystem[22m | 오토로드 스크립트를 만드는 중...[39m[0m
+[  66% ] [90m[1mfirst_scan_filesystem[22m | 플러그인을 초기화 중...[39m[0m
+[  83% ] [90m[1mfirst_scan_filesystem[22m | 파일 스캔 시작 중...[39m[0m
+[92m[ DONE ][39m [1mfirst_scan_filesystem[22m
+[0m
+[   0% ] [90m[1mupdate_scripts_classes[22m | Started 전역 클래스를 등록하는 중... (3 steps)[39m[0m
+[   0% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  25% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  50% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[92m[ DONE ][39m [1mupdate_scripts_classes[22m
+[0m
+[   0% ] [90m[1mreimport[22m | Started 애셋 (다시) 가져오는 중 (1 steps)[39m[0m
+[   0% ] [90m[1mreimport[22m | 다시 가져올 파일을 준비 중...[39m[0m
+[   0% ] [90m[1mreimport[22m | 다시 가져오기 전 작업을 수행 중...[39m[0m
+[   0% ] [90m[1mreimport[22m | translations.csv[39m[0m
+[  50% ] [90m[1mreimport[22m | 애셋 가져오기 마무리 중...[39m[0m
+[92m[ DONE ][39m [1mreimport[22m
+[0m
+[   0% ] [90m[1mreimport[22m | Started 애셋 (다시) 가져오는 중 (1 steps)[39m[0m
+[   0% ] [90m[1mreimport[22m | 다시 가져오기 후 작업을 수행 중...[39m[0m
+[92m[ DONE ][39m [1mreimport[22m
+[0m
+[   0% ] [90m[1mloading_editor_layout[22m | Started 편집기를 불러오는 중 (5 steps)[39m[0m
+[   0% ] [90m[1mloading_editor_layout[22m | 편집기 레이아웃을 불러오는 중...[39m[0m
+[  16% ] [90m[1mloading_editor_layout[22m | 독을 불러오는 중...[39m[0m
+[92m[ DONE ][39m [1mloading_editor_layout[22m
+[0m
+[godot-quality] import passed. Log: /tmp/mp116-green/import.log
+[godot-quality] running compile: godot --headless --path godot --quit
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+[ui] safe area 여백(뷰포트 단위) 좌 0 상 0 우 0 하 0 / 창 (0, 0) / 안전영역 [P: (0, 0), S: (0, 0)]
+[godot-quality] compile passed. Log: /tmp/mp116-green/compile.log
+[godot-quality] running smoke-core_test_runner: godot --headless --path godot res://tests/core_test_runner.tscn
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+[core-test] 시작
+[core-test] > _test_rules
+[core-test] > _test_deck
+[core-test] > _test_round
+[core-test] > _test_placement
+[core-test] > _test_game_flow
+[core-test] > _test_timer_semantics
+[core-test] > _test_splits
+[core-test] > _test_best_record
+[core-test] > _test_analytics_contract
+[core-test] 검사 94건, 실패 0건
+[godot-quality] smoke-core_test_runner passed. Log: /tmp/mp116-green/smoke-core_test_runner.log
+[godot-quality] running smoke-test_runner: godot --headless --path godot res://tests/test_runner.tscn
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+[smoke] 시작
+[smoke] 검사 114건, 실패 0건
+[godot-quality] smoke-test_runner passed. Log: /tmp/mp116-green/smoke-test_runner.log
+[godot-quality] running smoke-play_through: godot --headless --path godot res://tests/play_through.tscn
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+[play] 시작
+[ui] safe area 여백(뷰포트 단위) 좌 0 상 0 우 0 하 0 / 창 (0, 0) / 안전영역 [P: (0, 0), S: (0, 0)]
+[play] 검사 35건, 실패 0건
+[godot-quality] smoke-play_through passed. Log: /tmp/mp116-green/smoke-play_through.log
+[godot-quality] running smoke-release_stability: godot --headless --path godot res://tests/release_stability.tscn
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+[ui] safe area 여백(뷰포트 단위) 좌 0 상 0 우 0 하 0 / 창 (0, 0) / 안전영역 [P: (0, 0), S: (0, 0)]
+[stability] 검사 54건, 실패 0건
+[godot-quality] smoke-release_stability passed. Log: /tmp/mp116-green/smoke-release_stability.log
+
+> check:core-boundary
+> python3 tools/check_core_boundary.py
+
+[core-boundary] 14개 파일 통과: godot/src/core
+
+> check:font-coverage
+> python3 tools/check_font_coverage.py
+
+[font-coverage] OK — DoHyeon-Regular.ttf 가 화면 글자 189종을 모두 덮는다
+
+> check:sfx
+> python3 tools/generate_sfx.py --check
+
+  ok  correct 재현 일치
+  ok  wrong 재현 일치
+
+> check:admob
+> python3 tools/check_admob_bundle.py
+
+[admob] OK — Poing 5.1.0, payload 6개, 식별자 일치
+
+> check:leaderboard
+> python3 tools/check_leaderboard_bundle.py
+
+[leaderboard] OK — Play Games 3.4.0, GameCenterKit 1.0.1, payload 8개, 라이브 ID 구성됨
+
+> check:data-safety
+> python3 tools/check_data_safety.py
+
+[data-safety] OK — analytics=True, ads=True, declared=3
+
+> check:workflow-contract
+> python3 tools/check_release_workflow_contract.py
+
+[workflow-contract] OK — caller 4개 통과

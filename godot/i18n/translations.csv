@@ -27,3 +27,7 @@ SETTINGS_SOUND_OFF,꺼짐,OFF
 LANG_AUTO,기기 설정,SYSTEM
 LANG_KO,한국어,한국어
 LANG_EN,English,English
+RESULT_SAVE_FAILED,기록을 저장하지 못했어요,Record not saved.
+SETTINGS_AD_PRIVACY,광고 개인정보 설정,Ad privacy choices
+SETTINGS_AD_PRIVACY_OPENING,여는 중,Opening
+SETTINGS_AD_PRIVACY_FAILED,설정을 열지 못했어요,Could not open ad privacy choices.

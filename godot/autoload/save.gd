@@ -29,10 +29,18 @@ func get_value(key: String, fallback: Variant = null) -> Variant:
 	return _data.get(key, fallback)
 
 
-## 저장 실패는 삼키지 않고 호출한 쪽에 돌려준다. 이번 실행에서는 값이 이미 반영돼 있다.
+## 저장 성공 후에만 메모리에 반영한다. 한 키도 일괄 저장과 같은 경로를 쓴다.
 func set_value(key: String, value: Variant) -> bool:
-	_data[key] = value
-	return _storage.write(_data)
+	return set_values({key: value})
+
+
+func set_values(values: Dictionary) -> bool:
+	var candidate := _data.duplicate(true)
+	candidate.merge(values.duplicate(true), true)
+	if not _storage.write(candidate):
+		return false
+	_data = candidate
+	return true
 
 
 func snapshot() -> Dictionary:

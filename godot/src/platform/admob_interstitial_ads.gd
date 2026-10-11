@@ -20,111 +20,186 @@ var _load_callback: InterstitialAdLoadCallback
 var _content_callback: FullScreenContentCallback
 var _init_listener: OnInitializationCompleteListener
 var _ready := false
+var _initializing := false
 var _loading := false
+var _showing := false
+var _consent_busy := false
+## 이전 동의로 시작한 로드 결과를 폐기하기 위한 세대.
+var _generation := 0
 
 
 func _init() -> void:
 	_request_consent()
 
 
+func prepare() -> void:
+	_initialize()
+
+
 func is_available() -> bool:
-	return _ad != null
+	return _ad != null and not _showing and not _consent_busy and _consent_allows_ads()
 
 
-## 원본과 같이 RETRY 에서만 불린다. 준비된 광고가 없으면 조용히 넘어간다.
+## 원본과 같이 Retry에서만 요청한다. 중복 요청이나 미완료 동의는 건너뛴다.
 func show() -> bool:
-	if _ad == null:
+	if not is_available():
 		return false
+	_showing = true
 	_ad.show()
 	return true
 
 
-## 1단계. 동의 정보를 갱신한다. 실패해도 게임을 막지 않고 다음 단계로 넘어간다.
+func is_privacy_options_required() -> bool:
+	return _privacy_options_required()
+
+
+func is_privacy_options_busy() -> bool:
+	return _consent_busy
+
+
+func show_privacy_options() -> bool:
+	if not is_privacy_options_required() or _consent_busy or _showing:
+		return false
+	_consent_busy = true
+	_generation += 1
+	if _ad != null:
+		_ad.destroy()
+		_ad = null
+	# 진행 중인 로드는 완료 콜백까지 기다린다. Poing loader는 콜백을 하나만 보유하므로
+	# 이를 덮고 병렬 로드를 시작하면 옛 동의의 결과를 새 콜백이 받을 수 있다.
+	privacy_options_changed.emit()
+	_present_privacy_options(_on_privacy_options_finished)
+	return true
+
+
 func _request_consent() -> void:
+	_consent_busy = true
 	var request := ConsentRequestParameters.new()
 	request.tag_for_under_age_of_consent = false
 	UserMessagingPlatform.consent_information.update(
-		request,
-		_on_consent_updated,
-		func(_error: FormError) -> void: _initialize())
+		request, _on_consent_updated, _on_consent_update_failed)
 
 
-## 2단계. 동의 양식이 있고 아직 안 받았으면 띄운다.
+func _on_consent_update_failed(_error: FormError) -> void:
+	_finish_consent()
+
+
 func _on_consent_updated() -> void:
+	privacy_options_changed.emit()
 	var info := UserMessagingPlatform.consent_information
-	if not info.get_is_consent_form_available():
-		_initialize()
+	if not info.get_is_consent_form_available() or _consent_status() != ConsentInformation.ConsentStatus.REQUIRED:
+		_finish_consent()
 		return
-	UserMessagingPlatform.load_consent_form(
-		func(form: ConsentForm) -> void:
-			if info.get_consent_status() != ConsentInformation.ConsentStatus.REQUIRED:
-				_initialize()
-				return
-			form.show(func(_error: FormError) -> void: _initialize()),
-		func(_error: FormError) -> void: _initialize())
+	UserMessagingPlatform.load_consent_form(_on_consent_form_loaded, _on_consent_update_failed)
 
 
-## 3단계. 동의 상태가 정해진 뒤에만 SDK 를 켠다.
-##
-## 동의를 받지 못했으면 광고를 요청하지 않는다. is_available() 이 계속 false 라
-## 게임은 광고 없이 그대로 돌아간다.
-func _initialize() -> void:
-	if _ready:
-		return
-	var status := UserMessagingPlatform.consent_information.get_consent_status()
-	if status not in [
+func _on_consent_form_loaded(form: ConsentForm) -> void:
+	form.show(_on_consent_update_failed)
+
+
+func _finish_consent() -> void:
+	_consent_busy = false
+	privacy_options_changed.emit()
+	_initialize()
+
+
+func _present_privacy_options(callback: Callable) -> void:
+	UserMessagingPlatform.show_privacy_options_form(callback)
+
+
+func _on_privacy_options_finished(error: FormError) -> void:
+	_finish_consent()
+	privacy_options_finished.emit(error == null)
+
+
+func _privacy_options_required() -> bool:
+	return UserMessagingPlatform.consent_information.get_privacy_options_requirement_status() == ConsentInformation.PrivacyOptionsRequirementStatus.REQUIRED
+
+
+func _consent_status() -> int:
+	return UserMessagingPlatform.consent_information.get_consent_status()
+
+
+func _consent_allows_ads() -> bool:
+	# 현재 Poing 바인딩이 제공하는 상태만 사용한다. SDK/개인정보 선택은 어댑터 밖에 저장하지 않는다.
+	return _consent_status() in [
 		ConsentInformation.ConsentStatus.NOT_REQUIRED,
 		ConsentInformation.ConsentStatus.OBTAINED,
-	]:
-		return
+	]
 
-	# 같은그림찾기는 전 연령 대상이다. 광고 등급을 그에 맞춘다.
+
+func _initialize() -> void:
+	if _consent_busy or not _consent_allows_ads():
+		return
+	if _ready:
+		_load()
+	elif not _initializing:
+		_initializing = true
+		_initialize_sdk()
+
+
+func _initialize_sdk() -> void:
 	var config := RequestConfiguration.new()
 	config.max_ad_content_rating = RequestConfiguration.MAX_AD_CONTENT_RATING_G
 	MobileAds.set_request_configuration(config)
-
 	_init_listener = OnInitializationCompleteListener.new()
-	_init_listener.on_initialization_complete = (
-		func(_status: InitializationStatus) -> void:
-			_ready = true
-			_load()
-	)
+	_init_listener.on_initialization_complete = _on_initialized
 	MobileAds.initialize(_init_listener)
 
 
-## 4단계. 다음 RETRY 에 쓸 광고를 미리 받아 둔다.
+func _on_initialized(_status: InitializationStatus) -> void:
+	_initializing = false
+	_ready = true
+	_load()
+
+
 func _load() -> void:
-	if not _ready or _loading or _ad != null:
+	if not _ready or _loading or _ad != null or _consent_busy or not _consent_allows_ads():
 		return
 	_loading = true
-	# Poing v5.1.0은 AdRequest.extras를 Google 네트워크 extra로 보낸다.
-	# npa=1은 Android와 iOS 모두 비개인화 광고만 요청한다. UMP 동의 흐름은 별개로 유지한다.
 	var request := AdRequest.new()
+	# 비개인화 광고 요청을 Android와 iOS 모두 유지한다.
 	request.extras = {"npa": "1"}
 	_load_callback = InterstitialAdLoadCallback.new()
-	_load_callback.on_ad_loaded = func(ad: InterstitialAd) -> void:
-		_loading = false
-		_ad = ad
-		_attach_content_callback(ad)
-	_load_callback.on_ad_failed_to_load = func(_error: LoadAdError) -> void:
-		# 재시도하지 않는다. 다음 판이 끝나면 어차피 다시 부른다.
-		_loading = false
+	_load_callback.on_ad_loaded = _on_ad_loaded.bind(_generation)
+	_load_callback.on_ad_failed_to_load = _on_ad_failed_to_load.bind(_generation)
 	_loader.load(_ad_unit_id(), request, _load_callback)
 
 
-## 닫히거나 실패하면 네이티브 자원을 반드시 풀어 준다. 그러지 않으면 다음 광고가 샌다.
+func _on_ad_loaded(ad: InterstitialAd, generation: int) -> void:
+	_loading = false
+	if generation != _generation or _consent_busy or not _consent_allows_ads():
+		ad.destroy()
+		_load()
+		return
+	_ad = ad
+	_attach_content_callback(ad)
+
+
+func _on_ad_failed_to_load(_error: LoadAdError, generation: int) -> void:
+	_loading = false
+	# 보통 실패는 다음 판 완료까지 기다린다. 동의 변경으로 폐기된 요청만 최신 상태에서 이어 간다.
+	if generation != _generation:
+		_load()
+
+
 func _attach_content_callback(ad: InterstitialAd) -> void:
 	_content_callback = FullScreenContentCallback.new()
-	_content_callback.on_ad_dismissed_full_screen_content = func() -> void:
-		_discard(ad)
-	_content_callback.on_ad_failed_to_show_full_screen_content = func(_error: AdError) -> void:
-		_discard(ad)
+	_content_callback.on_ad_dismissed_full_screen_content = _discard.bind(weakref(ad))
+	_content_callback.on_ad_failed_to_show_full_screen_content = _on_ad_failed_to_show.bind(weakref(ad))
 	ad.full_screen_content_callback = _content_callback
 
 
-func _discard(ad: InterstitialAd) -> void:
-	if _ad == ad:
-		_ad = null
+func _on_ad_failed_to_show(_error: AdError, ad_ref: WeakRef) -> void:
+	_discard(ad_ref)
+
+
+func _discard(ad_ref: WeakRef) -> void:
+	var ad := ad_ref.get_ref() as InterstitialAd
+	if ad == null or _ad != ad:
+		return
+	_ad = null
+	_showing = false
 	ad.destroy()
 	_load()
 
