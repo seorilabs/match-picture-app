@@ -338,11 +338,13 @@ func _on_open_settings() -> void:
 func _refresh_privacy_options() -> void:
 	if _settings != null:
 		_settings.configure_privacy_options(
-			_ads.is_privacy_options_required(), _ads.is_privacy_options_busy())
+			_ads.is_privacy_options_required(), _ads.is_privacy_options_busy(),
+			_ads.is_privacy_options_opening())
 
 
 func _on_privacy_pressed() -> void:
 	if not _ads.show_privacy_options():
+		_refresh_privacy_options()
 		_settings.finish_privacy_options(false)
 
 

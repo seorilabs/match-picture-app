@@ -1,0 +1,10 @@
+Claude 교차 리뷰 후 추가 요구사항 실패. 문법/환경 오류는 없는 실행.
+
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+[ui] safe area 여백(뷰포트 단위) 좌 0 상 0 우 0 하 0 / 창 (0, 0) / 안전영역 [P: (0, 0), S: (0, 0)]
+[stability] 검사 59건, 실패 4건
+[stability] 실패: AC-1 부분 쓰기를 저장 성공으로 확정하지 않는다
+[stability] 실패: AC-1 부분 쓰기 실패 때 이전 정본 보존
+[stability] 실패: AC-3 초기 동의 갱신을 사용자 양식 열기로 표시하지 않는다
+[stability] 실패: AC-3 요청 거절 때 최신 필요 상태로 버튼 갱신

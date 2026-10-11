@@ -116,10 +116,10 @@ func _on_close() -> void:
 	dismiss()
 
 
-func configure_privacy_options(required: bool, busy: bool = false) -> void:
+func configure_privacy_options(required: bool, busy: bool = false, opening: bool = false) -> void:
 	_privacy_button.visible = required
 	_privacy_button.disabled = busy
-	_privacy_button.text = "SETTINGS_AD_PRIVACY_OPENING" if busy else "SETTINGS_AD_PRIVACY"
+	_privacy_button.text = "SETTINGS_AD_PRIVACY_OPENING" if opening else "SETTINGS_AD_PRIVACY"
 
 
 func finish_privacy_options(success: bool) -> void:

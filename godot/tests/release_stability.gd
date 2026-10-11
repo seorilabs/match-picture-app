@@ -21,6 +21,12 @@ class FailedPromotion:
 			return ERR_CANT_CREATE
 		return DirAccess.rename_absolute(from, to)
 
+class PartialWrite:
+	extends MpFileStorage
+	var truncate_write := false
+	func _write_bytes(file: FileAccess, bytes: PackedByteArray) -> bool:
+		return file.store_buffer(bytes.slice(0, int(bytes.size() / 2.0)) if truncate_write else bytes)
+
 class FakeLoader:
 	extends InterstitialAdLoader
 	var calls := 0
@@ -67,6 +73,8 @@ class FakeAds:
 	var prepares := 0
 	var shows := 0
 	var required := false
+	var busy := false
+	var opening := false
 	var requested := true
 	func prepare() -> void:
 		prepares += 1
@@ -77,6 +85,10 @@ class FakeAds:
 		return requested
 	func is_privacy_options_required() -> bool:
 		return required
+	func is_privacy_options_busy() -> bool:
+		return busy
+	func is_privacy_options_opening() -> bool:
+		return opening
 	func show_privacy_options() -> bool:
 		return required
 
@@ -126,6 +138,14 @@ func _check_save_transaction() -> void:
 	_check(Save.snapshot() == before, "AC-1 부분 기록을 남기지 않는다")
 
 func _check_file_recovery() -> void:
+	var partial_path := "user://mp116_partial_%d.save" % Time.get_ticks_usec()
+	var partial := PartialWrite.new(partial_path)
+	partial.write({"best_seconds": 24.6})
+	partial.truncate_write = true
+	_check(not partial.write({"best_seconds": 20.0}), "AC-1 부분 쓰기를 저장 성공으로 확정하지 않는다")
+	_check(partial.read().get("best_seconds") == 24.6, "AC-1 부분 쓰기 실패 때 이전 정본 보존")
+	for suffix in ["", MpFileStorage.BAK_SUFFIX, MpFileStorage.TMP_SUFFIX]:
+		DirAccess.remove_absolute(ProjectSettings.globalize_path(partial_path + suffix))
 	var path := "user://mp116_%d.save" % Time.get_ticks_usec()
 	var storage := FailedPromotion.new(path)
 	storage.write({"best_seconds": 24.6})
@@ -238,6 +258,19 @@ func _check_ui_and_events() -> void:
 	ads.required = true
 	main.call("_refresh_privacy_options")
 	_check(privacy_button.visible, "AC-3 늦게 결정된 필요 상태 반영")
+	ads.busy = true
+	main.call("_refresh_privacy_options")
+	_check(privacy_button.disabled and privacy_button.text == "SETTINGS_AD_PRIVACY",
+		"AC-3 초기 동의 갱신을 사용자 양식 열기로 표시하지 않는다")
+	ads.opening = true
+	main.call("_refresh_privacy_options")
+	_check(privacy_button.text == "SETTINGS_AD_PRIVACY_OPENING", "AC-3 실제 양식 요청에만 열기 표시")
+	ads.busy = false
+	ads.opening = false
+	ads.required = false
+	main.call("_on_privacy_pressed")
+	_check(not privacy_button.visible, "AC-3 요청 거절 때 최신 필요 상태로 버튼 갱신")
+	ads.required = true
 	settings.call("configure_privacy_options", true, true)
 	_check(privacy_button.disabled, "AC-3 양식을 여는 동안 입력 차단")
 	settings.call("finish_privacy_options", false)

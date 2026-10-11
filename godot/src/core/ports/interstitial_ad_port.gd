@@ -32,5 +32,10 @@ func is_privacy_options_busy() -> bool:
 	return false
 
 
+## 시작 시 동의 정보 갱신과 사용자가 요청한 양식 열기를 구분한다.
+func is_privacy_options_opening() -> bool:
+	return false
+
+
 func show_privacy_options() -> bool:
 	return false

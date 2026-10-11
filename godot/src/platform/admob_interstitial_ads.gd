@@ -24,6 +24,7 @@ var _initializing := false
 var _loading := false
 var _showing := false
 var _consent_busy := false
+var _privacy_form_open := false
 ## 이전 동의로 시작한 로드 결과를 폐기하기 위한 세대.
 var _generation := 0
 
@@ -57,10 +58,15 @@ func is_privacy_options_busy() -> bool:
 	return _consent_busy
 
 
+func is_privacy_options_opening() -> bool:
+	return _privacy_form_open
+
+
 func show_privacy_options() -> bool:
 	if not is_privacy_options_required() or _consent_busy or _showing:
 		return false
 	_consent_busy = true
+	_privacy_form_open = true
 	_generation += 1
 	if _ad != null:
 		_ad.destroy()
@@ -108,6 +114,7 @@ func _present_privacy_options(callback: Callable) -> void:
 
 
 func _on_privacy_options_finished(error: FormError) -> void:
+	_privacy_form_open = false
 	_finish_consent()
 	privacy_options_finished.emit(error == null)
 
