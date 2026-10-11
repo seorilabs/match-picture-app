@@ -1,0 +1,17 @@
+[
+  {
+    "path": "qa-round-1/editor-app.log",
+    "sha256": "0d9efb33e02dc5c1c8a7abbfc999da1304a4c787e77fa9e7c45a0405b8e74aa1",
+    "bytes": 458
+  },
+  {
+    "path": "qa-round-1/editor-rerun.log",
+    "sha256": "cf320b46ff3e85e5864fc38577e3097f7bbd17f00b6aca572323590cc635e92d",
+    "bytes": 150
+  },
+  {
+    "path": "qa-round-1/godot/override.cfg",
+    "sha256": "dd0f3ec9f0394ed96f1be37cedb9434946bbc62b66bc20796daccf8ef0980b2f",
+    "bytes": 249
+  }
+]

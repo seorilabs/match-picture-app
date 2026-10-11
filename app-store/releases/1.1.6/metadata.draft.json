@@ -6,11 +6,11 @@
   "build": null,
   "localizations": {
     "ko": {
-      "description": "두 카드에서 같은 그림 하나를 빠르게 찾아보세요.\n\n- 위와 아래의 원형 카드에는 각각 8개의 그림이 있습니다.\n- 두 카드에는 반드시 같은 그림이 하나 있습니다.\n- 같은 그림을 찾아 아래 카드에서 터치하세요.\n- 총 10번의 정답을 찾으면 완료 시간과 구간별 기록을 확인할 수 있습니다.\n- 최고 기록에 도전하고 설정에서 언어와 소리를 선택하세요.",
+      "description": "두 카드에서 같은 그림 하나를 빠르게 찾아보세요.\n\n- 위와 아래 카드에는 각각 8개의 그림이 있습니다.\n- 두 카드에는 반드시 같은 그림이 하나 있습니다.\n- 같은 그림을 찾아 아래 카드에서 터치하세요.\n- 총 10번의 정답을 찾으면 완료 시간과 구간별 기록을 확인할 수 있습니다.\n- 최고 기록에 도전하고 설정에서 언어와 소리를 선택하세요.",
       "supportUrl": "https://www.seorilabs.com/support/"
     },
     "en-US": {
-      "description": "Find the one matching symbol on two cards as quickly as you can.\n\n- Each circular card has eight symbols.\n- The two cards always have exactly one symbol in common.\n- Tap the matching symbol on the lower card.\n- Find ten matches to see your completion time and per-round splits.\n- Challenge your best time and choose your language and sound in Settings.",
+      "description": "Find the one matching symbol on two cards as quickly as you can.\n\n- Each card has eight symbols.\n- The two cards always have exactly one symbol in common.\n- Tap the matching symbol on the lower card.\n- Find ten matches to see your completion time and per-round splits.\n- Challenge your best time and choose your language and sound in Settings.",
       "supportUrl": "https://www.seorilabs.com/en/support/"
     }
   },

@@ -7,10 +7,10 @@
 - 계획 작성 시각: 2026-10-11T11:56:07Z. 실제 실행은 아래 계획 기록 이후 시작한다.
 - 구현자: `/root`. 독립 검수자: `/root/ui_review` (요구사항 검수자 / 처음 사용자).
 - 환경: macOS, Godot 4.7.2 Editor Run; CUA의 Godot 창 실제 클릭·키 입력. 헤드리스 검사나 캡처만을 실행 검수로 세지 않는다.
-- 격리 프로젝트: `/tmp/mp-ios-116-ui-round-1-7a26dab/godot` (후보의 git archive). `override.cfg`로 QA main scene과 회차 전용 사용자 디렉터리만 지정한다.
-- 격리 저장: `~/Library/Application Support/match-picture-MP-IOS-116-round-1-7a26dab`; QA 씬은 메모리 저장으로 교체한다. 원래 제품 저장은 읽거나 초기화하지 않는다.
+- 격리 프로젝트: `qa-round-1/godot` (후보의 git archive). `override.cfg`로 QA main scene과 회차 전용 사용자 디렉터리만 지정한다.
+- 격리 저장: `user-data-dir: match-picture-MP-IOS-116-round-1-7a26dab`; QA 씬은 메모리 저장으로 교체한다. 원래 제품 저장은 읽거나 초기화하지 않는다.
 - QA 씬: `tests/review_sandbox.tscn`. 제품 화면·GUI 입력은 그대로이며 저장 실패와 UMP/광고 콜백만 대역이다. 외부 SDK·실기기 통과로 표시하지 않는다.
-- 증거: 격리 프로젝트 `build/review/` 캡처, `/tmp/mp-ios-116-ui-round-1-7a26dab/editor.log`, 실제 CUA 창 관찰 및 필요시 해시 목록. 실제 SDK가 필요한 항목은 미확인으로 남긴다.
+- 증거: 격리 프로젝트 `build/review/` 캡처, `qa-round-1/editor.log`, 실제 CUA 창 관찰 및 필요시 해시 목록. 실제 SDK가 필요한 항목은 미확인으로 남긴다.
 - 순서: Editor에서 F5 Run → 타이틀 설정/언어/소리/프라이버시 조건·실패·완료 → 최초 안내 → 오답과 힌트 → 실제 카드 탭 10정답 완료 → 기록 결과/Retry → 저장 실패 결과/타이틀 기존 기록 → 뒤로/종료 취소 → 지원되지 않는 버튼 및 비율 확인.
 - 통과 기준: 아래 에디터 재현 가능한 항목의 기능과 UX가 모두 기대에 맞고 SCRIPT ERROR/ERROR가 없다. 네이티브 순위·실제 광고/UMP·AIT 공유·실기기 safe area/awake/계측은 별도 미검증이며 이 회차로 대체하지 않는다. 결함은 초기 판정을 보존하고 root에게 전달한다. 이 회차 안에 무제한 반복하지 않는다.
 
@@ -37,7 +37,7 @@
 ### 초기 환경 차단 (제품 입력 전)
 
 - 실제 GUI Editor PID: `18670`, 공식 4.7.2 설치본에서 프로젝트를 열고 F5를 눌렀다. 최초 symlink CLI Editor `11932`는 CUA 바인딩 실패로 종료했고 제가 추가로 연 프로젝트 매니저도 종료했다. 환경 라우팅 시도를 실행 통과로 세지 않는다.
-- `/tmp/mp-ios-116-ui-round-1-7a26dab/editor-app.log`에 `SCRIPT ERROR: Parse Error: Too few arguments for "new()" call. Expected at least 2 but received 0.` (`res://tests/review_sandbox.gd:39`), 이어서 QA 씬 스크립트 load ERROR가 발생했다.
+- `qa-round-1/editor-app.log`에 `SCRIPT ERROR: Parse Error: Too few arguments for "new()" call. Expected at least 2 but received 0.` (`res://tests/review_sandbox.gd:39`), 이어서 QA 씬 스크립트 load ERROR가 발생했다.
 - 사용자 영향: 검수용 QA 씬이 시작되지 않아 제품의 기능·UX를 확인할 수 없다. 제품 동작 결함으로 확정한 것은 아니다.
 - 수정 제안: 구현자가 QA 씬의 `FormError.new()` 생성자를 실제 SDK 인터페이스에 맞추고 QA 씬을 임포트/컴파일 검증에 포함한다.
 - 현재 판정: **차단**. 제품 버튼 입력·시나리오 미실행. 구현자에게 전달했으며 저는 제품/QA 코드를 수정하지 않았다. 다음 실행은 새 후보와 수정 검증을 받은 뒤 이 초기 차단을 보존한 1회 한정 재확인으로만 진행한다.
@@ -55,5 +55,9 @@
 - CUA 실제 입력으로 F5 및 창의 Play 좌표를 보냈으나 실행 게임 창·QA 시작 로그가 나타나지 않았다. 프로젝트와 디버그 메뉴의 AX 입력은 열렸지만 실행 경로를 재현하지 못했다. `user changed app` 알림과 40초 상태 조회 지연도 있었으며, 최신 상태를 읽고 메뉴를 닫은 뒤 확인을 한정해 중단했다. 사용자 포커스를 강제하거나 무제한 시작을 반복하지 않았다.
 - 한정 수정 재확인: QA 씬 파싱 오류 **해결**. 실제 제품 기능·UX 시나리오 **미실행/차단**. 타이틀·안내·카드·저장·설정·오류·Retry·종료·비율 모두 통과 판정할 수 없다. 네이티브 SDK 미검증 경계도 유지한다.
 - 실행 결과 판정: **차단**. 실제 Editor Run으로 제품 입력을 재현할 수 있어야 다음 단계의 검수 근거가 된다. 이 결과를 UI 통과나 3회 완료로 세지 않는다.
-- 증거 경로: `/tmp/mp-ios-116-ui-round-1-7a26dab/editor-app.log` (초기 파싱 오류), `editor-rerun.log` (수정 후 시작), `godot/override.cfg`, `evidence-manifest.json` (위 파일의 SHA-256·크기). 제품 화면 F7 캡처는 제품 씬이 시작되지 않아 없음. CUA 기록에는 실제 Editor와 프로젝트/디버그 메뉴 창 관찰이 남아 있다.
+- 증거 경로: `qa-round-1/editor-app.log` (초기 파싱 오류), `editor-rerun.log` (수정 후 시작), `godot/override.cfg`, `evidence-manifest.json` (위 파일의 SHA-256·크기). 제품 화면 F7 캡처는 제품 씬이 시작되지 않아 없음. CUA 기록에는 실제 Editor와 프로젝트/디버그 메뉴 창 관찰이 남아 있다.
 - 제품/QA 코드 변경 없음. 추가 회차 시작 없음. 공유 GUI 사용을 반환한다. 현재 실제 SDK·제품 UX·원본 저장 재실행 결과를 통과로 바꾸지 않는다.
+
+공개 보존 근거: [초기 실행 로그](evidence/round-1/editor-app.log), [한정 재확인 로그](evidence/round-1/editor-rerun.log), [파일 해시](evidence/round-1/provenance.json). 개인 환경 경로 접두어만 이식 가능한 이름으로 치환하고 초기 파싱 오류·차단 판정은 유지했다.
+
+구간 수 설명 정정: 초기 계획의 `10구간`은 문서 작성 오류다. 원본대로 첫 정답 뒤에 시간이 시작되므로 10정답의 실제 측정 구간은 9개다(`game_state.gd.splits()`/`split_bars.gd`). 최초 계획과 차단 이력은 보존하며 게임 규칙을 바꾸지 않았다.

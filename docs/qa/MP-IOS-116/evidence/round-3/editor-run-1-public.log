@@ -1,0 +1,14 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+OpenGL API 4.1 Metal - 90.5 - Compatibility - Using Device: Apple - Apple M3
+
+AdMob iOS plugin not found. Installing...
+Downloading https://github.com/poingstudios/godot-admob-plugin/releases/download/v5.1.0/ios-template-v4.7.2.zip
+Downloaded at: mp-ios-116-ui-round-3-02e63ae/godot/addons/admob/downloads/ios
+Extracted zip to: mp-ios-116-ui-round-3-02e63ae/godot/addons/admob/ios/bin/
+res://assets/fonts/PressStart2P-Regular.ttf: Pixel font detected, disabling subpixel positioning.
+res://assets/fonts/PressStart2P-Regular.ttf: Pixel font detected, disabling hinting.
+[review-editor] self_contained=true config=qa-runtime/editor_data cache=qa-runtime/editor_data/cache isolated=true
+[review-editor] user://=<QA_USER_DIR:match-picture-MP-IOS-116-round-3-02e63ae>/
+[review-editor] game_embed_mode=-1 remote_port=31663
+[review-editor] starting actual normal main Editor Run once
+[review-editor] is_playing_scene=true

@@ -1,0 +1,41 @@
+{
+  "candidateCode": "02e63ae229f687a0c0790ddec1de731e9373cd90",
+  "normalization": "Local environment path prefixes only. Assertions and results unchanged.",
+  "files": [
+    {
+      "file": "compile.log",
+      "rawSha256": "42c81461e70506deddfa4cf93b6a4d859f87ed5fe0879b34733b5692735aa68f",
+      "publicSha256": "42c81461e70506deddfa4cf93b6a4d859f87ed5fe0879b34733b5692735aa68f"
+    },
+    {
+      "file": "import.log",
+      "rawSha256": "5fc6ff67472c80042a31c9b6664e1ad012900bb4ca269353b8241787e64fdc79",
+      "publicSha256": "5fc6ff67472c80042a31c9b6664e1ad012900bb4ca269353b8241787e64fdc79"
+    },
+    {
+      "file": "smoke-core_test_runner.log",
+      "rawSha256": "9c1d5bb221da7b739028c327fa8d252a6d16ba93718b18e5f9c872bc9a48f60b",
+      "publicSha256": "9c1d5bb221da7b739028c327fa8d252a6d16ba93718b18e5f9c872bc9a48f60b"
+    },
+    {
+      "file": "smoke-play_through.log",
+      "rawSha256": "07a1c0f5e880baed0d34dacf001e7ff250511d92e8757009216e133262b80cc9",
+      "publicSha256": "07a1c0f5e880baed0d34dacf001e7ff250511d92e8757009216e133262b80cc9"
+    },
+    {
+      "file": "smoke-release_stability.log",
+      "rawSha256": "15aaa4f0a528be7a5ca2e97c9240a0e360ad52fd6f5051a46d0e08b274cd8d0c",
+      "publicSha256": "15aaa4f0a528be7a5ca2e97c9240a0e360ad52fd6f5051a46d0e08b274cd8d0c"
+    },
+    {
+      "file": "smoke-review_sandbox.log",
+      "rawSha256": "a2ab49b6da31a702552b4b265f77426bb3aa1cfea62b103994bfb4827a46e250",
+      "publicSha256": "a2ab49b6da31a702552b4b265f77426bb3aa1cfea62b103994bfb4827a46e250"
+    },
+    {
+      "file": "smoke-test_runner.log",
+      "rawSha256": "10ac371b5f285a3d868e151d6fe20f228d17b48d64bb3a36cfa7153953f8fcf6",
+      "publicSha256": "10ac371b5f285a3d868e151d6fe20f228d17b48d64bb3a36cfa7153953f8fcf6"
+    }
+  ]
+}

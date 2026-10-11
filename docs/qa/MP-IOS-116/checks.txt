@@ -31,12 +31,12 @@ Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
 [  16% ] loading_editor_layout | 독을 불러오는 중...
 [ DONE ] loading_editor_layout
 
-[godot-quality] import passed. Log: /tmp/mp116-review-green/import.log
+[godot-quality] import passed. Log: evidence/automated/import.log
 [godot-quality] running compile: godot --headless --path godot --quit
 Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
 
 [ui] safe area 여백(뷰포트 단위) 좌 0 상 0 우 0 하 0 / 창 (0, 0) / 안전영역 [P: (0, 0), S: (0, 0)]
-[godot-quality] compile passed. Log: /tmp/mp116-review-green/compile.log
+[godot-quality] compile passed. Log: evidence/automated/compile.log
 [godot-quality] running smoke-core_test_runner: godot --headless --path godot res://tests/core_test_runner.tscn
 Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
 
@@ -51,32 +51,32 @@ Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
 [core-test] > _test_best_record
 [core-test] > _test_analytics_contract
 [core-test] 검사 94건, 실패 0건
-[godot-quality] smoke-core_test_runner passed. Log: /tmp/mp116-review-green/smoke-core_test_runner.log
+[godot-quality] smoke-core_test_runner passed. Log: evidence/automated/smoke-core_test_runner.log
 [godot-quality] running smoke-test_runner: godot --headless --path godot res://tests/test_runner.tscn
 Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
 
 [smoke] 시작
 [smoke] 검사 114건, 실패 0건
-[godot-quality] smoke-test_runner passed. Log: /tmp/mp116-review-green/smoke-test_runner.log
+[godot-quality] smoke-test_runner passed. Log: evidence/automated/smoke-test_runner.log
 [godot-quality] running smoke-play_through: godot --headless --path godot res://tests/play_through.tscn
 Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
 
 [play] 시작
 [ui] safe area 여백(뷰포트 단위) 좌 0 상 0 우 0 하 0 / 창 (0, 0) / 안전영역 [P: (0, 0), S: (0, 0)]
 [play] 검사 35건, 실패 0건
-[godot-quality] smoke-play_through passed. Log: /tmp/mp116-review-green/smoke-play_through.log
+[godot-quality] smoke-play_through passed. Log: evidence/automated/smoke-play_through.log
 [godot-quality] running smoke-release_stability: godot --headless --path godot res://tests/release_stability.tscn
 Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
 
 [ui] safe area 여백(뷰포트 단위) 좌 0 상 0 우 0 하 0 / 창 (0, 0) / 안전영역 [P: (0, 0), S: (0, 0)]
 [stability] 검사 59건, 실패 0건
-[godot-quality] smoke-release_stability passed. Log: /tmp/mp116-review-green/smoke-release_stability.log
+[godot-quality] smoke-release_stability passed. Log: evidence/automated/smoke-release_stability.log
 [godot-quality] running smoke-review_sandbox: godot --headless --path godot res://tests/review_sandbox.tscn
 Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
 
 [ui] safe area 여백(뷰포트 단위) 좌 0 상 0 우 0 하 0 / 창 (0, 0) / 안전영역 [P: (0, 0), S: (0, 0)]
 [review] Editor Run / in-memory storage / fake SDK callbacks
-[godot-quality] smoke-review_sandbox passed. Log: /tmp/mp116-review-green/smoke-review_sandbox.log
+[godot-quality] smoke-review_sandbox passed. Log: evidence/automated/smoke-review_sandbox.log
 
 > check:core-boundary
 > python3 tools/check_core_boundary.py

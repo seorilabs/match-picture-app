@@ -1,0 +1,35 @@
+{
+  "candidate": "02e63ae229f687a0c0790ddec1de731e9373cd90",
+  "preparedUtc": "2026-10-11T13:25:11.026096+00:00",
+  "run": 3,
+  "artifactRoot": "mp-ios-116-ui-round-3-02e63ae",
+  "userDirName": "match-picture-MP-IOS-116-round-3-run3-02e63ae",
+  "editorHost": "headless-editor",
+  "productChild": "actual-gui-required",
+  "files": [
+    {
+      "file": "godot/project.godot",
+      "sha256": "987632e561a3e581b0a7efa8547ca93c065e46c9f3aa29bb938d0ccf9841820c"
+    },
+    {
+      "file": "project.godot.candidate-original",
+      "sha256": "4d5952ea3b2597c770195fdfbea8b030bf529ce32f17fb68d545e144eff75ea3"
+    },
+    {
+      "file": "project-environment-run-3.diff",
+      "sha256": "ca91941ac4fd6bb8da977b9827995ca513c561ed2c4b67906e535e00e20879fb"
+    },
+    {
+      "file": "godot/addons/mp_review_runner/plugin.cfg",
+      "sha256": "3138855637e3aca0b1862c1d2c742f6a90bdaa15b35285f5e41644808bf38c4f"
+    },
+    {
+      "file": "godot/addons/mp_review_runner/plugin.gd",
+      "sha256": "625f40bee0891ca58c276615b6eedf1bebc2f6be39276e3e9b2f5e69b862b947"
+    },
+    {
+      "file": "godot/addons/mp_review_runner/runtime_guard.gd",
+      "sha256": "2b8193988d949b98d6c2f3698a178dee567de5764dcf0d0ebe9c04419fb077e8"
+    }
+  ]
+}

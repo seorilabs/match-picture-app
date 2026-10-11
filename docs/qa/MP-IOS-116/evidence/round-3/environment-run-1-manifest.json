@@ -1,0 +1,47 @@
+{
+  "candidate": "02e63ae229f687a0c0790ddec1de731e9373cd90",
+  "createdUtc": "2026-10-11T13:04:06.009683+00:00",
+  "artifactRoot": "mp-ios-116-ui-round-3-02e63ae",
+  "files": [
+    {
+      "file": "project.godot.candidate-original",
+      "sha256": "4d5952ea3b2597c770195fdfbea8b030bf529ce32f17fb68d545e144eff75ea3",
+      "bytes": 2093
+    },
+    {
+      "file": "godot/project.godot",
+      "sha256": "74ad51686eb1943a4aec7cd288a2c45462271152ac77069cd78d266fe472fd7e",
+      "bytes": 2388
+    },
+    {
+      "file": "project-environment-run-1.diff",
+      "sha256": "d0f1675e5b7a2390ad5adbf088eba1b7d58e9fc56c24d6367317239c1fadee8c",
+      "bytes": 1186
+    },
+    {
+      "file": "godot/addons/mp_review_runner/plugin.cfg",
+      "sha256": "3138855637e3aca0b1862c1d2c742f6a90bdaa15b35285f5e41644808bf38c4f",
+      "bytes": 150
+    },
+    {
+      "file": "godot/addons/mp_review_runner/plugin.gd",
+      "sha256": "d3d3c46a6a086fbfa84a42d72a73fa17160ac2c374bf857cb2631060d74d0dc4",
+      "bytes": 1828
+    },
+    {
+      "file": "godot/addons/mp_review_runner/runtime_guard.gd",
+      "sha256": "fb210c93b0cea73484b1f3366304ee952c3cb2c13d4e4eca0739d52aa93c2869",
+      "bytes": 1112
+    },
+    {
+      "file": "receipt.json",
+      "sha256": "6f6379365000c9552d2d019f12ed78a80317fb47f4f2198fc57ebd2afc97663e",
+      "bytes": 389
+    },
+    {
+      "file": "self-contained-receipt.json",
+      "sha256": "c92fc51c1f6aed0fcaee36155ae764b670a1fe9042a916f9e2097cb16bb3823e",
+      "bytes": 414
+    }
+  ]
+}

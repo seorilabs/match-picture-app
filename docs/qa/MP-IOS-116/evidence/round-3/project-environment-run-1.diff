@@ -1,0 +1,37 @@
+--- candidate/godot/project.godot
++++ isolated-run-1/godot/project.godot
+@@ -17,6 +17,8 @@
+ [application]
+ 
+ config/name="같은그림찾기"
++config/use_custom_user_dir=true
++config/custom_user_dir_name="match-picture-MP-IOS-116-round-3-02e63ae"
+ config/name_localized={
+ "en": "Match Picture",
+ "ko": "같은그림찾기"
+@@ -32,6 +34,8 @@
+ 
+ [autoload]
+ 
++MpReviewEnvironment="*res://addons/mp_review_runner/runtime_guard.gd"
++
+ Platform="*res://autoload/platform.gd"
+ Save="*res://autoload/save.gd"
+ Locale="*res://autoload/locale.gd"
+@@ -43,13 +47,15 @@
+ 
+ window/size/viewport_width=648
+ window/size/viewport_height=1440
++window/size/window_width_override=324
++window/size/window_height_override=720
+ window/stretch/mode="canvas_items"
+ window/stretch/aspect="expand"
+ window/handheld/orientation=1
+ 
+ [editor_plugins]
+ 
+-enabled=PackedStringArray("res://addons/admob/plugin.cfg", "res://addons/GodotPlayGameServices/plugin.cfg", "res://addons/gamecenter/plugin.cfg")
++enabled=PackedStringArray("res://addons/admob/plugin.cfg", "res://addons/GodotPlayGameServices/plugin.cfg", "res://addons/gamecenter/plugin.cfg", "res://addons/mp_review_runner/plugin.cfg")
+ 
+ [input_devices]
+ 

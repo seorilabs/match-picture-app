@@ -1,0 +1,39 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+OpenGL API 4.1 Metal - 90.5 - Compatibility - Using Device: Apple - Apple M3
+
+[review-runtime] user://=<QA_USER_DIR:match-picture-MP-IOS-116-round-3-run3-02e63ae>/ isolated=true before Save
+[ui] safe area 여백(뷰포트 단위) 좌 0 상 0 우 0 하 0 / 창 (540, 720) / 안전영역 [P: (0, 60), S: (3840, 1976)]
+[review-layout] window=(540, 720) visible_rect=[P: (0.0, 0.0), S: (1080.0, 1440.0)]
+[review-layout] _safe_area_root size=(1080.0, 1440.0) rect=[P: (0.0, 0.0), S: (1080.0, 1440.0)] transform=[X: (1.0, 0.0), Y: (0.0, 1.0), O: (0.0, 0.0)]
+[review-layout] _game_screen size=(1080.0, 1440.0) rect=[P: (0.0, 0.0), S: (1080.0, 1440.0)] transform=[X: (1.0, 0.0), Y: (0.0, 1.0), O: (0.0, 0.0)]
+[review-layout] _tutorial size=(1080.0, 1440.0) rect=[P: (0.0, 0.0), S: (1080.0, 1440.0)] transform=[X: (1.0, 0.0), Y: (0.0, 1.0), O: (0.0, 0.0)]
+[review-layout] _stage size=(1080.0, 1340.0) rect=[P: (0.0, 100.0), S: (1080.0, 1340.0)] transform=[X: (1.0, 0.0), Y: (0.0, 1.0), O: (0.0, 100.0)]
+[review-layout] _opponent_card size=(650.0, 650.0) rect=[P: (247.5, 165.0), S: (585.0, 585.0)] transform=[X: (0.9, 0.0), Y: (0.0, 0.9), O: (247.5, 165.0)]
+[review-layout] _mine_card size=(650.0, 650.0) rect=[P: (247.5, 790.0), S: (585.0, 585.0)] transform=[X: (0.9, 0.0), Y: (0.0, 0.9), O: (247.5, 790.0)]
+[review-layout] _hud size=(1080.0, 100.0) rect=[P: (0.0, 65.0), S: (1080.0, 100.0)] transform=[X: (1.0, 0.0), Y: (0.0, 1.0), O: (0.0, 65.0)]
+[review-runtime] capture=res://build/review/capture-78680-1.png pixels=(540, 720) window=(540, 720) visible_rect=[P: (0.0, 0.0), S: (1080.0, 1440.0)] result=0
+[review-runtime] capture=res://build/review/capture-108763-2.png pixels=(540, 720) window=(540, 720) visible_rect=[P: (0.0, 0.0), S: (1080.0, 1440.0)] result=0
+[review-runtime] capture=res://build/review/capture-117676-3.png pixels=(540, 720) window=(540, 720) visible_rect=[P: (0.0, 0.0), S: (1080.0, 1440.0)] result=0
+[review-runtime] CUA F6 -> product Back notification proxy; no OS hardware proof
+[review-runtime] capture=res://build/review/capture-128601-4.png pixels=(540, 720) window=(540, 720) visible_rect=[P: (0.0, 0.0), S: (1080.0, 1440.0)] result=0
+[review-runtime] capture=res://build/review/capture-139259-5.png pixels=(540, 720) window=(540, 720) visible_rect=[P: (0.0, 0.0), S: (1080.0, 1440.0)] result=0
+[review-runtime] capture=res://build/review/capture-146335-6.png pixels=(540, 720) window=(540, 720) visible_rect=[P: (0.0, 0.0), S: (1080.0, 1440.0)] result=0
+[review-runtime] capture=res://build/review/capture-169041-7.png pixels=(540, 720) window=(540, 720) visible_rect=[P: (0.0, 0.0), S: (1080.0, 1440.0)] result=0
+[review-runtime] capture=res://build/review/capture-197213-8.png pixels=(540, 720) window=(540, 720) visible_rect=[P: (0.0, 0.0), S: (1080.0, 1440.0)] result=0
+[review-runtime] capture=res://build/review/capture-215695-9.png pixels=(540, 720) window=(540, 720) visible_rect=[P: (0.0, 0.0), S: (1080.0, 1440.0)] result=0
+[review-runtime] capture=res://build/review/capture-263294-10.png pixels=(540, 720) window=(540, 720) visible_rect=[P: (0.0, 0.0), S: (1080.0, 1440.0)] result=0
+[review-runtime] capture=res://build/review/capture-298522-11.png pixels=(540, 720) window=(540, 720) visible_rect=[P: (0.0, 0.0), S: (1080.0, 1440.0)] result=0
+[review-runtime] capture=res://build/review/capture-552583-12.png pixels=(540, 720) window=(540, 720) visible_rect=[P: (0.0, 0.0), S: (1080.0, 1440.0)] result=0
+[review-runtime] CUA F6 -> product Back notification proxy; no OS hardware proof
+[review-runtime] capture=res://build/review/capture-557524-13.png pixels=(540, 720) window=(540, 720) visible_rect=[P: (0.0, 0.0), S: (1080.0, 1440.0)] result=0
+[review-runtime] capture=res://build/review/capture-565283-14.png pixels=(540, 720) window=(540, 720) visible_rect=[P: (0.0, 0.0), S: (1080.0, 1440.0)] result=0
+[review-runtime] capture=res://build/review/capture-582643-15.png pixels=(540, 720) window=(540, 720) visible_rect=[P: (0.0, 0.0), S: (1080.0, 1440.0)] result=0
+[review-runtime] capture=res://build/review/capture-588917-16.png pixels=(540, 720) window=(540, 720) visible_rect=[P: (0.0, 0.0), S: (1080.0, 1440.0)] result=0
+[review-runtime] capture=res://build/review/capture-600845-17.png pixels=(540, 720) window=(540, 720) visible_rect=[P: (0.0, 0.0), S: (1080.0, 1440.0)] result=0
+[review-runtime] CUA F6 -> product Back notification proxy; no OS hardware proof
+[review-runtime] CUA F6 -> product Back notification proxy; no OS hardware proof
+[review-runtime] capture=res://build/review/capture-626154-18.png pixels=(540, 720) window=(540, 720) visible_rect=[P: (0.0, 0.0), S: (1080.0, 1440.0)] result=0
+[review-runtime] CUA F6 -> product Back notification proxy; no OS hardware proof
+[review-runtime] capture=res://build/review/capture-626196-19.png pixels=(540, 720) window=(540, 720) visible_rect=[P: (0.0, 0.0), S: (1080.0, 1440.0)] result=0
+[review-runtime] capture=res://build/review/capture-631470-20.png pixels=(540, 720) window=(540, 720) visible_rect=[P: (0.0, 0.0), S: (1080.0, 1440.0)] result=0
+[review-runtime] CUA F6 -> product Back notification proxy; no OS hardware proof

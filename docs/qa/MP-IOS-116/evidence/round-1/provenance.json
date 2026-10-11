@@ -1,0 +1,21 @@
+{
+  "candidate": "7a26dab0255917a8f378ceb9e36f315b76d0c667",
+  "normalization": "Local absolute environment path prefixes only. Failures and results unchanged.",
+  "files": [
+    {
+      "file": "editor-app.log",
+      "rawSha256": "0d9efb33e02dc5c1c8a7abbfc999da1304a4c787e77fa9e7c45a0405b8e74aa1",
+      "publicSha256": "0d9efb33e02dc5c1c8a7abbfc999da1304a4c787e77fa9e7c45a0405b8e74aa1"
+    },
+    {
+      "file": "editor-rerun.log",
+      "rawSha256": "cf320b46ff3e85e5864fc38577e3097f7bbd17f00b6aca572323590cc635e92d",
+      "publicSha256": "cf320b46ff3e85e5864fc38577e3097f7bbd17f00b6aca572323590cc635e92d"
+    },
+    {
+      "file": "evidence-manifest.json",
+      "rawSha256": "363ce6a278ba59f94fec596317f3e249a1e87473fb54c83b2f7ffb0ac3ccde90",
+      "publicSha256": "b79c9074d90a746a1d7d34cd0415b17236c82d2fcc1a62bd4b095cf9a58f0803"
+    }
+  ]
+}

@@ -1,9 +1,9 @@
 # 같은그림찾기 1.1.6: 기록 저장과 광고 설정 보완
 
 - 설계 ID: `MP-IOS-116`, 버전: **v1**, 날짜: 2026-10-11.
-- 상태: **v1 사람 승인 / 구현 중**. 2026-10-11 대화에서 사용자가 상세 설계 v1 확인 요청에 `승인`이라고 답했다. 승인 대상 문서 커밋은 `b8ed807c73bd7b8769d101aecc8fbe89cc6b2f07`이다. 구현·검수 완료는 별도로 기록한다.
+- 상태: **v1 사람 승인 / 구현 완료·검수 중**. 2026-10-11 대화에서 사용자가 상세 설계 v1 확인 요청에 `승인`이라고 답했다. 승인 대상 문서 커밋은 `b8ed807c73bd7b8769d101aecc8fbe89cc6b2f07`이다. 구현·검수 완료는 별도로 기록한다.
 - 기준 소스: `04357c7fff0eead3bdc4b6b6c334a7dc810fdb12`.
-- 승인 커밋: `b8ed807c73bd7b8769d101aecc8fbe89cc6b2f07`. 실행 티켓: [#110](https://github.com/seorilabs/match-picture-app/issues/110). [구현·검수 기록](../../qa/MP-IOS-116/implementation.md). PR은 생성 후 연결한다. 원본 Unity와 Obsidian은 참고만 한다.
+- 승인 커밋: `b8ed807c73bd7b8769d101aecc8fbe89cc6b2f07`. 실행 티켓: [#110](https://github.com/seorilabs/match-picture-app/issues/110). [구현·검수 기록](../../qa/MP-IOS-116/implementation.md). Ready PR: [#111](https://github.com/seorilabs/match-picture-app/pull/111). 원본 Unity와 Obsidian은 참고만 한다.
 
 ## 화면과 사용자 흐름
 
