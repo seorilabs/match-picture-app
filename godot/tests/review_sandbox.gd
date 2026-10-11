@@ -22,6 +22,12 @@ func _ready() -> void:
 	_ads.privacy_options_changed.connect(_main._refresh_privacy_options)
 	_ads.privacy_options_finished.connect(_main.get("_settings").finish_privacy_options)
 	print("[review] Editor Run / in-memory storage / fake SDK callbacks")
+	# 같은 씬을 품질 게이트에서 로드해 파싱·조립 실패도 잡는다. 실제 UI 검수는 별도다.
+	if DisplayServer.get_name() == "headless":
+		await get_tree().process_frame
+		_main.queue_free()
+		await get_tree().process_frame
+		get_tree().quit()
 
 func _input(event: InputEvent) -> void:
 	if not event is InputEventKey or not event.pressed or event.echo:
@@ -36,7 +42,7 @@ func _input(event: InputEvent) -> void:
 			print("[review] storage failure=", _storage.fail)
 		KEY_F3, KEY_F4:
 			if _ads.privacy_callback.is_valid() and _ads.is_privacy_options_busy():
-				_ads.privacy_callback.call(null if event.keycode == KEY_F3 else FormError.new())
+				_ads.privacy_callback.call(null if event.keycode == KEY_F3 else FormError.new(1, "QA simulated form failure"))
 				print("[review] privacy success=", event.keycode == KEY_F3)
 		KEY_F7:
 			_capture()

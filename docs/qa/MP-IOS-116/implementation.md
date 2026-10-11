@@ -21,3 +21,5 @@ Godot 4.7.2 Editor Run에서 `tests/review_sandbox.tscn`을 사용한다. 제품
 ## 남은 단계
 
 UI 독립 검수 3회, 최종 HEAD의 로컬 Claude 교차 리뷰, 한국어 Ready PR·CI·병합, 최종 후보 전체 기능 E2E·중앙 검증, App Store 빌드/업로드/처리, TestFlight iPhone/iPad, ko/en-US 문구·실제 스크린샷·지원 URL·개인정보 read-back, 심사·승인·공개·live를 별도로 진행한다. 중앙 gate의 미실행/차단을 통과로 표시하지 않는다.
+
+1회차 실제 Editor에서 QA 씬의 `FormError.new()` 인수 누락을 발견했다. 실제 생성자 `(error_code, message)`로 수정하고 `review_sandbox.tscn`도 품질 게이트에서 로드하도록 추가했다. 수정 후 전체 검사와 QA 씬 조립 스모크가 통과했다. 회차의 초기 차단은 iteration-1.md에 보존한다.
