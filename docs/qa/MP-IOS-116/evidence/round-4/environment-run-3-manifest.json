@@ -1,0 +1,15 @@
+{
+  "candidate": "385fa2e3d20c6cc89a790d403301573d48f164f1",
+  "recordedAt": "2026-10-11T22:41:48.576842+00:00",
+  "requestedWindow": [
+    540,
+    720
+  ],
+  "userDirName": "match-picture-MP-IOS-116-round-4-385fa2e",
+  "files": {
+    "project.godot": "df50cc92444e705eddc9a4a9cac252dca40c1f489f114f99d50d338cf3df0b61",
+    "addons/mp_review_runner/plugin.gd": "5b49a3294a32adfa103c9a25b1221f1ca5fcc4a690d20a956a24ea79a197cf42",
+    "addons/mp_review_runner/runtime_guard.gd": "2107ca480b4af0945c39b6a7c4fae4ca769fa1d5112557332c646930f2e4bf2a",
+    "addons/mp_review_runner/plugin.cfg": "3138855637e3aca0b1862c1d2c742f6a90bdaa15b35285f5e41644808bf38c4f"
+  }
+}

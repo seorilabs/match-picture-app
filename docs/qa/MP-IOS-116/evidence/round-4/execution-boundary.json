@@ -1,0 +1,12 @@
+{
+  "candidate": "385fa2e3d20c6cc89a790d403301573d48f164f1",
+  "firstRunRequestAt": "2026-10-11T22:15:00.631136+00:00",
+  "deadline": "2026-10-11T22:55:00.631136+00:00",
+  "maxRuns": 3,
+  "maxMinutes": 40,
+  "trackedSourceComparedFiles": 820,
+  "preRunSourceDifferences": [
+    "godot/project.godot"
+  ],
+  "portsInitiallyFree": true
+}

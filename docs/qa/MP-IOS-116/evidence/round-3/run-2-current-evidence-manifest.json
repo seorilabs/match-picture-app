@@ -1,0 +1,33 @@
+{
+  "candidate": "02e63ae229f687a0c0790ddec1de731e9373cd90",
+  "capturedAtUtc": "2026-10-11T13:21:31.572364+00:00",
+  "run": 2,
+  "editorPid": 13136,
+  "gamePid": 13585,
+  "embedded": false,
+  "actualWindow": [
+    406,
+    720
+  ],
+  "actualVisibleRect": [
+    812,
+    1440
+  ],
+  "errors": 0,
+  "productGuiInput": "blocked-no-exact-process-selector",
+  "logs": [
+    {
+      "rawFile": "editor-run-2.log",
+      "rawSha256": "db650800f015bb2f93547bf48c1a655958da539ff1456b30bddb2604852b6ede",
+      "publicFile": "editor-run-2-public.log",
+      "publicSha256": "0e8dd884544268bd9814baa9bde0768cd1118ebb2df87d6fff3399ea87b1fe05"
+    },
+    {
+      "rawFile": "game-run-2.log",
+      "rawSha256": "a3a52530be6f01ba5c30a4e3f4a0ab1736e226d19f978edb3323852a16f6d2ce",
+      "publicFile": "game-run-2-public.log",
+      "publicSha256": "db9e7e7ba795c0ef98f6b2173839e1908266942c7c9b51dd416722cce1dd07b3"
+    }
+  ],
+  "endedUtc": "2026-10-11T13:25:11.022822+00:00"
+}

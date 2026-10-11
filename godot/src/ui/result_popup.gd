@@ -12,6 +12,10 @@ signal exit_pressed()
 
 var _seconds_label: Label
 var _best_label: Label
+var _save_error_label: Label
+var _best_seconds := 0.0
+var _is_new_best := false
+var _record_saved := true
 var _split_bars: MpSplitBars
 var _panel: PanelContainer
 var _share_button: Button
@@ -51,6 +55,12 @@ func _init() -> void:
 	_best_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	column.add_child(_best_label)
 
+	_save_error_label = MpUiKit.make_word_label("RESULT_SAVE_FAILED", MpUiKit.FONT_BODY, MpUiKit.WRONG)
+	_save_error_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	_save_error_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	_save_error_label.visible = false
+	column.add_child(_save_error_label)
+
 	_split_bars = MpSplitBars.new()
 	column.add_child(_split_bars)
 
@@ -86,23 +96,37 @@ func show_result(
 	is_new_best: bool,
 	leaderboard_available: bool = false,
 	share_available: bool = false,
-	splits: Array[float] = []
+	splits: Array[float] = [],
+	record_saved: bool = true
 ) -> void:
 	_leaderboard_button.visible = leaderboard_available
 	_share_button.visible = share_available
 	_split_bars.set_splits(splits)
 	_seconds_label.text = MpRules.format_seconds(seconds)
-	if is_new_best:
+	_best_seconds = best_seconds
+	_is_new_best = is_new_best
+	_record_saved = record_saved
+	_save_error_label.visible = not record_saved
+	_refresh_best()
+	visible = true
+
+
+func _notification(what: int) -> void:
+	if what == NOTIFICATION_TRANSLATION_CHANGED and _best_label != null:
+		_refresh_best()
+
+
+func _refresh_best() -> void:
+	if _is_new_best and _record_saved:
 		_best_label.text = "RESULT_NEW_BEST"
 		_best_label.add_theme_color_override("font_color", MpUiKit.CORRECT)
-	elif MpBestRecord.has_record(best_seconds):
+	elif MpBestRecord.has_record(_best_seconds):
 		# 값이 끼는 문구라 여기서 조립한다. 조립한 문자열은 자동 번역 대상이 아니므로
 		# 결과 화면을 띄울 때마다 현재 로케일로 다시 만든다.
-		_best_label.text = tr("RESULT_BEST").format([MpRules.format_seconds(best_seconds)])
+		_best_label.text = tr("RESULT_BEST").format([MpRules.format_seconds(_best_seconds)])
 		_best_label.add_theme_color_override("font_color", MpUiKit.TEXT_DARK)
 	else:
 		_best_label.text = ""
-	visible = true
 
 
 func hide_result() -> void:

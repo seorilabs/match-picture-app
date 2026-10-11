@@ -1,0 +1,20 @@
+{
+  "sourceSha": "02e63ae229f687a0c0790ddec1de731e9373cd90",
+  "scope": "automated-investigation-only-not-ui-or-tdd",
+  "files": [
+    {
+      "originalFile": "smoke-startup_probe.log",
+      "publicFile": "headless-probe.log",
+      "rawSha256": "d470f1341a9666e7d2c101e2deab1384ac29f8da910b986651aa6c24206add47",
+      "publicSha256": "d470f1341a9666e7d2c101e2deab1384ac29f8da910b986651aa6c24206add47",
+      "normalization": "none"
+    },
+    {
+      "originalFile": "startup_probe.gd",
+      "publicFile": "headless-probe.gd",
+      "rawSha256": "6d978516ed3dad411f889a4a7e9626492b65cb88e100382ef175758296839ebf",
+      "publicSha256": "6d978516ed3dad411f889a4a7e9626492b65cb88e100382ef175758296839ebf",
+      "normalization": "none"
+    }
+  ]
+}

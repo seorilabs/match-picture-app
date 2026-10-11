@@ -1,0 +1,99 @@
+{
+  "checkedAt": "2026-10-11T22:31:09.247403+00:00",
+  "scope": "existing-published-questionnaire-readback-only",
+  "appId": "1528539634",
+  "bundleId": "com.github.magicsih.MatchSymbol",
+  "liveOrganization": "Seori Labs",
+  "browserProfile": "apple-app-store",
+  "liveAccountAndAppVerified": true,
+  "appTargetVerification": "browser app name plus catalog-backed API exact appId/bundleId readback",
+  "url": "https://appstoreconnect.apple.com/apps/1528539634/distribution/privacy",
+  "preview": "DATA_NOT_LINKED_TO_USER",
+  "policyUrls": {
+    "en-US": "https://www.seorilabs.com/en/privacy",
+    "ko": "https://www.seorilabs.com/privacy"
+  },
+  "privacyChoicesUrls": {
+    "en-US": null,
+    "ko": null
+  },
+  "categories": [
+    {
+      "category": "COARSE_LOCATION",
+      "purposes": [
+        "THIRD_PARTY_ADVERTISING"
+      ],
+      "linkedToUser": false,
+      "tracking": false,
+      "closedWithCancel": true
+    },
+    {
+      "category": "DEVICE_ID",
+      "purposes": [
+        "THIRD_PARTY_ADVERTISING",
+        "ANALYTICS"
+      ],
+      "linkedToUser": false,
+      "tracking": false,
+      "closedWithCancel": true
+    },
+    {
+      "category": "PRODUCT_INTERACTION",
+      "purposes": [
+        "THIRD_PARTY_ADVERTISING",
+        "ANALYTICS"
+      ],
+      "linkedToUser": false,
+      "tracking": false,
+      "closedWithCancel": true
+    },
+    {
+      "category": "CRASH_DATA",
+      "purposes": [
+        "ANALYTICS"
+      ],
+      "linkedToUser": false,
+      "tracking": false,
+      "closedWithCancel": true
+    },
+    {
+      "category": "PERFORMANCE_DATA",
+      "purposes": [
+        "ANALYTICS"
+      ],
+      "linkedToUser": false,
+      "tracking": false,
+      "closedWithCancel": true
+    }
+  ],
+  "questionnaireChanged": false,
+  "published": false,
+  "ownBrowserLeaseReleased": true,
+  "nativeSdkAgreement": "pending-exact-candidate-native-inspection",
+  "rawEvidence": [
+    {
+      "fileName": "mp116-connect-privacy-summary-20261012.json",
+      "sha256": "464557d00d23bb697c7946b33aa8f0c5b1c8165cf53e55eede8716f23e6ea688"
+    },
+    {
+      "fileName": "mp116-connect-privacy-location-purpose-20261012.json",
+      "sha256": "ebd6b639aedc2639f821533d043f5f93a353a57bd085dd68f4c3eaf49547483c"
+    },
+    {
+      "fileName": "mp116-connect-privacy-location-linked-20261012.json",
+      "sha256": "bbb1f1f5982d91e96fd7f1cfe553e669941472d679aa34bea86b8b6a942eddda"
+    },
+    {
+      "fileName": "mp116-connect-privacy-location-tracking-final-20261012.json",
+      "sha256": "516d7f20ec5569a59cdfa36cd1404ceb4e70e4c97cc28d7d4a6a533e8d005496"
+    },
+    {
+      "fileName": "mp116-connect-privacy-individual-remaining-20261012.json",
+      "sha256": "d4543fbac5bfa58a230c3f7b77d1732d12a72fc3211c9e35bff375eedb22f643"
+    },
+    {
+      "fileName": "mp116-connect-privacy-ko-20261012.json",
+      "sha256": "35b57bbfb063aba10a5d0afc0d8caf4308fc79144999f7cf0841518cfbeb3031"
+    }
+  ]
+}

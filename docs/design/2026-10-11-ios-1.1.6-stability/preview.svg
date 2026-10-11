@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="1120" height="1120" viewBox="0 0 1120 1120">
+<rect width="1120" height="1120" fill="#F0F4F6"/>
+<style>text{font-family:"Apple SD Gothic Neo","Noto Sans CJK KR",sans-serif;fill:#143C4E} .h{font-weight:700}</style>
+<text x="34" y="45" font-size="30" text-anchor="start" style="fill:#143C4E" class="h">같은그림찾기 1.1.6 · 설계 v1</text>
+<text x="34" y="78" font-size="19" text-anchor="start" style="fill:#143C4E" class="">구현 전 화면 예시 · 기존 스타일 재사용 · 실제 실행 검수는 별도</text>
+<text x="200" y="119" font-size="20" text-anchor="middle" style="fill:#143C4E" class="h">① 시작에서 설정</text>
+<rect x="40" y="142" width="320" height="654" rx="22" fill="#4594B5" stroke="#143C4E" stroke-width="3"/>
+<text x="560" y="119" font-size="20" text-anchor="middle" style="fill:#143C4E" class="h">② 필요한 경우 개인정보 설정</text>
+<rect x="400" y="142" width="320" height="654" rx="22" fill="#4594B5" stroke="#143C4E" stroke-width="3"/>
+<text x="920" y="119" font-size="20" text-anchor="middle" style="fill:#143C4E" class="h">③ 저장 실패 후 계속</text>
+<rect x="760" y="142" width="320" height="654" rx="22" fill="#4594B5" stroke="#143C4E" stroke-width="3"/>
+<image x="148" y="230" width="104" height="126" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAIgAAACACAMAAADnN9ENAAACH1BMVEVMaXHGxsbS0tLS0tLS0tLS0tLGxsbBwcHS0tLFxcXY2Nno6Ojt7e3r6+vg4ODS0tL19fXu7u7V1dbd3d7Nzc3x8fHk5OTb29zy6urio6DfiYPktLPu1tXQUU7NRULVc3HTXVrWSUTsUE3wUk/bS0fx4uXpysnXf3bPRkLjTUry7NjYlArXYTHmxGbbpQH7vwHz8OfdrBTttAH/wgHu153ety/nrwHmvlT1uQHp0IfgqgHR0dH09PTj4+PQ0NDqv77w4b7o7/K83eyJx+PZ5+49qNgdnNNftt3Q0NDz8/Pjtzxxvd8fodvi4uKYzeUun9QgpuAhrOkkt/bRZmTPz8+9VVWsHBy1JCPIPz0js/ETerwLXbEJVaUdYqtnk8Tk6e3h4eHRkZHGIiJuu93Nzc3MhITk7O8MZMDNzc3gvr7n09EqncZIfrjE0uLwezBcqKXw8PDf3+D7pBWVvYCFpszEv0nKysrz4Nn76uimzeHBp6m7RlUml9LIyMigjcFrSaZvS6x2ULWMc7faxcHRvbrHx8fIyMjs7OxNMSpYPTd9Y16wm5eWfXduVVDm0eKqkYzdxt9sSz9zTrHq6uqunsjBpdewkdK9ss+becu2qszOyNl9VMB5UrrRt9uCZ7LFxcWomMWLZcfExMR7Xa/n5+d/VsOWRy2+QxrZQQ3ATynFvdPBwcHDw8Pm5uZ0U6rl5eWYg73BwcHAwMCRernAwMC+NUHzAAAAtXRSTlMAY7//35sgP+8Q//////+A/////3///////////////////////////////////////////////////////7///////////////////////////////////////////////////////7///////////////////////////7//////////gP/////////////////////////////////////A//////////+A//////+///+UUqyvRwAAB9FJREFUeAHs08EBgTEQRGH+lxCQbBLQf6W0sDEHh/0qeIeZ3S9C2G/opHxYzDgmxPJaR4F/KDkV4Hy5qtwqX80fkoFqSn0A/p0UmKbVgbt7IcDDxCZs7ufCMLXnQkiDl0lESIS8P8zShRmEAAxD4THw4A7F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"/>
+<text x="200" y="420" font-size="34" text-anchor="middle" style="fill:#FFFFFF" class="h">같은그림찾기</text>
+<text x="200" y="462" font-size="19" text-anchor="middle" style="fill:#FFFFFF" class="">최고 기록 24.6초</text>
+<rect x="70" y="512" width="260" height="48" rx="12" fill="#F4D03F" stroke="none" stroke-width="3"/>
+<text x="200" y="543" font-size="21" text-anchor="middle" style="fill:#143C4E" class="">시작</text>
+<rect x="70" y="577" width="260" height="48" rx="12" fill="#4594B5" stroke="#FFFFFF" stroke-width="3"/>
+<text x="200" y="608" font-size="21" text-anchor="middle" style="fill:#FFFFFF" class="">설정</text>
+<text x="200" y="670" font-size="17" text-anchor="middle" style="fill:#FFFFFF" class="">언어·소리·광고 설정에 바로 접근</text>
+<rect x="420" y="180" width="280" height="584" rx="14" fill="#FFFFFF" stroke="#143C4E" stroke-width="3"/>
+<text x="560" y="222" font-size="28" text-anchor="middle" style="fill:#143C4E" class="h">설정</text>
+<text x="442" y="257" font-size="18" text-anchor="start" style="fill:#143C4E" class="">언어</text>
+<rect x="430" y="273" width="260" height="48" rx="12" fill="#F4D03F" stroke="none" stroke-width="3"/>
+<text x="560" y="304" font-size="21" text-anchor="middle" style="fill:#143C4E" class="">자동</text>
+<rect x="430" y="333" width="260" height="48" rx="12" fill="#4594B5" stroke="none" stroke-width="3"/>
+<text x="560" y="364" font-size="21" text-anchor="middle" style="fill:#FFFFFF" class="">한국어</text>
+<rect x="430" y="393" width="260" height="48" rx="12" fill="#4594B5" stroke="none" stroke-width="3"/>
+<text x="560" y="424" font-size="21" text-anchor="middle" style="fill:#FFFFFF" class="">English</text>
+<text x="442" y="464" font-size="18" text-anchor="start" style="fill:#143C4E" class="">소리</text>
+<rect x="430" y="480" width="260" height="48" rx="12" fill="#4594B5" stroke="none" stroke-width="3"/>
+<text x="560" y="511" font-size="21" text-anchor="middle" style="fill:#FFFFFF" class="">소리 켜짐</text>
+<rect x="430" y="546" width="260" height="48" rx="12" fill="#4594B5" stroke="none" stroke-width="3"/>
+<text x="560" y="577" font-size="21" text-anchor="middle" style="fill:#FFFFFF" class="">광고 개인정보 설정</text>
+<text x="560" y="621" font-size="17" text-anchor="middle" style="fill:#143C4E" class="">UMP 필요 상태에서만 표시</text>
+<rect x="430" y="681" width="260" height="48" rx="12" fill="#F4D03F" stroke="none" stroke-width="3"/>
+<text x="560" y="712" font-size="21" text-anchor="middle" style="fill:#143C4E" class="">닫기</text>
+<rect x="780" y="223" width="280" height="504" rx="14" fill="#FFFFFF" stroke="#143C4E" stroke-width="3"/>
+<text x="920" y="286" font-size="42" text-anchor="middle" style="fill:#143C4E" class="h">23.4초</text>
+<text x="920" y="327" font-size="18" text-anchor="middle" style="fill:#143C4E" class="">기존 최고 24.6초</text>
+<text x="920" y="366" font-size="19" text-anchor="middle" style="fill:#A43F32" class="h">기록을 저장하지 못했어요</text>
+<rect x="813" y="389" width="65" height="8" rx="3" fill="#4594B5"/>
+<rect x="813" y="400" width="118" height="8" rx="3" fill="#4594B5"/>
+<rect x="813" y="411" width="80" height="8" rx="3" fill="#4594B5"/>
+<rect x="813" y="422" width="158" height="8" rx="3" fill="#4594B5"/>
+<rect x="813" y="433" width="99" height="8" rx="3" fill="#4594B5"/>
+<rect x="813" y="444" width="176" height="8" rx="3" fill="#4594B5"/>
+<rect x="813" y="455" width="92" height="8" rx="3" fill="#4594B5"/>
+<rect x="813" y="466" width="132" height="8" rx="3" fill="#4594B5"/>
+<rect x="813" y="477" width="102" height="8" rx="3" fill="#4594B5"/>
+<rect x="790" y="499" width="260" height="48" rx="12" fill="#F4D03F" stroke="none" stroke-width="3"/>
+<text x="920" y="530" font-size="21" text-anchor="middle" style="fill:#143C4E" class="">다시</text>
+<rect x="790" y="565" width="260" height="48" rx="12" fill="#4594B5" stroke="none" stroke-width="3"/>
+<text x="920" y="596" font-size="21" text-anchor="middle" style="fill:#FFFFFF" class="">종료</text>
+<rect x="790" y="631" width="260" height="48" rx="12" fill="#4594B5" stroke="none" stroke-width="3"/>
+<text x="920" y="662" font-size="21" text-anchor="middle" style="fill:#FFFFFF" class="">설정</text>
+<text x="920" y="770" font-size="17" text-anchor="middle" style="fill:#FFFFFF" class="">이번 판 결과는 보고, 다음 판으로</text>
+<rect x="40" y="834" width="1040" height="138" rx="16" fill="#FFFFFF" stroke="none" stroke-width="3"/>
+<text x="62" y="868" font-size="23" text-anchor="start" style="fill:#143C4E" class="h">④ 광고 복구 · 올바른 시장 계측</text>
+<text x="62" y="902" font-size="20" text-anchor="start" style="fill:#143C4E" class="">로딩 실패 → 다음 판 완료 때 준비 → 준비됐으면 Retry에서 요청 → 다음 판 즉시 시작</text>
+<text x="62" y="941" font-size="19" text-anchor="start" style="fill:#143C4E" class="">App Store / Google Play / AIT · AdMob / Toss · 표시 요청 = REQUESTED</text>
+</svg>

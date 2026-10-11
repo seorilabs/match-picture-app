@@ -1,0 +1,2321 @@
+{
+  "recordedAt": "2026-10-11T22:47:42.002790+00:00",
+  "count": 231,
+  "runCounts": {
+    "1": 214,
+    "2": 8,
+    "3": 9
+  },
+  "frames": [
+    {
+      "file": "godot/build/review/run-1/capture-133417-1.png",
+      "run": 1,
+      "pixels": [
+        324,
+        720
+      ],
+      "sha256": "6cf3caf1f74b4ee0a79b43ad33aad68b27b13be83357e1e5d841663c333b0d6b",
+      "bytes": 15598
+    },
+    {
+      "file": "godot/build/review/run-1/capture-139831-2.png",
+      "run": 1,
+      "pixels": [
+        324,
+        720
+      ],
+      "sha256": "5e0c420f7a996dd7ea6bf9a16491dc4721317ca346c65dbc57b6c8623fb3342c",
+      "bytes": 15200
+    },
+    {
+      "file": "godot/build/review/run-1/capture-146348-3.png",
+      "run": 1,
+      "pixels": [
+        324,
+        720
+      ],
+      "sha256": "d0a77dc5fec40450ca5d7687daf5ae554b85267a98687108119e5025d71bfd35",
+      "bytes": 17900
+    },
+    {
+      "file": "godot/build/review/run-1/capture-155155-4.png",
+      "run": 1,
+      "pixels": [
+        324,
+        720
+      ],
+      "sha256": "cd2566d3e957f1803c9c9cc56826e49b341163ebe0e4da45e1ef1f701db7bb9d",
+      "bytes": 15222
+    },
+    {
+      "file": "godot/build/review/run-1/capture-156626-5.png",
+      "run": 1,
+      "pixels": [
+        324,
+        720
+      ],
+      "sha256": "76920e2694d4eba85ced842f10fde08aef80032f133f945dadb20b2e5f9ba4d1",
+      "bytes": 17757
+    },
+    {
+      "file": "godot/build/review/run-1/capture-161380-6.png",
+      "run": 1,
+      "pixels": [
+        324,
+        720
+      ],
+      "sha256": "b9c30c7cba567b461fbfb34e642b8282cb324ed80b4f71430a847960f31aba0e",
+      "bytes": 17444
+    },
+    {
+      "file": "godot/build/review/run-1/capture-172342-7.png",
+      "run": 1,
+      "pixels": [
+        324,
+        720
+      ],
+      "sha256": "51a93965ee5d419c9db2c960305cc885164199006c94a0bd47f8d465f3958f2f",
+      "bytes": 55626
+    },
+    {
+      "file": "godot/build/review/run-1/capture-178658-8.png",
+      "run": 1,
+      "pixels": [
+        324,
+        720
+      ],
+      "sha256": "97176d607ecb782b46edb99f8658db5dd5d96ae95c972453ad465a3127a15847",
+      "bytes": 56735
+    },
+    {
+      "file": "godot/build/review/run-1/capture-183792-9.png",
+      "run": 1,
+      "pixels": [
+        324,
+        720
+      ],
+      "sha256": "b7b1351be664c8dfe23093b386022e089b1fc40067194c0125091b344c209a9a",
+      "bytes": 52312
+    },
+    {
+      "file": "godot/build/review/run-1/capture-201954-10.png",
+      "run": 1,
+      "pixels": [
+        324,
+        720
+      ],
+      "sha256": "dad7bca9ba49dbc4ffd17d3580f033c9405c2acf51c77bf35f4e788076921c4a",
+      "bytes": 64459
+    },
+    {
+      "file": "godot/build/review/run-1/capture-209191-11.png",
+      "run": 1,
+      "pixels": [
+        324,
+        720
+      ],
+      "sha256": "08df3efbdd3ad7b515f421c2615ca75949a2c596666c11b39162759f951178e3",
+      "bytes": 63721
+    },
+    {
+      "file": "godot/build/review/run-1/capture-221324-12.png",
+      "run": 1,
+      "pixels": [
+        324,
+        720
+      ],
+      "sha256": "dad7bca9ba49dbc4ffd17d3580f033c9405c2acf51c77bf35f4e788076921c4a",
+      "bytes": 64459
+    },
+    {
+      "file": "godot/build/review/run-1/capture-268322-13.png",
+      "run": 1,
+      "pixels": [
+        324,
+        720
+      ],
+      "sha256": "da9698b52d671a0ef4ebfea2c455f3a74e47b8e5b60a501090b2ed780052af39",
+      "bytes": 63816
+    },
+    {
+      "file": "godot/build/review/run-1/capture-287536-14.png",
+      "run": 1,
+      "pixels": [
+        324,
+        720
+      ],
+      "sha256": "dad7bca9ba49dbc4ffd17d3580f033c9405c2acf51c77bf35f4e788076921c4a",
+      "bytes": 64459
+    },
+    {
+      "file": "godot/build/review/run-1/capture-306526-15.png",
+      "run": 1,
+      "pixels": [
+        324,
+        720
+      ],
+      "sha256": "f254ee0bf7c9ba88d0e17477e1d5f63c78d98321e657cc6aa2c1382bd384f4ea",
+      "bytes": 63896
+    },
+    {
+      "file": "godot/build/review/run-1/capture-340897-16.png",
+      "run": 1,
+      "pixels": [
+        324,
+        720
+      ],
+      "sha256": "db105b4e55a3f1854ba54cf904bfed12818f6474f37276bd0f6ec80af0b3cfe2",
+      "bytes": 69612
+    },
+    {
+      "file": "godot/build/review/run-1/capture-340921-17.png",
+      "run": 1,
+      "pixels": [
+        324,
+        720
+      ],
+      "sha256": "db105b4e55a3f1854ba54cf904bfed12818f6474f37276bd0f6ec80af0b3cfe2",
+      "bytes": 69612
+    },
+    {
+      "file": "godot/build/review/run-1/capture-340946-18.png",
+      "run": 1,
+      "pixels": [
+        324,
+        720
+      ],
+      "sha256": "db105b4e55a3f1854ba54cf904bfed12818f6474f37276bd0f6ec80af0b3cfe2",
+      "bytes": 69612
+    },
+    {
+      "file": "godot/build/review/run-1/capture-340960-19.png",
+      "run": 1,
+      "pixels": [
+        324,
+        720
+      ],
+      "sha256": "db105b4e55a3f1854ba54cf904bfed12818f6474f37276bd0f6ec80af0b3cfe2",
+      "bytes": 69612
+    },
+    {
+      "file": "godot/build/review/run-1/capture-340982-20.png",
+      "run": 1,
+      "pixels": [
+        324,
+        720
+      ],
+      "sha256": "db105b4e55a3f1854ba54cf904bfed12818f6474f37276bd0f6ec80af0b3cfe2",
+      "bytes": 69612
+    },
+    {
+      "file": "godot/build/review/run-1/capture-341004-21.png",
+      "run": 1,
+      "pixels": [
+        324,
+        720
+      ],
+      "sha256": "db105b4e55a3f1854ba54cf904bfed12818f6474f37276bd0f6ec80af0b3cfe2",
+      "bytes": 69612
+    },
+    {
+      "file": "godot/build/review/run-1/capture-341016-22.png",
+      "run": 1,
+      "pixels": [
+        324,
+        720
+      ],
+      "sha256": "db105b4e55a3f1854ba54cf904bfed12818f6474f37276bd0f6ec80af0b3cfe2",
+      "bytes": 69612
+    },
+    {
+      "file": "godot/build/review/run-1/capture-341027-23.png",
+      "run": 1,
+      "pixels": [
+        324,
+        720
+      ],
+      "sha256": "db105b4e55a3f1854ba54cf904bfed12818f6474f37276bd0f6ec80af0b3cfe2",
+      "bytes": 69612
+    },
+    {
+      "file": "godot/build/review/run-1/capture-388432-24.png",
+      "run": 1,
+      "pixels": [
+        324,
+        720
+      ],
+      "sha256": "db105b4e55a3f1854ba54cf904bfed12818f6474f37276bd0f6ec80af0b3cfe2",
+      "bytes": 69612
+    },
+    {
+      "file": "godot/build/review/run-1/capture-389736-25.png",
+      "run": 1,
+      "pixels": [
+        324,
+        720
+      ],
+      "sha256": "db105b4e55a3f1854ba54cf904bfed12818f6474f37276bd0f6ec80af0b3cfe2",
+      "bytes": 69612
+    },
+    {
+      "file": "godot/build/review/run-1/capture-391074-26.png",
+      "run": 1,
+      "pixels": [
+        324,
+        720
+      ],
+      "sha256": "db105b4e55a3f1854ba54cf904bfed12818f6474f37276bd0f6ec80af0b3cfe2",
+      "bytes": 69612
+    },
+    {
+      "file": "godot/build/review/run-1/capture-874613-27.png",
+      "run": 1,
+      "pixels": [
+        324,
+        720
+      ],
+      "sha256": "6b3046c57a7465a265299d898e9469838beb6552efe8eac4bcdb0d634dc28daa",
+      "bytes": 27298
+    },
+    {
+      "file": "godot/build/review/run-1/capture-876566-28.png",
+      "run": 1,
+      "pixels": [
+        324,
+        720
+      ],
+      "sha256": "b43b51291946d0f561a6bba4775275ed3f4bf83ceafcd3d51a5ca4c12ec4a479",
+      "bytes": 27407
+    },
+    {
+      "file": "godot/build/review/run-1/capture-881541-29.png",
+      "run": 1,
+      "pixels": [
+        324,
+        720
+      ],
+      "sha256": "979e0ca6e0ab2df45b2c104bd68b0e51305b39339290350939021dabf2a8b1a3",
+      "bytes": 27859
+    },
+    {
+      "file": "godot/build/review/run-1/capture-891702-30.png",
+      "run": 1,
+      "pixels": [
+        324,
+        720
+      ],
+      "sha256": "61303101c23e34332d4d26d8f0268873cbe677f798d2237797147ba040836b9f",
+      "bytes": 30097
+    },
+    {
+      "file": "godot/build/review/run-1/capture-891808-31.png",
+      "run": 1,
+      "pixels": [
+        324,
+        720
+      ],
+      "sha256": "fb59a05a1c827eda3efcb08279ec9fa3e386cc6d4d9ac31132ce0e240a551f6a",
+      "bytes": 27298
+    },
+    {
+      "file": "godot/build/review/run-1/capture-919720-32.png",
+      "run": 1,
+      "pixels": [
+        324,
+        720
+      ],
+      "sha256": "a373c944f83c0db68835fa3bf749eb06717da56877988a0a46d26ad4ab10f15b",
+      "bytes": 26202
+    },
+    {
+      "file": "godot/build/review/run-1/capture-927554-33.png",
+      "run": 1,
+      "pixels": [
+        324,
+        720
+      ],
+      "sha256": "fb59a05a1c827eda3efcb08279ec9fa3e386cc6d4d9ac31132ce0e240a551f6a",
+      "bytes": 27298
+    },
+    {
+      "file": "godot/build/review/run-1/capture-960963-34.png",
+      "run": 1,
+      "pixels": [
+        324,
+        720
+      ],
+      "sha256": "a399b0b9e2769f1dbacb74324e03142042d80f6abe6f7b2d42815a5e43bb2ac2",
+      "bytes": 67560
+    },
+    {
+      "file": "godot/build/review/run-1/capture-962736-35.png",
+      "run": 1,
+      "pixels": [
+        324,
+        720
+      ],
+      "sha256": "1359dfe26031b58c32eea258d3cc1552586c29da993b88a46696a187157570d0",
+      "bytes": 67625
+    },
+    {
+      "file": "godot/build/review/run-1/capture-964178-36.png",
+      "run": 1,
+      "pixels": [
+        324,
+        720
+      ],
+      "sha256": "425128d7aa1366d8c68b1a22c0632df292b6957e5a767880f2c0145472142085",
+      "bytes": 67543
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1071754-37.png",
+      "run": 1,
+      "pixels": [
+        324,
+        720
+      ],
+      "sha256": "87993648bba453e46377cb001361db923d702b3c0f77491454456beb6e10b17e",
+      "bytes": 67674
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1071785-38.png",
+      "run": 1,
+      "pixels": [
+        324,
+        720
+      ],
+      "sha256": "87993648bba453e46377cb001361db923d702b3c0f77491454456beb6e10b17e",
+      "bytes": 67674
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1071811-39.png",
+      "run": 1,
+      "pixels": [
+        324,
+        720
+      ],
+      "sha256": "87993648bba453e46377cb001361db923d702b3c0f77491454456beb6e10b17e",
+      "bytes": 67674
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1071834-40.png",
+      "run": 1,
+      "pixels": [
+        324,
+        720
+      ],
+      "sha256": "87993648bba453e46377cb001361db923d702b3c0f77491454456beb6e10b17e",
+      "bytes": 67674
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1071860-41.png",
+      "run": 1,
+      "pixels": [
+        324,
+        720
+      ],
+      "sha256": "87993648bba453e46377cb001361db923d702b3c0f77491454456beb6e10b17e",
+      "bytes": 67674
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1071885-42.png",
+      "run": 1,
+      "pixels": [
+        324,
+        720
+      ],
+      "sha256": "87993648bba453e46377cb001361db923d702b3c0f77491454456beb6e10b17e",
+      "bytes": 67674
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1071908-43.png",
+      "run": 1,
+      "pixels": [
+        324,
+        720
+      ],
+      "sha256": "87993648bba453e46377cb001361db923d702b3c0f77491454456beb6e10b17e",
+      "bytes": 67674
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1071934-44.png",
+      "run": 1,
+      "pixels": [
+        324,
+        720
+      ],
+      "sha256": "87993648bba453e46377cb001361db923d702b3c0f77491454456beb6e10b17e",
+      "bytes": 67674
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1071960-45.png",
+      "run": 1,
+      "pixels": [
+        324,
+        720
+      ],
+      "sha256": "87993648bba453e46377cb001361db923d702b3c0f77491454456beb6e10b17e",
+      "bytes": 67674
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1071985-46.png",
+      "run": 1,
+      "pixels": [
+        324,
+        720
+      ],
+      "sha256": "87993648bba453e46377cb001361db923d702b3c0f77491454456beb6e10b17e",
+      "bytes": 67674
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1072027-47.png",
+      "run": 1,
+      "pixels": [
+        324,
+        720
+      ],
+      "sha256": "87993648bba453e46377cb001361db923d702b3c0f77491454456beb6e10b17e",
+      "bytes": 67674
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1072075-48.png",
+      "run": 1,
+      "pixels": [
+        324,
+        720
+      ],
+      "sha256": "87993648bba453e46377cb001361db923d702b3c0f77491454456beb6e10b17e",
+      "bytes": 67674
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1072117-49.png",
+      "run": 1,
+      "pixels": [
+        324,
+        720
+      ],
+      "sha256": "87993648bba453e46377cb001361db923d702b3c0f77491454456beb6e10b17e",
+      "bytes": 67674
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1072169-50.png",
+      "run": 1,
+      "pixels": [
+        324,
+        720
+      ],
+      "sha256": "87993648bba453e46377cb001361db923d702b3c0f77491454456beb6e10b17e",
+      "bytes": 67674
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1072211-51.png",
+      "run": 1,
+      "pixels": [
+        324,
+        720
+      ],
+      "sha256": "87993648bba453e46377cb001361db923d702b3c0f77491454456beb6e10b17e",
+      "bytes": 67674
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1072252-52.png",
+      "run": 1,
+      "pixels": [
+        324,
+        720
+      ],
+      "sha256": "87993648bba453e46377cb001361db923d702b3c0f77491454456beb6e10b17e",
+      "bytes": 67674
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1072292-53.png",
+      "run": 1,
+      "pixels": [
+        324,
+        720
+      ],
+      "sha256": "87993648bba453e46377cb001361db923d702b3c0f77491454456beb6e10b17e",
+      "bytes": 67674
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1072334-54.png",
+      "run": 1,
+      "pixels": [
+        324,
+        720
+      ],
+      "sha256": "87993648bba453e46377cb001361db923d702b3c0f77491454456beb6e10b17e",
+      "bytes": 67674
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1072378-55.png",
+      "run": 1,
+      "pixels": [
+        324,
+        720
+      ],
+      "sha256": "87993648bba453e46377cb001361db923d702b3c0f77491454456beb6e10b17e",
+      "bytes": 67674
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1072424-56.png",
+      "run": 1,
+      "pixels": [
+        324,
+        720
+      ],
+      "sha256": "87993648bba453e46377cb001361db923d702b3c0f77491454456beb6e10b17e",
+      "bytes": 67674
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1072467-57.png",
+      "run": 1,
+      "pixels": [
+        324,
+        720
+      ],
+      "sha256": "87993648bba453e46377cb001361db923d702b3c0f77491454456beb6e10b17e",
+      "bytes": 67674
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1072508-58.png",
+      "run": 1,
+      "pixels": [
+        324,
+        720
+      ],
+      "sha256": "87993648bba453e46377cb001361db923d702b3c0f77491454456beb6e10b17e",
+      "bytes": 67674
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1072551-59.png",
+      "run": 1,
+      "pixels": [
+        324,
+        720
+      ],
+      "sha256": "f140f1962b98b02be8e1bcf8b84b0610f4d27e2421e499dd7476b142f04b8243",
+      "bytes": 67752
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1072594-60.png",
+      "run": 1,
+      "pixels": [
+        324,
+        720
+      ],
+      "sha256": "f140f1962b98b02be8e1bcf8b84b0610f4d27e2421e499dd7476b142f04b8243",
+      "bytes": 67752
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1072636-61.png",
+      "run": 1,
+      "pixels": [
+        324,
+        720
+      ],
+      "sha256": "f140f1962b98b02be8e1bcf8b84b0610f4d27e2421e499dd7476b142f04b8243",
+      "bytes": 67752
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1072711-62.png",
+      "run": 1,
+      "pixels": [
+        324,
+        720
+      ],
+      "sha256": "f140f1962b98b02be8e1bcf8b84b0610f4d27e2421e499dd7476b142f04b8243",
+      "bytes": 67752
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1072766-63.png",
+      "run": 1,
+      "pixels": [
+        324,
+        720
+      ],
+      "sha256": "f140f1962b98b02be8e1bcf8b84b0610f4d27e2421e499dd7476b142f04b8243",
+      "bytes": 67752
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1072826-64.png",
+      "run": 1,
+      "pixels": [
+        324,
+        720
+      ],
+      "sha256": "f140f1962b98b02be8e1bcf8b84b0610f4d27e2421e499dd7476b142f04b8243",
+      "bytes": 67752
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1072886-65.png",
+      "run": 1,
+      "pixels": [
+        324,
+        720
+      ],
+      "sha256": "f140f1962b98b02be8e1bcf8b84b0610f4d27e2421e499dd7476b142f04b8243",
+      "bytes": 67752
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1072944-66.png",
+      "run": 1,
+      "pixels": [
+        324,
+        720
+      ],
+      "sha256": "f140f1962b98b02be8e1bcf8b84b0610f4d27e2421e499dd7476b142f04b8243",
+      "bytes": 67752
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1073000-67.png",
+      "run": 1,
+      "pixels": [
+        324,
+        720
+      ],
+      "sha256": "f140f1962b98b02be8e1bcf8b84b0610f4d27e2421e499dd7476b142f04b8243",
+      "bytes": 67752
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1073083-68.png",
+      "run": 1,
+      "pixels": [
+        324,
+        720
+      ],
+      "sha256": "f140f1962b98b02be8e1bcf8b84b0610f4d27e2421e499dd7476b142f04b8243",
+      "bytes": 67752
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1073200-69.png",
+      "run": 1,
+      "pixels": [
+        324,
+        720
+      ],
+      "sha256": "b56fe86303173a6738fd8b5fcafc6b636c3a679e3fed1928dfd1c07e273cbcf4",
+      "bytes": 67757
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1073378-70.png",
+      "run": 1,
+      "pixels": [
+        324,
+        720
+      ],
+      "sha256": "03496f615fcde0fa50dd4f10d159eadca3083e54fef47064efaee7eec496ffe6",
+      "bytes": 67737
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1073533-71.png",
+      "run": 1,
+      "pixels": [
+        324,
+        720
+      ],
+      "sha256": "11dced9714be2d270702ad19ed939972b2cad438f47b19b83686edbaa15d9717",
+      "bytes": 67790
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1073650-72.png",
+      "run": 1,
+      "pixels": [
+        324,
+        720
+      ],
+      "sha256": "e34dedd814a0c56a1fed28633835850723fd2353ba9e7b3d76f4c41cb9d1be41",
+      "bytes": 67768
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1073779-73.png",
+      "run": 1,
+      "pixels": [
+        324,
+        720
+      ],
+      "sha256": "4773572445c23faea4341599fee6d8bddc2ddf63850560c8db48fc3a2ed4c562",
+      "bytes": 67780
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1073860-74.png",
+      "run": 1,
+      "pixels": [
+        324,
+        720
+      ],
+      "sha256": "4773572445c23faea4341599fee6d8bddc2ddf63850560c8db48fc3a2ed4c562",
+      "bytes": 67780
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1073995-75.png",
+      "run": 1,
+      "pixels": [
+        324,
+        720
+      ],
+      "sha256": "4773572445c23faea4341599fee6d8bddc2ddf63850560c8db48fc3a2ed4c562",
+      "bytes": 67780
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1074145-76.png",
+      "run": 1,
+      "pixels": [
+        324,
+        720
+      ],
+      "sha256": "4773572445c23faea4341599fee6d8bddc2ddf63850560c8db48fc3a2ed4c562",
+      "bytes": 67780
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1074272-77.png",
+      "run": 1,
+      "pixels": [
+        324,
+        720
+      ],
+      "sha256": "4773572445c23faea4341599fee6d8bddc2ddf63850560c8db48fc3a2ed4c562",
+      "bytes": 67780
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1074408-78.png",
+      "run": 1,
+      "pixels": [
+        324,
+        720
+      ],
+      "sha256": "4773572445c23faea4341599fee6d8bddc2ddf63850560c8db48fc3a2ed4c562",
+      "bytes": 67780
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1074494-79.png",
+      "run": 1,
+      "pixels": [
+        324,
+        720
+      ],
+      "sha256": "4773572445c23faea4341599fee6d8bddc2ddf63850560c8db48fc3a2ed4c562",
+      "bytes": 67780
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1074563-80.png",
+      "run": 1,
+      "pixels": [
+        324,
+        720
+      ],
+      "sha256": "0d954440697eaf4a70ce2c89ead7dd254cd126d14eb8a7f6a3abee0fcb2b66a5",
+      "bytes": 67893
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1074641-81.png",
+      "run": 1,
+      "pixels": [
+        324,
+        720
+      ],
+      "sha256": "0d954440697eaf4a70ce2c89ead7dd254cd126d14eb8a7f6a3abee0fcb2b66a5",
+      "bytes": 67893
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1074710-82.png",
+      "run": 1,
+      "pixels": [
+        324,
+        720
+      ],
+      "sha256": "0d954440697eaf4a70ce2c89ead7dd254cd126d14eb8a7f6a3abee0fcb2b66a5",
+      "bytes": 67893
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1074763-83.png",
+      "run": 1,
+      "pixels": [
+        324,
+        720
+      ],
+      "sha256": "0d954440697eaf4a70ce2c89ead7dd254cd126d14eb8a7f6a3abee0fcb2b66a5",
+      "bytes": 67893
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1074835-84.png",
+      "run": 1,
+      "pixels": [
+        324,
+        720
+      ],
+      "sha256": "0d954440697eaf4a70ce2c89ead7dd254cd126d14eb8a7f6a3abee0fcb2b66a5",
+      "bytes": 67893
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1074891-85.png",
+      "run": 1,
+      "pixels": [
+        324,
+        720
+      ],
+      "sha256": "0d954440697eaf4a70ce2c89ead7dd254cd126d14eb8a7f6a3abee0fcb2b66a5",
+      "bytes": 67893
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1074960-86.png",
+      "run": 1,
+      "pixels": [
+        324,
+        720
+      ],
+      "sha256": "0d954440697eaf4a70ce2c89ead7dd254cd126d14eb8a7f6a3abee0fcb2b66a5",
+      "bytes": 67893
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1075042-87.png",
+      "run": 1,
+      "pixels": [
+        324,
+        720
+      ],
+      "sha256": "0d954440697eaf4a70ce2c89ead7dd254cd126d14eb8a7f6a3abee0fcb2b66a5",
+      "bytes": 67893
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1075128-88.png",
+      "run": 1,
+      "pixels": [
+        324,
+        720
+      ],
+      "sha256": "0d954440697eaf4a70ce2c89ead7dd254cd126d14eb8a7f6a3abee0fcb2b66a5",
+      "bytes": 67893
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1075183-89.png",
+      "run": 1,
+      "pixels": [
+        324,
+        720
+      ],
+      "sha256": "0d954440697eaf4a70ce2c89ead7dd254cd126d14eb8a7f6a3abee0fcb2b66a5",
+      "bytes": 67893
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1075250-90.png",
+      "run": 1,
+      "pixels": [
+        324,
+        720
+      ],
+      "sha256": "0d954440697eaf4a70ce2c89ead7dd254cd126d14eb8a7f6a3abee0fcb2b66a5",
+      "bytes": 67893
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1075319-91.png",
+      "run": 1,
+      "pixels": [
+        324,
+        720
+      ],
+      "sha256": "0d954440697eaf4a70ce2c89ead7dd254cd126d14eb8a7f6a3abee0fcb2b66a5",
+      "bytes": 67893
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1075360-92.png",
+      "run": 1,
+      "pixels": [
+        324,
+        720
+      ],
+      "sha256": "0d954440697eaf4a70ce2c89ead7dd254cd126d14eb8a7f6a3abee0fcb2b66a5",
+      "bytes": 67893
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1075417-93.png",
+      "run": 1,
+      "pixels": [
+        324,
+        720
+      ],
+      "sha256": "0d954440697eaf4a70ce2c89ead7dd254cd126d14eb8a7f6a3abee0fcb2b66a5",
+      "bytes": 67893
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1075492-94.png",
+      "run": 1,
+      "pixels": [
+        324,
+        720
+      ],
+      "sha256": "0d954440697eaf4a70ce2c89ead7dd254cd126d14eb8a7f6a3abee0fcb2b66a5",
+      "bytes": 67893
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1075536-95.png",
+      "run": 1,
+      "pixels": [
+        324,
+        720
+      ],
+      "sha256": "0d5602d015cd5eb20756aad12ff630383b64d6a652c4d958421e7c5066d52c5a",
+      "bytes": 67827
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1075577-96.png",
+      "run": 1,
+      "pixels": [
+        324,
+        720
+      ],
+      "sha256": "0d5602d015cd5eb20756aad12ff630383b64d6a652c4d958421e7c5066d52c5a",
+      "bytes": 67827
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1075644-97.png",
+      "run": 1,
+      "pixels": [
+        324,
+        720
+      ],
+      "sha256": "0d5602d015cd5eb20756aad12ff630383b64d6a652c4d958421e7c5066d52c5a",
+      "bytes": 67827
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1075686-98.png",
+      "run": 1,
+      "pixels": [
+        324,
+        720
+      ],
+      "sha256": "0d5602d015cd5eb20756aad12ff630383b64d6a652c4d958421e7c5066d52c5a",
+      "bytes": 67827
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1075727-99.png",
+      "run": 1,
+      "pixels": [
+        324,
+        720
+      ],
+      "sha256": "0d5602d015cd5eb20756aad12ff630383b64d6a652c4d958421e7c5066d52c5a",
+      "bytes": 67827
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1075766-100.png",
+      "run": 1,
+      "pixels": [
+        324,
+        720
+      ],
+      "sha256": "0d5602d015cd5eb20756aad12ff630383b64d6a652c4d958421e7c5066d52c5a",
+      "bytes": 67827
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1075853-101.png",
+      "run": 1,
+      "pixels": [
+        324,
+        720
+      ],
+      "sha256": "0d5602d015cd5eb20756aad12ff630383b64d6a652c4d958421e7c5066d52c5a",
+      "bytes": 67827
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1075892-102.png",
+      "run": 1,
+      "pixels": [
+        324,
+        720
+      ],
+      "sha256": "0d5602d015cd5eb20756aad12ff630383b64d6a652c4d958421e7c5066d52c5a",
+      "bytes": 67827
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1075934-103.png",
+      "run": 1,
+      "pixels": [
+        324,
+        720
+      ],
+      "sha256": "0d5602d015cd5eb20756aad12ff630383b64d6a652c4d958421e7c5066d52c5a",
+      "bytes": 67827
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1075985-104.png",
+      "run": 1,
+      "pixels": [
+        324,
+        720
+      ],
+      "sha256": "0d5602d015cd5eb20756aad12ff630383b64d6a652c4d958421e7c5066d52c5a",
+      "bytes": 67827
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1076028-105.png",
+      "run": 1,
+      "pixels": [
+        324,
+        720
+      ],
+      "sha256": "0d5602d015cd5eb20756aad12ff630383b64d6a652c4d958421e7c5066d52c5a",
+      "bytes": 67827
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1076136-106.png",
+      "run": 1,
+      "pixels": [
+        324,
+        720
+      ],
+      "sha256": "0d5602d015cd5eb20756aad12ff630383b64d6a652c4d958421e7c5066d52c5a",
+      "bytes": 67827
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1076194-107.png",
+      "run": 1,
+      "pixels": [
+        324,
+        720
+      ],
+      "sha256": "0d5602d015cd5eb20756aad12ff630383b64d6a652c4d958421e7c5066d52c5a",
+      "bytes": 67827
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1076236-108.png",
+      "run": 1,
+      "pixels": [
+        324,
+        720
+      ],
+      "sha256": "0d5602d015cd5eb20756aad12ff630383b64d6a652c4d958421e7c5066d52c5a",
+      "bytes": 67827
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1076285-109.png",
+      "run": 1,
+      "pixels": [
+        324,
+        720
+      ],
+      "sha256": "0d5602d015cd5eb20756aad12ff630383b64d6a652c4d958421e7c5066d52c5a",
+      "bytes": 67827
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1076327-110.png",
+      "run": 1,
+      "pixels": [
+        324,
+        720
+      ],
+      "sha256": "0d5602d015cd5eb20756aad12ff630383b64d6a652c4d958421e7c5066d52c5a",
+      "bytes": 67827
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1076385-111.png",
+      "run": 1,
+      "pixels": [
+        324,
+        720
+      ],
+      "sha256": "0d5602d015cd5eb20756aad12ff630383b64d6a652c4d958421e7c5066d52c5a",
+      "bytes": 67827
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1076436-112.png",
+      "run": 1,
+      "pixels": [
+        324,
+        720
+      ],
+      "sha256": "0d5602d015cd5eb20756aad12ff630383b64d6a652c4d958421e7c5066d52c5a",
+      "bytes": 67827
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1076491-113.png",
+      "run": 1,
+      "pixels": [
+        324,
+        720
+      ],
+      "sha256": "0d5602d015cd5eb20756aad12ff630383b64d6a652c4d958421e7c5066d52c5a",
+      "bytes": 67827
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1076528-114.png",
+      "run": 1,
+      "pixels": [
+        324,
+        720
+      ],
+      "sha256": "d107bda4706cc1c9aace691cc1ddaaf7d56d479183d5629fa6bdb60aeeee1190",
+      "bytes": 67725
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1076585-115.png",
+      "run": 1,
+      "pixels": [
+        324,
+        720
+      ],
+      "sha256": "d107bda4706cc1c9aace691cc1ddaaf7d56d479183d5629fa6bdb60aeeee1190",
+      "bytes": 67725
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1076627-116.png",
+      "run": 1,
+      "pixels": [
+        324,
+        720
+      ],
+      "sha256": "d107bda4706cc1c9aace691cc1ddaaf7d56d479183d5629fa6bdb60aeeee1190",
+      "bytes": 67725
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1076695-117.png",
+      "run": 1,
+      "pixels": [
+        324,
+        720
+      ],
+      "sha256": "d107bda4706cc1c9aace691cc1ddaaf7d56d479183d5629fa6bdb60aeeee1190",
+      "bytes": 67725
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1076751-118.png",
+      "run": 1,
+      "pixels": [
+        324,
+        720
+      ],
+      "sha256": "d107bda4706cc1c9aace691cc1ddaaf7d56d479183d5629fa6bdb60aeeee1190",
+      "bytes": 67725
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1076819-119.png",
+      "run": 1,
+      "pixels": [
+        324,
+        720
+      ],
+      "sha256": "d107bda4706cc1c9aace691cc1ddaaf7d56d479183d5629fa6bdb60aeeee1190",
+      "bytes": 67725
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1076860-120.png",
+      "run": 1,
+      "pixels": [
+        324,
+        720
+      ],
+      "sha256": "d107bda4706cc1c9aace691cc1ddaaf7d56d479183d5629fa6bdb60aeeee1190",
+      "bytes": 67725
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1076902-121.png",
+      "run": 1,
+      "pixels": [
+        324,
+        720
+      ],
+      "sha256": "d107bda4706cc1c9aace691cc1ddaaf7d56d479183d5629fa6bdb60aeeee1190",
+      "bytes": 67725
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1076985-122.png",
+      "run": 1,
+      "pixels": [
+        324,
+        720
+      ],
+      "sha256": "d107bda4706cc1c9aace691cc1ddaaf7d56d479183d5629fa6bdb60aeeee1190",
+      "bytes": 67725
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1077028-123.png",
+      "run": 1,
+      "pixels": [
+        324,
+        720
+      ],
+      "sha256": "d107bda4706cc1c9aace691cc1ddaaf7d56d479183d5629fa6bdb60aeeee1190",
+      "bytes": 67725
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1077101-124.png",
+      "run": 1,
+      "pixels": [
+        324,
+        720
+      ],
+      "sha256": "d107bda4706cc1c9aace691cc1ddaaf7d56d479183d5629fa6bdb60aeeee1190",
+      "bytes": 67725
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1077142-125.png",
+      "run": 1,
+      "pixels": [
+        324,
+        720
+      ],
+      "sha256": "d107bda4706cc1c9aace691cc1ddaaf7d56d479183d5629fa6bdb60aeeee1190",
+      "bytes": 67725
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1077210-126.png",
+      "run": 1,
+      "pixels": [
+        324,
+        720
+      ],
+      "sha256": "d107bda4706cc1c9aace691cc1ddaaf7d56d479183d5629fa6bdb60aeeee1190",
+      "bytes": 67725
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1077251-127.png",
+      "run": 1,
+      "pixels": [
+        324,
+        720
+      ],
+      "sha256": "d107bda4706cc1c9aace691cc1ddaaf7d56d479183d5629fa6bdb60aeeee1190",
+      "bytes": 67725
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1077350-128.png",
+      "run": 1,
+      "pixels": [
+        324,
+        720
+      ],
+      "sha256": "d107bda4706cc1c9aace691cc1ddaaf7d56d479183d5629fa6bdb60aeeee1190",
+      "bytes": 67725
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1077391-129.png",
+      "run": 1,
+      "pixels": [
+        324,
+        720
+      ],
+      "sha256": "d107bda4706cc1c9aace691cc1ddaaf7d56d479183d5629fa6bdb60aeeee1190",
+      "bytes": 67725
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1077444-130.png",
+      "run": 1,
+      "pixels": [
+        324,
+        720
+      ],
+      "sha256": "d107bda4706cc1c9aace691cc1ddaaf7d56d479183d5629fa6bdb60aeeee1190",
+      "bytes": 67725
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1077519-131.png",
+      "run": 1,
+      "pixels": [
+        324,
+        720
+      ],
+      "sha256": "a83a076255a666a7d25b4dd0ea0773ff9f854f1974e96b0239b358863fe1d2ba",
+      "bytes": 67364
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1077561-132.png",
+      "run": 1,
+      "pixels": [
+        324,
+        720
+      ],
+      "sha256": "a83a076255a666a7d25b4dd0ea0773ff9f854f1974e96b0239b358863fe1d2ba",
+      "bytes": 67364
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1077619-133.png",
+      "run": 1,
+      "pixels": [
+        324,
+        720
+      ],
+      "sha256": "a83a076255a666a7d25b4dd0ea0773ff9f854f1974e96b0239b358863fe1d2ba",
+      "bytes": 67364
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1077659-134.png",
+      "run": 1,
+      "pixels": [
+        324,
+        720
+      ],
+      "sha256": "a83a076255a666a7d25b4dd0ea0773ff9f854f1974e96b0239b358863fe1d2ba",
+      "bytes": 67364
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1077749-135.png",
+      "run": 1,
+      "pixels": [
+        324,
+        720
+      ],
+      "sha256": "a83a076255a666a7d25b4dd0ea0773ff9f854f1974e96b0239b358863fe1d2ba",
+      "bytes": 67364
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1077819-136.png",
+      "run": 1,
+      "pixels": [
+        324,
+        720
+      ],
+      "sha256": "a83a076255a666a7d25b4dd0ea0773ff9f854f1974e96b0239b358863fe1d2ba",
+      "bytes": 67364
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1077877-137.png",
+      "run": 1,
+      "pixels": [
+        324,
+        720
+      ],
+      "sha256": "a83a076255a666a7d25b4dd0ea0773ff9f854f1974e96b0239b358863fe1d2ba",
+      "bytes": 67364
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1077917-138.png",
+      "run": 1,
+      "pixels": [
+        324,
+        720
+      ],
+      "sha256": "a83a076255a666a7d25b4dd0ea0773ff9f854f1974e96b0239b358863fe1d2ba",
+      "bytes": 67364
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1078008-139.png",
+      "run": 1,
+      "pixels": [
+        324,
+        720
+      ],
+      "sha256": "a83a076255a666a7d25b4dd0ea0773ff9f854f1974e96b0239b358863fe1d2ba",
+      "bytes": 67364
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1078034-140.png",
+      "run": 1,
+      "pixels": [
+        324,
+        720
+      ],
+      "sha256": "a83a076255a666a7d25b4dd0ea0773ff9f854f1974e96b0239b358863fe1d2ba",
+      "bytes": 67364
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1078159-141.png",
+      "run": 1,
+      "pixels": [
+        324,
+        720
+      ],
+      "sha256": "a83a076255a666a7d25b4dd0ea0773ff9f854f1974e96b0239b358863fe1d2ba",
+      "bytes": 67364
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1078200-142.png",
+      "run": 1,
+      "pixels": [
+        324,
+        720
+      ],
+      "sha256": "a83a076255a666a7d25b4dd0ea0773ff9f854f1974e96b0239b358863fe1d2ba",
+      "bytes": 67364
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1078269-143.png",
+      "run": 1,
+      "pixels": [
+        324,
+        720
+      ],
+      "sha256": "a83a076255a666a7d25b4dd0ea0773ff9f854f1974e96b0239b358863fe1d2ba",
+      "bytes": 67364
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1078310-144.png",
+      "run": 1,
+      "pixels": [
+        324,
+        720
+      ],
+      "sha256": "a83a076255a666a7d25b4dd0ea0773ff9f854f1974e96b0239b358863fe1d2ba",
+      "bytes": 67364
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1078394-145.png",
+      "run": 1,
+      "pixels": [
+        324,
+        720
+      ],
+      "sha256": "a83a076255a666a7d25b4dd0ea0773ff9f854f1974e96b0239b358863fe1d2ba",
+      "bytes": 67364
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1078433-146.png",
+      "run": 1,
+      "pixels": [
+        324,
+        720
+      ],
+      "sha256": "a83a076255a666a7d25b4dd0ea0773ff9f854f1974e96b0239b358863fe1d2ba",
+      "bytes": 67364
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1078544-147.png",
+      "run": 1,
+      "pixels": [
+        324,
+        720
+      ],
+      "sha256": "231d23c6411424a2eaa1c7920106fb2c454e86b93c5a55765a90b487a79705cb",
+      "bytes": 67747
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1078585-148.png",
+      "run": 1,
+      "pixels": [
+        324,
+        720
+      ],
+      "sha256": "231d23c6411424a2eaa1c7920106fb2c454e86b93c5a55765a90b487a79705cb",
+      "bytes": 67747
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1078691-149.png",
+      "run": 1,
+      "pixels": [
+        324,
+        720
+      ],
+      "sha256": "231d23c6411424a2eaa1c7920106fb2c454e86b93c5a55765a90b487a79705cb",
+      "bytes": 67747
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1078761-150.png",
+      "run": 1,
+      "pixels": [
+        324,
+        720
+      ],
+      "sha256": "231d23c6411424a2eaa1c7920106fb2c454e86b93c5a55765a90b487a79705cb",
+      "bytes": 67747
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1078799-151.png",
+      "run": 1,
+      "pixels": [
+        324,
+        720
+      ],
+      "sha256": "231d23c6411424a2eaa1c7920106fb2c454e86b93c5a55765a90b487a79705cb",
+      "bytes": 67747
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1078845-152.png",
+      "run": 1,
+      "pixels": [
+        324,
+        720
+      ],
+      "sha256": "231d23c6411424a2eaa1c7920106fb2c454e86b93c5a55765a90b487a79705cb",
+      "bytes": 67747
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1078902-153.png",
+      "run": 1,
+      "pixels": [
+        324,
+        720
+      ],
+      "sha256": "231d23c6411424a2eaa1c7920106fb2c454e86b93c5a55765a90b487a79705cb",
+      "bytes": 67747
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1079083-154.png",
+      "run": 1,
+      "pixels": [
+        324,
+        720
+      ],
+      "sha256": "231d23c6411424a2eaa1c7920106fb2c454e86b93c5a55765a90b487a79705cb",
+      "bytes": 67747
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1079128-155.png",
+      "run": 1,
+      "pixels": [
+        324,
+        720
+      ],
+      "sha256": "231d23c6411424a2eaa1c7920106fb2c454e86b93c5a55765a90b487a79705cb",
+      "bytes": 67747
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1079178-156.png",
+      "run": 1,
+      "pixels": [
+        324,
+        720
+      ],
+      "sha256": "231d23c6411424a2eaa1c7920106fb2c454e86b93c5a55765a90b487a79705cb",
+      "bytes": 67747
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1079220-157.png",
+      "run": 1,
+      "pixels": [
+        324,
+        720
+      ],
+      "sha256": "231d23c6411424a2eaa1c7920106fb2c454e86b93c5a55765a90b487a79705cb",
+      "bytes": 67747
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1079266-158.png",
+      "run": 1,
+      "pixels": [
+        324,
+        720
+      ],
+      "sha256": "231d23c6411424a2eaa1c7920106fb2c454e86b93c5a55765a90b487a79705cb",
+      "bytes": 67747
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1079461-159.png",
+      "run": 1,
+      "pixels": [
+        324,
+        720
+      ],
+      "sha256": "231d23c6411424a2eaa1c7920106fb2c454e86b93c5a55765a90b487a79705cb",
+      "bytes": 67747
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1079503-160.png",
+      "run": 1,
+      "pixels": [
+        324,
+        720
+      ],
+      "sha256": "231d23c6411424a2eaa1c7920106fb2c454e86b93c5a55765a90b487a79705cb",
+      "bytes": 67747
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1079550-161.png",
+      "run": 1,
+      "pixels": [
+        324,
+        720
+      ],
+      "sha256": "d2c408034e55cd229aee0a7298f8418aa7c902a6551df16bf5d4dba45e9a8ed8",
+      "bytes": 67731
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1079594-162.png",
+      "run": 1,
+      "pixels": [
+        324,
+        720
+      ],
+      "sha256": "d2c408034e55cd229aee0a7298f8418aa7c902a6551df16bf5d4dba45e9a8ed8",
+      "bytes": 67731
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1079632-163.png",
+      "run": 1,
+      "pixels": [
+        324,
+        720
+      ],
+      "sha256": "d2c408034e55cd229aee0a7298f8418aa7c902a6551df16bf5d4dba45e9a8ed8",
+      "bytes": 67731
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1079828-164.png",
+      "run": 1,
+      "pixels": [
+        324,
+        720
+      ],
+      "sha256": "d2c408034e55cd229aee0a7298f8418aa7c902a6551df16bf5d4dba45e9a8ed8",
+      "bytes": 67731
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1079886-165.png",
+      "run": 1,
+      "pixels": [
+        324,
+        720
+      ],
+      "sha256": "d2c408034e55cd229aee0a7298f8418aa7c902a6551df16bf5d4dba45e9a8ed8",
+      "bytes": 67731
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1079934-166.png",
+      "run": 1,
+      "pixels": [
+        324,
+        720
+      ],
+      "sha256": "d2c408034e55cd229aee0a7298f8418aa7c902a6551df16bf5d4dba45e9a8ed8",
+      "bytes": 67731
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1079978-167.png",
+      "run": 1,
+      "pixels": [
+        324,
+        720
+      ],
+      "sha256": "d2c408034e55cd229aee0a7298f8418aa7c902a6551df16bf5d4dba45e9a8ed8",
+      "bytes": 67731
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1080019-168.png",
+      "run": 1,
+      "pixels": [
+        324,
+        720
+      ],
+      "sha256": "d2c408034e55cd229aee0a7298f8418aa7c902a6551df16bf5d4dba45e9a8ed8",
+      "bytes": 67731
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1080182-169.png",
+      "run": 1,
+      "pixels": [
+        324,
+        720
+      ],
+      "sha256": "d2c408034e55cd229aee0a7298f8418aa7c902a6551df16bf5d4dba45e9a8ed8",
+      "bytes": 67731
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1080250-170.png",
+      "run": 1,
+      "pixels": [
+        324,
+        720
+      ],
+      "sha256": "d2c408034e55cd229aee0a7298f8418aa7c902a6551df16bf5d4dba45e9a8ed8",
+      "bytes": 67731
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1080291-171.png",
+      "run": 1,
+      "pixels": [
+        324,
+        720
+      ],
+      "sha256": "d2c408034e55cd229aee0a7298f8418aa7c902a6551df16bf5d4dba45e9a8ed8",
+      "bytes": 67731
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1080358-172.png",
+      "run": 1,
+      "pixels": [
+        324,
+        720
+      ],
+      "sha256": "d2c408034e55cd229aee0a7298f8418aa7c902a6551df16bf5d4dba45e9a8ed8",
+      "bytes": 67731
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1080403-173.png",
+      "run": 1,
+      "pixels": [
+        324,
+        720
+      ],
+      "sha256": "d2c408034e55cd229aee0a7298f8418aa7c902a6551df16bf5d4dba45e9a8ed8",
+      "bytes": 67731
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1080492-174.png",
+      "run": 1,
+      "pixels": [
+        324,
+        720
+      ],
+      "sha256": "d2c408034e55cd229aee0a7298f8418aa7c902a6551df16bf5d4dba45e9a8ed8",
+      "bytes": 67731
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1080627-175.png",
+      "run": 1,
+      "pixels": [
+        324,
+        720
+      ],
+      "sha256": "2a9e50529acbba076872d24b180f0b9707112ef9b3c88d1ef5b7078dca307bc4",
+      "bytes": 67365
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1080666-176.png",
+      "run": 1,
+      "pixels": [
+        324,
+        720
+      ],
+      "sha256": "2a9e50529acbba076872d24b180f0b9707112ef9b3c88d1ef5b7078dca307bc4",
+      "bytes": 67365
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1080744-177.png",
+      "run": 1,
+      "pixels": [
+        324,
+        720
+      ],
+      "sha256": "2a9e50529acbba076872d24b180f0b9707112ef9b3c88d1ef5b7078dca307bc4",
+      "bytes": 67365
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1080792-178.png",
+      "run": 1,
+      "pixels": [
+        324,
+        720
+      ],
+      "sha256": "2a9e50529acbba076872d24b180f0b9707112ef9b3c88d1ef5b7078dca307bc4",
+      "bytes": 67365
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1080833-179.png",
+      "run": 1,
+      "pixels": [
+        324,
+        720
+      ],
+      "sha256": "2a9e50529acbba076872d24b180f0b9707112ef9b3c88d1ef5b7078dca307bc4",
+      "bytes": 67365
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1080992-180.png",
+      "run": 1,
+      "pixels": [
+        324,
+        720
+      ],
+      "sha256": "2a9e50529acbba076872d24b180f0b9707112ef9b3c88d1ef5b7078dca307bc4",
+      "bytes": 67365
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1081083-181.png",
+      "run": 1,
+      "pixels": [
+        324,
+        720
+      ],
+      "sha256": "2a9e50529acbba076872d24b180f0b9707112ef9b3c88d1ef5b7078dca307bc4",
+      "bytes": 67365
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1081127-182.png",
+      "run": 1,
+      "pixels": [
+        324,
+        720
+      ],
+      "sha256": "2a9e50529acbba076872d24b180f0b9707112ef9b3c88d1ef5b7078dca307bc4",
+      "bytes": 67365
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1081166-183.png",
+      "run": 1,
+      "pixels": [
+        324,
+        720
+      ],
+      "sha256": "2a9e50529acbba076872d24b180f0b9707112ef9b3c88d1ef5b7078dca307bc4",
+      "bytes": 67365
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1081211-184.png",
+      "run": 1,
+      "pixels": [
+        324,
+        720
+      ],
+      "sha256": "2a9e50529acbba076872d24b180f0b9707112ef9b3c88d1ef5b7078dca307bc4",
+      "bytes": 67365
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1081377-185.png",
+      "run": 1,
+      "pixels": [
+        324,
+        720
+      ],
+      "sha256": "2a9e50529acbba076872d24b180f0b9707112ef9b3c88d1ef5b7078dca307bc4",
+      "bytes": 67365
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1081420-186.png",
+      "run": 1,
+      "pixels": [
+        324,
+        720
+      ],
+      "sha256": "2a9e50529acbba076872d24b180f0b9707112ef9b3c88d1ef5b7078dca307bc4",
+      "bytes": 67365
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1081542-187.png",
+      "run": 1,
+      "pixels": [
+        324,
+        720
+      ],
+      "sha256": "08e76ed100bac18593a5755acfa721beec6c20e81e35461f2b9e4d259e37f8c0",
+      "bytes": 67618
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1081584-188.png",
+      "run": 1,
+      "pixels": [
+        324,
+        720
+      ],
+      "sha256": "08e76ed100bac18593a5755acfa721beec6c20e81e35461f2b9e4d259e37f8c0",
+      "bytes": 67618
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1081626-189.png",
+      "run": 1,
+      "pixels": [
+        324,
+        720
+      ],
+      "sha256": "08e76ed100bac18593a5755acfa721beec6c20e81e35461f2b9e4d259e37f8c0",
+      "bytes": 67618
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1081750-190.png",
+      "run": 1,
+      "pixels": [
+        324,
+        720
+      ],
+      "sha256": "08e76ed100bac18593a5755acfa721beec6c20e81e35461f2b9e4d259e37f8c0",
+      "bytes": 67618
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1081902-191.png",
+      "run": 1,
+      "pixels": [
+        324,
+        720
+      ],
+      "sha256": "08e76ed100bac18593a5755acfa721beec6c20e81e35461f2b9e4d259e37f8c0",
+      "bytes": 67618
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1081942-192.png",
+      "run": 1,
+      "pixels": [
+        324,
+        720
+      ],
+      "sha256": "08e76ed100bac18593a5755acfa721beec6c20e81e35461f2b9e4d259e37f8c0",
+      "bytes": 67618
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1081983-193.png",
+      "run": 1,
+      "pixels": [
+        324,
+        720
+      ],
+      "sha256": "08e76ed100bac18593a5755acfa721beec6c20e81e35461f2b9e4d259e37f8c0",
+      "bytes": 67618
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1082033-194.png",
+      "run": 1,
+      "pixels": [
+        324,
+        720
+      ],
+      "sha256": "08e76ed100bac18593a5755acfa721beec6c20e81e35461f2b9e4d259e37f8c0",
+      "bytes": 67618
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1082137-195.png",
+      "run": 1,
+      "pixels": [
+        324,
+        720
+      ],
+      "sha256": "08e76ed100bac18593a5755acfa721beec6c20e81e35461f2b9e4d259e37f8c0",
+      "bytes": 67618
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1082227-196.png",
+      "run": 1,
+      "pixels": [
+        324,
+        720
+      ],
+      "sha256": "08e76ed100bac18593a5755acfa721beec6c20e81e35461f2b9e4d259e37f8c0",
+      "bytes": 67618
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1082300-197.png",
+      "run": 1,
+      "pixels": [
+        324,
+        720
+      ],
+      "sha256": "08e76ed100bac18593a5755acfa721beec6c20e81e35461f2b9e4d259e37f8c0",
+      "bytes": 67618
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1082435-198.png",
+      "run": 1,
+      "pixels": [
+        324,
+        720
+      ],
+      "sha256": "08e76ed100bac18593a5755acfa721beec6c20e81e35461f2b9e4d259e37f8c0",
+      "bytes": 67618
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1082502-199.png",
+      "run": 1,
+      "pixels": [
+        324,
+        720
+      ],
+      "sha256": "08e76ed100bac18593a5755acfa721beec6c20e81e35461f2b9e4d259e37f8c0",
+      "bytes": 67618
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1082550-200.png",
+      "run": 1,
+      "pixels": [
+        324,
+        720
+      ],
+      "sha256": "7d6c2e00d74f13f00807922659303cd799da7b13e2685d775029b180c032dff4",
+      "bytes": 67674
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1082600-201.png",
+      "run": 1,
+      "pixels": [
+        324,
+        720
+      ],
+      "sha256": "7d6c2e00d74f13f00807922659303cd799da7b13e2685d775029b180c032dff4",
+      "bytes": 67674
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1082711-202.png",
+      "run": 1,
+      "pixels": [
+        324,
+        720
+      ],
+      "sha256": "7d6c2e00d74f13f00807922659303cd799da7b13e2685d775029b180c032dff4",
+      "bytes": 67674
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1082883-203.png",
+      "run": 1,
+      "pixels": [
+        324,
+        720
+      ],
+      "sha256": "7d6c2e00d74f13f00807922659303cd799da7b13e2685d775029b180c032dff4",
+      "bytes": 67674
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1082928-204.png",
+      "run": 1,
+      "pixels": [
+        324,
+        720
+      ],
+      "sha256": "7d6c2e00d74f13f00807922659303cd799da7b13e2685d775029b180c032dff4",
+      "bytes": 67674
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1082985-205.png",
+      "run": 1,
+      "pixels": [
+        324,
+        720
+      ],
+      "sha256": "7d6c2e00d74f13f00807922659303cd799da7b13e2685d775029b180c032dff4",
+      "bytes": 67674
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1083066-206.png",
+      "run": 1,
+      "pixels": [
+        324,
+        720
+      ],
+      "sha256": "7d6c2e00d74f13f00807922659303cd799da7b13e2685d775029b180c032dff4",
+      "bytes": 67674
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1083227-207.png",
+      "run": 1,
+      "pixels": [
+        324,
+        720
+      ],
+      "sha256": "7d6c2e00d74f13f00807922659303cd799da7b13e2685d775029b180c032dff4",
+      "bytes": 67674
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1083266-208.png",
+      "run": 1,
+      "pixels": [
+        324,
+        720
+      ],
+      "sha256": "7d6c2e00d74f13f00807922659303cd799da7b13e2685d775029b180c032dff4",
+      "bytes": 67674
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1083361-209.png",
+      "run": 1,
+      "pixels": [
+        324,
+        720
+      ],
+      "sha256": "7d6c2e00d74f13f00807922659303cd799da7b13e2685d775029b180c032dff4",
+      "bytes": 67674
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1083452-210.png",
+      "run": 1,
+      "pixels": [
+        324,
+        720
+      ],
+      "sha256": "7d6c2e00d74f13f00807922659303cd799da7b13e2685d775029b180c032dff4",
+      "bytes": 67674
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1083607-211.png",
+      "run": 1,
+      "pixels": [
+        324,
+        720
+      ],
+      "sha256": "a59e81f655fed74c100934404ff6b8178c47552528c743a459e4d1cfadaa3c5f",
+      "bytes": 67665
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1083653-212.png",
+      "run": 1,
+      "pixels": [
+        324,
+        720
+      ],
+      "sha256": "a59e81f655fed74c100934404ff6b8178c47552528c743a459e4d1cfadaa3c5f",
+      "bytes": 67665
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1132474-213.png",
+      "run": 1,
+      "pixels": [
+        324,
+        720
+      ],
+      "sha256": "2afbc98d488857db279577f927bf4fc177a46f01ea16720d543aec2f662aa18f",
+      "bytes": 54425
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1140554-214.png",
+      "run": 1,
+      "pixels": [
+        324,
+        720
+      ],
+      "sha256": "6a9a34e72c7c3d7729f6a6fd134980d928e18148664ae52c252c1dd6a68445db",
+      "bytes": 67929
+    },
+    {
+      "file": "godot/build/review/run-2/capture-18624-1.png",
+      "run": 2,
+      "pixels": [
+        406,
+        720
+      ],
+      "sha256": "38af3b16fb788b18259ae4010f27bb71f3cbdf26ecf6c0fd466314bb9d76ac1d",
+      "bytes": 20247
+    },
+    {
+      "file": "godot/build/review/run-2/capture-19501-2.png",
+      "run": 2,
+      "pixels": [
+        406,
+        720
+      ],
+      "sha256": "bc293b812479626bfb116a9eec5514b449f5a1319fdded9706fb9d2002a4e592",
+      "bytes": 18461
+    },
+    {
+      "file": "godot/build/review/run-2/capture-47168-3.png",
+      "run": 2,
+      "pixels": [
+        406,
+        720
+      ],
+      "sha256": "fdb2e39c6ce0fdeb7d7f30a737730a26eaea03b89d66b20710a07e61c5209c73",
+      "bytes": 67080
+    },
+    {
+      "file": "godot/build/review/run-2/capture-47212-4.png",
+      "run": 2,
+      "pixels": [
+        406,
+        720
+      ],
+      "sha256": "205d63b72ee81cfd5aa79ccdb69fc1333e7ce872f992a8021c5f1333cb8d57d3",
+      "bytes": 57550
+    },
+    {
+      "file": "godot/build/review/run-2/capture-253753-5.png",
+      "run": 2,
+      "pixels": [
+        406,
+        720
+      ],
+      "sha256": "8b327a81f5bf5ced0c0e1cefad2a810ca691043a6afbf3b87c3423235fdc147c",
+      "bytes": 31609
+    },
+    {
+      "file": "godot/build/review/run-2/capture-259290-6.png",
+      "run": 2,
+      "pixels": [
+        406,
+        720
+      ],
+      "sha256": "a835ea9a571fd696c8a0b25f5194c3dc444ff0f0c7edc531e5bc95bb6eb40649",
+      "bytes": 33692
+    },
+    {
+      "file": "godot/build/review/run-2/capture-275711-7.png",
+      "run": 2,
+      "pixels": [
+        406,
+        720
+      ],
+      "sha256": "a835ea9a571fd696c8a0b25f5194c3dc444ff0f0c7edc531e5bc95bb6eb40649",
+      "bytes": 33692
+    },
+    {
+      "file": "godot/build/review/run-2/capture-281454-8.png",
+      "run": 2,
+      "pixels": [
+        406,
+        720
+      ],
+      "sha256": "18c8436c6fa16bea912c4c6c391caf55daceb515396d47e0e7e3238897d54cd8",
+      "bytes": 29999
+    },
+    {
+      "file": "godot/build/review/run-3/capture-15118-1.png",
+      "run": 3,
+      "pixels": [
+        540,
+        720
+      ],
+      "sha256": "b9efbb6e700c044670b0392f3532db094b1dc5b792b43cd3a25af3a62fe75a34",
+      "bytes": 21047
+    },
+    {
+      "file": "godot/build/review/run-3/capture-20078-2.png",
+      "run": 3,
+      "pixels": [
+        540,
+        720
+      ],
+      "sha256": "59f908e4c8d5496a61893e63294c49f8c071767544ab99ad463694ef9a0e93e4",
+      "bytes": 19171
+    },
+    {
+      "file": "godot/build/review/run-3/capture-43803-3.png",
+      "run": 3,
+      "pixels": [
+        540,
+        720
+      ],
+      "sha256": "bb21b37e1b17ce01d7a8bd038679325c423c44564a1f1216ccac4bcef037d433",
+      "bytes": 56041
+    },
+    {
+      "file": "godot/build/review/run-3/capture-55548-4.png",
+      "run": 3,
+      "pixels": [
+        540,
+        720
+      ],
+      "sha256": "7ccd3763ebdb1c5e37e7921c9f8f3f99ae7d017cd31b51f3573a9ca07e18c63a",
+      "bytes": 64379
+    },
+    {
+      "file": "godot/build/review/run-3/capture-139058-5.png",
+      "run": 3,
+      "pixels": [
+        540,
+        720
+      ],
+      "sha256": "274c72612498b41562088ca28bc056583d87b5ac1ee1071185135332b507ad27",
+      "bytes": 30097
+    },
+    {
+      "file": "godot/build/review/run-3/capture-145689-6.png",
+      "run": 3,
+      "pixels": [
+        540,
+        720
+      ],
+      "sha256": "29854d092c4f6d2fe010a3094fda06b2f6698e81005d0f2492f17c234070a0e4",
+      "bytes": 33102
+    },
+    {
+      "file": "godot/build/review/run-3/capture-157891-7.png",
+      "run": 3,
+      "pixels": [
+        540,
+        720
+      ],
+      "sha256": "b1b30ee3afec4f99f33139043540e0169b9f6126d1ae73cfedd76ba280290154",
+      "bytes": 33138
+    },
+    {
+      "file": "godot/build/review/run-3/capture-171790-8.png",
+      "run": 3,
+      "pixels": [
+        540,
+        720
+      ],
+      "sha256": "274c72612498b41562088ca28bc056583d87b5ac1ee1071185135332b507ad27",
+      "bytes": 30097
+    },
+    {
+      "file": "godot/build/review/run-3/capture-177174-9.png",
+      "run": 3,
+      "pixels": [
+        540,
+        720
+      ],
+      "sha256": "b8655fd8ce64ca34a891d3ad664008d791dabed9d436525fc14256b36770a188",
+      "bytes": 28768
+    }
+  ]
+}

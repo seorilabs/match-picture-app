@@ -30,15 +30,31 @@ func write(data: Dictionary) -> bool:
 	if tmp == null:
 		push_warning("세이브 임시 파일을 열지 못했다: %s" % error_string(FileAccess.get_open_error()))
 		return false
-	tmp.store_string(JSON.stringify(data))
+	var bytes := JSON.stringify(data).to_utf8_buffer()
+	var wrote := _write_bytes(tmp, bytes)
+	tmp.flush()
+	var write_error := tmp.get_error()
+	# flush 자체는 일부 플랫폼에서 오류를 갱신하지 않는다. 실제 바이트 수도 확인한다.
+	var complete := tmp.get_length() == bytes.size()
 	tmp.close()
-
-	var dir := DirAccess.open(_path.get_base_dir())
-	if dir == null:
+	if not wrote or write_error != OK or not complete:
 		return false
-	if dir.file_exists(_path):
-		dir.rename(_path, _path + BAK_SUFFIX)
-	return dir.rename(tmp_path, _path) == OK
+
+	# 복구한 정상 백업을 손상된 원본으로 덮지 않는다. 회전 실패면 원본을 보존한다.
+	if not _read_json(_path).is_empty():
+		if _rename_file(_path, _path + BAK_SUFFIX) != OK:
+			return false
+	# 여기서 실패해도 정상 원본 또는 .bak 을 read()로 다시 읽을 수 있다.
+	return _rename_file(tmp_path, _path) == OK
+
+
+func _write_bytes(file: FileAccess, bytes: PackedByteArray) -> bool:
+	return file.store_buffer(bytes)
+
+
+func _rename_file(from: String, to: String) -> Error:
+	return DirAccess.rename_absolute(
+		ProjectSettings.globalize_path(from), ProjectSettings.globalize_path(to))
 
 
 func _read_json(path: String) -> Dictionary:

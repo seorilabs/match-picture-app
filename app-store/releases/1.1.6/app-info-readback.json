@@ -1,0 +1,81 @@
+{
+  "checkedAt": "2026-10-11T22:30:35.236969+00:00",
+  "appId": "1528539634",
+  "bundleId": "com.github.magicsih.MatchSymbol",
+  "appInfos": [
+    {
+      "id": "0aa5a988-bad8-4848-8d5a-a61750697794",
+      "attributes": {
+        "appStoreState": "READY_FOR_SALE",
+        "state": "READY_FOR_DISTRIBUTION",
+        "appStoreAgeRating": "FOUR_PLUS",
+        "australiaAgeRating": null,
+        "brazilAgeRating": "L",
+        "brazilAgeRatingV2": "SELF_RATED_L",
+        "franceAgeRating": null,
+        "koreaAgeRating": "ALL"
+      },
+      "localizations": [
+        {
+          "id": "1d2ce8ef-7d00-4696-94e4-9492368ae13c",
+          "attributes": {
+            "locale": "en-US",
+            "name": "Match Symbols",
+            "subtitle": "Find the same symbol",
+            "privacyPolicyUrl": "https://seoleeapps.blogspot.com/p/privacy-policy-body-font-family.html",
+            "privacyChoicesUrl": null,
+            "privacyPolicyText": null
+          }
+        },
+        {
+          "id": "8808a35f-2c0e-442a-a366-037c869dcd98",
+          "attributes": {
+            "locale": "ko",
+            "name": "같은 그림 찾아보기",
+            "subtitle": "16개의 그림 중 같은 그림 2개를 찾아라.",
+            "privacyPolicyUrl": "https://seoleeapps.blogspot.com/p/privacy-policy-body-font-family.html",
+            "privacyChoicesUrl": null,
+            "privacyPolicyText": null
+          }
+        }
+      ]
+    },
+    {
+      "id": "0a4f4778-aeef-49bf-9fb2-e3318035b3d8",
+      "attributes": {
+        "appStoreState": "REJECTED",
+        "state": "REJECTED",
+        "appStoreAgeRating": "FOUR_PLUS",
+        "australiaAgeRating": null,
+        "brazilAgeRating": "L",
+        "brazilAgeRatingV2": "SELF_RATED_L",
+        "franceAgeRating": null,
+        "koreaAgeRating": "ALL"
+      },
+      "localizations": [
+        {
+          "id": "bf3e0177-221c-4390-908b-cee536b4ff45",
+          "attributes": {
+            "locale": "en-US",
+            "name": "Match Symbols",
+            "subtitle": "Find the same symbol",
+            "privacyPolicyUrl": "https://www.seorilabs.com/en/privacy",
+            "privacyChoicesUrl": null,
+            "privacyPolicyText": null
+          }
+        },
+        {
+          "id": "a832e788-61e7-4d45-bf19-af288d45cddb",
+          "attributes": {
+            "locale": "ko",
+            "name": "같은 그림 찾아보기",
+            "subtitle": "16개의 그림 중 같은 그림 2개를 찾아라.",
+            "privacyPolicyUrl": "https://www.seorilabs.com/privacy",
+            "privacyChoicesUrl": null,
+            "privacyPolicyText": null
+          }
+        }
+      ]
+    }
+  ]
+}

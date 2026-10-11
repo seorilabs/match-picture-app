@@ -1,0 +1,57 @@
+{
+  "schemaVersion": 1,
+  "features": [
+    {
+      "id": "title",
+      "core": true
+    },
+    {
+      "id": "first-run-tutorial",
+      "core": true
+    },
+    {
+      "id": "matching-game",
+      "core": true
+    },
+    {
+      "id": "wrong-answer-and-hint",
+      "core": true
+    },
+    {
+      "id": "timing-and-splits",
+      "core": true
+    },
+    {
+      "id": "record-persistence",
+      "core": true
+    },
+    {
+      "id": "language-and-sound-settings",
+      "core": true
+    },
+    {
+      "id": "back-and-exit",
+      "core": true
+    },
+    {
+      "id": "safe-area-and-awake",
+      "core": true
+    },
+    {
+      "id": "native-leaderboards",
+      "core": false
+    },
+    {
+      "id": "interstitial-and-privacy",
+      "core": false
+    },
+    {
+      "id": "ait-share",
+      "core": false
+    },
+    {
+      "id": "analytics",
+      "core": false
+    }
+  ]
+}

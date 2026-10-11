@@ -1,0 +1,21 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+[ui] safe area 여백(뷰포트 단위) 좌 0 상 0 우 0 하 0 / 창 (0, 0) / 안전영역 [P: (0, 0), S: (0, 0)]
+[stability] 검사 21건, 실패 17건
+[stability] 실패: AC-1 실패하면 메모리 기록을 보존한다
+[stability] 실패: AC-1 여러 기록을 한 번에 저장하는 인터페이스
+[stability] 실패: AC-1 손상 원본으로 정상 백업을 덮지 않는다
+[stability] 실패: AC-1 최종 교체 실패 반환
+[stability] 실패: AC-1 교체 실패 후 이전 정상 기록 복구
+[stability] 실패: AC-2 다음 판에서 광고를 재준비한다
+[stability] 실패: AC-3 타이틀 설정 버튼
+[stability] 실패: AC-1 실제 판 완료도 한 번 쓴다
+[stability] 실패: AC-1 결과에서 저장 실패해도 이전 기록 유지
+[stability] 실패: AC-1 결과에 짧은 실패 알림
+[stability] 실패: AC-1 실패를 신기록 저장 성공으로 표시하지 않는다
+[stability] 실패: AC-2 판 완료에서 광고 준비
+[stability] 실패: AC-4 순위 시장 app_store
+[stability] 실패: AC-4 AdMob 표시 요청 분류
+[stability] 실패: AC-4 순위 시장 google_play
+[stability] 실패: AC-4 AdMob 표시 요청 분류
+[stability] 실패: AC-4 실제 표면 시장 판정

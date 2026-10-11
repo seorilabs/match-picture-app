@@ -1,0 +1,20 @@
+{
+  "checkedAt": "2026-10-11T22:42:16.349447+00:00",
+  "scope": "current-config-and-secret-name-readback-only-not-built-artifact-proof",
+  "bundleId": "com.github.magicsih.MatchSymbol",
+  "checkedInAnalyticsConfig": {
+    "measurementIdConfigured": false,
+    "apiSecretConfigured": false,
+    "sha256": "a6e052439ed88c0ce72e19fbb82ae0674902d1d7d0ed9b789474ff16e553af82"
+  },
+  "godotAnalyticsSecretNamePresent": {
+    "repository": false,
+    "appStoreEnvironment": false,
+    "organization": false
+  },
+  "currentCaller": "Deploy App Store → central Godot App Store workflow",
+  "centralSourceSha": "458096f05165494054e8be0039437454440f65b8",
+  "nativeAnalyticsCollection": "not-verified; current configuration is disabled",
+  "credentialsOrPipelineChanged": false,
+  "remaining": "Read exact build restore-step result and native runtime configuration; no production transmission pass inferred from event doubles"
+}

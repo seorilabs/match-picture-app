@@ -1,0 +1,83 @@
+{
+  "candidate": "385fa2e3d20c6cc89a790d403301573d48f164f1",
+  "run": 2,
+  "plannedViewport": [
+    405,
+    720
+  ],
+  "preparedAt": "2026-10-11T22:35:56.439353+00:00",
+  "normalPrimaryUnchangedFromRun1": true,
+  "sameUserDirName": "match-picture-MP-IOS-116-round-4-385fa2e",
+  "preRestartSaveValues": {
+    "match_picture.save": {
+      "sha256": "5965e3c3ca1bfa3f50dcc6419cfea81dfea6ba1df0cdabbbf84779db7bf7ca1b",
+      "value": {
+        "best_seconds": 513.123436333499,
+        "best_splits": [
+          369.747453111352,
+          90.847687555516,
+          7.45365633332722,
+          5.49856466666319,
+          6.51087799999601,
+          5.63986396969307,
+          6.07259493939017,
+          15.915174424231,
+          5.43756333332971
+        ],
+        "clear_count": 1,
+        "has_played": true,
+        "language": "en",
+        "muted": true,
+        "schema": 1
+      }
+    },
+    "match_picture.save.bak": {
+      "sha256": "8a635fa3d8ea5de1e923c2018484da08d7f0bc55df8ea8cb4b68b86e0a5be476",
+      "value": {
+        "best_seconds": 513.123436333499,
+        "best_splits": [
+          369.747453111352,
+          90.847687555516,
+          7.45365633332722,
+          5.49856466666319,
+          6.51087799999601,
+          5.63986396969307,
+          6.07259493939017,
+          15.915174424231,
+          5.43756333332971
+        ],
+        "clear_count": 1,
+        "has_played": true,
+        "language": "en",
+        "muted": false,
+        "schema": 1
+      }
+    }
+  },
+  "files": [
+    {
+      "file": "godot/project.godot",
+      "sha256": "4c23f0aecc97767808bc2ba7adb180bd08640a9e4741c2344e41cccaa226512a"
+    },
+    {
+      "file": "project.godot.candidate-original",
+      "sha256": "4d5952ea3b2597c770195fdfbea8b030bf529ce32f17fb68d545e144eff75ea3"
+    },
+    {
+      "file": "project-environment-run-2.diff",
+      "sha256": "400df884c61cc0fc8854ccdbb965d170a807fb88c53aad157b0bb6820d857c47"
+    },
+    {
+      "file": "godot/addons/mp_review_runner/plugin.cfg",
+      "sha256": "3138855637e3aca0b1862c1d2c742f6a90bdaa15b35285f5e41644808bf38c4f"
+    },
+    {
+      "file": "godot/addons/mp_review_runner/plugin.gd",
+      "sha256": "5b49a3294a32adfa103c9a25b1221f1ca5fcc4a690d20a956a24ea79a197cf42"
+    },
+    {
+      "file": "godot/addons/mp_review_runner/runtime_guard.gd",
+      "sha256": "9b7ba5a18bc435c125ea40aea10bd4605affce76390e796d06fe487c34629ed2"
+    }
+  ]
+}

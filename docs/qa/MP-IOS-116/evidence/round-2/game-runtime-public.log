@@ -1,0 +1,33 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+OpenGL API 4.1 Metal - 90.5 - Compatibility - Using Device: Apple - Apple M3
+
+[review-runtime] actual user://=<QA_USER_DIR:match-picture-MP-IOS-116-round-2-3670659>/ isolated=true
+[ui] safe area 여백(뷰포트 단위) 좌 0 상 0 우 0 하 0 / 창 (323, 719) / 안전영역 [P: (0, 0), S: (323, 719)]
+[review] Editor Run / in-memory storage / fake SDK callbacks
+[review] privacy required=true
+[review] capture=res://build/review/capture-81908.png result=0
+[review] capture=res://build/review/capture-110699.png result=0
+[review] privacy success=false
+[review] capture=res://build/review/capture-118541.png result=0
+[review] privacy success=true
+[review] capture=res://build/review/capture-126157.png result=0
+[review] capture=res://build/review/capture-136958.png result=0
+[review] capture=res://build/review/capture-186219.png result=0
+[review] capture=res://build/review/capture-219200.png result=0
+[review] capture=res://build/review/capture-227742.png result=0
+[review] capture=res://build/review/capture-249509.png result=0
+[review] capture=res://build/review/capture-271551.png result=0
+[review] capture=res://build/review/capture-283125.png result=0
+[review] capture=res://build/review/capture-360410.png result=0
+[review] capture=res://build/review/capture-435918.png result=0
+[review] capture=res://build/review/capture-467318.png result=0
+[review] capture=res://build/review/capture-483010.png result=0
+[review] storage failure=true
+[review] capture=res://build/review/capture-507394.png result=0
+[review] capture=res://build/review/capture-654919.png result=0
+[review] capture=res://build/review/capture-690543.png result=0
+[review] capture=res://build/review/capture-712386.png result=0
+[review] capture=res://build/review/capture-736986.png result=0
+[review] capture=res://build/review/capture-763178.png result=0
+[review] storage failure=false
+[review] capture=res://build/review/capture-1066845.png result=0

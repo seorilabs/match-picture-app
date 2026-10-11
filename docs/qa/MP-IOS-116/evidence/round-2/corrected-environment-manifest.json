@@ -1,0 +1,45 @@
+{
+  "candidate": "02e63ae229f687a0c0790ddec1de731e9373cd90",
+  "files": [
+    {
+      "path": "qa-round-2/project.godot.candidate-original",
+      "sha256": "4d5952ea3b2597c770195fdfbea8b030bf529ce32f17fb68d545e144eff75ea3",
+      "bytes": 2093
+    },
+    {
+      "path": "qa-round-2/godot/project.godot",
+      "sha256": "b5952cba93dba677be9ff9b6824f8d25db89544a6759a4ae9b70ec3db9ed96c4",
+      "bytes": 2399
+    },
+    {
+      "path": "qa-round-2/godot/override.cfg",
+      "sha256": "f7a6a76d7074cf6b234df302a291a025865b07aa93435db92cec768947bf2b31",
+      "bytes": 462
+    },
+    {
+      "path": "qa-round-2/godot/addons/mp_review_runner/plugin.cfg",
+      "sha256": "83608d4b50420e02a7f0a39e2b99d3e558509428ab91f5fab3d11914c66354f9",
+      "bytes": 191
+    },
+    {
+      "path": "qa-round-2/godot/addons/mp_review_runner/plugin.gd",
+      "sha256": "5f4fd578bcb32b2ffc0d2c2eeb9a6aad116b362457a527a2ba4b064d1e180274",
+      "bytes": 886
+    },
+    {
+      "path": "qa-round-2/godot/addons/mp_review_runner/runtime_guard.gd",
+      "sha256": "2816af988a8b38df887c0a56a44d4b36f407e35effc5fe4392a1dc0b348cfb03",
+      "bytes": 412
+    },
+    {
+      "path": "qa-editor-app/receipt.json",
+      "sha256": "6f6379365000c9552d2d019f12ed78a80317fb47f4f2198fc57ebd2afc97663e",
+      "bytes": 389
+    },
+    {
+      "path": "qa-round-2/project-environment.diff",
+      "sha256": "1834c47c2c97b1cfa90e8370336f3b21094ffb129846a37d77f70ed81edc78e5",
+      "bytes": 1560
+    }
+  ]
+}

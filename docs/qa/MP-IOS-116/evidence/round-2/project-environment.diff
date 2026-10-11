@@ -1,0 +1,49 @@
+--- candidate/project.godot
++++ review-environment/project.godot
+@@ -16,6 +16,9 @@
+ 
+ [application]
+ 
++config/use_custom_user_dir=true
++config/custom_user_dir_name="match-picture-MP-IOS-116-round-2-3670659"
++
+ config/name="같은그림찾기"
+ config/name_localized={
+ "en": "Match Picture",
+@@ -23,7 +26,7 @@
+ }
+ config/description="상단 카드와 하단 카드에 함께 들어 있는 심볼 하나를 찾는 도블 방식 타임어택"
+ config/version="2.0.0"
+-run/main_scene="res://scenes/main.tscn"
++run/main_scene="res://tests/review_sandbox.tscn"
+ config/quit_on_go_back=false
+ config/features=PackedStringArray("4.7", "GL Compatibility")
+ boot_splash/bg_color=Color(0.270588, 0.580392, 0.709804, 1)
+@@ -31,6 +34,8 @@
+ config/icon="res://assets/icons/launcher/icon-1024.png"
+ 
+ [autoload]
++
++MpReviewEnvironment="*res://addons/mp_review_runner/runtime_guard.gd"
+ 
+ Platform="*res://autoload/platform.gd"
+ Save="*res://autoload/save.gd"
+@@ -41,6 +46,9 @@
+ 
+ [display]
+ 
++window/size/window_width_override=324
++window/size/window_height_override=720
++
+ window/size/viewport_width=648
+ window/size/viewport_height=1440
+ window/stretch/mode="canvas_items"
+@@ -49,7 +57,7 @@
+ 
+ [editor_plugins]
+ 
+-enabled=PackedStringArray("res://addons/admob/plugin.cfg", "res://addons/GodotPlayGameServices/plugin.cfg", "res://addons/gamecenter/plugin.cfg")
++enabled=PackedStringArray("res://addons/admob/plugin.cfg", "res://addons/GodotPlayGameServices/plugin.cfg", "res://addons/gamecenter/plugin.cfg", "res://addons/mp_review_runner/plugin.cfg")
+ 
+ [input_devices]
+ 

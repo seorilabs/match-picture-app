@@ -1,0 +1,483 @@
+{
+  "candidate": "02e63ae229f687a0c0790ddec1de731e9373cd90",
+  "artifactRoot": "mp-ios-116-ui-round-3-02e63ae",
+  "preparedPlanUtc": "2026-10-11T13:25:11.022822+00:00",
+  "run3StartedRequestUtc": "2026-10-11T13:25:23.903366+00:00",
+  "gameYesExitObservedUtc": "2026-10-11T13:36:19.006883+00:00",
+  "ownEditorAndGameAbsentObservedUtc": "2026-10-11T13:36:26.408395+00:00",
+  "evidenceFinalizedUtc": "2026-10-11T13:37:55.898960+00:00",
+  "totalEditorRuns": 3,
+  "editorHost": "headless --editor official 4.7.2; actual EditorInterface.play_main_scene once",
+  "guiChild": "OpenGL actual GUI; no --headless/--embedded; actual CUA inputs",
+  "editorPid": 33786,
+  "gamePid": 33874,
+  "actualViewport": [
+    540,
+    720
+  ],
+  "userDirName": "match-picture-MP-IOS-116-round-3-run3-02e63ae",
+  "logs": [
+    {
+      "rawFile": "editor-run-3.log",
+      "rawSha256": "43f01d3c4cf1d355e0510e0f05666861f1ce8268da19accf469478f9350767b1",
+      "publicFile": "editor-run-3-public.log",
+      "publicSha256": "5a43cbd007fb696009cab07d34bf55defee0875d1841051dc9162ab0a2070a9d",
+      "errorCount": 0
+    },
+    {
+      "rawFile": "game-run-3.log",
+      "rawSha256": "6d9c68fd2885a1e3cdffa93b4e544cf5d567104530b13ea6325e37e20f33ea88",
+      "publicFile": "game-run-3-public.log",
+      "publicSha256": "eef276d4ea5b12472f4c15d10a6641351928092a6a145c654c5ed85d20eb4264",
+      "errorCount": 0
+    }
+  ],
+  "captures": [
+    {
+      "file": "godot/build/review/capture-78680-1.png",
+      "sha256": "01c5378af388bef4ade6143a46d430ec79b7fa0883991fedc3c55f870b423295",
+      "pixels": [
+        540,
+        720
+      ],
+      "scene": "정상 신규 한국어 타이틀"
+    },
+    {
+      "file": "godot/build/review/capture-108763-2.png",
+      "sha256": "7e6e4e297924c42e33d9075a4b012bd9f565c687082ca59539ea2db8d448bf61",
+      "pixels": [
+        540,
+        720
+      ],
+      "scene": "SYSTEM 선택 뒤 한국어 설정/ON"
+    },
+    {
+      "file": "godot/build/review/capture-117676-3.png",
+      "sha256": "29638fa5e088eb48ce925fc0e7cccbd50acbb7c58ac4b79dd58dc1e2f4e1e7cd",
+      "pixels": [
+        540,
+        720
+      ],
+      "scene": "영어 설정/OFF/미지원 SDK 버튼 숨김"
+    },
+    {
+      "file": "godot/build/review/capture-128601-4.png",
+      "sha256": "4ae66f0fca7b345ebcc88e5973de8492c992fc5c7c4d021d98e43a9fe6978f63",
+      "pixels": [
+        540,
+        720
+      ],
+      "scene": "정상 안내1/3 예시 카드"
+    },
+    {
+      "file": "godot/build/review/capture-139259-5.png",
+      "sha256": "f48d97f09623a3eee419e6554a4ad6064091459f8b9d13cd597581d954736bdf",
+      "pixels": [
+        540,
+        720
+      ],
+      "scene": "정상 안내2/3 공통 심볼 O"
+    },
+    {
+      "file": "godot/build/review/capture-146335-6.png",
+      "sha256": "cd35c2454b1e32e5b538d9c8a70ee7dced7d883b68922b3171a7a435ed4e4dd2",
+      "pixels": [
+        540,
+        720
+      ],
+      "scene": "정상 안내 마지막 손가락/START"
+    },
+    {
+      "file": "godot/build/review/capture-169041-7.png",
+      "sha256": "59c94a2addffbb8cdd5147e2ed6fd01c3f2c230c58e46cdfb4a97b0d7dec64ea",
+      "pixels": [
+        540,
+        720
+      ],
+      "scene": "Start 카드 이동 중간 프레임: 안정 레이아웃 판정 제외"
+    },
+    {
+      "file": "godot/build/review/capture-197213-8.png",
+      "sha256": "a8c15f908545ddaf22e640f8140d008970a2197c2780fe64006de58b454c4965",
+      "pixels": [
+        540,
+        720
+      ],
+      "scene": "오답 X와 count10/0s 잠금"
+    },
+    {
+      "file": "godot/build/review/capture-215695-9.png",
+      "sha256": "3fc5b5cd6b91a9f3e3cc0c31d801cbfa40ae39a4ebb3344ded1e1f58bb0a38c9",
+      "pixels": [
+        540,
+        720
+      ],
+      "scene": "유휴 힌트 O/count10/0s"
+    },
+    {
+      "file": "godot/build/review/capture-263294-10.png",
+      "sha256": "2b00828f0566b34e39f26e4aad492ebe1a875ab9ed8f7491ab379b4d73fa7781",
+      "pixels": [
+        540,
+        720
+      ],
+      "scene": "5정답 후 count5/47s/힌트"
+    },
+    {
+      "file": "godot/build/review/capture-298522-11.png",
+      "sha256": "c1a364d842a62623a29012512561bd4846ed056c1b06b09b4749cd97be20ac35",
+      "pixels": [
+        540,
+        720
+      ],
+      "scene": "마지막 정답 피드백 count1/82s: 완료 전 중간 프레임"
+    },
+    {
+      "file": "godot/build/review/capture-552583-12.png",
+      "sha256": "45fd8b88be7637fecdb0f4b4c3c5071687ba8c4e485242b965f5d9d5afb4c849",
+      "pixels": [
+        540,
+        720
+      ],
+      "scene": "정상 완료 후 한국어 설정/ON"
+    },
+    {
+      "file": "godot/build/review/capture-557524-13.png",
+      "sha256": "0a8b5ccbd5b834dedab8ae59382e8434b73a892e0f0831d21a6b8f6b85fd11ca",
+      "pixels": [
+        540,
+        720
+      ],
+      "scene": "한국어 최고기록82s/막대9"
+    },
+    {
+      "file": "godot/build/review/capture-565283-14.png",
+      "sha256": "1711acf4dfebef1a06b1394b8f37a37a4a21680b8f18c56d84e4c6b0fdc0b0d0",
+      "pixels": [
+        540,
+        720
+      ],
+      "scene": "정상 완료 후 영어 설정/OFF"
+    },
+    {
+      "file": "godot/build/review/capture-582643-15.png",
+      "sha256": "9cc850e0f72f16a78323168e37a0ad4becd0def97e7fc701774c504604c04463",
+      "pixels": [
+        540,
+        720
+      ],
+      "scene": "영어 NEW BEST82s/막대9/HUD0"
+    },
+    {
+      "file": "godot/build/review/capture-588917-16.png",
+      "sha256": "07ace8e6e5e9b8441fb02ec31fdd241b5f41c16ec40e9986728a2fe7328033eb",
+      "pixels": [
+        540,
+        720
+      ],
+      "scene": "결과 Exit 종료 팝업"
+    },
+    {
+      "file": "godot/build/review/capture-600845-17.png",
+      "sha256": "9cc850e0f72f16a78323168e37a0ad4becd0def97e7fc701774c504604c04463",
+      "pixels": [
+        540,
+        720
+      ],
+      "scene": "실제 No 뒤 결과82s 유지"
+    },
+    {
+      "file": "godot/build/review/capture-626154-18.png",
+      "sha256": "25d1322adb8b4a48eaeb0f7a1dcdeb3bb27e7860ebaecc81ad5677a9f83be9c3",
+      "pixels": [
+        540,
+        720
+      ],
+      "scene": "실제 Retry count10/0s/BEST82s/안내 없음"
+    },
+    {
+      "file": "godot/build/review/capture-626196-19.png",
+      "sha256": "bae892f995de9a02fc68dbfbb374800634c8b6bd4960e1bc509731e2700a9ca9",
+      "pixels": [
+        540,
+        720
+      ],
+      "scene": "Retry 게임 F6 종료 팝업"
+    },
+    {
+      "file": "godot/build/review/capture-631470-20.png",
+      "sha256": "25d1322adb8b4a48eaeb0f7a1dcdeb3bb27e7860ebaecc81ad5677a9f83be9c3",
+      "pixels": [
+        540,
+        720
+      ],
+      "scene": "Retry 게임 실제 No 취소"
+    }
+  ],
+  "saveEvidence": {
+    "match_picture.save": {
+      "file": "run-3-match_picture.save",
+      "sha256": "8c53e09e46c7c5a636e7d6043f846ed05fa55c71c2c811b230f68f26049a3a0d",
+      "value": {
+        "best_seconds": 82.8871653333406,
+        "best_splits": [
+          8.53021788888895,
+          11.0870370370368,
+          11.3614647407405,
+          7.8228136666663,
+          8.82312899999962,
+          6.9067056666664,
+          10.022563444444,
+          8.75642955556003,
+          9.576804333338
+        ],
+        "clear_count": 1,
+        "has_played": true,
+        "language": "en",
+        "muted": true,
+        "schema": 1
+      },
+      "splitsCount": 9,
+      "splitsSum": 82.8871653333406
+    },
+    "match_picture.save.bak": {
+      "file": "run-3-match_picture.save.bak",
+      "sha256": "4d08ee0ba8b1f1bce02bf1b952159fd6e8d16f258a4f6d9f1bd678ba90e7e6a4",
+      "value": {
+        "best_seconds": 82.8871653333406,
+        "best_splits": [
+          8.53021788888895,
+          11.0870370370368,
+          11.3614647407405,
+          7.8228136666663,
+          8.82312899999962,
+          6.9067056666664,
+          10.022563444444,
+          8.75642955556003,
+          9.576804333338
+        ],
+        "clear_count": 1,
+        "has_played": true,
+        "language": "en",
+        "muted": false,
+        "schema": 1
+      },
+      "splitsCount": 9,
+      "splitsSum": 82.8871653333406
+    }
+  },
+  "sourceProvenanceFile": "source-provenance.json",
+  "trackedDifferences": [
+    {
+      "file": "godot/project.godot",
+      "candidateSha256": "4d5952ea3b2597c770195fdfbea8b030bf529ce32f17fb68d545e144eff75ea3",
+      "qaCopySha256": "987632e561a3e581b0a7efa8547ca93c065e46c9f3aa29bb938d0ccf9841820c"
+    },
+    {
+      "file": "godot/scenes/main.tscn",
+      "candidateSha256": "2c6c5fda931ee43689569f4824f03ef888361d0536f980bfd7fdc6823b1cea08",
+      "qaCopySha256": "7c6c4fce0247b76d28e0b742a014d013171f8d410fde223d2462439f7d70b9ce"
+    }
+  ],
+  "qaEditorSettingLines": {
+    "run/window_placement/game_embed_mode": "run/window_placement/game_embed_mode = -1",
+    "network/debug/remote_port": "network/debug/remote_port = 31663",
+    "network/language_server/remote_port": "network/language_server/remote_port = 31665"
+  },
+  "remainingUnknown": [
+    "normal-primary restart preservation",
+    "corrupted-primary normal-bak restart recovery",
+    "normal narrow viewport main UI",
+    "all three ratios actual GUI input comparison",
+    "native SDKs / physical safe area / awake / hardware back"
+  ],
+  "artifactFiles": [
+    {
+      "file": "editor-run-1-public.log",
+      "sha256": "01275a8ff9d2625bd7f93312878e33ca85d9ea8d6750e6245c596374d505788f",
+      "visibility": "evidence-review-required"
+    },
+    {
+      "file": "editor-run-1.log",
+      "sha256": "5e1d03bece9ba40f91b423df6265a763ad5923210631fe1f06b8d872799959aa",
+      "visibility": "local-only"
+    },
+    {
+      "file": "editor-run-2-public.log",
+      "sha256": "0e8dd884544268bd9814baa9bde0768cd1118ebb2df87d6fff3399ea87b1fe05",
+      "visibility": "evidence-review-required"
+    },
+    {
+      "file": "editor-run-2.log",
+      "sha256": "db650800f015bb2f93547bf48c1a655958da539ff1456b30bddb2604852b6ede",
+      "visibility": "local-only"
+    },
+    {
+      "file": "editor-run-3-public.log",
+      "sha256": "5a43cbd007fb696009cab07d34bf55defee0875d1841051dc9162ab0a2070a9d",
+      "visibility": "evidence-review-required"
+    },
+    {
+      "file": "editor-run-3.log",
+      "sha256": "43f01d3c4cf1d355e0510e0f05666861f1ce8268da19accf469478f9350767b1",
+      "visibility": "local-only"
+    },
+    {
+      "file": "environment-run-1-manifest.json",
+      "sha256": "c1b453bf0df99a82d8edc3d457fb6222d19288e843cacc47d854c38799bb1035",
+      "visibility": "evidence-review-required"
+    },
+    {
+      "file": "environment-run-2-manifest.json",
+      "sha256": "4945c1c48cc31ddb4f62b788f34bd38cce84e73904d660c672d7bb5f1e040868",
+      "visibility": "evidence-review-required"
+    },
+    {
+      "file": "environment-run-3-manifest.json",
+      "sha256": "d6c6ac25368b8474da0122a7feae8d13adcd2e158258f52b4354e2a0cf8bfc1b",
+      "visibility": "evidence-review-required"
+    },
+    {
+      "file": "game-run-1-public.log",
+      "sha256": "3aac8f2bfb787f5dc4bd539a3ae87e53fbadb43555dda0698308557c3ba40aba",
+      "visibility": "evidence-review-required"
+    },
+    {
+      "file": "game-run-1.log",
+      "sha256": "54050662ba07c38e178c8596c09dc0e29f3f10d3ec68cdba0e67f1ebf9ebd958",
+      "visibility": "local-only"
+    },
+    {
+      "file": "game-run-2-public.log",
+      "sha256": "db9e7e7ba795c0ef98f6b2173839e1908266942c7c9b51dd416722cce1dd07b3",
+      "visibility": "evidence-review-required"
+    },
+    {
+      "file": "game-run-2.log",
+      "sha256": "a3a52530be6f01ba5c30a4e3f4a0ab1736e226d19f978edb3323852a16f6d2ce",
+      "visibility": "local-only"
+    },
+    {
+      "file": "game-run-3-public.log",
+      "sha256": "eef276d4ea5b12472f4c15d10a6641351928092a6a145c654c5ed85d20eb4264",
+      "visibility": "evidence-review-required"
+    },
+    {
+      "file": "game-run-3.log",
+      "sha256": "6d9c68fd2885a1e3cdffa93b4e544cf5d567104530b13ea6325e37e20f33ea88",
+      "visibility": "local-only"
+    },
+    {
+      "file": "main-scene-editor-serialization.diff",
+      "sha256": "fd49c3d21e49ea59ed28bc2ac24c4dc5818484eccfcc2a78583123c204ccb24b",
+      "visibility": "evidence-review-required"
+    },
+    {
+      "file": "main.tscn.candidate-original",
+      "sha256": "2c6c5fda931ee43689569f4824f03ef888361d0536f980bfd7fdc6823b1cea08",
+      "visibility": "evidence-review-required"
+    },
+    {
+      "file": "main.tscn.editor-serialized",
+      "sha256": "7c6c4fce0247b76d28e0b742a014d013171f8d410fde223d2462439f7d70b9ce",
+      "visibility": "evidence-review-required"
+    },
+    {
+      "file": "project-environment-run-1.diff",
+      "sha256": "d0f1675e5b7a2390ad5adbf088eba1b7d58e9fc56c24d6367317239c1fadee8c",
+      "visibility": "evidence-review-required"
+    },
+    {
+      "file": "project-environment-run-2.diff",
+      "sha256": "e929c3b2b8233a618aeaa5645ae165404ca8fb9b7a8f78f3124e9e3ce29a87cb",
+      "visibility": "evidence-review-required"
+    },
+    {
+      "file": "project-environment-run-3.diff",
+      "sha256": "ca91941ac4fd6bb8da977b9827995ca513c561ed2c4b67906e535e00e20879fb",
+      "visibility": "evidence-review-required"
+    },
+    {
+      "file": "project.godot.candidate-original",
+      "sha256": "4d5952ea3b2597c770195fdfbea8b030bf529ce32f17fb68d545e144eff75ea3",
+      "visibility": "evidence-review-required"
+    },
+    {
+      "file": "run-1-failure-evidence-manifest.json",
+      "sha256": "293c4e659df3e44f1d99b70a2bbab0f833c0233299bb5f4c8f25d03099ac69c4",
+      "visibility": "evidence-review-required"
+    },
+    {
+      "file": "run-1-match_picture.save",
+      "sha256": "283a2b70a17517784895affe3303ad1d9336d81f95727dcbe9c8e7989de261c8",
+      "visibility": "evidence-review-required"
+    },
+    {
+      "file": "run-1-match_picture.save.bak",
+      "sha256": "426046432b389f106742750353b7a76e2f8a8f24dd17cc6af69d9af4ff1560af",
+      "visibility": "evidence-review-required"
+    },
+    {
+      "file": "run-1-preserved-match_picture.save",
+      "sha256": "283a2b70a17517784895affe3303ad1d9336d81f95727dcbe9c8e7989de261c8",
+      "visibility": "evidence-review-required"
+    },
+    {
+      "file": "run-1-preserved-match_picture.save.bak",
+      "sha256": "426046432b389f106742750353b7a76e2f8a8f24dd17cc6af69d9af4ff1560af",
+      "visibility": "evidence-review-required"
+    },
+    {
+      "file": "run-2-current-evidence-manifest.json",
+      "sha256": "0d80575bb48749f12d0c7b7eb39cde6d2d35c14473e4ddaa7114a2ee52d4d594",
+      "visibility": "evidence-review-required"
+    },
+    {
+      "file": "run-3-match_picture.save",
+      "sha256": "8c53e09e46c7c5a636e7d6043f846ed05fa55c71c2c811b230f68f26049a3a0d",
+      "visibility": "evidence-review-required"
+    },
+    {
+      "file": "run-3-match_picture.save.bak",
+      "sha256": "4d08ee0ba8b1f1bce02bf1b952159fd6e8d16f258a4f6d9f1bd678ba90e7e6a4",
+      "visibility": "evidence-review-required"
+    },
+    {
+      "file": "run-3-process-end.json",
+      "sha256": "23e6664dfe026d68293308c756617fcc7af4290a2312e1a3b8442e4095e369f7",
+      "visibility": "evidence-review-required"
+    },
+    {
+      "file": "self-contained-editor-settings-after-run-3-public.tres",
+      "sha256": "5d962e5fc85ac59086e5b0a7eed4c56ebf4f94b4b4a421232c1af03b1e6c178c",
+      "visibility": "evidence-review-required"
+    },
+    {
+      "file": "self-contained-editor-settings-after-run-3.tres",
+      "sha256": "6b3bf86e5844147a280037b94ab611719b267a686cef8f256d4a090039630629",
+      "visibility": "local-only"
+    },
+    {
+      "file": "self-contained-receipt.json",
+      "sha256": "c92fc51c1f6aed0fcaee36155ae764b670a1fe9042a916f9e2097cb16bb3823e",
+      "visibility": "evidence-review-required"
+    },
+    {
+      "file": "source-provenance.json",
+      "sha256": "27aaf758ccc4b1e75d8c5f2c5efbb1fce148b2cfbecfbd00635d258677174843",
+      "visibility": "evidence-review-required"
+    },
+    {
+      "file": "unique-app-receipt.json",
+      "sha256": "6f6379365000c9552d2d019f12ed78a80317fb47f4f2198fc57ebd2afc97663e",
+      "visibility": "evidence-review-required"
+    }
+  ],
+  "editorPreferencesEvidence": {
+    "rawFile": "self-contained-editor-settings-after-run-3.tres",
+    "rawSha256": "6b3bf86e5844147a280037b94ab611719b267a686cef8f256d4a090039630629",
+    "publicFile": "self-contained-editor-settings-after-run-3-public.tres",
+    "publicSha256": "5d962e5fc85ac59086e5b0a7eed4c56ebf4f94b4b4a421232c1af03b1e6c178c",
+    "rawVisibility": "local-only"
+  }
+}

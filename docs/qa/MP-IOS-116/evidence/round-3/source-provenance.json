@@ -1,0 +1,21 @@
+{
+  "candidate": "02e63ae229f687a0c0790ddec1de731e9373cd90",
+  "comparedTrackedGodotFiles": 820,
+  "differences": [
+    {
+      "file": "godot/project.godot",
+      "candidateSha256": "4d5952ea3b2597c770195fdfbea8b030bf529ce32f17fb68d545e144eff75ea3",
+      "qaCopySha256": "987632e561a3e581b0a7efa8547ca93c065e46c9f3aa29bb938d0ccf9841820c"
+    },
+    {
+      "file": "godot/scenes/main.tscn",
+      "candidateSha256": "2c6c5fda931ee43689569f4824f03ef888361d0536f980bfd7fdc6823b1cea08",
+      "qaCopySha256": "7c6c4fce0247b76d28e0b742a014d013171f8d410fde223d2462439f7d70b9ce"
+    }
+  ],
+  "interpretation": {
+    "godot/project.godot": "approved isolated execution configuration",
+    "godot/scenes/main.tscn": "Editor save_before_run automatic UID/load_steps metadata serialization; exact diff preserved; no manual product source edit"
+  },
+  "behaviorSourceSame": true
+}

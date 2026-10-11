@@ -8,6 +8,7 @@ extends Control
 ## 것은 다르다. 여기서 보여 주는 값은 둘 다 이미 저장하고 있던 것이다.
 
 signal start_pressed()
+signal settings_pressed()
 
 ## 덱을 뜻하는 조커 카드. HUD 의 남은 카드 아이콘과 같은 그림이라 따로 만들지 않는다.
 const EMBLEM_PATH := "res://assets/icons/joker.png"
@@ -15,6 +16,8 @@ const EMBLEM_SIZE := 180.0
 
 var _best_label: Label
 var _clears_label: Label
+var _best_seconds := 0.0
+var _clear_count := 0
 
 
 func _init() -> void:
@@ -69,16 +72,36 @@ func _init() -> void:
 	start.pressed.connect(func() -> void: start_pressed.emit())
 	column.add_child(start)
 
+	var settings := MpUiKit.make_button("SETTINGS_TITLE", MpUiKit.PANEL_BORDER)
+	settings.add_theme_color_override("font_color", MpUiKit.TEXT_LIGHT)
+	var style := MpUiKit.button_style(MpUiKit.PANEL_BORDER)
+	style.border_color = MpUiKit.TEXT_LIGHT
+	style.set_border_width_all(3)
+	settings.add_theme_stylebox_override("normal", style)
+	settings.pressed.connect(func() -> void: settings_pressed.emit())
+	column.add_child(settings)
+
 
 ## 세이브에 있는 값을 그대로 받는다. 아직 기록이 없으면 그 줄은 비워 둔다.
 func show_title(best_seconds: float, clear_count: int) -> void:
+	_best_seconds = best_seconds
+	_clear_count = clear_count
+	_refresh_records()
+	visible = true
+
+
+func _notification(what: int) -> void:
+	if what == NOTIFICATION_TRANSLATION_CHANGED and _best_label != null:
+		_refresh_records()
+
+
+func _refresh_records() -> void:
 	# 값이 끼는 문구는 조립한 순간의 로케일로 굳는다. 띄울 때마다 다시 만든다.
-	if MpBestRecord.has_record(best_seconds):
-		_best_label.text = tr("RESULT_BEST").format([MpRules.format_seconds(best_seconds)])
+	if MpBestRecord.has_record(_best_seconds):
+		_best_label.text = tr("RESULT_BEST").format([MpRules.format_seconds(_best_seconds)])
 	else:
 		_best_label.text = ""
-	_clears_label.text = tr("TITLE_CLEARS").format([clear_count]) if clear_count > 0 else ""
-	visible = true
+	_clears_label.text = tr("TITLE_CLEARS").format([_clear_count]) if _clear_count > 0 else ""
 
 
 func hide_title() -> void:

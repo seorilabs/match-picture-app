@@ -120,3 +120,28 @@ func _detect() -> Surface:
 			return Surface.IOS
 		_:
 			return Surface.DESKTOP
+
+
+func market_id() -> String:
+	return market_for(_surface, is_ait())
+
+
+func ad_provider_id() -> String:
+	return ad_provider_for(market_id())
+
+
+static func ad_provider_for(market: String) -> String:
+	if market == "ait":
+		return "toss_ads"
+	return "admob" if market in ["app_store", "google_play"] else ""
+
+
+static func market_for(actual_surface: Surface, ait: bool = false) -> String:
+	match actual_surface:
+		Surface.IOS:
+			return "app_store"
+		Surface.ANDROID:
+			return "google_play"
+		Surface.WEB:
+			return "ait" if ait else ""
+	return ""

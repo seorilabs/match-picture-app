@@ -1,0 +1,776 @@
+{
+  "recordedAt": "2026-10-11T22:48:00.555779+00:00",
+  "classification": "Editor plugin automatic isolated official iOS template download/reimport generated assets; no physical iOS SDK execution proof",
+  "files": [
+    {
+      "file": "godot/addons/admob/downloads/ios/ios-template-v4.7.2.zip",
+      "bytes": 3149407,
+      "sha256": "6e7f1c807761f9c0ad45d335ac4c74acd4bba7a31f9e1c7cd16a5220010cce71"
+    },
+    {
+      "file": "godot/addons/admob/ios/bin/package.gd.uid",
+      "bytes": 20,
+      "sha256": "f02619756aef702dae5353e39041f9764bbc09c62cab117858027f9ef542cb9c"
+    },
+    {
+      "file": "godot/addons/admob/ios/bin/package.gd",
+      "bytes": 163,
+      "sha256": "7b35c5dd9444a30bf9c52b3a8a9d742789cf019929c473fee22bc4f3d23d620e"
+    },
+    {
+      "file": "godot/addons/admob/ios/bin/ads/poing_godot_admob_ads.gd.uid",
+      "bytes": 19,
+      "sha256": "089d6552431357f6dd29a13c6c6e13efb526e7086fb4c2078bcd426edf8633ce"
+    },
+    {
+      "file": "godot/addons/admob/ios/bin/ads/poing_godot_admob_ads.gd",
+      "bytes": 7388,
+      "sha256": "848b4948c30e284cb21d82e4d041557fc48fc7df643b9e54784c9b6e0de91139"
+    },
+    {
+      "file": "godot/addons/admob/ios/bin/vungle/poing_godot_admob_vungle.gd.uid",
+      "bytes": 19,
+      "sha256": "b49943d6959a46476d798c7834770d39e8e559050d6b83bf9b3d7ea6e15a28ec"
+    },
+    {
+      "file": "godot/addons/admob/ios/bin/vungle/poing_godot_admob_vungle.gd",
+      "bytes": 1969,
+      "sha256": "50e4c2207c3cd3f585641ade8612e6936a7886662ab57ee6d19c44680a5108ca"
+    },
+    {
+      "file": "godot/addons/admob/ios/bin/inmobi/poing_godot_admob_inmobi.gd.uid",
+      "bytes": 19,
+      "sha256": "ff808b0841d731bd5805e423fcee8b216a135b21d4c75f6e2118bef4d5d1b8c5"
+    },
+    {
+      "file": "godot/addons/admob/ios/bin/inmobi/poing_godot_admob_inmobi.gd",
+      "bytes": 1952,
+      "sha256": "19e997cc3ea6d8d7ffc67f12bfc93ffb57f594b7cc445535f72d90abaf0be977"
+    },
+    {
+      "file": "godot/addons/admob/ios/bin/applovin/poing_godot_admob_applovin.gd",
+      "bytes": 1964,
+      "sha256": "a2cb08a005bd3b4420f478b86be12c2d744d280c4fadae584c1f1dba04c1dc59"
+    },
+    {
+      "file": "godot/addons/admob/ios/bin/applovin/poing_godot_admob_applovin.gd.uid",
+      "bytes": 20,
+      "sha256": "e6e04c52b8b35ee96661791c70b83eba3acfa103dbe6692c45ec8c281b2ab7af"
+    },
+    {
+      "file": "godot/addons/admob/ios/bin/pangle/poing_godot_admob_pangle.gd",
+      "bytes": 1953,
+      "sha256": "193213395335082cd865f64c01f298025b282c8ce9c19e5657442f854c58aa64"
+    },
+    {
+      "file": "godot/addons/admob/ios/bin/pangle/poing_godot_admob_pangle.gd.uid",
+      "bytes": 19,
+      "sha256": "a1fcc9d1c1ece46218f6657934471013978d7cd43ce62242f14f8c825e716450"
+    },
+    {
+      "file": "godot/addons/admob/ios/bin/moloco/poing_godot_admob_moloco.gd.uid",
+      "bytes": 19,
+      "sha256": "e3b7cf2666d3a9a221274cf5b6cb75bd5b90811ab018f4def35b166dbbf8178e"
+    },
+    {
+      "file": "godot/addons/admob/ios/bin/moloco/poing_godot_admob_moloco.gd",
+      "bytes": 1952,
+      "sha256": "c4ec5c7955db228fb8ecc69f4788a48dd5a52bf50b9c5b0c05e88b5edace67d1"
+    },
+    {
+      "file": "godot/addons/admob/ios/bin/meta/poing_godot_admob_meta.gd.uid",
+      "bytes": 20,
+      "sha256": "d1202ec6a205b5cb9080add6496e2afa15b75943c95d1c0beb86cbfc26285df6"
+    },
+    {
+      "file": "godot/addons/admob/ios/bin/meta/poing_godot_admob_meta.gd",
+      "bytes": 1940,
+      "sha256": "ec434302629378d440c6027e042da31c2713554668184c67f115a77034c97474"
+    },
+    {
+      "file": "godot/addons/admob/ios/bin/bidmachine/poing_godot_admob_bidmachine.gd",
+      "bytes": 1975,
+      "sha256": "20d5c92da96aa5db8672600c463dc1777b1be8bd85b78e8a345c9bb7708eac27"
+    },
+    {
+      "file": "godot/addons/admob/ios/bin/bidmachine/poing_godot_admob_bidmachine.gd.uid",
+      "bytes": 20,
+      "sha256": "c9e42a93b23451abd3e8798486c53f3ee07d89cc8d65036984363bafc1af7028"
+    },
+    {
+      "file": "godot/addons/admob/ios/bin/mytarget/poing_godot_admob_mytarget.gd.uid",
+      "bytes": 20,
+      "sha256": "2d4f9e3874806bb7df75dd99f1b65fe5d1d4d0276eb5e15d69731fdc04883b74"
+    },
+    {
+      "file": "godot/addons/admob/ios/bin/mytarget/poing_godot_admob_mytarget.gd",
+      "bytes": 1964,
+      "sha256": "91bca105f03f3e93c28273c5a4ac61ef736310232489910005296138723371f5"
+    },
+    {
+      "file": "godot/addons/admob/ios/bin/unity_ads/poing_godot_admob_unity_ads.gd",
+      "bytes": 1961,
+      "sha256": "27f160a635d4a657e7fddbfb664a606361f1a3342846614cc8f687e1f9c2047c"
+    },
+    {
+      "file": "godot/addons/admob/ios/bin/unity_ads/poing_godot_admob_unity_ads.gd.uid",
+      "bytes": 20,
+      "sha256": "c5ffda5e14fc28d86fdeb98379796ff66738bb8bdca5fcd152c911daf7479bbc"
+    },
+    {
+      "file": "godot/addons/admob/ios/bin/line/poing_godot_admob_line.gd",
+      "bytes": 1939,
+      "sha256": "51158276d3847df37ac4a426616bde33fcba230d3220f0619233ec686e542bc1"
+    },
+    {
+      "file": "godot/addons/admob/ios/bin/line/poing_godot_admob_line.gd.uid",
+      "bytes": 20,
+      "sha256": "c057b47dd726f6a2054b274ded9865f1e90b5407ef18a827592b5cbd90b1b8cc"
+    },
+    {
+      "file": "godot/addons/admob/ios/bin/dtexchange/poing_godot_admob_dtexchange.gd",
+      "bytes": 1977,
+      "sha256": "bd4861b7dd490f11023b683ebcd0666578f25565203ddab361cf40378c4a9126"
+    },
+    {
+      "file": "godot/addons/admob/ios/bin/dtexchange/poing_godot_admob_dtexchange.gd.uid",
+      "bytes": 20,
+      "sha256": "0ad161e3a2f4927f4d365f3c2b30ec541efe00f755aaeb72f07ff95f53146780"
+    },
+    {
+      "file": "godot/addons/admob/ios/bin/ironsource/poing_godot_admob_ironsource.gd.uid",
+      "bytes": 20,
+      "sha256": "84a69eebceadb09f8492076f4a85afb02b1896216b8d54d6341efb20e9334190"
+    },
+    {
+      "file": "godot/addons/admob/ios/bin/ironsource/poing_godot_admob_ironsource.gd",
+      "bytes": 1977,
+      "sha256": "6330b139300b400cb539ccc69093bc985421f1f026af9ef60b1bc58ee8ed3915"
+    },
+    {
+      "file": "godot/addons/admob/ios/bin/maio/poing_godot_admob_maio.gd.uid",
+      "bytes": 20,
+      "sha256": "999812bfba9a1badd35853cd9377a532159e67cb29047a15906171deb2180876"
+    },
+    {
+      "file": "godot/addons/admob/ios/bin/maio/poing_godot_admob_maio.gd",
+      "bytes": 1937,
+      "sha256": "51bf772717fa5116382f246a7e477d46d05efbd1ee5e77dfdf960cb77d6afee0"
+    },
+    {
+      "file": "godot/addons/admob/ios/bin/chartboost/poing_godot_admob_chartboost.gd.uid",
+      "bytes": 19,
+      "sha256": "73e8c5620e2dfbe5e3c53b6b84ad2854d0be2a0de53f40c4a54d1085144963b7"
+    },
+    {
+      "file": "godot/addons/admob/ios/bin/chartboost/poing_godot_admob_chartboost.gd",
+      "bytes": 1976,
+      "sha256": "1c10e4c8df13baa59177197bffd623a55d1387b5b26ebde72c0cf5080a4295c0"
+    },
+    {
+      "file": "godot/addons/admob/ios/bin/imobile/poing_godot_admob_imobile.gd.uid",
+      "bytes": 19,
+      "sha256": "74afa4038fc4235061f51378b96643a13622dfbf6b37058f2bf70869ecf60b4a"
+    },
+    {
+      "file": "godot/addons/admob/ios/bin/imobile/poing_godot_admob_imobile.gd",
+      "bytes": 1957,
+      "sha256": "2238c7ad1b551369a0073073600578a116f55c41920da1ecb7014ad90d2d7e4a"
+    },
+    {
+      "file": "godot/addons/admob/ios/bin/pubmatic/poing_godot_admob_pubmatic.gd.uid",
+      "bytes": 20,
+      "sha256": "195c233cfcdbfd554efe1cc5a2bf300bc8a2c5118a5d4a04bab40702ad43489e"
+    },
+    {
+      "file": "godot/addons/admob/ios/bin/pubmatic/poing_godot_admob_pubmatic.gd",
+      "bytes": 1963,
+      "sha256": "fa8454f831f414518b024633d934907ea8fc600583e426d5e93a194695c7a415"
+    },
+    {
+      "file": "godot/addons/admob/ios/bin/mintegral/poing_godot_admob_mintegral.gd",
+      "bytes": 1969,
+      "sha256": "a8a65e23cdc80e84c406776bee5850985939ca4fe41847da70325ee9fce46a8d"
+    },
+    {
+      "file": "godot/addons/admob/ios/bin/mintegral/poing_godot_admob_mintegral.gd.uid",
+      "bytes": 20,
+      "sha256": "b23d25f30522cfa28066b729c0ac26669341a2083bf0ba21c248333f039972b8"
+    },
+    {
+      "file": "godot/addons/admob/ios/bin/mintegral/libs/poing-godot-admob-mintegral.debug.xcframework/Info.plist",
+      "bytes": 1318,
+      "sha256": "1daa6b7864ca0ab29571c4d7646dd766f131ae267da57b3e71298a194cadbd07"
+    },
+    {
+      "file": "godot/addons/admob/ios/bin/mintegral/libs/poing-godot-admob-mintegral.release.xcframework/Info.plist",
+      "bytes": 1294,
+      "sha256": "83fcdaf375e88e8ca1e752f6d11d412f1bec01c9f438137bfdbecc3a5f71f637"
+    },
+    {
+      "file": "godot/addons/admob/ios/bin/mintegral/libs/poing-godot-admob-mintegral.release.xcframework/ios-arm64_x86_64-simulator/poing-godot-admob-mintegral.simulator.release.a",
+      "bytes": 48272,
+      "sha256": "f232d5ad0a551675b4cb0b2fbf27b6fbe3e02134a3789ef5e46d30cf409cf002"
+    },
+    {
+      "file": "godot/addons/admob/ios/bin/mintegral/libs/poing-godot-admob-mintegral.release.xcframework/ios-arm64/libpoing-godot-admob-mintegral.arm64-ios.release.a",
+      "bytes": 26216,
+      "sha256": "7179e9ca5b3ffdf74cc770bbe3271d19f20e89f0a0e4203eaa7b14af40a6a3f5"
+    },
+    {
+      "file": "godot/addons/admob/ios/bin/mintegral/libs/poing-godot-admob-mintegral.debug.xcframework/ios-arm64_x86_64-simulator/poing-godot-admob-mintegral.simulator.release_debug.a",
+      "bytes": 54840,
+      "sha256": "4c7f5e62ed7c3e3bc96024164f62d77ac2519e9204bae7dc51b915be7105e780"
+    },
+    {
+      "file": "godot/addons/admob/ios/bin/mintegral/libs/poing-godot-admob-mintegral.debug.xcframework/ios-arm64/libpoing-godot-admob-mintegral.arm64-ios.release_debug.a",
+      "bytes": 29600,
+      "sha256": "a99312d0ff9cdb22ce42fbd7b806220f59f3b3957b7ce87bce8af41b7a749c5b"
+    },
+    {
+      "file": "godot/addons/admob/ios/bin/pubmatic/libs/poing-godot-admob-pubmatic.debug.xcframework/Info.plist",
+      "bytes": 1314,
+      "sha256": "2a40ae40fdfb6c0a9371288dbc1c8faa1b9f91162d1fb2e867e90addfa029806"
+    },
+    {
+      "file": "godot/addons/admob/ios/bin/pubmatic/libs/poing-godot-admob-pubmatic.release.xcframework/Info.plist",
+      "bytes": 1290,
+      "sha256": "1a3ce3a36577732851bc22f2b39be9e6b9bc322565228f3fdc9efc12e50319e0"
+    },
+    {
+      "file": "godot/addons/admob/ios/bin/pubmatic/libs/poing-godot-admob-pubmatic.release.xcframework/ios-arm64_x86_64-simulator/poing-godot-admob-pubmatic.simulator.release.a",
+      "bytes": 48096,
+      "sha256": "182f3a85cca7601b92ca584226aa621ca0102548c677ae34f5a57f750099c071"
+    },
+    {
+      "file": "godot/addons/admob/ios/bin/pubmatic/libs/poing-godot-admob-pubmatic.release.xcframework/ios-arm64/libpoing-godot-admob-pubmatic.arm64-ios.release.a",
+      "bytes": 26120,
+      "sha256": "32c2488f38255170414616f6bb62cb85080396593f9b34050cf106eda5e1d963"
+    },
+    {
+      "file": "godot/addons/admob/ios/bin/pubmatic/libs/poing-godot-admob-pubmatic.debug.xcframework/ios-arm64_x86_64-simulator/poing-godot-admob-pubmatic.simulator.release_debug.a",
+      "bytes": 54664,
+      "sha256": "302c0bc85ff21c9645e39fca4cfadbd0569a7361f8b3b88a1d7acfa9d92dfc15"
+    },
+    {
+      "file": "godot/addons/admob/ios/bin/pubmatic/libs/poing-godot-admob-pubmatic.debug.xcframework/ios-arm64/libpoing-godot-admob-pubmatic.arm64-ios.release_debug.a",
+      "bytes": 29512,
+      "sha256": "dec6478610feff721e2d71f622d710d178b96fe45a46e394823743746c1cce15"
+    },
+    {
+      "file": "godot/addons/admob/ios/bin/imobile/libs/poing-godot-admob-imobile.release.xcframework/Info.plist",
+      "bytes": 1286,
+      "sha256": "1be7bf3805599e3eef30f30e4c7806c4e2fdecb9951e8f6c0ac7448b842a0a44"
+    },
+    {
+      "file": "godot/addons/admob/ios/bin/imobile/libs/poing-godot-admob-imobile.debug.xcframework/Info.plist",
+      "bytes": 1310,
+      "sha256": "3cbfbff4a554ec63d2030b30470eca87e9f20886f7a3094215a001fc9d2434dc"
+    },
+    {
+      "file": "godot/addons/admob/ios/bin/imobile/libs/poing-godot-admob-imobile.debug.xcframework/ios-arm64_x86_64-simulator/poing-godot-admob-imobile.simulator.release_debug.a",
+      "bytes": 54512,
+      "sha256": "c8e7177c96a2988dd2818f61bf8607b799f99a985be4bc1f16c005fd84ed2fe7"
+    },
+    {
+      "file": "godot/addons/admob/ios/bin/imobile/libs/poing-godot-admob-imobile.debug.xcframework/ios-arm64/libpoing-godot-admob-imobile.arm64-ios.release_debug.a",
+      "bytes": 29432,
+      "sha256": "d53b13591d15a0f69365aeebb25eaa52849ac13fe12c11aac9057d44c078f48d"
+    },
+    {
+      "file": "godot/addons/admob/ios/bin/imobile/libs/poing-godot-admob-imobile.release.xcframework/ios-arm64_x86_64-simulator/poing-godot-admob-imobile.simulator.release.a",
+      "bytes": 47952,
+      "sha256": "9fb48c3e47886fee951084480b0a118cc83d200f9154066a748b328a743a6ed2"
+    },
+    {
+      "file": "godot/addons/admob/ios/bin/imobile/libs/poing-godot-admob-imobile.release.xcframework/ios-arm64/libpoing-godot-admob-imobile.arm64-ios.release.a",
+      "bytes": 26048,
+      "sha256": "abf9145411948d5a92fd61084d5000eac3992c1ca9947b15830a8b50ecd505c5"
+    },
+    {
+      "file": "godot/addons/admob/ios/bin/chartboost/libs/poing-godot-admob-chartboost.debug.xcframework/Info.plist",
+      "bytes": 1322,
+      "sha256": "903293c71823ec8c19434fc6abb2e040a5010d8d7b7f097d683e13af2a252643"
+    },
+    {
+      "file": "godot/addons/admob/ios/bin/chartboost/libs/poing-godot-admob-chartboost.release.xcframework/Info.plist",
+      "bytes": 1298,
+      "sha256": "47200236fdb17910606752d43e8596ebe695dedcc782be92bf5e18353cbd1b8b"
+    },
+    {
+      "file": "godot/addons/admob/ios/bin/chartboost/libs/poing-godot-admob-chartboost.release.xcframework/ios-arm64_x86_64-simulator/poing-godot-admob-chartboost.simulator.release.a",
+      "bytes": 68560,
+      "sha256": "110f9f2f677e1a76b5e8fe5f2ebf5141fd69a345ff47e7987fb4093f6dcadf1f"
+    },
+    {
+      "file": "godot/addons/admob/ios/bin/chartboost/libs/poing-godot-admob-chartboost.release.xcframework/ios-arm64/libpoing-godot-admob-chartboost.arm64-ios.release.a",
+      "bytes": 37256,
+      "sha256": "86d50c5abb8f1a2855ace3d5dcfa6969e83d8528c54d082755ce2782928bd9d5"
+    },
+    {
+      "file": "godot/addons/admob/ios/bin/chartboost/libs/poing-godot-admob-chartboost.debug.xcframework/ios-arm64_x86_64-simulator/poing-godot-admob-chartboost.simulator.release_debug.a",
+      "bytes": 83288,
+      "sha256": "918ff69bddf71b4582dd71b970d06c4895a2cf087ae75b9dfe76665a5834e655"
+    },
+    {
+      "file": "godot/addons/admob/ios/bin/chartboost/libs/poing-godot-admob-chartboost.debug.xcframework/ios-arm64/libpoing-godot-admob-chartboost.arm64-ios.release_debug.a",
+      "bytes": 44880,
+      "sha256": "fa792336e1ff332efda06670b2d05c22e0a11777f3266a73a4ba45f1a5baf579"
+    },
+    {
+      "file": "godot/addons/admob/ios/bin/maio/libs/poing-godot-admob-maio.release.xcframework/Info.plist",
+      "bytes": 1274,
+      "sha256": "168f908203a122afaccca30a19497c87c664eecf72d24398df7bc3cc64ad47d2"
+    },
+    {
+      "file": "godot/addons/admob/ios/bin/maio/libs/poing-godot-admob-maio.debug.xcframework/Info.plist",
+      "bytes": 1298,
+      "sha256": "ef926cf7d0c49743b7386fa6a881838a514afadb567d72989003ffb61d91752f"
+    },
+    {
+      "file": "godot/addons/admob/ios/bin/maio/libs/poing-godot-admob-maio.debug.xcframework/ios-arm64_x86_64-simulator/poing-godot-admob-maio.simulator.release_debug.a",
+      "bytes": 54016,
+      "sha256": "2d42d3c3eae58c6eb921f624e3312aefb43b123f4aab2427ef5671c758bf3309"
+    },
+    {
+      "file": "godot/addons/admob/ios/bin/maio/libs/poing-godot-admob-maio.debug.xcframework/ios-arm64/libpoing-godot-admob-maio.arm64-ios.release_debug.a",
+      "bytes": 29192,
+      "sha256": "61658d7e5a62a6459c6c4f83d87bcecd69002357ba0117ee9852f2919c833d9e"
+    },
+    {
+      "file": "godot/addons/admob/ios/bin/maio/libs/poing-godot-admob-maio.release.xcframework/ios-arm64_x86_64-simulator/poing-godot-admob-maio.simulator.release.a",
+      "bytes": 47464,
+      "sha256": "ea9f81872f699566e4ecb652b0228f3e470f010fb4cd091855fadb1a7ab391e8"
+    },
+    {
+      "file": "godot/addons/admob/ios/bin/maio/libs/poing-godot-admob-maio.release.xcframework/ios-arm64/libpoing-godot-admob-maio.arm64-ios.release.a",
+      "bytes": 25808,
+      "sha256": "5a079502e11bad5068058f4d0057b2cdf17c19b77de5934d1001047b46f7cb62"
+    },
+    {
+      "file": "godot/addons/admob/ios/bin/ironsource/libs/poing-godot-admob-ironsource.release.xcframework/Info.plist",
+      "bytes": 1298,
+      "sha256": "3f92d7b50180b4b1948e964a895f1f1eaa5db2f4c26290db6a534f0005df8709"
+    },
+    {
+      "file": "godot/addons/admob/ios/bin/ironsource/libs/poing-godot-admob-ironsource.debug.xcframework/Info.plist",
+      "bytes": 1322,
+      "sha256": "ad9734b1a270914dc32ab48a028bce8b721feb9b8067a5360de125e91c0a3c1d"
+    },
+    {
+      "file": "godot/addons/admob/ios/bin/ironsource/libs/poing-godot-admob-ironsource.debug.xcframework/ios-arm64_x86_64-simulator/poing-godot-admob-ironsource.simulator.release_debug.a",
+      "bytes": 122016,
+      "sha256": "6dad07042cb134b6cb527a80fef2de5459e03cce824ac7efef6e4a5c73f19e49"
+    },
+    {
+      "file": "godot/addons/admob/ios/bin/ironsource/libs/poing-godot-admob-ironsource.debug.xcframework/ios-arm64/libpoing-godot-admob-ironsource.arm64-ios.release_debug.a",
+      "bytes": 65776,
+      "sha256": "b1d64e86d201166072eed082563494a8328ebb1c1ea5f494f3ead27a0686dbe2"
+    },
+    {
+      "file": "godot/addons/admob/ios/bin/ironsource/libs/poing-godot-admob-ironsource.release.xcframework/ios-arm64_x86_64-simulator/poing-godot-admob-ironsource.simulator.release.a",
+      "bytes": 100624,
+      "sha256": "b878e61cffeaaa2a6daf244fc5bc397397133ce88055dbc0d0ff867dd8f79840"
+    },
+    {
+      "file": "godot/addons/admob/ios/bin/ironsource/libs/poing-godot-admob-ironsource.release.xcframework/ios-arm64/libpoing-godot-admob-ironsource.arm64-ios.release.a",
+      "bytes": 55120,
+      "sha256": "7e71d24c1abfe19d64b616a43a653dc51f0c9cc603f1355a03611887499fed76"
+    },
+    {
+      "file": "godot/addons/admob/ios/bin/dtexchange/libs/poing-godot-admob-dtexchange.release.xcframework/Info.plist",
+      "bytes": 1298,
+      "sha256": "e073f8ec0d59124a0b6f57828ab87e0e126d0c064dd0bd7259076d14533b5b4a"
+    },
+    {
+      "file": "godot/addons/admob/ios/bin/dtexchange/libs/poing-godot-admob-dtexchange.debug.xcframework/Info.plist",
+      "bytes": 1322,
+      "sha256": "affc75d9d1786f9a18e22b3a8493cb2787e420b0703f0ff39b7e3b19d1cb8659"
+    },
+    {
+      "file": "godot/addons/admob/ios/bin/dtexchange/libs/poing-godot-admob-dtexchange.debug.xcframework/ios-arm64_x86_64-simulator/poing-godot-admob-dtexchange.simulator.release_debug.a",
+      "bytes": 105032,
+      "sha256": "1ab771ef11dbd453656f4283bb1912a48110fef803093ffa2389fb3b70b034ad"
+    },
+    {
+      "file": "godot/addons/admob/ios/bin/dtexchange/libs/poing-godot-admob-dtexchange.debug.xcframework/ios-arm64/libpoing-godot-admob-dtexchange.arm64-ios.release_debug.a",
+      "bytes": 56608,
+      "sha256": "37abd5e29f86fcf23f05bc5babfd7bcc564d324d8d362c12982e37147c787cd5"
+    },
+    {
+      "file": "godot/addons/admob/ios/bin/dtexchange/libs/poing-godot-admob-dtexchange.release.xcframework/ios-arm64_x86_64-simulator/poing-godot-admob-dtexchange.simulator.release.a",
+      "bytes": 86792,
+      "sha256": "fa52407bbba1e36d29525e57d145c60d5e9019e39f5bdec76190a44fb1756a09"
+    },
+    {
+      "file": "godot/addons/admob/ios/bin/dtexchange/libs/poing-godot-admob-dtexchange.release.xcframework/ios-arm64/libpoing-godot-admob-dtexchange.arm64-ios.release.a",
+      "bytes": 47472,
+      "sha256": "b6bde7ea3c7e683ebabde67a16a1d336be4d4df70639b8f4a79498713160f6c6"
+    },
+    {
+      "file": "godot/addons/admob/ios/bin/line/libs/poing-godot-admob-line.release.xcframework/Info.plist",
+      "bytes": 1274,
+      "sha256": "8cd723463da5e6d322547173bec313570e3d79399cc6f97210660613ec8a112a"
+    },
+    {
+      "file": "godot/addons/admob/ios/bin/line/libs/poing-godot-admob-line.debug.xcframework/Info.plist",
+      "bytes": 1298,
+      "sha256": "e3ca371f60016ca34146308508536313353340d4217f562b659bbe6d8dffe225"
+    },
+    {
+      "file": "godot/addons/admob/ios/bin/line/libs/poing-godot-admob-line.debug.xcframework/ios-arm64_x86_64-simulator/poing-godot-admob-line.simulator.release_debug.a",
+      "bytes": 106472,
+      "sha256": "8ee8ea33f8e59378bda8c3a3e421a7a1b116cf2e9b80cf148f5d5b741583a560"
+    },
+    {
+      "file": "godot/addons/admob/ios/bin/line/libs/poing-godot-admob-line.debug.xcframework/ios-arm64/libpoing-godot-admob-line.arm64-ios.release_debug.a",
+      "bytes": 57240,
+      "sha256": "d28ff6b54958ee34b8ff34ae4221299ca904804f6f5a241ac1be3f3d110972cf"
+    },
+    {
+      "file": "godot/addons/admob/ios/bin/line/libs/poing-godot-admob-line.release.xcframework/ios-arm64_x86_64-simulator/poing-godot-admob-line.simulator.release.a",
+      "bytes": 91648,
+      "sha256": "b7a2a69305b10f01c82db3ee78ff4fab88d0474dc04d652e0a3868bac2076634"
+    },
+    {
+      "file": "godot/addons/admob/ios/bin/line/libs/poing-godot-admob-line.release.xcframework/ios-arm64/libpoing-godot-admob-line.arm64-ios.release.a",
+      "bytes": 49664,
+      "sha256": "950f0ae77c8be6eb509a3119cdf1a22b86856ded71459f5d957bbc3b4af8a5ee"
+    },
+    {
+      "file": "godot/addons/admob/ios/bin/unity_ads/libs/poing-godot-admob-unity_ads.release.xcframework/Info.plist",
+      "bytes": 1294,
+      "sha256": "046c358357341eed3ad602a71b6324afb482542208bb115caf076e7e919607cd"
+    },
+    {
+      "file": "godot/addons/admob/ios/bin/unity_ads/libs/poing-godot-admob-unity_ads.debug.xcframework/Info.plist",
+      "bytes": 1318,
+      "sha256": "975be0da9fbab8b3a906a2fcc9249825e521ad97c8a36d3d57d7c4f52b39dc9d"
+    },
+    {
+      "file": "godot/addons/admob/ios/bin/unity_ads/libs/poing-godot-admob-unity_ads.debug.xcframework/ios-arm64_x86_64-simulator/poing-godot-admob-unity_ads.simulator.release_debug.a",
+      "bytes": 102320,
+      "sha256": "2cc451a64a70e1532104c3ec0b558079f943afd0b224c303ae8a4d630f52c64b"
+    },
+    {
+      "file": "godot/addons/admob/ios/bin/unity_ads/libs/poing-godot-admob-unity_ads.debug.xcframework/ios-arm64/libpoing-godot-admob-unity_ads.arm64-ios.release_debug.a",
+      "bytes": 55104,
+      "sha256": "b2084455becc26089bf1f6df0d1d528fcf2c5fa609496764554da11f4e1b81aa"
+    },
+    {
+      "file": "godot/addons/admob/ios/bin/unity_ads/libs/poing-godot-admob-unity_ads.release.xcframework/ios-arm64_x86_64-simulator/poing-godot-admob-unity_ads.simulator.release.a",
+      "bytes": 86136,
+      "sha256": "dd252750d5b00d8c58e4d2811faac99bf5f1c55c7d0a6345455fb7baa41a7f82"
+    },
+    {
+      "file": "godot/addons/admob/ios/bin/unity_ads/libs/poing-godot-admob-unity_ads.release.xcframework/ios-arm64/libpoing-godot-admob-unity_ads.arm64-ios.release.a",
+      "bytes": 47104,
+      "sha256": "868b8b419e784d2565ffc4ffd12f91aaecb581d94656bf277482ad23451bda9c"
+    },
+    {
+      "file": "godot/addons/admob/ios/bin/mytarget/libs/poing-godot-admob-mytarget.debug.xcframework/Info.plist",
+      "bytes": 1314,
+      "sha256": "be734a7299cf5c22b34e57233d428a9db8bd770ec658b3c8a307ac9cf5070112"
+    },
+    {
+      "file": "godot/addons/admob/ios/bin/mytarget/libs/poing-godot-admob-mytarget.release.xcframework/Info.plist",
+      "bytes": 1290,
+      "sha256": "5f25e6a6ebc0485010e26052ac387c7cc41f0034a95e79e2c410c76830c84236"
+    },
+    {
+      "file": "godot/addons/admob/ios/bin/mytarget/libs/poing-godot-admob-mytarget.release.xcframework/ios-arm64_x86_64-simulator/poing-godot-admob-mytarget.simulator.release.a",
+      "bytes": 48096,
+      "sha256": "4e197d27305b9c74d8bcc0a51e2ded6e9021a8c981773c645238250ddc7e6fc9"
+    },
+    {
+      "file": "godot/addons/admob/ios/bin/mytarget/libs/poing-godot-admob-mytarget.release.xcframework/ios-arm64/libpoing-godot-admob-mytarget.arm64-ios.release.a",
+      "bytes": 26120,
+      "sha256": "33953587423c7dd2663ed0ddc1a81e4a402d49ba905676135bb0e7adede1dbe9"
+    },
+    {
+      "file": "godot/addons/admob/ios/bin/mytarget/libs/poing-godot-admob-mytarget.debug.xcframework/ios-arm64_x86_64-simulator/poing-godot-admob-mytarget.simulator.release_debug.a",
+      "bytes": 54664,
+      "sha256": "d20e7fca364af3f700fced79a5aa560638add702bbc7b90245d028844634a221"
+    },
+    {
+      "file": "godot/addons/admob/ios/bin/mytarget/libs/poing-godot-admob-mytarget.debug.xcframework/ios-arm64/libpoing-godot-admob-mytarget.arm64-ios.release_debug.a",
+      "bytes": 29512,
+      "sha256": "c411fabacd4a2c0a5668c559d9939b627cf08989f267b939c058cfa56b2401cd"
+    },
+    {
+      "file": "godot/addons/admob/ios/bin/bidmachine/libs/poing-godot-admob-bidmachine.debug.xcframework/Info.plist",
+      "bytes": 1322,
+      "sha256": "13cb49b5ee50484e07ce8b92a14cbcb3fc01d60c7909200d80497a74588b2db4"
+    },
+    {
+      "file": "godot/addons/admob/ios/bin/bidmachine/libs/poing-godot-admob-bidmachine.release.xcframework/Info.plist",
+      "bytes": 1298,
+      "sha256": "582b2b7cd178404fa2ca5f3bb895e8b4706ec1c5eb92d653942b7f199dfb0154"
+    },
+    {
+      "file": "godot/addons/admob/ios/bin/bidmachine/libs/poing-godot-admob-bidmachine.release.xcframework/ios-arm64_x86_64-simulator/poing-godot-admob-bidmachine.simulator.release.a",
+      "bytes": 89704,
+      "sha256": "49bf988f6bc118f89ab2e8004ab3ec654cfb208c539aa978d92d2b0690dbe17e"
+    },
+    {
+      "file": "godot/addons/admob/ios/bin/bidmachine/libs/poing-godot-admob-bidmachine.release.xcframework/ios-arm64/libpoing-godot-admob-bidmachine.arm64-ios.release.a",
+      "bytes": 49208,
+      "sha256": "597c1660ebecb08b98d1b866d195ab9572ce0d891ab49ea9d1a2b3435f9a7322"
+    },
+    {
+      "file": "godot/addons/admob/ios/bin/bidmachine/libs/poing-godot-admob-bidmachine.debug.xcframework/ios-arm64_x86_64-simulator/poing-godot-admob-bidmachine.simulator.release_debug.a",
+      "bytes": 107656,
+      "sha256": "3d0bf08a8cfd2d7e7e1e2c6d4c1b985c92b69be5b5db997eb2d55338900d257f"
+    },
+    {
+      "file": "godot/addons/admob/ios/bin/bidmachine/libs/poing-godot-admob-bidmachine.debug.xcframework/ios-arm64/libpoing-godot-admob-bidmachine.arm64-ios.release_debug.a",
+      "bytes": 58120,
+      "sha256": "17ff03ade9c8d76c318fafd388d6f1936ed2f62613e7e66d14eab757464b7b3e"
+    },
+    {
+      "file": "godot/addons/admob/ios/bin/meta/libs/poing-godot-admob-meta.release.xcframework/Info.plist",
+      "bytes": 1274,
+      "sha256": "60c4e83bb2acb0015d737fa3b712dee5bd5d6e6e0cc2c7bb4d44c83e6ff2451f"
+    },
+    {
+      "file": "godot/addons/admob/ios/bin/meta/libs/poing-godot-admob-meta.debug.xcframework/Info.plist",
+      "bytes": 1298,
+      "sha256": "bd12c55a41c87489cd3fd550e42b8cf1e508af4cc387924b095b2edcb6142ec1"
+    },
+    {
+      "file": "godot/addons/admob/ios/bin/meta/libs/poing-godot-admob-meta.debug.xcframework/ios-arm64_x86_64-simulator/poing-godot-admob-meta.simulator.release_debug.a",
+      "bytes": 84696,
+      "sha256": "6173e4b70fb2ca54d4b5722dbea83b02489346708e633a4972efc0a9e917a451"
+    },
+    {
+      "file": "godot/addons/admob/ios/bin/meta/libs/poing-godot-admob-meta.debug.xcframework/ios-arm64/libpoing-godot-admob-meta.arm64-ios.release_debug.a",
+      "bytes": 45432,
+      "sha256": "745fae4c5aa6fa1543817eebd262f33832b5e04c282e44b96fddb5965e869c38"
+    },
+    {
+      "file": "godot/addons/admob/ios/bin/meta/libs/poing-godot-admob-meta.release.xcframework/ios-arm64_x86_64-simulator/poing-godot-admob-meta.simulator.release.a",
+      "bytes": 71360,
+      "sha256": "4f606706bf048e3f21ba7f61c6f07130d2f1c740de7620c37f35f165af212032"
+    },
+    {
+      "file": "godot/addons/admob/ios/bin/meta/libs/poing-godot-admob-meta.release.xcframework/ios-arm64/libpoing-godot-admob-meta.arm64-ios.release.a",
+      "bytes": 38608,
+      "sha256": "8db1ae5cb2399fdff2d099c6bfd767314ab351f1893f651d0f5c7f6d40655e88"
+    },
+    {
+      "file": "godot/addons/admob/ios/bin/moloco/libs/poing-godot-admob-moloco.debug.xcframework/Info.plist",
+      "bytes": 1306,
+      "sha256": "f925c055320184c20f1f2153bcf5ad22f49ebc7f4486a7e3e3c4a363ee9cd2db"
+    },
+    {
+      "file": "godot/addons/admob/ios/bin/moloco/libs/poing-godot-admob-moloco.release.xcframework/Info.plist",
+      "bytes": 1282,
+      "sha256": "1fc9282520f0458f4efc8a9ed9ee1b4e253856a6bcb0960f527eecd66b71ff8b"
+    },
+    {
+      "file": "godot/addons/admob/ios/bin/moloco/libs/poing-godot-admob-moloco.release.xcframework/ios-arm64_x86_64-simulator/poing-godot-admob-moloco.simulator.release.a",
+      "bytes": 47768,
+      "sha256": "7e469293a31b9e940acaab19a821dae60b6850d3b0a4f0a65bf1b403005a4d44"
+    },
+    {
+      "file": "godot/addons/admob/ios/bin/moloco/libs/poing-godot-admob-moloco.release.xcframework/ios-arm64/libpoing-godot-admob-moloco.arm64-ios.release.a",
+      "bytes": 25960,
+      "sha256": "bde390ffea978098894eb70c31f0fef305c13e8b2529712022232d4986714110"
+    },
+    {
+      "file": "godot/addons/admob/ios/bin/moloco/libs/poing-godot-admob-moloco.debug.xcframework/ios-arm64_x86_64-simulator/poing-godot-admob-moloco.simulator.release_debug.a",
+      "bytes": 54328,
+      "sha256": "26fd690ca589203f5060dd5cededc69c1dbc1e5cef45aa16eeead46b333a785b"
+    },
+    {
+      "file": "godot/addons/admob/ios/bin/moloco/libs/poing-godot-admob-moloco.debug.xcframework/ios-arm64/libpoing-godot-admob-moloco.arm64-ios.release_debug.a",
+      "bytes": 29344,
+      "sha256": "d0fa4ea9dacb90d97628b3169cad9890a44dbd629898d3ddf363dcf57571a063"
+    },
+    {
+      "file": "godot/addons/admob/ios/bin/pangle/libs/poing-godot-admob-pangle.release.xcframework/Info.plist",
+      "bytes": 1282,
+      "sha256": "f1585d14d520b7b1bef0a06312a9052de7580fd7e35424ec2b4172d5c5061515"
+    },
+    {
+      "file": "godot/addons/admob/ios/bin/pangle/libs/poing-godot-admob-pangle.debug.xcframework/Info.plist",
+      "bytes": 1306,
+      "sha256": "657b068b1f0b317e637c7f3f618ed9e4c843ff35a4e790099ca69c92862aa5d7"
+    },
+    {
+      "file": "godot/addons/admob/ios/bin/pangle/libs/poing-godot-admob-pangle.debug.xcframework/ios-arm64_x86_64-simulator/poing-godot-admob-pangle.simulator.release_debug.a",
+      "bytes": 54328,
+      "sha256": "31f568dd8894f73a43922be13a9b24d0a9618b35b8085d12317c5429e9301a74"
+    },
+    {
+      "file": "godot/addons/admob/ios/bin/pangle/libs/poing-godot-admob-pangle.debug.xcframework/ios-arm64/libpoing-godot-admob-pangle.arm64-ios.release_debug.a",
+      "bytes": 29344,
+      "sha256": "b05bc901b0db45dfe823dab6e448661635fdb803a9ee07a787357bf4d11593c0"
+    },
+    {
+      "file": "godot/addons/admob/ios/bin/pangle/libs/poing-godot-admob-pangle.release.xcframework/ios-arm64_x86_64-simulator/poing-godot-admob-pangle.simulator.release.a",
+      "bytes": 47768,
+      "sha256": "a4e9d9592eeb0ea593bfd8786b2656d502cecf971f202666f3d533ce3fd9122c"
+    },
+    {
+      "file": "godot/addons/admob/ios/bin/pangle/libs/poing-godot-admob-pangle.release.xcframework/ios-arm64/libpoing-godot-admob-pangle.arm64-ios.release.a",
+      "bytes": 25960,
+      "sha256": "79057e6be413397a548b945d8b16389e5e0910d4dda89df2a71a3c30282710a2"
+    },
+    {
+      "file": "godot/addons/admob/ios/bin/applovin/libs/poing-godot-admob-applovin.debug.xcframework/Info.plist",
+      "bytes": 1314,
+      "sha256": "6a7b06dd753b239103156e56f03cef25f9a400ecd24929d30ee2e4037d87a3ff"
+    },
+    {
+      "file": "godot/addons/admob/ios/bin/applovin/libs/poing-godot-admob-applovin.release.xcframework/Info.plist",
+      "bytes": 1290,
+      "sha256": "06ae67be0ce96c4e00bd39b81b099a012a00553ef22650698120599a975adaec"
+    },
+    {
+      "file": "godot/addons/admob/ios/bin/applovin/libs/poing-godot-admob-applovin.release.xcframework/ios-arm64_x86_64-simulator/poing-godot-admob-applovin.simulator.release.a",
+      "bytes": 68752,
+      "sha256": "539aab413d6aa013394c090ffe21ee75534b6e4c0827b76f88710051fbe12466"
+    },
+    {
+      "file": "godot/addons/admob/ios/bin/applovin/libs/poing-godot-admob-applovin.release.xcframework/ios-arm64/libpoing-godot-admob-applovin.arm64-ios.release.a",
+      "bytes": 37424,
+      "sha256": "b6922c7a6ecf4032df085da0799db775ba491a7e58eca3b4b96e6fef6abc7bb2"
+    },
+    {
+      "file": "godot/addons/admob/ios/bin/applovin/libs/poing-godot-admob-applovin.debug.xcframework/ios-arm64_x86_64-simulator/poing-godot-admob-applovin.simulator.release_debug.a",
+      "bytes": 84952,
+      "sha256": "4bd6870f984f6212af03863ef79248dcde319d4122ebda80cd90af2eea60147c"
+    },
+    {
+      "file": "godot/addons/admob/ios/bin/applovin/libs/poing-godot-admob-applovin.debug.xcframework/ios-arm64/libpoing-godot-admob-applovin.arm64-ios.release_debug.a",
+      "bytes": 45888,
+      "sha256": "5c07fd1bd4eca3a42f4f9f42fad4ae8060173bd36e5618e3e68fb8379f91c6fd"
+    },
+    {
+      "file": "godot/addons/admob/ios/bin/inmobi/libs/poing-godot-admob-inmobi.release.xcframework/Info.plist",
+      "bytes": 1282,
+      "sha256": "9172ae3c0c890213319132965caf4d0b6780ecf21007679a089aa550694e6b5e"
+    },
+    {
+      "file": "godot/addons/admob/ios/bin/inmobi/libs/poing-godot-admob-inmobi.debug.xcframework/Info.plist",
+      "bytes": 1306,
+      "sha256": "ec6aecfdf02a80120f8116183d39224bd03d053b6b6c8fe034c2adc857bdb77c"
+    },
+    {
+      "file": "godot/addons/admob/ios/bin/inmobi/libs/poing-godot-admob-inmobi.debug.xcframework/ios-arm64_x86_64-simulator/poing-godot-admob-inmobi.simulator.release_debug.a",
+      "bytes": 54328,
+      "sha256": "70865202b77961376f56cddf186b7a8fc24725b9be22079748a0fdd398ee3828"
+    },
+    {
+      "file": "godot/addons/admob/ios/bin/inmobi/libs/poing-godot-admob-inmobi.debug.xcframework/ios-arm64/libpoing-godot-admob-inmobi.arm64-ios.release_debug.a",
+      "bytes": 29344,
+      "sha256": "9b15e2cdc04cbee3d738364378b359e420604818ff98d3e298fadf10d62d63aa"
+    },
+    {
+      "file": "godot/addons/admob/ios/bin/inmobi/libs/poing-godot-admob-inmobi.release.xcframework/ios-arm64_x86_64-simulator/poing-godot-admob-inmobi.simulator.release.a",
+      "bytes": 47768,
+      "sha256": "a459b166333715e749adfdb98a1b2c6d6ef79b67ed143d6bf8922530d08e8528"
+    },
+    {
+      "file": "godot/addons/admob/ios/bin/inmobi/libs/poing-godot-admob-inmobi.release.xcframework/ios-arm64/libpoing-godot-admob-inmobi.arm64-ios.release.a",
+      "bytes": 25960,
+      "sha256": "6ef61af18e3781915dc8f81510086ec29caccb9afee068df29355b7f21119672"
+    },
+    {
+      "file": "godot/addons/admob/ios/bin/vungle/libs/poing-godot-admob-vungle.debug.xcframework/Info.plist",
+      "bytes": 1306,
+      "sha256": "edbfd98cd25438ebbf6b8aed9caf1849ac9f3711edb1744ce666e706eaa5a156"
+    },
+    {
+      "file": "godot/addons/admob/ios/bin/vungle/libs/poing-godot-admob-vungle.release.xcframework/Info.plist",
+      "bytes": 1282,
+      "sha256": "58bede3048c5adeec1bd2150b7567a921db4c3c1cd8d92b567c1f77085965cb8"
+    },
+    {
+      "file": "godot/addons/admob/ios/bin/vungle/libs/poing-godot-admob-vungle.release.xcframework/ios-arm64_x86_64-simulator/poing-godot-admob-vungle.simulator.release.a",
+      "bytes": 111328,
+      "sha256": "9025970cb8a86b07dde43ed6c29075e13a63ede3ddf30f72da1ea81a121f8618"
+    },
+    {
+      "file": "godot/addons/admob/ios/bin/vungle/libs/poing-godot-admob-vungle.release.xcframework/ios-arm64/libpoing-godot-admob-vungle.arm64-ios.release.a",
+      "bytes": 60752,
+      "sha256": "08e047a9f4fc01f6999df67ab5ec082ec13037b81512e2898a386c8294431914"
+    },
+    {
+      "file": "godot/addons/admob/ios/bin/vungle/libs/poing-godot-admob-vungle.debug.xcframework/ios-arm64_x86_64-simulator/poing-godot-admob-vungle.simulator.release_debug.a",
+      "bytes": 130800,
+      "sha256": "33fcec30d30467beca42d02c57ba271bb5726647d22afcc8508c6db1a8f235ec"
+    },
+    {
+      "file": "godot/addons/admob/ios/bin/vungle/libs/poing-godot-admob-vungle.debug.xcframework/ios-arm64/libpoing-godot-admob-vungle.arm64-ios.release_debug.a",
+      "bytes": 70416,
+      "sha256": "218bd85d2e712a833f77703a2578c5168a5f8d7bb0959ccfb9774a769e25f3b1"
+    },
+    {
+      "file": "godot/addons/admob/ios/bin/ads/res/GADTMediumTemplateView.xib",
+      "bytes": 20913,
+      "sha256": "99aa4f57de8c604ee70e5d0ae4715f4325bbc0eae0ee26e2506b46a09e82febc"
+    },
+    {
+      "file": "godot/addons/admob/ios/bin/ads/res/GADTSmallTemplateView.xib",
+      "bytes": 12262,
+      "sha256": "545e52d2721ecf915e635ebc17bdf0fb6a4885187ea41ffddb077cc913a4a437"
+    },
+    {
+      "file": "godot/addons/admob/ios/bin/ads/libs/poing-godot-admob-ads.release.xcframework/Info.plist",
+      "bytes": 1270,
+      "sha256": "63254d7c18e72ab30c8f676868a90eea1abf16af4c3b63a99285e586a8eb1974"
+    },
+    {
+      "file": "godot/addons/admob/ios/bin/ads/libs/poing-godot-admob-ads.debug.xcframework/Info.plist",
+      "bytes": 1294,
+      "sha256": "3333fdb9856e402ec4545f15a11c813fed5be54ec9534e6d8d508404ca53a61c"
+    },
+    {
+      "file": "godot/addons/admob/ios/bin/ads/libs/poing-godot-admob-ads.debug.xcframework/ios-arm64_x86_64-simulator/poing-godot-admob-ads.simulator.release_debug.a",
+      "bytes": 2715024,
+      "sha256": "8aa818fcf93317e59a800f904cacd2e23b528d97a32d5302ac4943ab57e8f90c"
+    },
+    {
+      "file": "godot/addons/admob/ios/bin/ads/libs/poing-godot-admob-ads.debug.xcframework/ios-arm64/libpoing-godot-admob-ads.arm64-ios.release_debug.a",
+      "bytes": 1445136,
+      "sha256": "323338809680aa678ceabec781218bc6f861ffe51cdcde957507e652d6a8ba0f"
+    },
+    {
+      "file": "godot/addons/admob/ios/bin/ads/libs/poing-godot-admob-ads.release.xcframework/ios-arm64_x86_64-simulator/poing-godot-admob-ads.simulator.release.a",
+      "bytes": 2304584,
+      "sha256": "02862782399cdfdc26ac8e85823369298914ca484cf546cf134534020e7ef44f"
+    },
+    {
+      "file": "godot/addons/admob/ios/bin/ads/libs/poing-godot-admob-ads.release.xcframework/ios-arm64/libpoing-godot-admob-ads.arm64-ios.release.a",
+      "bytes": 1258608,
+      "sha256": "e38c293e0bdc8b1f51ae79292fbff97de1a6c2c375c0f8800a4023713233977f"
+    },
+    {
+      "file": "godot/addons/admob/internal/translations/admob_sample.pt_BR.translation",
+      "bytes": 7334,
+      "sha256": "f2f0a3a7cefe75b6be2c36e803cc892e11064fbeec7933b09d3f770e202c7d1c"
+    },
+    {
+      "file": "godot/addons/admob/internal/translations/admob_sample.zh_CN.translation",
+      "bytes": 7006,
+      "sha256": "56b7c11569292799c7b20395b5081b4873890ff254b487018cea2cf852124817"
+    },
+    {
+      "file": "godot/addons/admob/internal/translations/admob_sample.ja.translation",
+      "bytes": 8739,
+      "sha256": "6ecaf60789f7540631786db56afbec9cd52c3fe69787c427899a0937531915fe"
+    },
+    {
+      "file": "godot/addons/admob/internal/translations/admob_sample.es.translation",
+      "bytes": 7219,
+      "sha256": "0fcc84134b6d97579af84c3c9ba80fbe211cf2367a91d164e3d7ddd2da88abc6"
+    },
+    {
+      "file": "godot/addons/admob/internal/translations/admob_sample.en.translation",
+      "bytes": 6568,
+      "sha256": "f30ad545df81bc1451a675107ea660802a09d7c0fce0cea5b770f79010a87462"
+    }
+  ]
+}

@@ -18,7 +18,6 @@ var _analytics: MpAnalyticsPort
 var _ads: MpInterstitialAdPort
 var _leaderboard: MpLeaderboardPort
 var _share: MpSharePort
-var _retry_count := 0
 var _safe_area_root: MarginContainer
 ## 마지막으로 적용한 안전영역. 초당 한 번 도는 확인이 값이 그대로일 때 theme
 ## override 를 헛돌리지 않게 한다. 처음에는 실제 값이 될 수 없는 음수를 넣어
@@ -136,6 +135,7 @@ func _build_overlays() -> void:
 	# 타이틀을 가장 먼저 붙여 설정·종료 확인 같은 팝업이 그 위에 뜨게 한다.
 	_title = MpTitleScreen.new()
 	_title.start_pressed.connect(_on_title_start)
+	_title.settings_pressed.connect(_on_open_settings)
 	layer.add_child(_title)
 
 	_result_popup = MpResultPopup.new()
@@ -154,6 +154,9 @@ func _build_overlays() -> void:
 	_tutorial.set_stage_rect(_game_screen.stage_rect())
 
 	_settings = MpSettingsPopup.new()
+	_settings.privacy_pressed.connect(_on_privacy_pressed)
+	_ads.privacy_options_changed.connect(_refresh_privacy_options)
+	_ads.privacy_options_finished.connect(_settings.finish_privacy_options)
 	layer.add_child(_settings)
 
 	_quit_confirm = MpQuitConfirm.new()
@@ -238,22 +241,26 @@ func _on_game_finished(seconds: float) -> void:
 
 	var splits := _game_screen.splits()
 	var merged := MpBestRecord.merge(Save.snapshot(), seconds, splits)
-	for key in [MpBestRecord.BEST_KEY, MpBestRecord.BEST_SPLITS_KEY, MpBestRecord.CLEAR_COUNT_KEY]:
-		Save.set_value(key, merged[key])
+	var record_saved := Save.set_values({
+		MpBestRecord.BEST_KEY: merged[MpBestRecord.BEST_KEY],
+		MpBestRecord.BEST_SPLITS_KEY: merged[MpBestRecord.BEST_SPLITS_KEY],
+		MpBestRecord.CLEAR_COUNT_KEY: merged[MpBestRecord.CLEAR_COUNT_KEY],
+	})
 
-	if is_new_best:
+	if is_new_best and record_saved:
 		_analytics.log_event(MpAnalyticsEvents.NEW_BEST_RECORD, {
 			"seconds": int(seconds),
 			"previous_seconds": int(best),
 		})
 
 	_submit_score(seconds)
+	_ads.prepare()
 	# 네이티브 인증은 비동기다. 결과를 연 순간의 사용 가능 여부를 고정해 두어, 인증이
 	# 나중에 끝나도 이미 떠 있는 팝업에 새 행동을 끼워 넣지 않는다. 다음 판 결과에서는
 	# 최신 인증 상태를 다시 읽는다.
 	_result_popup.show_result(
 		seconds, best, is_new_best,
-		_leaderboard.is_available(), _share.is_available(), splits)
+		_leaderboard.is_available(), _share.is_available(), splits, record_saved)
 
 
 ## 기록은 끝날 때마다 올린다. 게임센터가 더 좋은 기록만 남긴다.
@@ -262,8 +269,9 @@ func _submit_score(seconds: float) -> void:
 		return
 	var score := MpBestRecord.to_leaderboard_score(seconds)
 	var result := _leaderboard.submit_score(score)
-	if result == MpLeaderboardPort.Result.SUCCESS:
-		_analytics.log_event(MpAnalyticsEvents.POST_SCORE, {"score": score, "market": "ait"})
+	var market := Platform.market_id()
+	if result == MpLeaderboardPort.Result.SUCCESS and not market.is_empty():
+		_analytics.log_event(MpAnalyticsEvents.POST_SCORE, {"score": score, "market": market})
 
 
 ## tests/capture_screens.gd 가 결과 화면을 같은 비율에서 찍기 위해 쓴다.
@@ -295,12 +303,12 @@ func show_overlay_for_capture(name: String) -> void:
 ## 원본은 RETRY 를 눌렀을 때만 전면광고를 띄웠다. 빈도 캡은 두지 않는다.
 func _on_retry() -> void:
 	_result_popup.hide_result()
-	_retry_count += 1
-	if _ads.is_available():
-		var shown := _ads.show()
+	var provider := Platform.ad_provider_id()
+	var requested := _ads.show() if _ads.is_available() else false
+	if not provider.is_empty():
 		_analytics.log_event(MpAnalyticsEvents.INTERSTITIAL_AD_IMPRESSION, {
-			"ad_platform": "toss_ads",
-			"result": "SHOWN" if shown else "SKIPPED",
+			"ad_platform": provider,
+			"result": "REQUESTED" if requested else "SKIPPED",
 		})
 	_start_game(true)
 
@@ -323,7 +331,21 @@ func _on_open_leaderboard() -> void:
 
 
 func _on_open_settings() -> void:
+	_refresh_privacy_options()
 	_settings.show_settings()
+
+
+func _refresh_privacy_options() -> void:
+	if _settings != null:
+		_settings.configure_privacy_options(
+			_ads.is_privacy_options_required(), _ads.is_privacy_options_busy(),
+			_ads.is_privacy_options_opening())
+
+
+func _on_privacy_pressed() -> void:
+	if not _ads.show_privacy_options():
+		_refresh_privacy_options()
+		_settings.finish_privacy_options(false)
 
 
 func _on_request_quit() -> void:

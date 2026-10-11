@@ -1,0 +1,54 @@
+{
+  "observedAt": "2026-10-11T22:30:29.838669+00:00",
+  "userDirName": "match-picture-MP-IOS-116-round-4-385fa2e",
+  "files": {
+    "match_picture.save": {
+      "sha256": "5965e3c3ca1bfa3f50dcc6419cfea81dfea6ba1df0cdabbbf84779db7bf7ca1b",
+      "value": {
+        "best_seconds": 513.123436333499,
+        "best_splits": [
+          369.747453111352,
+          90.847687555516,
+          7.45365633332722,
+          5.49856466666319,
+          6.51087799999601,
+          5.63986396969307,
+          6.07259493939017,
+          15.915174424231,
+          5.43756333332971
+        ],
+        "clear_count": 1,
+        "has_played": true,
+        "language": "en",
+        "muted": true,
+        "schema": 1
+      },
+      "splitCount": 9,
+      "splitSum": 513.1234363334984
+    },
+    "match_picture.save.bak": {
+      "sha256": "8a635fa3d8ea5de1e923c2018484da08d7f0bc55df8ea8cb4b68b86e0a5be476",
+      "value": {
+        "best_seconds": 513.123436333499,
+        "best_splits": [
+          369.747453111352,
+          90.847687555516,
+          7.45365633332722,
+          5.49856466666319,
+          6.51087799999601,
+          5.63986396969307,
+          6.07259493939017,
+          15.915174424231,
+          5.43756333332971
+        ],
+        "clear_count": 1,
+        "has_played": true,
+        "language": "en",
+        "muted": false,
+        "schema": 1
+      },
+      "splitCount": 9,
+      "splitSum": 513.1234363334984
+    }
+  }
+}

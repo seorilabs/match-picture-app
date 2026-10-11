@@ -1,0 +1,12 @@
+[
+  {
+    "pid": 13107,
+    "ppid": 88957,
+    "args": "mp116-godot-ui-_zc8d_lb/Match Picture UI QA.app/Contents/MacOS/Godot --headless --editor --path mp-ios-116-ui-round-4-385fa2e/godot --log-file mp-ios-116-ui-round-4-385fa2e/editor-run-1.log"
+  },
+  {
+    "pid": 13138,
+    "ppid": 1,
+    "args": "mp116-godot-ui-_zc8d_lb/Match Picture UI QA.app/Contents/MacOS/Godot --path mp-ios-116-ui-round-4-385fa2e/godot --remote-debug tcp://127.0.0.1:31663 --editor-pid 13107 --scene res://scenes/main.tscn"
+  }
+]

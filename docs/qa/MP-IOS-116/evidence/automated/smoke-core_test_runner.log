@@ -1,0 +1,13 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+[core-test] 시작
+[core-test] > _test_rules
+[core-test] > _test_deck
+[core-test] > _test_round
+[core-test] > _test_placement
+[core-test] > _test_game_flow
+[core-test] > _test_timer_semantics
+[core-test] > _test_splits
+[core-test] > _test_best_record
+[core-test] > _test_analytics_contract
+[core-test] 검사 94건, 실패 0건

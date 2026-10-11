@@ -1,0 +1,40 @@
+{
+  "checkedAt": "2026-10-11T22:21:08.668860+00:00",
+  "scope": "draft-text-only-not-saved",
+  "appStoreId": "1528539634",
+  "candidateSourceSha": "02e63ae229f687a0c0790ddec1de731e9373cd90",
+  "build": null,
+  "notesSha256": "340568aa27119996ed6f96166a2f2e0b983733ba181d6acd9fd479cf082c6bc4",
+  "metadataDraftSha256": "418ae81993d20f884b76ed7cf795d684efea300f112fc669140328d3ad979349",
+  "effectiveNotesSource": "markets.appStore",
+  "localeMapping": {
+    "ko-KR": "ko",
+    "en-US": "en-US"
+  },
+  "locales": {
+    "ko": {
+      "descriptionCharacters": 192,
+      "whatsNewCharacters": 126,
+      "whatsNew": "- 기록 저장을 보완하고 저장하지 못한 경우 알려드려요.\n- 시작 화면에서도 설정을 열 수 있어요.\n- 필요한 경우 설정에서 광고 개인정보 선택을 다시 열 수 있어요.\n- 광고 준비에 실패해도 다음 판이 끝나면 다시 준비해요.",
+      "keywords": "틀린그림찾기, 같은그림찾기, 퍼즐, 카드놀이, 그림놀이, 매직아이",
+      "keywordsCharacters": 36
+    },
+    "en-US": {
+      "descriptionCharacters": 343,
+      "whatsNewCharacters": 232,
+      "whatsNew": "- Improved record saving and added a message when a record cannot be saved.\n- Open Settings from the start screen.\n- Reopen ad privacy choices in Settings when available.\n- Ads can prepare again after the next game if loading fails.",
+      "keywords": "matchsymbol, puzzle, braintrain, match, symbol, magiceye",
+      "keywordsCharacters": 56
+    }
+  },
+  "pending": [
+    "current-candidate-native-screen-inspection",
+    "all-active-locale-existing-fields-and-images-review",
+    "saved-values-readback",
+    "current-valid-build-selection",
+    "privacy-exact-native-sdk-agreement"
+  ],
+  "keywordChangeApprovalEvidence": "metadata-keywords-proposal.json",
+  "privacyIndividualReadback": "privacy-individual-readback.json",
+  "existingAppInfoReadback": "app-info-readback.json"
+}

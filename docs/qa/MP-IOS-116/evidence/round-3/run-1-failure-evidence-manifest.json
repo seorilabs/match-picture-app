@@ -1,0 +1,115 @@
+{
+  "candidate": "02e63ae229f687a0c0790ddec1de731e9373cd90",
+  "capturedAtUtc": "2026-10-11T13:10:05.346968+00:00",
+  "artifactRoot": "mp-ios-116-ui-round-3-02e63ae",
+  "run": 1,
+  "errors": 11,
+  "trackedDifferences": [
+    "godot/project.godot"
+  ],
+  "captures": [
+    {
+      "file": "capture-109100-5.png",
+      "pixels": [
+        323,
+        719
+      ],
+      "sha256": "4d5a28cf02b290b8b2a63b60852e1a973a002662b04aaa54a201ae744b190280"
+    },
+    {
+      "file": "capture-130675-6.png",
+      "pixels": [
+        323,
+        719
+      ],
+      "sha256": "4001ade60798fb2435750d501d1f9455d5797148231c4f2c5fa986f570b9a956"
+    },
+    {
+      "file": "capture-144591-7.png",
+      "pixels": [
+        323,
+        719
+      ],
+      "sha256": "5ca1e9b2ca2b900de01054cfd8ffa1db1b1dc4c46d66a4cfad539fcc782c0a43"
+    },
+    {
+      "file": "capture-186599-8.png",
+      "pixels": [
+        323,
+        719
+      ],
+      "sha256": "7dba6cbe86808f59fbb25782f291aa9f9da4f13aa63032a3a3e84832b271423e"
+    },
+    {
+      "file": "capture-197359-9.png",
+      "pixels": [
+        323,
+        719
+      ],
+      "sha256": "65c3ee7986f325cc59da12eea183a46e2828a74ec5d51d75ca04451565c3d584"
+    },
+    {
+      "file": "capture-255159-10.png",
+      "pixels": [
+        323,
+        719
+      ],
+      "sha256": "1a74aab04cc6edee220e2eba76393269cc3e359e858af18e7f998d34c1993177"
+    },
+    {
+      "file": "capture-265483-11.png",
+      "pixels": [
+        323,
+        719
+      ],
+      "sha256": "65c3ee7986f325cc59da12eea183a46e2828a74ec5d51d75ca04451565c3d584"
+    },
+    {
+      "file": "capture-53493-1.png",
+      "pixels": [
+        323,
+        719
+      ],
+      "sha256": "cf651487c16f724921edaa601bcf637b4cfc83ecd66319a095cbeadd8fdb349f"
+    },
+    {
+      "file": "capture-71542-2.png",
+      "pixels": [
+        323,
+        719
+      ],
+      "sha256": "33c2170a87857665920d833e9e555806574f959beb31af7193d1d0b4c4c94cba"
+    },
+    {
+      "file": "capture-87942-3.png",
+      "pixels": [
+        323,
+        719
+      ],
+      "sha256": "bc86845f2bf7ddede494f749e72b89d8c38426bc2b4867d57aea97c73924b085"
+    },
+    {
+      "file": "capture-98782-4.png",
+      "pixels": [
+        323,
+        719
+      ],
+      "sha256": "4d5a28cf02b290b8b2a63b60852e1a973a002662b04aaa54a201ae744b190280"
+    }
+  ],
+  "logs": [
+    {
+      "rawFile": "editor-run-1.log",
+      "rawSha256": "5e1d03bece9ba40f91b423df6265a763ad5923210631fe1f06b8d872799959aa",
+      "publicFile": "editor-run-1-public.log",
+      "publicSha256": "01275a8ff9d2625bd7f93312878e33ca85d9ea8d6750e6245c596374d505788f"
+    },
+    {
+      "rawFile": "game-run-1.log",
+      "rawSha256": "54050662ba07c38e178c8596c09dc0e29f3f10d3ec68cdba0e67f1ebf9ebd958",
+      "publicFile": "game-run-1-public.log",
+      "publicSha256": "3aac8f2bfb787f5dc4bd539a3ae87e53fbadb43555dda0698308557c3ba40aba"
+    }
+  ],
+  "runEndedUtc": "2026-10-11T13:10:44.336550+00:00"
+}

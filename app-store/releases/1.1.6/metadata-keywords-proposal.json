@@ -1,0 +1,32 @@
+{
+  "status": "user-approved-not-saved",
+  "appStoreId": "1528539634",
+  "versionRecordId": "1d36616f-cdc7-4d53-abcc-f3442c26a261",
+  "checkedAt": "2026-10-11T22:19:29.042440+00:00",
+  "reason": "Live keywords contain third-party Dobble brand; Apple2.3.7 accurate metadata. Approved design v1 preserves keywords, so this narrow field change requires user decision. No assumption about a license.",
+  "sources": [
+    "https://developer.apple.com/app-store/review/guidelines/#accurate-metadata",
+    "https://www.dobblegame.com/les-jeux/dobble-classique/",
+    "https://investor.asmodee.com/"
+  ],
+  "localizations": {
+    "en-US": {
+      "localizationId": "21b1358e-946d-4983-843e-fa5d6fd9cb91",
+      "before": "dobble, matchsymbol, puzzle, braintrain, match, symbol, magiceye",
+      "proposedKeywords": "matchsymbol, puzzle, braintrain, match, symbol, magiceye",
+      "beforeCharacters": 64,
+      "afterCharacters": 56,
+      "removedTerm": "dobble"
+    },
+    "ko": {
+      "localizationId": "13a90bf3-fb65-4a71-8862-38212cb80c28",
+      "before": "도블, 틀린그림찾기, 같은그림찾기, 퍼즐, 카드놀이, 그림놀이, 매직아이",
+      "proposedKeywords": "틀린그림찾기, 같은그림찾기, 퍼즐, 카드놀이, 그림놀이, 매직아이",
+      "beforeCharacters": 40,
+      "afterCharacters": 36,
+      "removedTerm": "도블"
+    }
+  },
+  "approvalObservedAt": "2026-10-11T22:21:08.668016+00:00",
+  "approvalEvidence": "2026-10-12 conversation: user replied 두 단어만 삭제 승인 to exact keyword-only proposal"
+}

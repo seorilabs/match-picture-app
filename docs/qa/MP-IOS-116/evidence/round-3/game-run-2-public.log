@@ -1,0 +1,13 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+OpenGL API 4.1 Metal - 90.5 - Compatibility - Using Device: Apple - Apple M3
+
+[review-runtime] user://=<QA_USER_DIR:match-picture-MP-IOS-116-round-3-run2-02e63ae>/ isolated=true before Save
+[ui] safe area 여백(뷰포트 단위) 좌 0 상 0 우 0 하 0 / 창 (406, 720) / 안전영역 [P: (0, 60), S: (3840, 1976)]
+[review-layout] window=(406, 720) visible_rect=[P: (0.0, 0.0), S: (812.0, 1440.0)]
+[review-layout] _safe_area_root size=(812.0, 1440.0) rect=[P: (0.0, 0.0), S: (812.0, 1440.0)] transform=[X: (1.0, 0.0), Y: (0.0, 1.0), O: (0.0, 0.0)]
+[review-layout] _game_screen size=(812.0, 1440.0) rect=[P: (0.0, 0.0), S: (812.0, 1440.0)] transform=[X: (1.0, 0.0), Y: (0.0, 1.0), O: (0.0, 0.0)]
+[review-layout] _tutorial size=(812.0, 1440.0) rect=[P: (0.0, 0.0), S: (812.0, 1440.0)] transform=[X: (1.0, 0.0), Y: (0.0, 1.0), O: (0.0, 0.0)]
+[review-layout] _stage size=(812.0, 1340.0) rect=[P: (0.0, 100.0), S: (812.0, 1340.0)] transform=[X: (1.0, 0.0), Y: (0.0, 1.0), O: (0.0, 100.0)]
+[review-layout] _opponent_card size=(650.0, 650.0) rect=[P: (113.5, 165.0), S: (585.0, 585.0)] transform=[X: (0.9, 0.0), Y: (0.0, 0.9), O: (113.5, 165.0)]
+[review-layout] _mine_card size=(650.0, 650.0) rect=[P: (113.5, 790.0), S: (585.0, 585.0)] transform=[X: (0.9, 0.0), Y: (0.0, 0.9), O: (113.5, 790.0)]
+[review-layout] _hud size=(812.0, 100.0) rect=[P: (0.0, 65.0), S: (812.0, 100.0)] transform=[X: (1.0, 0.0), Y: (0.0, 1.0), O: (0.0, 65.0)]

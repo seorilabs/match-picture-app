@@ -1,0 +1,8 @@
+{
+  "observedAt": "2026-10-11T13:36:19.006883+00:00",
+  "processes": {
+    "33786": "33786 qa-runtime/Match Picture UI QA.app/Contents/MacOS/Godot --headless --editor --path mp-ios-116-ui-round-3-02e63ae/godot --log-file mp-ios-116-ui-round-3-02e63ae/editor-run-3.log",
+    "33874": ""
+  },
+  "actualYesClicked": true
+}

@@ -1,0 +1,95 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+OpenGL API 4.1 Metal - 90.5 - Compatibility - Using Device: Apple - Apple M3
+
+[review-runtime] user://=<QA_USER_DIR:match-picture-MP-IOS-116-round-3-02e63ae>/ isolated=true before Save
+ERROR: Condition "!std::isfinite(p_size.x) || !std::isfinite(p_size.y)" is true.
+   at: set_size (scene/gui/control.cpp:1527)
+   GDScript backtrace (most recent call first):
+       [0] set_stage_rect (res://src/ui/tutorial_overlay.gd:202)
+       [1] _build_overlays (res://src/ui/main.gd:154)
+       [2] _ready (res://src/ui/main.gd:45)
+ERROR: Condition "!std::isfinite(p_size.x) || !std::isfinite(p_size.y)" is true.
+   at: set_size (scene/gui/control.cpp:1527)
+   GDScript backtrace (most recent call first):
+       [0] set_stage_rect (res://src/ui/tutorial_overlay.gd:202)
+       [1] _layout_cards (res://src/ui/game_screen.gd:136)
+       [2] _on_stage_resized (res://src/ui/game_screen.gd:143)
+       [3] _apply_safe_area (res://src/ui/main.gd:174)
+       [4] _ready (res://src/ui/main.gd:50)
+ERROR: Condition "!std::isfinite(p_size.x) || !std::isfinite(p_size.y)" is true.
+   at: set_size (scene/gui/control.cpp:1527)
+   GDScript backtrace (most recent call first):
+       [0] set_stage_rect (res://src/ui/tutorial_overlay.gd:202)
+       [1] _layout_cards (res://src/ui/game_screen.gd:136)
+       [2] _on_stage_resized (res://src/ui/game_screen.gd:143)
+       [3] _apply_safe_area (res://src/ui/main.gd:175)
+       [4] _ready (res://src/ui/main.gd:50)
+ERROR: Condition "!std::isfinite(p_size.x) || !std::isfinite(p_size.y)" is true.
+   at: set_size (scene/gui/control.cpp:1527)
+   GDScript backtrace (most recent call first):
+       [0] set_stage_rect (res://src/ui/tutorial_overlay.gd:202)
+       [1] _layout_cards (res://src/ui/game_screen.gd:136)
+       [2] _on_stage_resized (res://src/ui/game_screen.gd:143)
+       [3] _apply_safe_area (res://src/ui/main.gd:176)
+       [4] _ready (res://src/ui/main.gd:50)
+ERROR: Condition "!std::isfinite(p_size.x) || !std::isfinite(p_size.y)" is true.
+   at: set_size (scene/gui/control.cpp:1527)
+   GDScript backtrace (most recent call first):
+       [0] set_stage_rect (res://src/ui/tutorial_overlay.gd:202)
+       [1] _layout_cards (res://src/ui/game_screen.gd:136)
+       [2] _on_stage_resized (res://src/ui/game_screen.gd:143)
+       [3] _apply_safe_area (res://src/ui/main.gd:177)
+       [4] _ready (res://src/ui/main.gd:50)
+[ui] safe area 여백(뷰포트 단위) 좌 0 상 0 우 0 하 0 / 창 (0, 0) / 안전영역 [P: (0, 0), S: (0, 0)]
+ERROR: Condition "!std::isfinite(p_size.x) || !std::isfinite(p_size.y)" is true.
+   at: set_size (scene/gui/control.cpp:1527)
+   GDScript backtrace (most recent call first):
+       [0] set_stage_rect (res://src/ui/tutorial_overlay.gd:202)
+       [1] _layout_cards (res://src/ui/game_screen.gd:136)
+       [2] _on_stage_resized (res://src/ui/game_screen.gd:143)
+ERROR: Condition "!std::isfinite(p_size.x) || !std::isfinite(p_size.y)" is true.
+   at: set_size (scene/gui/control.cpp:1527)
+   GDScript backtrace (most recent call first):
+       [0] set_stage_rect (res://src/ui/tutorial_overlay.gd:202)
+       [1] _layout_cards (res://src/ui/game_screen.gd:136)
+       [2] _on_stage_resized (res://src/ui/game_screen.gd:143)
+ERROR: Condition "!std::isfinite(p_size.x) || !std::isfinite(p_size.y)" is true.
+   at: set_size (scene/gui/control.cpp:1527)
+   GDScript backtrace (most recent call first):
+       [0] set_stage_rect (res://src/ui/tutorial_overlay.gd:202)
+       [1] _layout_cards (res://src/ui/game_screen.gd:136)
+       [2] _on_stage_resized (res://src/ui/game_screen.gd:143)
+ERROR: Condition "!std::isfinite(p_size.x) || !std::isfinite(p_size.y)" is true.
+   at: set_size (scene/gui/control.cpp:1527)
+   GDScript backtrace (most recent call first):
+       [0] set_stage_rect (res://src/ui/tutorial_overlay.gd:202)
+       [1] _layout_cards (res://src/ui/game_screen.gd:136)
+       [2] _on_stage_resized (res://src/ui/game_screen.gd:143)
+ERROR: Condition "!std::isfinite(p_size.x) || !std::isfinite(p_size.y)" is true.
+   at: set_size (scene/gui/control.cpp:1527)
+   GDScript backtrace (most recent call first):
+       [0] set_stage_rect (res://src/ui/tutorial_overlay.gd:202)
+       [1] _layout_cards (res://src/ui/game_screen.gd:136)
+       [2] _on_stage_resized (res://src/ui/game_screen.gd:143)
+ERROR: Condition "!std::isfinite(p_size.x) || !std::isfinite(p_size.y)" is true.
+   at: set_size (scene/gui/control.cpp:1527)
+   GDScript backtrace (most recent call first):
+       [0] set_stage_rect (res://src/ui/tutorial_overlay.gd:202)
+       [1] _layout_cards (res://src/ui/game_screen.gd:136)
+       [2] _on_stage_resized (res://src/ui/game_screen.gd:143)
+[review-runtime] capture=res://build/review/capture-53493-1.png pixels=(323, 719) window=(323, 719) visible_rect=[P: (0.0, 0.0), S: (648.0, 1442.0)] result=0
+[review-runtime] capture=res://build/review/capture-71542-2.png pixels=(323, 719) window=(323, 719) visible_rect=[P: (0.0, 0.0), S: (648.0, 1442.0)] result=0
+[review-runtime] capture=res://build/review/capture-87942-3.png pixels=(323, 719) window=(323, 719) visible_rect=[P: (0.0, 0.0), S: (648.0, 1442.0)] result=0
+[review-runtime] CUA F6 -> product Back notification proxy; no OS hardware proof
+[review-runtime] capture=res://build/review/capture-98782-4.png pixels=(323, 719) window=(323, 719) visible_rect=[P: (0.0, 0.0), S: (648.0, 1442.0)] result=0
+[review-runtime] CUA F6 -> product Back notification proxy; no OS hardware proof
+[review-runtime] capture=res://build/review/capture-109100-5.png pixels=(323, 719) window=(323, 719) visible_rect=[P: (0.0, 0.0), S: (648.0, 1442.0)] result=0
+[review-runtime] CUA F6 -> product Back notification proxy; no OS hardware proof
+[review-runtime] capture=res://build/review/capture-130675-6.png pixels=(323, 719) window=(323, 719) visible_rect=[P: (0.0, 0.0), S: (648.0, 1442.0)] result=0
+[review-runtime] capture=res://build/review/capture-144591-7.png pixels=(323, 719) window=(323, 719) visible_rect=[P: (0.0, 0.0), S: (648.0, 1442.0)] result=0
+[review-runtime] capture=res://build/review/capture-186599-8.png pixels=(323, 719) window=(323, 719) visible_rect=[P: (0.0, 0.0), S: (648.0, 1442.0)] result=0
+[review-runtime] capture=res://build/review/capture-197359-9.png pixels=(323, 719) window=(323, 719) visible_rect=[P: (0.0, 0.0), S: (648.0, 1442.0)] result=0
+[review-runtime] CUA F6 -> product Back notification proxy; no OS hardware proof
+[review-runtime] capture=res://build/review/capture-255159-10.png pixels=(323, 719) window=(323, 719) visible_rect=[P: (0.0, 0.0), S: (648.0, 1442.0)] result=0
+[review-runtime] capture=res://build/review/capture-265483-11.png pixels=(323, 719) window=(323, 719) visible_rect=[P: (0.0, 0.0), S: (648.0, 1442.0)] result=0
+[review-runtime] CUA F6 -> product Back notification proxy; no OS hardware proof

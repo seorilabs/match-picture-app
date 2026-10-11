@@ -1,0 +1,8 @@
+{
+  "appPath": "qa-runtime/Match Picture UI QA.app",
+  "bundleId": "com.seorilabs.matchpicture.uiqa",
+  "engineVersion": "4.7.2.stable.official.ed1daf0bf",
+  "officialExecutableSha256": "c7cccbf8fb143e34e02fd6521e09be2c2b974f0d5db080b19071c9c570718ccf",
+  "localSigning": "ad-hoc QA copy; hardened runtime and vendor entitlements preserved",
+  "sourceUnmodified": true
+}

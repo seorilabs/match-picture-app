@@ -1,0 +1,190 @@
+{
+  "candidate": "02e63ae229f687a0c0790ddec1de731e9373cd90",
+  "round": 2,
+  "endedUtc": "2026-10-11T12:57:51.857431+00:00",
+  "artifactRoot": "mp-ios-116-ui-round-2-3670659",
+  "userDirName": "match-picture-MP-IOS-116-round-2-3670659",
+  "candidateTrackedDifferences": [
+    "godot/project.godot"
+  ],
+  "captures": [
+    {
+      "file": "godot/build/review/capture-1066845.png",
+      "width": 323,
+      "height": 719,
+      "sha256": "42f64c546cc68e96aea4307094ba35959a985c61747011a76437b90559802430",
+      "bytes": 22071
+    },
+    {
+      "file": "godot/build/review/capture-110699.png",
+      "width": 323,
+      "height": 719,
+      "sha256": "1e96cf0a47a9568dfb082c4f95abef4518cf1883609e606981c999ec6c76b56a",
+      "bytes": 22129
+    },
+    {
+      "file": "godot/build/review/capture-118541.png",
+      "width": 323,
+      "height": 719,
+      "sha256": "8a1f5782cbb7f51bc0e468403e6784e2d7da2355aec1cdaf1d7b51b5a6a0814d",
+      "bytes": 31309
+    },
+    {
+      "file": "godot/build/review/capture-126157.png",
+      "width": 323,
+      "height": 719,
+      "sha256": "6d52419ade8c5fb50b838a73b9e427751ceb85e605d1dd92d54d552aeab285dd",
+      "bytes": 25672
+    },
+    {
+      "file": "godot/build/review/capture-136958.png",
+      "width": 323,
+      "height": 719,
+      "sha256": "dde088d0c3f4445ea594d54c7ef50e544d7148f15681c70b7753d9d9964ad919",
+      "bytes": 21707
+    },
+    {
+      "file": "godot/build/review/capture-186219.png",
+      "width": 323,
+      "height": 719,
+      "sha256": "bffb550a919700f6a05f55007bdadbba111f1c30601e8c42ae4c9bce480897b2",
+      "bytes": 57600
+    },
+    {
+      "file": "godot/build/review/capture-219200.png",
+      "width": 323,
+      "height": 719,
+      "sha256": "28bf2edc93a490ac387115664c56ed6b75d05b5881aa2867a78e39225cbe0589",
+      "bytes": 58733
+    },
+    {
+      "file": "godot/build/review/capture-227742.png",
+      "width": 323,
+      "height": 719,
+      "sha256": "bc902de0dcd57b274a0e4c543ba6f9cca7ed20e643484dbcd5a63cac81a24f6a",
+      "bytes": 52765
+    },
+    {
+      "file": "godot/build/review/capture-249509.png",
+      "width": 323,
+      "height": 719,
+      "sha256": "f3aef25bfeccab2fdcebdb038f5e4ff80c71855520ae3af6c50dc8603b64a553",
+      "bytes": 55992
+    },
+    {
+      "file": "godot/build/review/capture-271551.png",
+      "width": 323,
+      "height": 719,
+      "sha256": "30533f9cfda185e5cde9b9c8007a17e80fc686d1666c3e6531270e441b343c44",
+      "bytes": 66409
+    },
+    {
+      "file": "godot/build/review/capture-283125.png",
+      "width": 323,
+      "height": 719,
+      "sha256": "0482455e5e5a17a7773de05c54d89986d75a433b37f5e1d424e719c3e47a03fd",
+      "bytes": 66626
+    },
+    {
+      "file": "godot/build/review/capture-360410.png",
+      "width": 323,
+      "height": 719,
+      "sha256": "b9d5652da1f182df0bc5aeda0cc0e5e08c1092fbc4e7d8c6b8a16532b85c2397",
+      "bytes": 68111
+    },
+    {
+      "file": "godot/build/review/capture-435918.png",
+      "width": 323,
+      "height": 719,
+      "sha256": "86a5a2eb9da660f59493955b4ed8541d2826de9451f67a8438b54a7c17594537",
+      "bytes": 63522
+    },
+    {
+      "file": "godot/build/review/capture-467318.png",
+      "width": 323,
+      "height": 719,
+      "sha256": "f51c78458db91ab4914b1391a4543401fc28e9ec3666657e8648c520a776cf9b",
+      "bytes": 37113
+    },
+    {
+      "file": "godot/build/review/capture-483010.png",
+      "width": 323,
+      "height": 719,
+      "sha256": "7a046e5e778fd9ffb2c230d196b573813df17e1e080c14e528aafee0f90a0bea",
+      "bytes": 21624
+    },
+    {
+      "file": "godot/build/review/capture-507394.png",
+      "width": 323,
+      "height": 719,
+      "sha256": "60385f6500eb12c6947bba8ccf501307876189c4610f2e94f67ea6d74e33e23a",
+      "bytes": 65193
+    },
+    {
+      "file": "godot/build/review/capture-654919.png",
+      "width": 323,
+      "height": 719,
+      "sha256": "f3e5309a8edab61a32a9e3b6cf36ad85eeb80a725ac1da42fc616fa3f41e3fd7",
+      "bytes": 70632
+    },
+    {
+      "file": "godot/build/review/capture-690543.png",
+      "width": 323,
+      "height": 719,
+      "sha256": "c5fe70286538715326ee30e5be1aab0cfb266f8f35db8157b633c2810d61b718",
+      "bytes": 33092
+    },
+    {
+      "file": "godot/build/review/capture-712386.png",
+      "width": 323,
+      "height": 719,
+      "sha256": "5b3a2ebc50b4fefe95ab7734abd136cbc8b8a12678c78398d588dd3420578fe4",
+      "bytes": 29598
+    },
+    {
+      "file": "godot/build/review/capture-736986.png",
+      "width": 323,
+      "height": 719,
+      "sha256": "d2e6e7f88cd8915e7f8ef6756945dabde3ae85bdf319a47dd8db65f29bbadd74",
+      "bytes": 41982
+    },
+    {
+      "file": "godot/build/review/capture-763178.png",
+      "width": 323,
+      "height": 719,
+      "sha256": "7a046e5e778fd9ffb2c230d196b573813df17e1e080c14e528aafee0f90a0bea",
+      "bytes": 21624
+    },
+    {
+      "file": "godot/build/review/capture-81908.png",
+      "width": 323,
+      "height": 719,
+      "sha256": "a6a671f52f4b460466d3e54f1b44e0a7f82e33d6533f9a1ab8155fb0b4f61034",
+      "bytes": 22056
+    }
+  ],
+  "logs": [
+    {
+      "file": "editor-isolated-run.log",
+      "sha256": "233c24a9675b82a5c50f086d71f05c32b64fc957c96dadd4a2f13622b841f4b2"
+    },
+    {
+      "file": "game-runtime.log",
+      "sha256": "1213a5206c8a8fa884ced64e43b69c62b683dd7dbd96fc0d66e8d1aa06e36ac2"
+    }
+  ],
+  "publicLogs": [
+    {
+      "file": "editor-isolated-run-public.log",
+      "sha256": "9ec5d8c3d9731ef559ef277b07fef7478da9a2d4da4cee920d07b67afa826769",
+      "rawFile": "editor-isolated-run.log",
+      "rawSha256": "233c24a9675b82a5c50f086d71f05c32b64fc957c96dadd4a2f13622b841f4b2"
+    },
+    {
+      "file": "game-runtime-public.log",
+      "sha256": "45b51de645770cf2539210bcd51549cbce7eeb85318103e4f094086104df8fb5",
+      "rawFile": "game-runtime.log",
+      "rawSha256": "1213a5206c8a8fa884ced64e43b69c62b683dd7dbd96fc0d66e8d1aa06e36ac2"
+    }
+  ]
+}
