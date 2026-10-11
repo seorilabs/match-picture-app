@@ -1,0 +1,14 @@
+{
+  "schema": "seorilabs.release-notes/v2",
+  "version": "v1.1.6",
+  "notes": {
+    "ko-KR": "- 기록 저장을 보완하고 저장하지 못한 경우 알려드려요.\n- 시작 화면에서도 설정을 열 수 있어요.\n- 필요한 경우 설정에서 광고 개인정보 선택을 다시 열 수 있어요.\n- 광고 준비에 실패해도 다음 판이 끝나면 다시 준비해요.",
+    "en-US": "- Improved record saving and added a message when a record cannot be saved.\n- Open Settings from the start screen.\n- Reopen ad privacy choices in Settings when available.\n- Ads can prepare again after the next game if loading fails."
+  },
+  "markets": {
+    "appStore": {
+      "ko-KR": "- 기록 저장을 보완하고 저장하지 못한 경우 알려드려요.\n- 시작 화면에서도 설정을 열 수 있어요.\n- 필요한 경우 설정에서 광고 개인정보 선택을 다시 열 수 있어요.\n- 광고 준비에 실패해도 다음 판이 끝나면 다시 준비해요.",
+      "en-US": "- Improved record saving and added a message when a record cannot be saved.\n- Open Settings from the start screen.\n- Reopen ad privacy choices in Settings when available.\n- Ads can prepare again after the next game if loading fails."
+    }
+  }
+}
