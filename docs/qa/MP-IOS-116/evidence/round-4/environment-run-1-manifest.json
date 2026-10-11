@@ -1,0 +1,49 @@
+{
+  "candidate": "385fa2e3d20c6cc89a790d403301573d48f164f1",
+  "preparedAt": "2026-10-11T22:14:33.603493+00:00",
+  "userDirName": "match-picture-MP-IOS-116-round-4-385fa2e",
+  "userDirAbsentBeforePreparation": true,
+  "requestedViewport": [
+    324,
+    720
+  ],
+  "preparationNote": "Initial assembly expected already-present custom-user/window keys; assertion stopped before Editor launch. Correct source has no such keys; isolated copy adds official keys. No Run used.",
+  "files": [
+    {
+      "file": "project.godot.candidate-original",
+      "sha256": "4d5952ea3b2597c770195fdfbea8b030bf529ce32f17fb68d545e144eff75ea3"
+    },
+    {
+      "file": "godot/project.godot",
+      "sha256": "e60c1463e9234a1bdafa957afd4200759933cf1d1b3cf3e7b78b7ab397b8164d"
+    },
+    {
+      "file": "project-environment-run-1.diff",
+      "sha256": "ac7a988f899bbf96ce5ce76d0b0f18113b4e547e640a71b66f23f10a53c34c1a"
+    },
+    {
+      "file": "godot/addons/mp_review_runner/plugin.cfg",
+      "sha256": "3138855637e3aca0b1862c1d2c742f6a90bdaa15b35285f5e41644808bf38c4f"
+    },
+    {
+      "file": "godot/addons/mp_review_runner/plugin.gd",
+      "sha256": "5b49a3294a32adfa103c9a25b1221f1ca5fcc4a690d20a956a24ea79a197cf42"
+    },
+    {
+      "file": "godot/addons/mp_review_runner/runtime_guard.gd",
+      "sha256": "42d4af95a36f26a3745b8f0889ba749c73275b9e575249a2bd4cb21b3bdde995"
+    },
+    {
+      "file": "approval.json",
+      "sha256": "30208eba8fc7a20813ada91eb3116e4c021ffb818a97874a254b319590042ba1"
+    },
+    {
+      "file": "receipt.json",
+      "sha256": "6f6379365000c9552d2d019f12ed78a80317fb47f4f2198fc57ebd2afc97663e"
+    },
+    {
+      "file": "self-contained-receipt.json",
+      "sha256": "c92fc51c1f6aed0fcaee36155ae764b670a1fe9042a916f9e2097cb16bb3823e"
+    }
+  ]
+}

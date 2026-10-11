@@ -1,0 +1,120 @@
+{
+  "recordedAt": "2026-10-11T22:47:42.004672+00:00",
+  "executionBoundary": {
+    "candidate": "385fa2e3d20c6cc89a790d403301573d48f164f1",
+    "firstRunRequestAt": "2026-10-11T22:15:00.631136+00:00",
+    "deadline": "2026-10-11T22:55:00.631136+00:00",
+    "maxRuns": 3,
+    "maxMinutes": 40,
+    "trackedSourceComparedFiles": 820,
+    "preRunSourceDifferences": [
+      "godot/project.godot"
+    ],
+    "portsInitiallyFree": true
+  },
+  "runs": [
+    {
+      "run": 1,
+      "editorLogCreatedAt": "2026-10-11T22:15:09.736713+00:00",
+      "creationTimeMeaning": "stdout log creation at command launch, not claimed exact native GUI visibility time",
+      "processEvidence": [
+        {
+          "pid": 13107,
+          "ppid": 88957,
+          "args": "mp116-godot-ui-_zc8d_lb/Match Picture UI QA.app/Contents/MacOS/Godot --headless --editor --path mp-ios-116-ui-round-4-385fa2e/godot --log-file mp-ios-116-ui-round-4-385fa2e/editor-run-1.log"
+        },
+        {
+          "pid": 13138,
+          "ppid": 1,
+          "args": "mp116-godot-ui-_zc8d_lb/Match Picture UI QA.app/Contents/MacOS/Godot --path mp-ios-116-ui-round-4-385fa2e/godot --remote-debug tcp://127.0.0.1:31663 --editor-pid 13107 --scene res://scenes/main.tscn"
+        }
+      ],
+      "end": {
+        "gameYesExitObservedAt": "2026-10-11T22:34:59.172698+00:00",
+        "game13138Absent": true,
+        "processesObserved": [
+          {
+            "pid": 13107,
+            "ppid": 88957,
+            "args": "mp116-godot-ui-_zc8d_lb/Match Picture UI QA.app/Contents/MacOS/Godot --headless --editor --path mp-ios-116-ui-round-4-385fa2e/godot --log-file mp-ios-116-ui-round-4-385fa2e/editor-run-1.log"
+          },
+          {
+            "pid": 66312,
+            "ppid": 1,
+            "args": "mp116-godot-ui-_zc8d_lb/Match Picture UI QA.app/Contents/MacOS/Godot"
+          }
+        ],
+        "ownTerminatedPids": [
+          13107,
+          66312
+        ],
+        "postQuitAXObservation": "CUA fell back to a new QA Project Manager with no project args; no Editor Play/main Run; terminated own PM without any UI input"
+      }
+    },
+    {
+      "run": 2,
+      "editorLogCreatedAt": "2026-10-11T22:36:25.177109+00:00",
+      "creationTimeMeaning": "stdout log creation at command launch, not claimed exact native GUI visibility time",
+      "processEvidence": {
+        "at": "2026-10-11T22:36:35.524765+00:00",
+        "rows": [
+          {
+            "pid": 72087,
+            "ppid": 88957,
+            "args": "mp116-godot-ui-_zc8d_lb/Match Picture UI QA.app/Contents/MacOS/Godot --headless --editor --path mp-ios-116-ui-round-4-385fa2e/godot --log-file mp-ios-116-ui-round-4-385fa2e/editor-run-2.log"
+          },
+          {
+            "pid": 72236,
+            "ppid": 1,
+            "args": "mp116-godot-ui-_zc8d_lb/Match Picture UI QA.app/Contents/MacOS/Godot --path mp-ios-116-ui-round-4-385fa2e/godot --remote-debug tcp://127.0.0.1:31663 --editor-pid 72087 --scene res://scenes/main.tscn"
+          }
+        ]
+      },
+      "end": {
+        "actualGameEndedAt": "2026-10-11T22:41:24.667611+00:00",
+        "gamePID": 72236,
+        "gameAbsent": true,
+        "ownEditorPID": 72087,
+        "editorTerminationRequested": true
+      }
+    },
+    {
+      "run": 3,
+      "editorLogCreatedAt": "2026-10-11T22:41:56.797487+00:00",
+      "creationTimeMeaning": "stdout log creation at command launch, not claimed exact native GUI visibility time",
+      "processEvidence": {
+        "observedAt": "2026-10-11T22:42:03.113813+00:00",
+        "ownProcessRows": [
+          "83187 88957 mp116-godot-ui-_zc8d_lb/Match Picture UI QA.app/Contents/MacOS/Godot --headless --editor --path mp-ios-116-ui-round-4-385fa2e/godot --rendering-method gl_compatibility",
+          "83382     1 mp116-godot-ui-_zc8d_lb/Match Picture UI QA.app/Contents/MacOS/Godot --path mp-ios-116-ui-round-4-385fa2e/godot --remote-debug tcp://127.0.0.1:31663 --editor-pid 83187 --scene res://scenes/main.tscn"
+        ]
+      },
+      "end": {
+        "actualGameEndedAt": "2026-10-11T22:45:08.932343+00:00",
+        "gamePID": 83382,
+        "gameAbsent": true,
+        "ownEditorPID": 83187,
+        "editorTerminationRequested": true
+      }
+    }
+  ],
+  "overallEnd": {
+    "actualOwnProcessesAbsentAt": "2026-10-11T22:45:15.861957+00:00",
+    "startedAt": "2026-10-11T22:15:00.631136+00:00",
+    "deadline": "2026-10-11T22:55:00.631136+00:00",
+    "runCount": 3,
+    "elapsedSeconds": 1815.230821,
+    "within40Minutes": true,
+    "ownPIDsAbsent": [
+      13107,
+      13138,
+      66312,
+      72087,
+      72236,
+      83187,
+      83382
+    ],
+    "guiReturned": true,
+    "additionalRunPerformed": false
+  }
+}

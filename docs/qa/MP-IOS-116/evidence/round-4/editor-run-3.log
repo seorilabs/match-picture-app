@@ -1,0 +1,70 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+[   0% ] [90m[1mfirst_scan_filesystem[22m | Started 프로젝트 초기화 (5 steps)[39m[0m
+[   0% ] [90m[1mfirst_scan_filesystem[22m | 파일 구조 스캔 중...[39m[0m
+[  16% ] [90m[1mfirst_scan_filesystem[22m | 전역 클래스 이름을 불러오는 중...[39m[0m
+[  33% ] [90m[1mfirst_scan_filesystem[22m | GDExtensions 검증 중...[39m[0m
+[  50% ] [90m[1mfirst_scan_filesystem[22m | 오토로드 스크립트를 만드는 중...[39m[0m
+[  66% ] [90m[1mfirst_scan_filesystem[22m | 플러그인을 초기화 중...[39m[0m
+[review-editor] host display=headless actual GUI child required
+[  83% ] [90m[1mfirst_scan_filesystem[22m | 파일 스캔 시작 중...[39m[0m
+[92m[ DONE ][39m [1mfirst_scan_filesystem[22m
+[0m
+[   0% ] [90m[1m_update_scan_actions[22m | Started 액션 스캔 중... (8 steps)[39m[0m
+[   0% ] [90m[1m_update_scan_actions[22m | capture-18624-1.png[39m[0m
+[  11% ] [90m[1m_update_scan_actions[22m | capture-19501-2.png[39m[0m
+[  22% ] [90m[1m_update_scan_actions[22m | capture-47168-3.png[39m[0m
+[  33% ] [90m[1m_update_scan_actions[22m | capture-47212-4.png[39m[0m
+[  44% ] [90m[1m_update_scan_actions[22m | capture-253753-5.png[39m[0m
+[  55% ] [90m[1m_update_scan_actions[22m | capture-259290-6.png[39m[0m
+[  66% ] [90m[1m_update_scan_actions[22m | capture-275711-7.png[39m[0m
+[  77% ] [90m[1m_update_scan_actions[22m | capture-281454-8.png[39m[0m
+[92m[ DONE ][39m [1m_update_scan_actions[22m
+[0m
+[   0% ] [90m[1mreimport[22m | Started 애셋 (다시) 가져오는 중 (8 steps)[39m[0m
+[   0% ] [90m[1mreimport[22m | 다시 가져올 파일을 준비 중...[39m[0m
+[  11% ] [90m[1mreimport[22m | 다시 가져올 파일을 준비 중...[39m[0m
+[  22% ] [90m[1mreimport[22m | 다시 가져올 파일을 준비 중...[39m[0m
+[  33% ] [90m[1mreimport[22m | 다시 가져올 파일을 준비 중...[39m[0m
+[  44% ] [90m[1mreimport[22m | 다시 가져올 파일을 준비 중...[39m[0m
+[  55% ] [90m[1mreimport[22m | 다시 가져올 파일을 준비 중...[39m[0m
+[  66% ] [90m[1mreimport[22m | 다시 가져올 파일을 준비 중...[39m[0m
+[  77% ] [90m[1mreimport[22m | 다시 가져올 파일을 준비 중...[39m[0m
+[   0% ] [90m[1mreimport[22m | 다시 가져오기 전 작업을 수행 중...[39m[0m
+[   0% ] [90m[1mreimport[22m | capture-18624-1.png[39m[0m
+[  11% ] [90m[1mreimport[22m | capture-19501-2.png[39m[0m
+[  22% ] [90m[1mreimport[22m | capture-47168-3.png[39m[0m
+[  33% ] [90m[1mreimport[22m | capture-47212-4.png[39m[0m
+[  44% ] [90m[1mreimport[22m | capture-253753-5.png[39m[0m
+[  55% ] [90m[1mreimport[22m | capture-259290-6.png[39m[0m
+[  66% ] [90m[1mreimport[22m | capture-275711-7.png[39m[0m
+[  77% ] [90m[1mreimport[22m | capture-281454-8.png[39m[0m
+[  88% ] [90m[1mreimport[22m | 애셋 가져오기 마무리 중...[39m[0m
+[92m[ DONE ][39m [1mreimport[22m
+[0m
+[   0% ] [90m[1mreimport[22m | Started 애셋 (다시) 가져오는 중 (8 steps)[39m[0m
+[   0% ] [90m[1mreimport[22m | 다시 가져오기 후 작업을 수행 중...[39m[0m
+[92m[ DONE ][39m [1mreimport[22m
+[0m
+[   0% ] [90m[1mloading_editor_layout[22m | Started 편집기를 불러오는 중 (5 steps)[39m[0m
+[   0% ] [90m[1mloading_editor_layout[22m | 편집기 레이아웃을 불러오는 중...[39m[0m
+[  16% ] [90m[1mloading_editor_layout[22m | 독을 불러오는 중...[39m[0m
+[  33% ] [90m[1mloading_editor_layout[22m | 씬을 다시 여는 중...[39m[0m
+[  50% ] [90m[1mloading_editor_layout[22m | 중앙 편집기 레이아웃을 불러오는 중...[39m[0m
+[  66% ] [90m[1mloading_editor_layout[22m | 플러그인 창 레이아웃을 불러오는 중...[39m[0m
+[  83% ] [90m[1mloading_editor_layout[22m | 편집기 레이아웃이 준비되었습니다.[39m[0m
+[92m[ DONE ][39m [1mloading_editor_layout[22m
+[0m
+[review-editor] self_contained=true config=mp116-godot-ui-_zc8d_lb/editor_data cache=mp116-godot-ui-_zc8d_lb/editor_data/cache isolated=true
+[review-editor] user://=<HOME>/Library/Application Support/match-picture-MP-IOS-116-round-4-385fa2e/
+[review-editor] game_embed_mode at initial load=-1
+[review-editor] game_embed_mode=-1 remote_port=31663
+[review-editor] starting actual normal main Editor Run once
+[   0% ] [90m[1msave[22m | Started 씬 저장 중 (4 steps)[39m[0m
+[   0% ] [90m[1msave[22m | 분석 중[39m[0m
+[  20% ] [90m[1msave[22m | 썸네일 만드는 중[39m[0m
+[  60% ] [90m[1msave[22m | 썸네일 만드는 중[39m[0m
+[  80% ] [90m[1msave[22m | 씬 저장 중[39m[0m
+[92m[ DONE ][39m [1msave[22m
+[0m
+[review-editor] is_playing_scene=true

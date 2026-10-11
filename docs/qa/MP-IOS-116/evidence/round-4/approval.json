@@ -1,0 +1,16 @@
+{
+  "designId": "MP-IOS-116",
+  "approvedBy": "user",
+  "approvalObservedAt": "2026-10-11T22:10:57Z",
+  "approvalEvidence": "2026-10-12 Asia/Seoul conversation: user replied 승인 to the additional UI round4 proposal",
+  "proposalCommit": "385fa2e3d20c6cc89a790d403301573d48f164f1",
+  "proposalSha256": "c1c5975b8f493f625c4b43b70c8a337fad000bcbdaafdc6d21a35349baf667b9",
+  "sourceSha": "385fa2e3d20c6cc89a790d403301573d48f164f1",
+  "scope": "One additional UI round4; normal-main restart preservation, normal-bak recovery, three viewport ratios, all nine core features",
+  "maxRound": 4,
+  "maxEditorRuns": 3,
+  "maxMinutes": 40,
+  "implementer": "/root",
+  "reviewer": "/root/ui_review",
+  "executionStarted": false
+}

@@ -207,3 +207,7 @@ main 씬의 후보 원본 `main.tscn.candidate-original`, 자동 직렬화본 `m
 - [실제 정상 게임](evidence/round-3/godot/build/review/capture-215695-9.png), [한국어 신기록 결과](evidence/round-3/godot/build/review/capture-557524-13.png), [영어 결과](evidence/round-3/godot/build/review/capture-582643-15.png), [Retry](evidence/round-3/godot/build/review/capture-626154-18.png).
 - [primary](evidence/round-3/run-3-match_picture.save), [.bak](evidence/round-3/run-3-match_picture.save.bak), [제품 runtime 로그](evidence/round-3/game-run-3-public.log), [Editor 로그](evidence/round-3/editor-run-3-public.log).
 - [소스 비교](evidence/round-3/source-provenance.json), [격리 설정 diff](evidence/round-3/project-environment-run-3.diff), [Editor 씬 메타데이터 diff](evidence/round-3/main-scene-editor-serialization.diff).
+
+## 2026-10-12 관찰 용어 정정
+
+위 회차에서 공통 심볼의 녹색 O를 힌트로 설명한 부분은 잘못된 분류다. 제품 `MpSymbolButton.start_hint()`의 실제 힌트는 **하단 정답 심볼의 좌우 흔들림**이며, O는 안내 예시 또는 정답 판정에 사용된다. 원래 관찰·PNG는 보존하지만 이 회차의 O 이미지를 유휴 힌트 흔들림의 통과 근거로 사용하지 않는다. 오답 잠금·복구와 정답 진행 결과는 이 정정과 별개다. 실제 흔들림 여부는 추가 승인된 4회차의 독립 관찰 결과에 따른다.

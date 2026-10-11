@@ -1,0 +1,24 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+OpenGL API 4.1 Metal - 90.5 - Compatibility - Using Device: Apple - Apple M3
+
+[review-runtime] user://=<HOME>/Library/Application Support/match-picture-MP-IOS-116-round-4-385fa2e/ isolated=true before Save
+[ui] safe area 여백(뷰포트 단위) 좌 0 상 0 우 0 하 0 / 창 (540, 720) / 안전영역 [P: (0, 60), S: (3840, 1976)]
+[review-layout] window=(540, 720) visible_rect=[P: (0.0, 0.0), S: (1080.0, 1440.0)]
+[review-layout] _safe_area_root size=(1080.0, 1440.0) rect=[P: (0.0, 0.0), S: (1080.0, 1440.0)] transform=[X: (1.0, 0.0), Y: (0.0, 1.0), O: (0.0, 0.0)]
+[review-layout] _game_screen size=(1080.0, 1440.0) rect=[P: (0.0, 0.0), S: (1080.0, 1440.0)] transform=[X: (1.0, 0.0), Y: (0.0, 1.0), O: (0.0, 0.0)]
+[review-layout] _tutorial size=(1080.0, 1440.0) rect=[P: (0.0, 0.0), S: (1080.0, 1440.0)] transform=[X: (1.0, 0.0), Y: (0.0, 1.0), O: (0.0, 0.0)]
+[review-layout] _stage size=(1080.0, 1340.0) rect=[P: (0.0, 100.0), S: (1080.0, 1340.0)] transform=[X: (1.0, 0.0), Y: (0.0, 1.0), O: (0.0, 100.0)]
+[review-layout] _opponent_card size=(650.0, 650.0) rect=[P: (247.5, 165.0), S: (585.0, 585.0)] transform=[X: (0.9, 0.0), Y: (0.0, 0.9), O: (247.5, 165.0)]
+[review-layout] _mine_card size=(650.0, 650.0) rect=[P: (247.5, 790.0), S: (585.0, 585.0)] transform=[X: (0.9, 0.0), Y: (0.0, 0.9), O: (247.5, 790.0)]
+[review-layout] _hud size=(1080.0, 100.0) rect=[P: (0.0, 65.0), S: (1080.0, 100.0)] transform=[X: (1.0, 0.0), Y: (0.0, 1.0), O: (0.0, 65.0)]
+[review-runtime] capture=res://build/review/run-3/capture-15118-1.png pixels=(540, 720) window=(540, 720) visible_rect=[P: (0.0, 0.0), S: (1080.0, 1440.0)] result=0
+[review-runtime] capture=res://build/review/run-3/capture-20078-2.png pixels=(540, 720) window=(540, 720) visible_rect=[P: (0.0, 0.0), S: (1080.0, 1440.0)] result=0
+[review-runtime] CUA F6 -> product Back notification proxy; no OS hardware proof
+[review-runtime] capture=res://build/review/run-3/capture-43803-3.png pixels=(540, 720) window=(540, 720) visible_rect=[P: (0.0, 0.0), S: (1080.0, 1440.0)] result=0
+[review-runtime] capture=res://build/review/run-3/capture-55548-4.png pixels=(540, 720) window=(540, 720) visible_rect=[P: (0.0, 0.0), S: (1080.0, 1440.0)] result=0
+[review-runtime] capture=res://build/review/run-3/capture-139058-5.png pixels=(540, 720) window=(540, 720) visible_rect=[P: (0.0, 0.0), S: (1080.0, 1440.0)] result=0
+[review-runtime] capture=res://build/review/run-3/capture-145689-6.png pixels=(540, 720) window=(540, 720) visible_rect=[P: (0.0, 0.0), S: (1080.0, 1440.0)] result=0
+[review-runtime] capture=res://build/review/run-3/capture-157891-7.png pixels=(540, 720) window=(540, 720) visible_rect=[P: (0.0, 0.0), S: (1080.0, 1440.0)] result=0
+[review-runtime] CUA F6 -> product Back notification proxy; no OS hardware proof
+[review-runtime] capture=res://build/review/run-3/capture-171790-8.png pixels=(540, 720) window=(540, 720) visible_rect=[P: (0.0, 0.0), S: (1080.0, 1440.0)] result=0
+[review-runtime] capture=res://build/review/run-3/capture-177174-9.png pixels=(540, 720) window=(540, 720) visible_rect=[P: (0.0, 0.0), S: (1080.0, 1440.0)] result=0

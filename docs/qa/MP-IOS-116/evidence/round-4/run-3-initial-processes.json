@@ -1,0 +1,7 @@
+{
+  "observedAt": "2026-10-11T22:42:03.113813+00:00",
+  "ownProcessRows": [
+    "83187 88957 mp116-godot-ui-_zc8d_lb/Match Picture UI QA.app/Contents/MacOS/Godot --headless --editor --path mp-ios-116-ui-round-4-385fa2e/godot --rendering-method gl_compatibility",
+    "83382     1 mp116-godot-ui-_zc8d_lb/Match Picture UI QA.app/Contents/MacOS/Godot --path mp-ios-116-ui-round-4-385fa2e/godot --remote-debug tcp://127.0.0.1:31663 --editor-pid 83187 --scene res://scenes/main.tscn"
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "marker": "_sc_",
+  "placement": "beside QA .app",
+  "appBundleUnchanged": true,
+  "codesignVerify": "passed",
+  "appFilesSha256": {
+    "Info.plist": "b06cc5bc9b1ee0a1416d8120355be8b31ad7f86cb48c066ba9fc7b8d66040835",
+    "Godot": "6e31502c5d239d68078bc77453353dc2e4c45d7daa17d16325470ae5089b94b1"
+  },
+  "expectedEditorData": "editor_data",
+  "runtimePathVerification": "pending next planned Editor launch"
+}

@@ -1,0 +1,29 @@
+{
+  "observedAt": "2026-10-11T22:16:51.285713+00:00",
+  "files": [
+    {
+      "locale": "en",
+      "originalFile": "translations.en.candidate-original.translation",
+      "originalSha256": "44371df2cbeba1dfb01a404ef007370f5f56a78b511c47821fb11d5dcadb4863",
+      "reimportedFile": "translations.en.editor-reimported.translation",
+      "reimportedSha256": "c04f6c48dcc66c15ebf5b76f7277dcb8b20cf5d840fa1f443af6262a3dad4372",
+      "originalFormat": "RSRC",
+      "reimportedFormat": "RSCC",
+      "semanticEquivalence": "pending-resource-only-probe"
+    },
+    {
+      "locale": "ko",
+      "originalFile": "translations.ko.candidate-original.translation",
+      "originalSha256": "ffa92d62a4c3ca42d60242966cd2a6481d19018d3a73d594c1628bddeeea22bb",
+      "reimportedFile": "translations.ko.editor-reimported.translation",
+      "reimportedSha256": "402f122f0c2b004a5c37694d75d2b8bd4655512f122090aeba9282fad958f6bc",
+      "originalFormat": "RSRC",
+      "reimportedFormat": "RSCC",
+      "semanticEquivalence": "pending-resource-only-probe"
+    }
+  ],
+  "extraEditorRunUsed": false,
+  "productInputsBeforeProbe": false,
+  "semanticEquivalence": "passed-resource-only-locale-and-all-32-csv-keys-per-2-locales",
+  "resourceOnlyProbe": "translation-resource-probe/result.json"
+}

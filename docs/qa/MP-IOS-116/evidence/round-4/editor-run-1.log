@@ -1,0 +1,546 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+[   0% ] first_scan_filesystem | Started 프로젝트 초기화 (5 steps)
+[  16% ] first_scan_filesystem | 전역 클래스 이름을 불러오는 중...
+[  33% ] first_scan_filesystem | GDExtensions 검증 중...
+[  50% ] first_scan_filesystem | 오토로드 스크립트를 만드는 중...
+[  66% ] first_scan_filesystem | 플러그인을 초기화 중...
+AdMob: Headless mode detected and iOS binaries are missing. Downloading dynamically...
+AdMob: Downloading synchronously from https://github.com/poingstudios/godot-admob-plugin/releases/download/v5.1.0/ios-template-v4.7.2.zip
+Extracted zip to: mp-ios-116-ui-round-4-385fa2e/godot/addons/admob/ios/bin/
+AdMob: iOS binaries successfully downloaded and installed!
+[review-editor] host display=headless actual GUI child required
+[  83% ] first_scan_filesystem | 파일 스캔 시작 중...
+[ DONE ] first_scan_filesystem
+
+[   0% ] update_scripts_classes | Started 전역 클래스를 등록하는 중... (178 steps)
+[   0% ] update_scripts_classes | 
+[   0% ] update_scripts_classes | 
+[   1% ] update_scripts_classes | 
+[   1% ] update_scripts_classes | 
+[   2% ] update_scripts_classes | 
+[   2% ] update_scripts_classes | 
+[   3% ] update_scripts_classes | 
+[   3% ] update_scripts_classes | 
+[   4% ] update_scripts_classes | 
+[   5% ] update_scripts_classes | 
+[   5% ] update_scripts_classes | 
+[   6% ] update_scripts_classes | 
+[   6% ] update_scripts_classes | 
+[   7% ] update_scripts_classes | 
+[   7% ] update_scripts_classes | 
+[   8% ] update_scripts_classes | AdapterResponseInfo
+[   8% ] update_scripts_classes | AdapterStatus
+[   9% ] update_scripts_classes | AdChoicesPlacement
+[  10% ] update_scripts_classes | AdError
+[  10% ] update_scripts_classes | AdPosition
+[  11% ] update_scripts_classes | AdRequest
+[  11% ] update_scripts_classes | AdSize
+[  12% ] update_scripts_classes | AdValue
+[  12% ] update_scripts_classes | AdVideoController
+[  13% ] update_scripts_classes | LoadAdError
+[  13% ] update_scripts_classes | MediaContent
+[  14% ] update_scripts_classes | NativeAdOptions
+[  15% ] update_scripts_classes | NativeMediaAspectRatio
+[  15% ] update_scripts_classes | NativeTemplateFontStyle
+[  16% ] update_scripts_classes | NativeTemplateStyle
+[  16% ] update_scripts_classes | NativeTemplateTextStyle
+[  17% ] update_scripts_classes | RequestConfiguration
+[  17% ] update_scripts_classes | ResponseInfo
+[  18% ] update_scripts_classes | RewardedItem
+[  18% ] update_scripts_classes | ServerSideVerificationOptions
+[  19% ] update_scripts_classes | AdVideoOptions
+[  20% ] update_scripts_classes | AdInspectorClosedListener
+[  20% ] update_scripts_classes | AdListener
+[  21% ] update_scripts_classes | AppOpenAdLoadCallback
+[  21% ] update_scripts_classes | FullScreenContentCallback
+[  22% ] update_scripts_classes | InterstitialAdLoadCallback
+[  22% ] update_scripts_classes | OnInitializationCompleteListener
+[  23% ] update_scripts_classes | OnUserEarnedRewardListener
+[  24% ] update_scripts_classes | RewardedAdLoadCallback
+[  24% ] update_scripts_classes | RewardedInterstitialAdLoadCallback
+[  25% ] update_scripts_classes | VideoLifecycleCallbacks
+[  25% ] update_scripts_classes | AdView
+[  26% ] update_scripts_classes | AppOpenAd
+[  26% ] update_scripts_classes | AppOpenAdLoader
+[  27% ] update_scripts_classes | InitializationStatus
+[  27% ] update_scripts_classes | InterstitialAd
+[  28% ] update_scripts_classes | InterstitialAdLoader
+[  29% ] update_scripts_classes | MobileAds
+[  29% ] update_scripts_classes | NativeOverlayAd
+[  30% ] update_scripts_classes | RewardedAd
+[  30% ] update_scripts_classes | RewardedAdLoader
+[  31% ] update_scripts_classes | RewardedInterstitialAd
+[  31% ] update_scripts_classes | RewardedInterstitialAdLoader
+[  32% ] update_scripts_classes | MobileSingletonPlugin
+[  32% ] update_scripts_classes | AppLovin
+[  33% ] update_scripts_classes | BidMachine
+[  34% ] update_scripts_classes | Chartboost
+[  34% ] update_scripts_classes | DTExchange
+[  35% ] update_scripts_classes | IMobile
+[  35% ] update_scripts_classes | InMobi
+[  36% ] update_scripts_classes | IronSource
+[  36% ] update_scripts_classes | LineAds
+[  37% ] update_scripts_classes | LineMediationExtras
+[  37% ] update_scripts_classes | FBAdSettings
+[  38% ] update_scripts_classes | UnityAds
+[  39% ] update_scripts_classes | Vungle
+[  39% ] update_scripts_classes | VungleInterstitialMediationExtras
+[  40% ] update_scripts_classes | VungleMediationExtras
+[  40% ] update_scripts_classes | VungleRewardedMediationExtras
+[  41% ] update_scripts_classes | MediationExtras
+[  41% ] update_scripts_classes | ConsentForm
+[  42% ] update_scripts_classes | ConsentInformation
+[  43% ] update_scripts_classes | UserMessagingPlatform
+[  43% ] update_scripts_classes | ConsentDebugSettings
+[  44% ] update_scripts_classes | ConsentRequestParameters
+[  44% ] update_scripts_classes | DebugGeography
+[  45% ] update_scripts_classes | FormError
+[  45% ] update_scripts_classes | 
+[  46% ] update_scripts_classes | 
+[  46% ] update_scripts_classes | 
+[  47% ] update_scripts_classes | 
+[  48% ] update_scripts_classes | 
+[  48% ] update_scripts_classes | 
+[  49% ] update_scripts_classes | 
+[  49% ] update_scripts_classes | 
+[  50% ] update_scripts_classes | 
+[  50% ] update_scripts_classes | 
+[  51% ] update_scripts_classes | 
+[  51% ] update_scripts_classes | 
+[  52% ] update_scripts_classes | 
+[  53% ] update_scripts_classes | 
+[  53% ] update_scripts_classes | 
+[  54% ] update_scripts_classes | 
+[  54% ] update_scripts_classes | 
+[  55% ] update_scripts_classes | 
+[  55% ] update_scripts_classes | 
+[  56% ] update_scripts_classes | 
+[  56% ] update_scripts_classes | 
+[  57% ] update_scripts_classes | 
+[  58% ] update_scripts_classes | 
+[  58% ] update_scripts_classes | 
+[  59% ] update_scripts_classes | 
+[  59% ] update_scripts_classes | 
+[  60% ] update_scripts_classes | 
+[  60% ] update_scripts_classes | 
+[  61% ] update_scripts_classes | 
+[  62% ] update_scripts_classes | 
+[  62% ] update_scripts_classes | 
+[  63% ] update_scripts_classes | 
+[  63% ] update_scripts_classes | 
+[  64% ] update_scripts_classes | 
+[  64% ] update_scripts_classes | 
+[  65% ] update_scripts_classes | 
+[  65% ] update_scripts_classes | 
+[  66% ] update_scripts_classes | 
+[  67% ] update_scripts_classes | 
+[  67% ] update_scripts_classes | 
+[  68% ] update_scripts_classes | 
+[  68% ] update_scripts_classes | JsonMarshaller
+[  69% ] update_scripts_classes | 
+[  69% ] update_scripts_classes | 
+[  70% ] update_scripts_classes | 
+[  70% ] update_scripts_classes | 
+[  71% ] update_scripts_classes | 
+[  72% ] update_scripts_classes | 
+[  72% ] update_scripts_classes | 
+[  73% ] update_scripts_classes | 
+[  73% ] update_scripts_classes | MpAnalyticsPort
+[  74% ] update_scripts_classes | MpInterstitialAdPort
+[  74% ] update_scripts_classes | MpLeaderboardPort
+[  75% ] update_scripts_classes | MpSharePort
+[  75% ] update_scripts_classes | MpStoragePort
+[  76% ] update_scripts_classes | MpAnalyticsEvents
+[  77% ] update_scripts_classes | MpBestRecord
+[  77% ] update_scripts_classes | MpCardLayout
+[  78% ] update_scripts_classes | MpDeck
+[  78% ] update_scripts_classes | MpGameState
+[  79% ] update_scripts_classes | MpPlacement
+[  79% ] update_scripts_classes | MpRound
+[  80% ] update_scripts_classes | MpRules
+[  81% ] update_scripts_classes | MpSymbolSpot
+[  81% ] update_scripts_classes | MpAdMobInterstitialAds
+[  82% ] update_scripts_classes | MpAitInterstitialAds
+[  82% ] update_scripts_classes | MpAitLeaderboard
+[  83% ] update_scripts_classes | MpAitShare
+[  83% ] update_scripts_classes | MpFileStorage
+[  84% ] update_scripts_classes | MpGa4Analytics
+[  84% ] update_scripts_classes | MpGameCenterLeaderboard
+[  85% ] update_scripts_classes | MpGooglePlayLeaderboard
+[  86% ] update_scripts_classes | MpLeaderboardSettings
+[  86% ] update_scripts_classes | MpCardView
+[  87% ] update_scripts_classes | MpGameScreen
+[  87% ] update_scripts_classes | MpHud
+[  88% ] update_scripts_classes | MpJudgeMark
+[  88% ] update_scripts_classes | 
+[  89% ] update_scripts_classes | MpQuitConfirm
+[  89% ] update_scripts_classes | MpResultPopup
+[  90% ] update_scripts_classes | MpSafeArea
+[  91% ] update_scripts_classes | MpSettingsPopup
+[  91% ] update_scripts_classes | MpSplitBars
+[  92% ] update_scripts_classes | MpSymbolButton
+[  92% ] update_scripts_classes | MpSymbolLibrary
+[  93% ] update_scripts_classes | MpTitleScreen
+[  93% ] update_scripts_classes | MpTutorialOverlay
+[  94% ] update_scripts_classes | MpUiKit
+[  94% ] update_scripts_classes | 
+[  95% ] update_scripts_classes | 
+[  96% ] update_scripts_classes | 
+[  96% ] update_scripts_classes | MpMemoryStorage
+[  97% ] update_scripts_classes | 
+[  97% ] update_scripts_classes | 
+[  98% ] update_scripts_classes | 
+[  98% ] update_scripts_classes | 
+[ DONE ] update_scripts_classes
+
+[   0% ] _update_scan_actions | Started 액션 스캔 중... (106 steps)
+[   0% ] _update_scan_actions | Ko-fi_Logo_RGB_ColorBg.png
+[   0% ] _update_scan_actions | Patreon_logo_with_wordmark.svg
+[   1% ] _update_scan_actions | PayPal.svg
+[   2% ] _update_scan_actions | NotoSansSC-Regular.otf
+[   3% ] _update_scan_actions | android.png
+[   4% ] _update_scan_actions | arrow_left.svg
+[   5% ] _update_scan_actions | arrow_right.svg
+[   6% ] _update_scan_actions | flood_it_icon.svg
+[   7% ] _update_scan_actions | format-app-open.svg
+[   8% ] _update_scan_actions | format-banner.svg
+[   9% ] _update_scan_actions | format-interstitial.svg
+[  10% ] _update_scan_actions | format-native.svg
+[  11% ] _update_scan_actions | format-rewarded-interstitial.svg
+[  12% ] _update_scan_actions | google_play_icon.svg
+[  13% ] _update_scan_actions | icon-15.png
+[  14% ] _update_scan_actions | icon-76.png
+[  14% ] _update_scan_actions | icon-120.png
+[  15% ] _update_scan_actions | icon-500.png
+[  16% ] _update_scan_actions | icon-1024.png
+[  17% ] _update_scan_actions | ios.png
+[  18% ] _update_scan_actions | music.ogg
+[  19% ] _update_scan_actions | poing.jpeg
+[  20% ] _update_scan_actions | pos_bottom.svg
+[  21% ] _update_scan_actions | pos_bottom_left.svg
+[  22% ] _update_scan_actions | pos_bottom_right.svg
+[  23% ] _update_scan_actions | pos_center.svg
+[  24% ] _update_scan_actions | pos_left.svg
+[  25% ] _update_scan_actions | pos_right.svg
+[  26% ] _update_scan_actions | pos_top.svg
+[  27% ] _update_scan_actions | pos_top_left.svg
+[  28% ] _update_scan_actions | pos_top_right.svg
+[  28% ] _update_scan_actions | admob_sample.csv
+[  29% ] _update_scan_actions | correct.wav
+[  30% ] _update_scan_actions | wrong.wav
+[  31% ] _update_scan_actions | app-icon-background.png
+[  32% ] _update_scan_actions | app-icon-foreground.png
+[  33% ] _update_scan_actions | app-icon-source.png
+[  34% ] _update_scan_actions | seori-labs-boot-splash-1024.png
+[  35% ] _update_scan_actions | splash-source.png
+[  36% ] _update_scan_actions | DoHyeon-Regular.ttf
+[  37% ] _update_scan_actions | PressStart2P-Regular.ttf
+[  38% ] _update_scan_actions | adaptive-background-432.png
+[  39% ] _update_scan_actions | adaptive-foreground-432.png
+[  40% ] _update_scan_actions | icon-192.png
+[  41% ] _update_scan_actions | icon-1024.png
+[  42% ] _update_scan_actions | finger.png
+[  42% ] _update_scan_actions | joker.png
+[  43% ] _update_scan_actions | stopwatch.png
+[  44% ] _update_scan_actions | 001.png
+[  45% ] _update_scan_actions | 002.png
+[  46% ] _update_scan_actions | 003.png
+[  47% ] _update_scan_actions | 004.png
+[  48% ] _update_scan_actions | 005.png
+[  49% ] _update_scan_actions | 006.png
+[  50% ] _update_scan_actions | 007.png
+[  51% ] _update_scan_actions | 008.png
+[  52% ] _update_scan_actions | 009.png
+[  53% ] _update_scan_actions | 010.png
+[  54% ] _update_scan_actions | 011.png
+[  55% ] _update_scan_actions | 012.png
+[  56% ] _update_scan_actions | 013.png
+[  57% ] _update_scan_actions | 014.png
+[  57% ] _update_scan_actions | 015.png
+[  58% ] _update_scan_actions | 016.png
+[  59% ] _update_scan_actions | 017.png
+[  60% ] _update_scan_actions | 018.png
+[  61% ] _update_scan_actions | 019.png
+[  62% ] _update_scan_actions | 020.png
+[  63% ] _update_scan_actions | 021.png
+[  64% ] _update_scan_actions | 022.png
+[  65% ] _update_scan_actions | 023.png
+[  66% ] _update_scan_actions | 024.png
+[  67% ] _update_scan_actions | 025.png
+[  68% ] _update_scan_actions | 026.png
+[  69% ] _update_scan_actions | 027.png
+[  70% ] _update_scan_actions | 028.png
+[  71% ] _update_scan_actions | 029.png
+[  71% ] _update_scan_actions | 030.png
+[  72% ] _update_scan_actions | 031.png
+[  73% ] _update_scan_actions | 032.png
+[  74% ] _update_scan_actions | 033.png
+[  75% ] _update_scan_actions | 034.png
+[  76% ] _update_scan_actions | 035.png
+[  77% ] _update_scan_actions | 036.png
+[  78% ] _update_scan_actions | 037.png
+[  79% ] _update_scan_actions | 038.png
+[  80% ] _update_scan_actions | 039.png
+[  81% ] _update_scan_actions | 040.png
+[  82% ] _update_scan_actions | 041.png
+[  83% ] _update_scan_actions | 042.png
+[  84% ] _update_scan_actions | 043.png
+[  85% ] _update_scan_actions | 044.png
+[  85% ] _update_scan_actions | 045.png
+[  86% ] _update_scan_actions | 046.png
+[  87% ] _update_scan_actions | 047.png
+[  88% ] _update_scan_actions | 048.png
+[  89% ] _update_scan_actions | 049.png
+[  90% ] _update_scan_actions | 050.png
+[  91% ] _update_scan_actions | 051.png
+[  92% ] _update_scan_actions | 052.png
+[  93% ] _update_scan_actions | 053.png
+[  94% ] _update_scan_actions | 054.png
+[  95% ] _update_scan_actions | 055.png
+[  96% ] _update_scan_actions | 056.png
+[  97% ] _update_scan_actions | 057.png
+[  98% ] _update_scan_actions | translations.csv
+[ DONE ] _update_scan_actions
+
+[   0% ] reimport | Started 애셋 (다시) 가져오는 중 (106 steps)
+[   0% ] reimport | 다시 가져올 파일을 준비 중...
+[   0% ] reimport | 다시 가져올 파일을 준비 중...
+[   1% ] reimport | 다시 가져올 파일을 준비 중...
+[   2% ] reimport | 다시 가져올 파일을 준비 중...
+[   3% ] reimport | 다시 가져올 파일을 준비 중...
+[   4% ] reimport | 다시 가져올 파일을 준비 중...
+[   5% ] reimport | 다시 가져올 파일을 준비 중...
+[   6% ] reimport | 다시 가져올 파일을 준비 중...
+[   7% ] reimport | 다시 가져올 파일을 준비 중...
+[   8% ] reimport | 다시 가져올 파일을 준비 중...
+[   9% ] reimport | 다시 가져올 파일을 준비 중...
+[  10% ] reimport | 다시 가져올 파일을 준비 중...
+[  11% ] reimport | 다시 가져올 파일을 준비 중...
+[  12% ] reimport | 다시 가져올 파일을 준비 중...
+[  13% ] reimport | 다시 가져올 파일을 준비 중...
+[  14% ] reimport | 다시 가져올 파일을 준비 중...
+[  14% ] reimport | 다시 가져올 파일을 준비 중...
+[  15% ] reimport | 다시 가져올 파일을 준비 중...
+[  16% ] reimport | 다시 가져올 파일을 준비 중...
+[  17% ] reimport | 다시 가져올 파일을 준비 중...
+[  18% ] reimport | 다시 가져올 파일을 준비 중...
+[  19% ] reimport | 다시 가져올 파일을 준비 중...
+[  20% ] reimport | 다시 가져올 파일을 준비 중...
+[  21% ] reimport | 다시 가져올 파일을 준비 중...
+[  22% ] reimport | 다시 가져올 파일을 준비 중...
+[  23% ] reimport | 다시 가져올 파일을 준비 중...
+[  24% ] reimport | 다시 가져올 파일을 준비 중...
+[  25% ] reimport | 다시 가져올 파일을 준비 중...
+[  26% ] reimport | 다시 가져올 파일을 준비 중...
+[  27% ] reimport | 다시 가져올 파일을 준비 중...
+[  28% ] reimport | 다시 가져올 파일을 준비 중...
+[  28% ] reimport | 다시 가져올 파일을 준비 중...
+[  29% ] reimport | 다시 가져올 파일을 준비 중...
+[  30% ] reimport | 다시 가져올 파일을 준비 중...
+[  31% ] reimport | 다시 가져올 파일을 준비 중...
+[  32% ] reimport | 다시 가져올 파일을 준비 중...
+[  33% ] reimport | 다시 가져올 파일을 준비 중...
+[  34% ] reimport | 다시 가져올 파일을 준비 중...
+[  35% ] reimport | 다시 가져올 파일을 준비 중...
+[  36% ] reimport | 다시 가져올 파일을 준비 중...
+[  37% ] reimport | 다시 가져올 파일을 준비 중...
+[  38% ] reimport | 다시 가져올 파일을 준비 중...
+[  39% ] reimport | 다시 가져올 파일을 준비 중...
+[  40% ] reimport | 다시 가져올 파일을 준비 중...
+[  41% ] reimport | 다시 가져올 파일을 준비 중...
+[  42% ] reimport | 다시 가져올 파일을 준비 중...
+[  42% ] reimport | 다시 가져올 파일을 준비 중...
+[  43% ] reimport | 다시 가져올 파일을 준비 중...
+[  44% ] reimport | 다시 가져올 파일을 준비 중...
+[  45% ] reimport | 다시 가져올 파일을 준비 중...
+[  46% ] reimport | 다시 가져올 파일을 준비 중...
+[  47% ] reimport | 다시 가져올 파일을 준비 중...
+[  48% ] reimport | 다시 가져올 파일을 준비 중...
+[  49% ] reimport | 다시 가져올 파일을 준비 중...
+[  50% ] reimport | 다시 가져올 파일을 준비 중...
+[  51% ] reimport | 다시 가져올 파일을 준비 중...
+[  52% ] reimport | 다시 가져올 파일을 준비 중...
+[  53% ] reimport | 다시 가져올 파일을 준비 중...
+[  54% ] reimport | 다시 가져올 파일을 준비 중...
+[  55% ] reimport | 다시 가져올 파일을 준비 중...
+[  56% ] reimport | 다시 가져올 파일을 준비 중...
+[  57% ] reimport | 다시 가져올 파일을 준비 중...
+[  57% ] reimport | 다시 가져올 파일을 준비 중...
+[  58% ] reimport | 다시 가져올 파일을 준비 중...
+[  59% ] reimport | 다시 가져올 파일을 준비 중...
+[  60% ] reimport | 다시 가져올 파일을 준비 중...
+[  61% ] reimport | 다시 가져올 파일을 준비 중...
+[  62% ] reimport | 다시 가져올 파일을 준비 중...
+[  63% ] reimport | 다시 가져올 파일을 준비 중...
+[  64% ] reimport | 다시 가져올 파일을 준비 중...
+[  65% ] reimport | 다시 가져올 파일을 준비 중...
+[  66% ] reimport | 다시 가져올 파일을 준비 중...
+[  67% ] reimport | 다시 가져올 파일을 준비 중...
+[  68% ] reimport | 다시 가져올 파일을 준비 중...
+[  69% ] reimport | 다시 가져올 파일을 준비 중...
+[  70% ] reimport | 다시 가져올 파일을 준비 중...
+[  71% ] reimport | 다시 가져올 파일을 준비 중...
+[  71% ] reimport | 다시 가져올 파일을 준비 중...
+[  72% ] reimport | 다시 가져올 파일을 준비 중...
+[  73% ] reimport | 다시 가져올 파일을 준비 중...
+[  74% ] reimport | 다시 가져올 파일을 준비 중...
+[  75% ] reimport | 다시 가져올 파일을 준비 중...
+[  76% ] reimport | 다시 가져올 파일을 준비 중...
+[  77% ] reimport | 다시 가져올 파일을 준비 중...
+[  78% ] reimport | 다시 가져올 파일을 준비 중...
+[  79% ] reimport | 다시 가져올 파일을 준비 중...
+[  80% ] reimport | 다시 가져올 파일을 준비 중...
+[  81% ] reimport | 다시 가져올 파일을 준비 중...
+[  82% ] reimport | 다시 가져올 파일을 준비 중...
+[  83% ] reimport | 다시 가져올 파일을 준비 중...
+[  84% ] reimport | 다시 가져올 파일을 준비 중...
+[  85% ] reimport | 다시 가져올 파일을 준비 중...
+[  85% ] reimport | 다시 가져올 파일을 준비 중...
+[  86% ] reimport | 다시 가져올 파일을 준비 중...
+[  87% ] reimport | 다시 가져올 파일을 준비 중...
+[  88% ] reimport | 다시 가져올 파일을 준비 중...
+[  89% ] reimport | 다시 가져올 파일을 준비 중...
+[  90% ] reimport | 다시 가져올 파일을 준비 중...
+[  91% ] reimport | 다시 가져올 파일을 준비 중...
+[  92% ] reimport | 다시 가져올 파일을 준비 중...
+[  93% ] reimport | 다시 가져올 파일을 준비 중...
+[  94% ] reimport | 다시 가져올 파일을 준비 중...
+[  95% ] reimport | 다시 가져올 파일을 준비 중...
+[  96% ] reimport | 다시 가져올 파일을 준비 중...
+[  97% ] reimport | 다시 가져올 파일을 준비 중...
+[  98% ] reimport | 다시 가져올 파일을 준비 중...
+[   0% ] reimport | 다시 가져오기 전 작업을 수행 중...
+[   0% ] reimport | translations.csv
+[   0% ] reimport | admob_sample.csv
+[   1% ] reimport | translations.csv
+[   2% ] reimport | admob_sample.csv
+res://assets/fonts/PressStart2P-Regular.ttf: Pixel font detected, disabling subpixel positioning.
+res://assets/fonts/PressStart2P-Regular.ttf: Pixel font detected, disabling hinting.
+[   3% ] reimport | NotoSansSC-Regular.otf
+[   4% ] reimport | music.ogg
+[   5% ] reimport | translations.csv
+[   6% ] reimport | admob_sample.csv
+[   7% ] reimport | NotoSansSC-Regular.otf
+[   8% ] reimport | DoHyeon-Regular.ttf
+[   9% ] reimport | PressStart2P-Regular.ttf
+[  10% ] reimport | music.ogg
+[  11% ] reimport | 031.png
+[  12% ] reimport | 030.png
+[  13% ] reimport | 029.png
+[  14% ] reimport | 028.png
+[  14% ] reimport | 027.png
+[  15% ] reimport | 026.png
+[  16% ] reimport | 025.png
+[  17% ] reimport | 024.png
+[  18% ] reimport | 023.png
+[  19% ] reimport | 022.png
+[  20% ] reimport | 021.png
+[  21% ] reimport | 020.png
+[  22% ] reimport | 019.png
+[  23% ] reimport | 018.png
+[  24% ] reimport | 017.png
+[  25% ] reimport | 016.png
+[  26% ] reimport | 015.png
+[  27% ] reimport | 014.png
+[  28% ] reimport | 013.png
+[  28% ] reimport | 012.png
+[  29% ] reimport | 011.png
+[  30% ] reimport | 010.png
+[  31% ] reimport | 009.png
+[  32% ] reimport | 057.png
+[  33% ] reimport | 056.png
+[  34% ] reimport | 055.png
+[  35% ] reimport | 054.png
+[  36% ] reimport | 053.png
+[  37% ] reimport | 052.png
+[  38% ] reimport | 051.png
+[  39% ] reimport | 050.png
+[  40% ] reimport | 049.png
+[  41% ] reimport | 048.png
+[  42% ] reimport | 047.png
+[  42% ] reimport | 046.png
+[  43% ] reimport | 045.png
+[  44% ] reimport | 044.png
+[  45% ] reimport | 043.png
+[  46% ] reimport | 042.png
+[  47% ] reimport | 041.png
+[  48% ] reimport | 040.png
+[  49% ] reimport | 039.png
+[  50% ] reimport | 038.png
+[  51% ] reimport | 037.png
+[  52% ] reimport | 036.png
+[  53% ] reimport | 035.png
+[  54% ] reimport | 034.png
+[  55% ] reimport | 033.png
+[  56% ] reimport | 032.png
+[  57% ] reimport | pos_left.svg
+[  57% ] reimport | pos_center.svg
+[  58% ] reimport | pos_bottom_right.svg
+[  59% ] reimport | pos_bottom_left.svg
+[  60% ] reimport | pos_bottom.svg
+[  61% ] reimport | poing.jpeg
+[  62% ] reimport | ios.png
+[  63% ] reimport | icon-1024.png
+[  64% ] reimport | icon-500.png
+[  65% ] reimport | icon-120.png
+[  66% ] reimport | icon-76.png
+[  67% ] reimport | icon-15.png
+[  68% ] reimport | google_play_icon.svg
+[  69% ] reimport | format-rewarded-interstitial.svg
+[  70% ] reimport | format-native.svg
+[  71% ] reimport | format-interstitial.svg
+[  71% ] reimport | format-banner.svg
+[  72% ] reimport | format-app-open.svg
+[  73% ] reimport | flood_it_icon.svg
+[  74% ] reimport | arrow_right.svg
+[  75% ] reimport | arrow_left.svg
+[  76% ] reimport | android.png
+[  77% ] reimport | PayPal.svg
+[  78% ] reimport | Patreon_logo_with_wordmark.svg
+[  79% ] reimport | Ko-fi_Logo_RGB_ColorBg.png
+[  80% ] reimport | 008.png
+[  81% ] reimport | 007.png
+[  82% ] reimport | 006.png
+[  83% ] reimport | 005.png
+[  84% ] reimport | 004.png
+[  85% ] reimport | 003.png
+[  85% ] reimport | 002.png
+[  86% ] reimport | 001.png
+[  87% ] reimport | stopwatch.png
+[  88% ] reimport | joker.png
+[  89% ] reimport | finger.png
+[  90% ] reimport | icon-1024.png
+[  91% ] reimport | icon-192.png
+[  92% ] reimport | adaptive-foreground-432.png
+[  93% ] reimport | adaptive-background-432.png
+[  94% ] reimport | splash-source.png
+[  95% ] reimport | seori-labs-boot-splash-1024.png
+[  96% ] reimport | app-icon-source.png
+[  97% ] reimport | translations.csv
+[  98% ] reimport | admob_sample.csv
+[  99% ] reimport | 애셋 가져오기 마무리 중...
+[ DONE ] reimport
+
+[   0% ] reimport | Started 애셋 (다시) 가져오는 중 (106 steps)
+[   0% ] reimport | 다시 가져오기 후 작업을 수행 중...
+[ DONE ] reimport
+
+[   0% ] loading_editor_layout | Started 편집기를 불러오는 중 (5 steps)
+[   0% ] loading_editor_layout | 편집기 레이아웃을 불러오는 중...
+[  16% ] loading_editor_layout | 독을 불러오는 중...
+[ DONE ] loading_editor_layout
+
+[review-editor] self_contained=true config=mp116-godot-ui-_zc8d_lb/editor_data cache=mp116-godot-ui-_zc8d_lb/editor_data/cache isolated=true
+[review-editor] user://=<HOME>/Library/Application Support/match-picture-MP-IOS-116-round-4-385fa2e/
+[review-editor] game_embed_mode at initial load=-1
+[review-editor] game_embed_mode=-1 remote_port=31663
+[review-editor] starting actual normal main Editor Run once
+[   0% ] save | Started 씬 저장 중 (4 steps)
+[   0% ] save | 분석 중
+[  20% ] save | 썸네일 만드는 중
+[  60% ] save | 썸네일 만드는 중
+[  80% ] save | 씬 저장 중
+[ DONE ] save
+
+[review-editor] is_playing_scene=true

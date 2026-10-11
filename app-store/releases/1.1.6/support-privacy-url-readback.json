@@ -1,0 +1,30 @@
+{
+  "checkedAt": "2026-10-11T22:32:30.575588+00:00",
+  "urls": [
+    {
+      "requestedUrl": "https://www.seorilabs.com/privacy",
+      "finalUrl": "https://www.seorilabs.com/privacy/",
+      "httpStatus": 200,
+      "contentType": "text/html; charset=utf-8"
+    },
+    {
+      "requestedUrl": "https://www.seorilabs.com/en/privacy",
+      "finalUrl": "https://www.seorilabs.com/en/privacy/",
+      "httpStatus": 200,
+      "contentType": "text/html; charset=utf-8"
+    },
+    {
+      "requestedUrl": "https://www.seorilabs.com/support/",
+      "finalUrl": "https://www.seorilabs.com/support/",
+      "httpStatus": 200,
+      "contentType": "text/html; charset=utf-8"
+    },
+    {
+      "requestedUrl": "https://www.seorilabs.com/en/support/",
+      "finalUrl": "https://www.seorilabs.com/en/support/",
+      "httpStatus": 200,
+      "contentType": "text/html; charset=utf-8"
+    }
+  ],
+  "websiteChanged": false
+}

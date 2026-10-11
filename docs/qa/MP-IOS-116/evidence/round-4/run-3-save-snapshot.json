@@ -1,0 +1,49 @@
+{
+  "observedAt": "2026-10-11T22:44:33.757189+00:00",
+  "files": {
+    "match_picture.save": {
+      "sha256": "0ed516ffdc9d573b759cbd4b2f1cbbca2e0f1fc4c2e6612d8e18f30abdba2b88",
+      "payload": {
+        "best_seconds": 53.9175103333313,
+        "best_splits": [
+          8.65689733333345,
+          5.03008890909075,
+          4.85941790909071,
+          4.84997951515126,
+          5.75960499999966,
+          7.64165633333301,
+          6.06720766666634,
+          6.16640599999972,
+          4.88625166666641
+        ],
+        "clear_count": 3,
+        "has_played": true,
+        "language": "en",
+        "muted": false,
+        "schema": 1.0
+      }
+    },
+    "match_picture.save.bak": {
+      "sha256": "2bc8aca62efe1c6ee40fabf0dab6663be53bd3052c8a6f3feb56b9fdedd62ade",
+      "payload": {
+        "best_seconds": 53.9175103333313,
+        "best_splits": [
+          8.65689733333345,
+          5.03008890909075,
+          4.85941790909071,
+          4.84997951515126,
+          5.75960499999966,
+          7.64165633333301,
+          6.06720766666634,
+          6.16640599999972,
+          4.88625166666641
+        ],
+        "clear_count": 3,
+        "has_played": true,
+        "language": "en",
+        "muted": true,
+        "schema": 1.0
+      }
+    }
+  }
+}

@@ -1,0 +1,231 @@
+{
+  "recordedAt": "2026-10-11T22:50:47.879658+00:00",
+  "candidate": "385fa2e3d20c6cc89a790d403301573d48f164f1",
+  "implementationAgent": "/root",
+  "independentReviewer": "/root/ui_review",
+  "reviewType": "approved additional UI iteration4; not final merged-SHA E2E",
+  "coreCount": 9,
+  "nonCoreCount": 4,
+  "functionalAndUsabilityPassedCoreCountWithinEditorScope": 9,
+  "features": [
+    {
+      "featureId": "title",
+      "core": true,
+      "functional": "passed",
+      "usability": "passed",
+      "scope": "Actual normal main GUI child launched once by official EditorInterface.play_main_scene per Run; desktop-supported execution and UI only",
+      "actualInputEvidence": "Reviewer CUA actions and observed resulting native screen, not PNG-only automation",
+      "evidence": [
+        "godot/build/review/run-1/capture-133417-1.png",
+        "godot/build/review/run-2/capture-18624-1.png",
+        "godot/build/review/run-3/capture-15118-1.png"
+      ],
+      "unverifiedNativeSubchecks": []
+    },
+    {
+      "featureId": "first-run-tutorial",
+      "core": true,
+      "functional": "passed",
+      "usability": "passed",
+      "scope": "Actual normal main GUI child launched once by official EditorInterface.play_main_scene per Run; desktop-supported execution and UI only",
+      "actualInputEvidence": "Reviewer CUA actions and observed resulting native screen, not PNG-only automation",
+      "evidence": [
+        "godot/build/review/run-1/capture-172342-7.png",
+        "godot/build/review/run-1/capture-178658-8.png",
+        "godot/build/review/run-1/capture-183792-9.png",
+        "godot/build/review/run-2/capture-47168-3.png"
+      ],
+      "unverifiedNativeSubchecks": []
+    },
+    {
+      "featureId": "matching-game",
+      "core": true,
+      "functional": "passed",
+      "usability": "passed",
+      "scope": "Actual normal main GUI child launched once by official EditorInterface.play_main_scene per Run; desktop-supported execution and UI only",
+      "actualInputEvidence": "Reviewer CUA actions and observed resulting native screen, not PNG-only automation",
+      "evidence": [
+        "godot/build/review/run-1/capture-201954-10.png",
+        "godot/build/review/run-1/capture-874613-27.png",
+        "godot/build/review/run-2/capture-253753-5.png",
+        "godot/build/review/run-3/capture-139058-5.png"
+      ],
+      "unverifiedNativeSubchecks": []
+    },
+    {
+      "featureId": "wrong-answer-and-hint",
+      "core": true,
+      "functional": "passed",
+      "usability": "passed",
+      "scope": "Actual normal main GUI child launched once by official EditorInterface.play_main_scene per Run; desktop-supported execution and UI only",
+      "actualInputEvidence": "Reviewer CUA actions and observed resulting native screen, not PNG-only automation",
+      "evidence": [
+        "godot/build/review/run-1/capture-209191-11.png",
+        "run-1-idle-hint-render-frames.json",
+        "run-1-retry-idle-hint-render-frames.json",
+        "run-1-retry-idle-hint-12sec-evidence.json"
+      ],
+      "unverifiedNativeSubchecks": []
+    },
+    {
+      "featureId": "timing-and-splits",
+      "core": true,
+      "functional": "passed",
+      "usability": "passed",
+      "scope": "Actual normal main GUI child launched once by official EditorInterface.play_main_scene per Run; desktop-supported execution and UI only",
+      "actualInputEvidence": "Reviewer CUA actions and observed resulting native screen, not PNG-only automation",
+      "evidence": [
+        "run-1-save-snapshot.json",
+        "run-2-save-snapshot.json",
+        "godot/build/review/run-3/capture-139058-5.png",
+        "runtime-log-inspection.json"
+      ],
+      "unverifiedNativeSubchecks": []
+    },
+    {
+      "featureId": "record-persistence",
+      "core": true,
+      "functional": "passed",
+      "usability": "passed",
+      "scope": "Actual normal main GUI child launched once by official EditorInterface.play_main_scene per Run; desktop-supported execution and UI only",
+      "actualInputEvidence": "Reviewer CUA actions and observed resulting native screen, not PNG-only automation",
+      "evidence": [
+        "run-1-save-snapshot.json",
+        "run-2-before-match_picture.save",
+        "run-2-save-snapshot.json",
+        "run-3-recovery-preparation.json",
+        "run-3-corruption-observation.json",
+        "run-3-recovery-observation.json",
+        "run-3-save-snapshot.json"
+      ],
+      "unverifiedNativeSubchecks": []
+    },
+    {
+      "featureId": "language-and-sound-settings",
+      "core": true,
+      "functional": "passed",
+      "usability": "passed",
+      "scope": "Actual normal main GUI child launched once by official EditorInterface.play_main_scene per Run; desktop-supported execution and UI only",
+      "actualInputEvidence": "Reviewer CUA actions and observed resulting native screen, not PNG-only automation",
+      "evidence": [
+        "godot/build/review/run-1/capture-139831-2.png",
+        "godot/build/review/run-1/capture-156626-5.png",
+        "godot/build/review/run-1/capture-876566-28.png",
+        "godot/build/review/run-2/capture-19501-2.png",
+        "godot/build/review/run-3/capture-20078-2.png"
+      ],
+      "unverifiedNativeSubchecks": [
+        "physical audio output/mute"
+      ]
+    },
+    {
+      "featureId": "back-and-exit",
+      "core": true,
+      "functional": "passed",
+      "usability": "passed",
+      "scope": "Actual normal main GUI child launched once by official EditorInterface.play_main_scene per Run; desktop-supported execution and UI only",
+      "actualInputEvidence": "Reviewer CUA actions and observed resulting native screen, not PNG-only automation",
+      "evidence": [
+        "godot/build/review/run-1/capture-919720-32.png",
+        "run-1-end-processes.json",
+        "run-2-end-processes.json",
+        "godot/build/review/run-3/capture-171790-8.png",
+        "run-3-end-processes.json",
+        "round-4-execution-ended.json"
+      ],
+      "unverifiedNativeSubchecks": [
+        "OS hardware Back/AIT Back"
+      ]
+    },
+    {
+      "featureId": "safe-area-and-awake",
+      "core": true,
+      "functional": "passed",
+      "usability": "passed",
+      "scope": "Actual normal main GUI child launched once by official EditorInterface.play_main_scene per Run; desktop-supported execution and UI only",
+      "actualInputEvidence": "Reviewer CUA actions and observed resulting native screen, not PNG-only automation",
+      "evidence": [
+        "capture-manifest.json",
+        "game-run-1.log",
+        "game-run-2.log",
+        "game-run-3.log"
+      ],
+      "unverifiedNativeSubchecks": [
+        "physical safe area and rotation",
+        "native awake/background lifecycle"
+      ]
+    },
+    {
+      "featureId": "native-leaderboards",
+      "core": false,
+      "desktopObservation": "unsupported/no-op, respective SDK buttons hidden; normal Start/Retry/Exit/Settings remain usable",
+      "nativeFunctional": "not_run",
+      "nativeUsability": "not_run",
+      "actualProviderSuccessClaimed": false,
+      "evidence": [
+        "godot/build/review/run-2/capture-19501-2.png",
+        "godot/build/review/run-3/capture-139058-5.png"
+      ]
+    },
+    {
+      "featureId": "interstitial-and-privacy",
+      "core": false,
+      "desktopObservation": "unsupported/no-op, respective SDK buttons hidden; normal Start/Retry/Exit/Settings remain usable",
+      "nativeFunctional": "not_run",
+      "nativeUsability": "not_run",
+      "actualProviderSuccessClaimed": false,
+      "evidence": [
+        "godot/build/review/run-2/capture-19501-2.png",
+        "godot/build/review/run-3/capture-139058-5.png"
+      ]
+    },
+    {
+      "featureId": "ait-share",
+      "core": false,
+      "desktopObservation": "unsupported/no-op, respective SDK buttons hidden; normal Start/Retry/Exit/Settings remain usable",
+      "nativeFunctional": "not_run",
+      "nativeUsability": "not_run",
+      "actualProviderSuccessClaimed": false,
+      "evidence": [
+        "godot/build/review/run-2/capture-19501-2.png",
+        "godot/build/review/run-3/capture-139058-5.png"
+      ]
+    },
+    {
+      "featureId": "analytics",
+      "core": false,
+      "desktopObservation": "unsupported/no-op, respective SDK buttons hidden; normal Start/Retry/Exit/Settings remain usable",
+      "nativeFunctional": "not_run",
+      "nativeUsability": "not_run",
+      "actualProviderSuccessClaimed": false,
+      "evidence": [
+        "godot/build/review/run-2/capture-19501-2.png",
+        "godot/build/review/run-3/capture-139058-5.png"
+      ]
+    }
+  ],
+  "unresolvedObservation": {
+    "HUD11sFrozenFrames": "preserved; cause unconfirmed; later actual automatic time progression and next legitimate input/result verified",
+    "OHintWording": "corrected; O is tutorial/correct feedback, actual idle hint lower-symbol shake is evidenced by 176 frames"
+  },
+  "nativeGates": "unknown/not_run; no SDK/UMP/ad/GC/share/provider/hardware/awake success claim",
+  "executionEnded": {
+    "actualOwnProcessesAbsentAt": "2026-10-11T22:45:15.861957+00:00",
+    "startedAt": "2026-10-11T22:15:00.631136+00:00",
+    "deadline": "2026-10-11T22:55:00.631136+00:00",
+    "runCount": 3,
+    "elapsedSeconds": 1815.230821,
+    "within40Minutes": true,
+    "ownPIDsAbsent": [
+      13107,
+      13138,
+      66312,
+      72087,
+      72236,
+      83187,
+      83382
+    ],
+    "guiReturned": true,
+    "additionalRunPerformed": false
+  }
+}

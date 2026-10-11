@@ -1,0 +1,19 @@
+{
+  "actualOwnProcessesAbsentAt": "2026-10-11T22:45:15.861957+00:00",
+  "startedAt": "2026-10-11T22:15:00.631136+00:00",
+  "deadline": "2026-10-11T22:55:00.631136+00:00",
+  "runCount": 3,
+  "elapsedSeconds": 1815.230821,
+  "within40Minutes": true,
+  "ownPIDsAbsent": [
+    13107,
+    13138,
+    66312,
+    72087,
+    72236,
+    83187,
+    83382
+  ],
+  "guiReturned": true,
+  "additionalRunPerformed": false
+}

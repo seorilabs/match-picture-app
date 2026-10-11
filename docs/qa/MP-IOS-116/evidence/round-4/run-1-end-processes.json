@@ -1,0 +1,21 @@
+{
+  "gameYesExitObservedAt": "2026-10-11T22:34:59.172698+00:00",
+  "game13138Absent": true,
+  "processesObserved": [
+    {
+      "pid": 13107,
+      "ppid": 88957,
+      "args": "mp116-godot-ui-_zc8d_lb/Match Picture UI QA.app/Contents/MacOS/Godot --headless --editor --path mp-ios-116-ui-round-4-385fa2e/godot --log-file mp-ios-116-ui-round-4-385fa2e/editor-run-1.log"
+    },
+    {
+      "pid": 66312,
+      "ppid": 1,
+      "args": "mp116-godot-ui-_zc8d_lb/Match Picture UI QA.app/Contents/MacOS/Godot"
+    }
+  ],
+  "ownTerminatedPids": [
+    13107,
+    66312
+  ],
+  "postQuitAXObservation": "CUA fell back to a new QA Project Manager with no project args; no Editor Play/main Run; terminated own PM without any UI input"
+}

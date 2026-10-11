@@ -1,0 +1,74 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=5
+
+[admob]
+
+general/android/app_id="ca-app-pub-9932778305312246~8514815775"
+general/android/enable_r8_optimization=true
+general/ios/app_id="ca-app-pub-9932778305312246~3239589743"
+
+[application]
+
+config/name="같은그림찾기"
+config/name_localized={
+"en": "Match Picture",
+"ko": "같은그림찾기"
+}
+config/description="상단 카드와 하단 카드에 함께 들어 있는 심볼 하나를 찾는 도블 방식 타임어택"
+config/version="2.0.0"
+run/main_scene="res://scenes/main.tscn"
+config/use_custom_user_dir=true
+config/custom_user_dir_name="match-picture-MP-IOS-116-round-4-385fa2e"
+config/quit_on_go_back=false
+config/features=PackedStringArray("4.7", "GL Compatibility")
+boot_splash/bg_color=Color(0.270588, 0.580392, 0.709804, 1)
+boot_splash/image="res://assets/branding/seori-labs-boot-splash-1024.png"
+config/icon="res://assets/icons/launcher/icon-1024.png"
+
+[autoload]
+
+MpReviewEnvironment="*res://addons/mp_review_runner/runtime_guard.gd"
+Platform="*res://autoload/platform.gd"
+Save="*res://autoload/save.gd"
+Locale="*res://autoload/locale.gd"
+Ui="*res://autoload/ui.gd"
+Audio="*res://autoload/audio.gd"
+GodotPlayGameServices="*uid://b10vuhuji5mvb"
+
+[display]
+
+window/size/viewport_width=648
+window/size/viewport_height=1440
+window/size/window_width_override=540
+window/size/window_height_override=720
+window/stretch/mode="canvas_items"
+window/stretch/aspect="expand"
+window/handheld/orientation=1
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/admob/plugin.cfg", "res://addons/GodotPlayGameServices/plugin.cfg", "res://addons/gamecenter/plugin.cfg", "res://addons/mp_review_runner/plugin.cfg")
+
+[input_devices]
+
+pointing/emulate_touch_from_mouse=true
+
+[internationalization]
+
+locale/translations=PackedStringArray("res://i18n/translations.ko.translation", "res://i18n/translations.en.translation")
+locale/include_text_server_data=true
+locale/fallback="ko"
+
+[rendering]
+
+renderer/rendering_method="gl_compatibility"
+renderer/rendering_method.mobile="gl_compatibility"
+textures/vram_compression/import_etc2_astc=true
+environment/defaults/default_clear_color=Color(0.270588, 0.580392, 0.709804, 1)

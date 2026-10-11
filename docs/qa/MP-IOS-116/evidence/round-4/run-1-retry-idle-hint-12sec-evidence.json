@@ -1,0 +1,1110 @@
+{
+  "observedAt": "2026-10-11T22:33:42.274762+00:00",
+  "actualCuaF7Inputs": 176,
+  "sampleWallMs": 12011,
+  "candidate": "385fa2e3d20c6cc89a790d403301573d48f164f1",
+  "frameBounds": [
+    [
+      235,
+      269
+    ],
+    [
+      237,
+      272
+    ],
+    [
+      238,
+      272
+    ],
+    [
+      240,
+      274
+    ]
+  ],
+  "representatives": [
+    {
+      "file": "godot/build/review/run-1/capture-1073200-69.png",
+      "sha256": "b56fe86303173a6738fd8b5fcafc6b636c3a679e3fed1928dfd1c07e273cbcf4",
+      "snailXMin": 235,
+      "snailXMax": 269
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1073650-72.png",
+      "sha256": "e34dedd814a0c56a1fed28633835850723fd2353ba9e7b3d76f4c41cb9d1be41",
+      "snailXMin": 237,
+      "snailXMax": 272
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1071754-37.png",
+      "sha256": "87993648bba453e46377cb001361db923d702b3c0f77491454456beb6e10b17e",
+      "snailXMin": 238,
+      "snailXMax": 272
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1073378-70.png",
+      "sha256": "03496f615fcde0fa50dd4f10d159eadca3083e54fef47064efaee7eec496ffe6",
+      "snailXMin": 240,
+      "snailXMax": 274
+    }
+  ],
+  "frames": [
+    {
+      "file": "godot/build/review/run-1/capture-1071754-37.png",
+      "sha256": "87993648bba453e46377cb001361db923d702b3c0f77491454456beb6e10b17e",
+      "snailXMin": 238,
+      "snailXMax": 272
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1071785-38.png",
+      "sha256": "87993648bba453e46377cb001361db923d702b3c0f77491454456beb6e10b17e",
+      "snailXMin": 238,
+      "snailXMax": 272
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1071811-39.png",
+      "sha256": "87993648bba453e46377cb001361db923d702b3c0f77491454456beb6e10b17e",
+      "snailXMin": 238,
+      "snailXMax": 272
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1071834-40.png",
+      "sha256": "87993648bba453e46377cb001361db923d702b3c0f77491454456beb6e10b17e",
+      "snailXMin": 238,
+      "snailXMax": 272
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1071860-41.png",
+      "sha256": "87993648bba453e46377cb001361db923d702b3c0f77491454456beb6e10b17e",
+      "snailXMin": 238,
+      "snailXMax": 272
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1071885-42.png",
+      "sha256": "87993648bba453e46377cb001361db923d702b3c0f77491454456beb6e10b17e",
+      "snailXMin": 238,
+      "snailXMax": 272
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1071908-43.png",
+      "sha256": "87993648bba453e46377cb001361db923d702b3c0f77491454456beb6e10b17e",
+      "snailXMin": 238,
+      "snailXMax": 272
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1071934-44.png",
+      "sha256": "87993648bba453e46377cb001361db923d702b3c0f77491454456beb6e10b17e",
+      "snailXMin": 238,
+      "snailXMax": 272
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1071960-45.png",
+      "sha256": "87993648bba453e46377cb001361db923d702b3c0f77491454456beb6e10b17e",
+      "snailXMin": 238,
+      "snailXMax": 272
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1071985-46.png",
+      "sha256": "87993648bba453e46377cb001361db923d702b3c0f77491454456beb6e10b17e",
+      "snailXMin": 238,
+      "snailXMax": 272
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1072027-47.png",
+      "sha256": "87993648bba453e46377cb001361db923d702b3c0f77491454456beb6e10b17e",
+      "snailXMin": 238,
+      "snailXMax": 272
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1072075-48.png",
+      "sha256": "87993648bba453e46377cb001361db923d702b3c0f77491454456beb6e10b17e",
+      "snailXMin": 238,
+      "snailXMax": 272
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1072117-49.png",
+      "sha256": "87993648bba453e46377cb001361db923d702b3c0f77491454456beb6e10b17e",
+      "snailXMin": 238,
+      "snailXMax": 272
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1072169-50.png",
+      "sha256": "87993648bba453e46377cb001361db923d702b3c0f77491454456beb6e10b17e",
+      "snailXMin": 238,
+      "snailXMax": 272
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1072211-51.png",
+      "sha256": "87993648bba453e46377cb001361db923d702b3c0f77491454456beb6e10b17e",
+      "snailXMin": 238,
+      "snailXMax": 272
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1072252-52.png",
+      "sha256": "87993648bba453e46377cb001361db923d702b3c0f77491454456beb6e10b17e",
+      "snailXMin": 238,
+      "snailXMax": 272
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1072292-53.png",
+      "sha256": "87993648bba453e46377cb001361db923d702b3c0f77491454456beb6e10b17e",
+      "snailXMin": 238,
+      "snailXMax": 272
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1072334-54.png",
+      "sha256": "87993648bba453e46377cb001361db923d702b3c0f77491454456beb6e10b17e",
+      "snailXMin": 238,
+      "snailXMax": 272
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1072378-55.png",
+      "sha256": "87993648bba453e46377cb001361db923d702b3c0f77491454456beb6e10b17e",
+      "snailXMin": 238,
+      "snailXMax": 272
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1072424-56.png",
+      "sha256": "87993648bba453e46377cb001361db923d702b3c0f77491454456beb6e10b17e",
+      "snailXMin": 238,
+      "snailXMax": 272
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1072467-57.png",
+      "sha256": "87993648bba453e46377cb001361db923d702b3c0f77491454456beb6e10b17e",
+      "snailXMin": 238,
+      "snailXMax": 272
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1072508-58.png",
+      "sha256": "87993648bba453e46377cb001361db923d702b3c0f77491454456beb6e10b17e",
+      "snailXMin": 238,
+      "snailXMax": 272
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1072551-59.png",
+      "sha256": "f140f1962b98b02be8e1bcf8b84b0610f4d27e2421e499dd7476b142f04b8243",
+      "snailXMin": 238,
+      "snailXMax": 272
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1072594-60.png",
+      "sha256": "f140f1962b98b02be8e1bcf8b84b0610f4d27e2421e499dd7476b142f04b8243",
+      "snailXMin": 238,
+      "snailXMax": 272
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1072636-61.png",
+      "sha256": "f140f1962b98b02be8e1bcf8b84b0610f4d27e2421e499dd7476b142f04b8243",
+      "snailXMin": 238,
+      "snailXMax": 272
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1072711-62.png",
+      "sha256": "f140f1962b98b02be8e1bcf8b84b0610f4d27e2421e499dd7476b142f04b8243",
+      "snailXMin": 238,
+      "snailXMax": 272
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1072766-63.png",
+      "sha256": "f140f1962b98b02be8e1bcf8b84b0610f4d27e2421e499dd7476b142f04b8243",
+      "snailXMin": 238,
+      "snailXMax": 272
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1072826-64.png",
+      "sha256": "f140f1962b98b02be8e1bcf8b84b0610f4d27e2421e499dd7476b142f04b8243",
+      "snailXMin": 238,
+      "snailXMax": 272
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1072886-65.png",
+      "sha256": "f140f1962b98b02be8e1bcf8b84b0610f4d27e2421e499dd7476b142f04b8243",
+      "snailXMin": 238,
+      "snailXMax": 272
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1072944-66.png",
+      "sha256": "f140f1962b98b02be8e1bcf8b84b0610f4d27e2421e499dd7476b142f04b8243",
+      "snailXMin": 238,
+      "snailXMax": 272
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1073000-67.png",
+      "sha256": "f140f1962b98b02be8e1bcf8b84b0610f4d27e2421e499dd7476b142f04b8243",
+      "snailXMin": 238,
+      "snailXMax": 272
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1073083-68.png",
+      "sha256": "f140f1962b98b02be8e1bcf8b84b0610f4d27e2421e499dd7476b142f04b8243",
+      "snailXMin": 238,
+      "snailXMax": 272
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1073200-69.png",
+      "sha256": "b56fe86303173a6738fd8b5fcafc6b636c3a679e3fed1928dfd1c07e273cbcf4",
+      "snailXMin": 235,
+      "snailXMax": 269
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1073378-70.png",
+      "sha256": "03496f615fcde0fa50dd4f10d159eadca3083e54fef47064efaee7eec496ffe6",
+      "snailXMin": 240,
+      "snailXMax": 274
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1073533-71.png",
+      "sha256": "11dced9714be2d270702ad19ed939972b2cad438f47b19b83686edbaa15d9717",
+      "snailXMin": 238,
+      "snailXMax": 272
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1073650-72.png",
+      "sha256": "e34dedd814a0c56a1fed28633835850723fd2353ba9e7b3d76f4c41cb9d1be41",
+      "snailXMin": 237,
+      "snailXMax": 272
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1073779-73.png",
+      "sha256": "4773572445c23faea4341599fee6d8bddc2ddf63850560c8db48fc3a2ed4c562",
+      "snailXMin": 238,
+      "snailXMax": 272
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1073860-74.png",
+      "sha256": "4773572445c23faea4341599fee6d8bddc2ddf63850560c8db48fc3a2ed4c562",
+      "snailXMin": 238,
+      "snailXMax": 272
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1073995-75.png",
+      "sha256": "4773572445c23faea4341599fee6d8bddc2ddf63850560c8db48fc3a2ed4c562",
+      "snailXMin": 238,
+      "snailXMax": 272
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1074145-76.png",
+      "sha256": "4773572445c23faea4341599fee6d8bddc2ddf63850560c8db48fc3a2ed4c562",
+      "snailXMin": 238,
+      "snailXMax": 272
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1074272-77.png",
+      "sha256": "4773572445c23faea4341599fee6d8bddc2ddf63850560c8db48fc3a2ed4c562",
+      "snailXMin": 238,
+      "snailXMax": 272
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1074408-78.png",
+      "sha256": "4773572445c23faea4341599fee6d8bddc2ddf63850560c8db48fc3a2ed4c562",
+      "snailXMin": 238,
+      "snailXMax": 272
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1074494-79.png",
+      "sha256": "4773572445c23faea4341599fee6d8bddc2ddf63850560c8db48fc3a2ed4c562",
+      "snailXMin": 238,
+      "snailXMax": 272
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1074563-80.png",
+      "sha256": "0d954440697eaf4a70ce2c89ead7dd254cd126d14eb8a7f6a3abee0fcb2b66a5",
+      "snailXMin": 238,
+      "snailXMax": 272
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1074641-81.png",
+      "sha256": "0d954440697eaf4a70ce2c89ead7dd254cd126d14eb8a7f6a3abee0fcb2b66a5",
+      "snailXMin": 238,
+      "snailXMax": 272
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1074710-82.png",
+      "sha256": "0d954440697eaf4a70ce2c89ead7dd254cd126d14eb8a7f6a3abee0fcb2b66a5",
+      "snailXMin": 238,
+      "snailXMax": 272
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1074763-83.png",
+      "sha256": "0d954440697eaf4a70ce2c89ead7dd254cd126d14eb8a7f6a3abee0fcb2b66a5",
+      "snailXMin": 238,
+      "snailXMax": 272
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1074835-84.png",
+      "sha256": "0d954440697eaf4a70ce2c89ead7dd254cd126d14eb8a7f6a3abee0fcb2b66a5",
+      "snailXMin": 238,
+      "snailXMax": 272
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1074891-85.png",
+      "sha256": "0d954440697eaf4a70ce2c89ead7dd254cd126d14eb8a7f6a3abee0fcb2b66a5",
+      "snailXMin": 238,
+      "snailXMax": 272
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1074960-86.png",
+      "sha256": "0d954440697eaf4a70ce2c89ead7dd254cd126d14eb8a7f6a3abee0fcb2b66a5",
+      "snailXMin": 238,
+      "snailXMax": 272
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1075042-87.png",
+      "sha256": "0d954440697eaf4a70ce2c89ead7dd254cd126d14eb8a7f6a3abee0fcb2b66a5",
+      "snailXMin": 238,
+      "snailXMax": 272
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1075128-88.png",
+      "sha256": "0d954440697eaf4a70ce2c89ead7dd254cd126d14eb8a7f6a3abee0fcb2b66a5",
+      "snailXMin": 238,
+      "snailXMax": 272
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1075183-89.png",
+      "sha256": "0d954440697eaf4a70ce2c89ead7dd254cd126d14eb8a7f6a3abee0fcb2b66a5",
+      "snailXMin": 238,
+      "snailXMax": 272
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1075250-90.png",
+      "sha256": "0d954440697eaf4a70ce2c89ead7dd254cd126d14eb8a7f6a3abee0fcb2b66a5",
+      "snailXMin": 238,
+      "snailXMax": 272
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1075319-91.png",
+      "sha256": "0d954440697eaf4a70ce2c89ead7dd254cd126d14eb8a7f6a3abee0fcb2b66a5",
+      "snailXMin": 238,
+      "snailXMax": 272
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1075360-92.png",
+      "sha256": "0d954440697eaf4a70ce2c89ead7dd254cd126d14eb8a7f6a3abee0fcb2b66a5",
+      "snailXMin": 238,
+      "snailXMax": 272
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1075417-93.png",
+      "sha256": "0d954440697eaf4a70ce2c89ead7dd254cd126d14eb8a7f6a3abee0fcb2b66a5",
+      "snailXMin": 238,
+      "snailXMax": 272
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1075492-94.png",
+      "sha256": "0d954440697eaf4a70ce2c89ead7dd254cd126d14eb8a7f6a3abee0fcb2b66a5",
+      "snailXMin": 238,
+      "snailXMax": 272
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1075536-95.png",
+      "sha256": "0d5602d015cd5eb20756aad12ff630383b64d6a652c4d958421e7c5066d52c5a",
+      "snailXMin": 238,
+      "snailXMax": 272
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1075577-96.png",
+      "sha256": "0d5602d015cd5eb20756aad12ff630383b64d6a652c4d958421e7c5066d52c5a",
+      "snailXMin": 238,
+      "snailXMax": 272
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1075644-97.png",
+      "sha256": "0d5602d015cd5eb20756aad12ff630383b64d6a652c4d958421e7c5066d52c5a",
+      "snailXMin": 238,
+      "snailXMax": 272
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1075686-98.png",
+      "sha256": "0d5602d015cd5eb20756aad12ff630383b64d6a652c4d958421e7c5066d52c5a",
+      "snailXMin": 238,
+      "snailXMax": 272
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1075727-99.png",
+      "sha256": "0d5602d015cd5eb20756aad12ff630383b64d6a652c4d958421e7c5066d52c5a",
+      "snailXMin": 238,
+      "snailXMax": 272
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1075766-100.png",
+      "sha256": "0d5602d015cd5eb20756aad12ff630383b64d6a652c4d958421e7c5066d52c5a",
+      "snailXMin": 238,
+      "snailXMax": 272
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1075853-101.png",
+      "sha256": "0d5602d015cd5eb20756aad12ff630383b64d6a652c4d958421e7c5066d52c5a",
+      "snailXMin": 238,
+      "snailXMax": 272
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1075892-102.png",
+      "sha256": "0d5602d015cd5eb20756aad12ff630383b64d6a652c4d958421e7c5066d52c5a",
+      "snailXMin": 238,
+      "snailXMax": 272
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1075934-103.png",
+      "sha256": "0d5602d015cd5eb20756aad12ff630383b64d6a652c4d958421e7c5066d52c5a",
+      "snailXMin": 238,
+      "snailXMax": 272
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1075985-104.png",
+      "sha256": "0d5602d015cd5eb20756aad12ff630383b64d6a652c4d958421e7c5066d52c5a",
+      "snailXMin": 238,
+      "snailXMax": 272
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1076028-105.png",
+      "sha256": "0d5602d015cd5eb20756aad12ff630383b64d6a652c4d958421e7c5066d52c5a",
+      "snailXMin": 238,
+      "snailXMax": 272
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1076136-106.png",
+      "sha256": "0d5602d015cd5eb20756aad12ff630383b64d6a652c4d958421e7c5066d52c5a",
+      "snailXMin": 238,
+      "snailXMax": 272
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1076194-107.png",
+      "sha256": "0d5602d015cd5eb20756aad12ff630383b64d6a652c4d958421e7c5066d52c5a",
+      "snailXMin": 238,
+      "snailXMax": 272
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1076236-108.png",
+      "sha256": "0d5602d015cd5eb20756aad12ff630383b64d6a652c4d958421e7c5066d52c5a",
+      "snailXMin": 238,
+      "snailXMax": 272
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1076285-109.png",
+      "sha256": "0d5602d015cd5eb20756aad12ff630383b64d6a652c4d958421e7c5066d52c5a",
+      "snailXMin": 238,
+      "snailXMax": 272
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1076327-110.png",
+      "sha256": "0d5602d015cd5eb20756aad12ff630383b64d6a652c4d958421e7c5066d52c5a",
+      "snailXMin": 238,
+      "snailXMax": 272
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1076385-111.png",
+      "sha256": "0d5602d015cd5eb20756aad12ff630383b64d6a652c4d958421e7c5066d52c5a",
+      "snailXMin": 238,
+      "snailXMax": 272
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1076436-112.png",
+      "sha256": "0d5602d015cd5eb20756aad12ff630383b64d6a652c4d958421e7c5066d52c5a",
+      "snailXMin": 238,
+      "snailXMax": 272
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1076491-113.png",
+      "sha256": "0d5602d015cd5eb20756aad12ff630383b64d6a652c4d958421e7c5066d52c5a",
+      "snailXMin": 238,
+      "snailXMax": 272
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1076528-114.png",
+      "sha256": "d107bda4706cc1c9aace691cc1ddaaf7d56d479183d5629fa6bdb60aeeee1190",
+      "snailXMin": 238,
+      "snailXMax": 272
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1076585-115.png",
+      "sha256": "d107bda4706cc1c9aace691cc1ddaaf7d56d479183d5629fa6bdb60aeeee1190",
+      "snailXMin": 238,
+      "snailXMax": 272
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1076627-116.png",
+      "sha256": "d107bda4706cc1c9aace691cc1ddaaf7d56d479183d5629fa6bdb60aeeee1190",
+      "snailXMin": 238,
+      "snailXMax": 272
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1076695-117.png",
+      "sha256": "d107bda4706cc1c9aace691cc1ddaaf7d56d479183d5629fa6bdb60aeeee1190",
+      "snailXMin": 238,
+      "snailXMax": 272
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1076751-118.png",
+      "sha256": "d107bda4706cc1c9aace691cc1ddaaf7d56d479183d5629fa6bdb60aeeee1190",
+      "snailXMin": 238,
+      "snailXMax": 272
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1076819-119.png",
+      "sha256": "d107bda4706cc1c9aace691cc1ddaaf7d56d479183d5629fa6bdb60aeeee1190",
+      "snailXMin": 238,
+      "snailXMax": 272
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1076860-120.png",
+      "sha256": "d107bda4706cc1c9aace691cc1ddaaf7d56d479183d5629fa6bdb60aeeee1190",
+      "snailXMin": 238,
+      "snailXMax": 272
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1076902-121.png",
+      "sha256": "d107bda4706cc1c9aace691cc1ddaaf7d56d479183d5629fa6bdb60aeeee1190",
+      "snailXMin": 238,
+      "snailXMax": 272
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1076985-122.png",
+      "sha256": "d107bda4706cc1c9aace691cc1ddaaf7d56d479183d5629fa6bdb60aeeee1190",
+      "snailXMin": 238,
+      "snailXMax": 272
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1077028-123.png",
+      "sha256": "d107bda4706cc1c9aace691cc1ddaaf7d56d479183d5629fa6bdb60aeeee1190",
+      "snailXMin": 238,
+      "snailXMax": 272
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1077101-124.png",
+      "sha256": "d107bda4706cc1c9aace691cc1ddaaf7d56d479183d5629fa6bdb60aeeee1190",
+      "snailXMin": 238,
+      "snailXMax": 272
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1077142-125.png",
+      "sha256": "d107bda4706cc1c9aace691cc1ddaaf7d56d479183d5629fa6bdb60aeeee1190",
+      "snailXMin": 238,
+      "snailXMax": 272
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1077210-126.png",
+      "sha256": "d107bda4706cc1c9aace691cc1ddaaf7d56d479183d5629fa6bdb60aeeee1190",
+      "snailXMin": 238,
+      "snailXMax": 272
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1077251-127.png",
+      "sha256": "d107bda4706cc1c9aace691cc1ddaaf7d56d479183d5629fa6bdb60aeeee1190",
+      "snailXMin": 238,
+      "snailXMax": 272
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1077350-128.png",
+      "sha256": "d107bda4706cc1c9aace691cc1ddaaf7d56d479183d5629fa6bdb60aeeee1190",
+      "snailXMin": 238,
+      "snailXMax": 272
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1077391-129.png",
+      "sha256": "d107bda4706cc1c9aace691cc1ddaaf7d56d479183d5629fa6bdb60aeeee1190",
+      "snailXMin": 238,
+      "snailXMax": 272
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1077444-130.png",
+      "sha256": "d107bda4706cc1c9aace691cc1ddaaf7d56d479183d5629fa6bdb60aeeee1190",
+      "snailXMin": 238,
+      "snailXMax": 272
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1077519-131.png",
+      "sha256": "a83a076255a666a7d25b4dd0ea0773ff9f854f1974e96b0239b358863fe1d2ba",
+      "snailXMin": 238,
+      "snailXMax": 272
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1077561-132.png",
+      "sha256": "a83a076255a666a7d25b4dd0ea0773ff9f854f1974e96b0239b358863fe1d2ba",
+      "snailXMin": 238,
+      "snailXMax": 272
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1077619-133.png",
+      "sha256": "a83a076255a666a7d25b4dd0ea0773ff9f854f1974e96b0239b358863fe1d2ba",
+      "snailXMin": 238,
+      "snailXMax": 272
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1077659-134.png",
+      "sha256": "a83a076255a666a7d25b4dd0ea0773ff9f854f1974e96b0239b358863fe1d2ba",
+      "snailXMin": 238,
+      "snailXMax": 272
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1077749-135.png",
+      "sha256": "a83a076255a666a7d25b4dd0ea0773ff9f854f1974e96b0239b358863fe1d2ba",
+      "snailXMin": 238,
+      "snailXMax": 272
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1077819-136.png",
+      "sha256": "a83a076255a666a7d25b4dd0ea0773ff9f854f1974e96b0239b358863fe1d2ba",
+      "snailXMin": 238,
+      "snailXMax": 272
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1077877-137.png",
+      "sha256": "a83a076255a666a7d25b4dd0ea0773ff9f854f1974e96b0239b358863fe1d2ba",
+      "snailXMin": 238,
+      "snailXMax": 272
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1077917-138.png",
+      "sha256": "a83a076255a666a7d25b4dd0ea0773ff9f854f1974e96b0239b358863fe1d2ba",
+      "snailXMin": 238,
+      "snailXMax": 272
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1078008-139.png",
+      "sha256": "a83a076255a666a7d25b4dd0ea0773ff9f854f1974e96b0239b358863fe1d2ba",
+      "snailXMin": 238,
+      "snailXMax": 272
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1078034-140.png",
+      "sha256": "a83a076255a666a7d25b4dd0ea0773ff9f854f1974e96b0239b358863fe1d2ba",
+      "snailXMin": 238,
+      "snailXMax": 272
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1078159-141.png",
+      "sha256": "a83a076255a666a7d25b4dd0ea0773ff9f854f1974e96b0239b358863fe1d2ba",
+      "snailXMin": 238,
+      "snailXMax": 272
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1078200-142.png",
+      "sha256": "a83a076255a666a7d25b4dd0ea0773ff9f854f1974e96b0239b358863fe1d2ba",
+      "snailXMin": 238,
+      "snailXMax": 272
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1078269-143.png",
+      "sha256": "a83a076255a666a7d25b4dd0ea0773ff9f854f1974e96b0239b358863fe1d2ba",
+      "snailXMin": 238,
+      "snailXMax": 272
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1078310-144.png",
+      "sha256": "a83a076255a666a7d25b4dd0ea0773ff9f854f1974e96b0239b358863fe1d2ba",
+      "snailXMin": 238,
+      "snailXMax": 272
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1078394-145.png",
+      "sha256": "a83a076255a666a7d25b4dd0ea0773ff9f854f1974e96b0239b358863fe1d2ba",
+      "snailXMin": 238,
+      "snailXMax": 272
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1078433-146.png",
+      "sha256": "a83a076255a666a7d25b4dd0ea0773ff9f854f1974e96b0239b358863fe1d2ba",
+      "snailXMin": 238,
+      "snailXMax": 272
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1078544-147.png",
+      "sha256": "231d23c6411424a2eaa1c7920106fb2c454e86b93c5a55765a90b487a79705cb",
+      "snailXMin": 238,
+      "snailXMax": 272
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1078585-148.png",
+      "sha256": "231d23c6411424a2eaa1c7920106fb2c454e86b93c5a55765a90b487a79705cb",
+      "snailXMin": 238,
+      "snailXMax": 272
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1078691-149.png",
+      "sha256": "231d23c6411424a2eaa1c7920106fb2c454e86b93c5a55765a90b487a79705cb",
+      "snailXMin": 238,
+      "snailXMax": 272
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1078761-150.png",
+      "sha256": "231d23c6411424a2eaa1c7920106fb2c454e86b93c5a55765a90b487a79705cb",
+      "snailXMin": 238,
+      "snailXMax": 272
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1078799-151.png",
+      "sha256": "231d23c6411424a2eaa1c7920106fb2c454e86b93c5a55765a90b487a79705cb",
+      "snailXMin": 238,
+      "snailXMax": 272
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1078845-152.png",
+      "sha256": "231d23c6411424a2eaa1c7920106fb2c454e86b93c5a55765a90b487a79705cb",
+      "snailXMin": 238,
+      "snailXMax": 272
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1078902-153.png",
+      "sha256": "231d23c6411424a2eaa1c7920106fb2c454e86b93c5a55765a90b487a79705cb",
+      "snailXMin": 238,
+      "snailXMax": 272
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1079083-154.png",
+      "sha256": "231d23c6411424a2eaa1c7920106fb2c454e86b93c5a55765a90b487a79705cb",
+      "snailXMin": 238,
+      "snailXMax": 272
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1079128-155.png",
+      "sha256": "231d23c6411424a2eaa1c7920106fb2c454e86b93c5a55765a90b487a79705cb",
+      "snailXMin": 238,
+      "snailXMax": 272
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1079178-156.png",
+      "sha256": "231d23c6411424a2eaa1c7920106fb2c454e86b93c5a55765a90b487a79705cb",
+      "snailXMin": 238,
+      "snailXMax": 272
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1079220-157.png",
+      "sha256": "231d23c6411424a2eaa1c7920106fb2c454e86b93c5a55765a90b487a79705cb",
+      "snailXMin": 238,
+      "snailXMax": 272
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1079266-158.png",
+      "sha256": "231d23c6411424a2eaa1c7920106fb2c454e86b93c5a55765a90b487a79705cb",
+      "snailXMin": 238,
+      "snailXMax": 272
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1079461-159.png",
+      "sha256": "231d23c6411424a2eaa1c7920106fb2c454e86b93c5a55765a90b487a79705cb",
+      "snailXMin": 238,
+      "snailXMax": 272
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1079503-160.png",
+      "sha256": "231d23c6411424a2eaa1c7920106fb2c454e86b93c5a55765a90b487a79705cb",
+      "snailXMin": 238,
+      "snailXMax": 272
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1079550-161.png",
+      "sha256": "d2c408034e55cd229aee0a7298f8418aa7c902a6551df16bf5d4dba45e9a8ed8",
+      "snailXMin": 238,
+      "snailXMax": 272
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1079594-162.png",
+      "sha256": "d2c408034e55cd229aee0a7298f8418aa7c902a6551df16bf5d4dba45e9a8ed8",
+      "snailXMin": 238,
+      "snailXMax": 272
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1079632-163.png",
+      "sha256": "d2c408034e55cd229aee0a7298f8418aa7c902a6551df16bf5d4dba45e9a8ed8",
+      "snailXMin": 238,
+      "snailXMax": 272
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1079828-164.png",
+      "sha256": "d2c408034e55cd229aee0a7298f8418aa7c902a6551df16bf5d4dba45e9a8ed8",
+      "snailXMin": 238,
+      "snailXMax": 272
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1079886-165.png",
+      "sha256": "d2c408034e55cd229aee0a7298f8418aa7c902a6551df16bf5d4dba45e9a8ed8",
+      "snailXMin": 238,
+      "snailXMax": 272
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1079934-166.png",
+      "sha256": "d2c408034e55cd229aee0a7298f8418aa7c902a6551df16bf5d4dba45e9a8ed8",
+      "snailXMin": 238,
+      "snailXMax": 272
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1079978-167.png",
+      "sha256": "d2c408034e55cd229aee0a7298f8418aa7c902a6551df16bf5d4dba45e9a8ed8",
+      "snailXMin": 238,
+      "snailXMax": 272
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1080019-168.png",
+      "sha256": "d2c408034e55cd229aee0a7298f8418aa7c902a6551df16bf5d4dba45e9a8ed8",
+      "snailXMin": 238,
+      "snailXMax": 272
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1080182-169.png",
+      "sha256": "d2c408034e55cd229aee0a7298f8418aa7c902a6551df16bf5d4dba45e9a8ed8",
+      "snailXMin": 238,
+      "snailXMax": 272
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1080250-170.png",
+      "sha256": "d2c408034e55cd229aee0a7298f8418aa7c902a6551df16bf5d4dba45e9a8ed8",
+      "snailXMin": 238,
+      "snailXMax": 272
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1080291-171.png",
+      "sha256": "d2c408034e55cd229aee0a7298f8418aa7c902a6551df16bf5d4dba45e9a8ed8",
+      "snailXMin": 238,
+      "snailXMax": 272
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1080358-172.png",
+      "sha256": "d2c408034e55cd229aee0a7298f8418aa7c902a6551df16bf5d4dba45e9a8ed8",
+      "snailXMin": 238,
+      "snailXMax": 272
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1080403-173.png",
+      "sha256": "d2c408034e55cd229aee0a7298f8418aa7c902a6551df16bf5d4dba45e9a8ed8",
+      "snailXMin": 238,
+      "snailXMax": 272
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1080492-174.png",
+      "sha256": "d2c408034e55cd229aee0a7298f8418aa7c902a6551df16bf5d4dba45e9a8ed8",
+      "snailXMin": 238,
+      "snailXMax": 272
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1080627-175.png",
+      "sha256": "2a9e50529acbba076872d24b180f0b9707112ef9b3c88d1ef5b7078dca307bc4",
+      "snailXMin": 238,
+      "snailXMax": 272
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1080666-176.png",
+      "sha256": "2a9e50529acbba076872d24b180f0b9707112ef9b3c88d1ef5b7078dca307bc4",
+      "snailXMin": 238,
+      "snailXMax": 272
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1080744-177.png",
+      "sha256": "2a9e50529acbba076872d24b180f0b9707112ef9b3c88d1ef5b7078dca307bc4",
+      "snailXMin": 238,
+      "snailXMax": 272
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1080792-178.png",
+      "sha256": "2a9e50529acbba076872d24b180f0b9707112ef9b3c88d1ef5b7078dca307bc4",
+      "snailXMin": 238,
+      "snailXMax": 272
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1080833-179.png",
+      "sha256": "2a9e50529acbba076872d24b180f0b9707112ef9b3c88d1ef5b7078dca307bc4",
+      "snailXMin": 238,
+      "snailXMax": 272
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1080992-180.png",
+      "sha256": "2a9e50529acbba076872d24b180f0b9707112ef9b3c88d1ef5b7078dca307bc4",
+      "snailXMin": 238,
+      "snailXMax": 272
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1081083-181.png",
+      "sha256": "2a9e50529acbba076872d24b180f0b9707112ef9b3c88d1ef5b7078dca307bc4",
+      "snailXMin": 238,
+      "snailXMax": 272
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1081127-182.png",
+      "sha256": "2a9e50529acbba076872d24b180f0b9707112ef9b3c88d1ef5b7078dca307bc4",
+      "snailXMin": 238,
+      "snailXMax": 272
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1081166-183.png",
+      "sha256": "2a9e50529acbba076872d24b180f0b9707112ef9b3c88d1ef5b7078dca307bc4",
+      "snailXMin": 238,
+      "snailXMax": 272
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1081211-184.png",
+      "sha256": "2a9e50529acbba076872d24b180f0b9707112ef9b3c88d1ef5b7078dca307bc4",
+      "snailXMin": 238,
+      "snailXMax": 272
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1081377-185.png",
+      "sha256": "2a9e50529acbba076872d24b180f0b9707112ef9b3c88d1ef5b7078dca307bc4",
+      "snailXMin": 238,
+      "snailXMax": 272
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1081420-186.png",
+      "sha256": "2a9e50529acbba076872d24b180f0b9707112ef9b3c88d1ef5b7078dca307bc4",
+      "snailXMin": 238,
+      "snailXMax": 272
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1081542-187.png",
+      "sha256": "08e76ed100bac18593a5755acfa721beec6c20e81e35461f2b9e4d259e37f8c0",
+      "snailXMin": 238,
+      "snailXMax": 272
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1081584-188.png",
+      "sha256": "08e76ed100bac18593a5755acfa721beec6c20e81e35461f2b9e4d259e37f8c0",
+      "snailXMin": 238,
+      "snailXMax": 272
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1081626-189.png",
+      "sha256": "08e76ed100bac18593a5755acfa721beec6c20e81e35461f2b9e4d259e37f8c0",
+      "snailXMin": 238,
+      "snailXMax": 272
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1081750-190.png",
+      "sha256": "08e76ed100bac18593a5755acfa721beec6c20e81e35461f2b9e4d259e37f8c0",
+      "snailXMin": 238,
+      "snailXMax": 272
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1081902-191.png",
+      "sha256": "08e76ed100bac18593a5755acfa721beec6c20e81e35461f2b9e4d259e37f8c0",
+      "snailXMin": 238,
+      "snailXMax": 272
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1081942-192.png",
+      "sha256": "08e76ed100bac18593a5755acfa721beec6c20e81e35461f2b9e4d259e37f8c0",
+      "snailXMin": 238,
+      "snailXMax": 272
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1081983-193.png",
+      "sha256": "08e76ed100bac18593a5755acfa721beec6c20e81e35461f2b9e4d259e37f8c0",
+      "snailXMin": 238,
+      "snailXMax": 272
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1082033-194.png",
+      "sha256": "08e76ed100bac18593a5755acfa721beec6c20e81e35461f2b9e4d259e37f8c0",
+      "snailXMin": 238,
+      "snailXMax": 272
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1082137-195.png",
+      "sha256": "08e76ed100bac18593a5755acfa721beec6c20e81e35461f2b9e4d259e37f8c0",
+      "snailXMin": 238,
+      "snailXMax": 272
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1082227-196.png",
+      "sha256": "08e76ed100bac18593a5755acfa721beec6c20e81e35461f2b9e4d259e37f8c0",
+      "snailXMin": 238,
+      "snailXMax": 272
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1082300-197.png",
+      "sha256": "08e76ed100bac18593a5755acfa721beec6c20e81e35461f2b9e4d259e37f8c0",
+      "snailXMin": 238,
+      "snailXMax": 272
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1082435-198.png",
+      "sha256": "08e76ed100bac18593a5755acfa721beec6c20e81e35461f2b9e4d259e37f8c0",
+      "snailXMin": 238,
+      "snailXMax": 272
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1082502-199.png",
+      "sha256": "08e76ed100bac18593a5755acfa721beec6c20e81e35461f2b9e4d259e37f8c0",
+      "snailXMin": 238,
+      "snailXMax": 272
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1082550-200.png",
+      "sha256": "7d6c2e00d74f13f00807922659303cd799da7b13e2685d775029b180c032dff4",
+      "snailXMin": 238,
+      "snailXMax": 272
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1082600-201.png",
+      "sha256": "7d6c2e00d74f13f00807922659303cd799da7b13e2685d775029b180c032dff4",
+      "snailXMin": 238,
+      "snailXMax": 272
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1082711-202.png",
+      "sha256": "7d6c2e00d74f13f00807922659303cd799da7b13e2685d775029b180c032dff4",
+      "snailXMin": 238,
+      "snailXMax": 272
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1082883-203.png",
+      "sha256": "7d6c2e00d74f13f00807922659303cd799da7b13e2685d775029b180c032dff4",
+      "snailXMin": 238,
+      "snailXMax": 272
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1082928-204.png",
+      "sha256": "7d6c2e00d74f13f00807922659303cd799da7b13e2685d775029b180c032dff4",
+      "snailXMin": 238,
+      "snailXMax": 272
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1082985-205.png",
+      "sha256": "7d6c2e00d74f13f00807922659303cd799da7b13e2685d775029b180c032dff4",
+      "snailXMin": 238,
+      "snailXMax": 272
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1083066-206.png",
+      "sha256": "7d6c2e00d74f13f00807922659303cd799da7b13e2685d775029b180c032dff4",
+      "snailXMin": 238,
+      "snailXMax": 272
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1083227-207.png",
+      "sha256": "7d6c2e00d74f13f00807922659303cd799da7b13e2685d775029b180c032dff4",
+      "snailXMin": 238,
+      "snailXMax": 272
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1083266-208.png",
+      "sha256": "7d6c2e00d74f13f00807922659303cd799da7b13e2685d775029b180c032dff4",
+      "snailXMin": 238,
+      "snailXMax": 272
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1083361-209.png",
+      "sha256": "7d6c2e00d74f13f00807922659303cd799da7b13e2685d775029b180c032dff4",
+      "snailXMin": 238,
+      "snailXMax": 272
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1083452-210.png",
+      "sha256": "7d6c2e00d74f13f00807922659303cd799da7b13e2685d775029b180c032dff4",
+      "snailXMin": 238,
+      "snailXMax": 272
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1083607-211.png",
+      "sha256": "a59e81f655fed74c100934404ff6b8178c47552528c743a459e4d1cfadaa3c5f",
+      "snailXMin": 238,
+      "snailXMax": 272
+    },
+    {
+      "file": "godot/build/review/run-1/capture-1083653-212.png",
+      "sha256": "a59e81f655fed74c100934404ff6b8178c47552528c743a459e4d1cfadaa3c5f",
+      "snailXMin": 238,
+      "snailXMax": 272
+    }
+  ],
+  "functionalVerdict": "passed-actual-idle-lower-common-snail-render-movement",
+  "noGameStateTimeHintInjection": true
+}

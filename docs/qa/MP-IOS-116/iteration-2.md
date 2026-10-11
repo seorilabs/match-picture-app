@@ -119,3 +119,7 @@
 공개 보존 근거: [22개 실제 캡처·로그·해시 목록](evidence/round-2/final-evidence-manifest.json), [실행 로그](evidence/round-2/editor-isolated-run-public.log), [게임 로그](evidence/round-2/game-runtime-public.log), [환경 diff](evidence/round-2/project-environment.diff). 이미지의 실제 바이트·해시를 복사 후 다시 확인했다. 환경 파일에는 개인 절대 경로 접두어만 치환했고 원본 해시는 별도 provenance에 보존했다.
 
 구간 수 설명 정정: 최초 계획의 `10구간`과 이전 결과 설명의 `열 구간`은 작성 오류였다. `game_state.gd`는 첫 정답 뒤 타이머를 켜며 실제 완료 splits/구간 막대는 9개다. 10정답·11장·원본 타이머 규칙은 유지하고 결과 설명만 바로잡았다.
+
+## 2026-10-12 관찰 용어 정정
+
+위 회차에서 공통 심볼의 녹색 O를 힌트로 설명한 부분은 잘못된 분류다. 제품 `MpSymbolButton.start_hint()`의 실제 힌트는 **하단 정답 심볼의 좌우 흔들림**이며, O는 안내 예시 또는 정답 판정에 사용된다. 원래 관찰·PNG는 보존하지만 이 회차의 O 이미지를 유휴 힌트 흔들림의 통과 근거로 사용하지 않는다. 오답 잠금·복구와 정답 진행 결과는 이 정정과 별개다. 실제 흔들림 여부는 추가 승인된 4회차의 독립 관찰 결과에 따른다.

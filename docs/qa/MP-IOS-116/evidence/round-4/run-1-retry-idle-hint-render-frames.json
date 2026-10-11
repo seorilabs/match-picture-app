@@ -1,0 +1,22 @@
+{
+  "frames": [
+    {
+      "file": "godot/build/review/run-1/capture-960963-34.png",
+      "snailXMin": 238,
+      "snailXMax": 272
+    },
+    {
+      "file": "godot/build/review/run-1/capture-962736-35.png",
+      "snailXMin": 238,
+      "snailXMax": 272
+    },
+    {
+      "file": "godot/build/review/run-1/capture-964178-36.png",
+      "snailXMin": 238,
+      "snailXMax": 272
+    }
+  ],
+  "interpretation": "Unknown: all three initial lower-snail x-bounds are unchanged [238,272]; this sample alone does not prove hint movement. Actual later movement is independently evidenced by the bounded 176-frame/12.011-second sample.",
+  "originalInterpretationPreserved": "Actual lower common snail x-bounds movement across idle F7 frames; timers also increase in native observations. No state/time/hint injection.",
+  "correctedAt": "2026-10-11T22:47:41.501569+00:00"
+}

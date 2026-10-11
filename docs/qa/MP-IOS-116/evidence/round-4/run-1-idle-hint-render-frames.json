@@ -1,0 +1,46 @@
+{
+  "actualF7Frames": [
+    {
+      "file": "godot/build/review/run-1/capture-340897-16.png",
+      "cookiePixelXMin": 62,
+      "cookiePixelXMax": 109
+    },
+    {
+      "file": "godot/build/review/run-1/capture-340921-17.png",
+      "cookiePixelXMin": 62,
+      "cookiePixelXMax": 109
+    },
+    {
+      "file": "godot/build/review/run-1/capture-340946-18.png",
+      "cookiePixelXMin": 62,
+      "cookiePixelXMax": 109
+    },
+    {
+      "file": "godot/build/review/run-1/capture-340960-19.png",
+      "cookiePixelXMin": 62,
+      "cookiePixelXMax": 109
+    },
+    {
+      "file": "godot/build/review/run-1/capture-340982-20.png",
+      "cookiePixelXMin": 62,
+      "cookiePixelXMax": 109
+    },
+    {
+      "file": "godot/build/review/run-1/capture-341004-21.png",
+      "cookiePixelXMin": 62,
+      "cookiePixelXMax": 109
+    },
+    {
+      "file": "godot/build/review/run-1/capture-341016-22.png",
+      "cookiePixelXMin": 62,
+      "cookiePixelXMax": 109
+    },
+    {
+      "file": "godot/build/review/run-1/capture-341027-23.png",
+      "cookiePixelXMin": 62,
+      "cookiePixelXMax": 109
+    }
+  ],
+  "observation": "Initial 8 burst frames cookie x bounds unchanged. No actual hint movement proven by these frames.",
+  "hintVerdict": "unknown-pending-timer-freeze-investigation"
+}

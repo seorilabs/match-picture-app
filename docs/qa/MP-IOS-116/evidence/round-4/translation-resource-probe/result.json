@@ -1,0 +1,22 @@
+{
+  "allSemanticallyEqual": true,
+  "candidate": "385fa2e3d20c6cc89a790d403301573d48f164f1",
+  "locales": {
+    "en": {
+      "classOriginal": "OptimizedTranslation",
+      "classReimported": "OptimizedTranslation",
+      "comparedMessageCount": 32,
+      "localeEqualsExpected": true,
+      "mismatchedKeys": []
+    },
+    "ko": {
+      "classOriginal": "OptimizedTranslation",
+      "classReimported": "OptimizedTranslation",
+      "comparedMessageCount": 32,
+      "localeEqualsExpected": true,
+      "mismatchedKeys": []
+    }
+  },
+  "messageKeys": 32,
+  "scope": "resource-only headless automated comparison; no product main or Editor Run"
+}

@@ -1,0 +1,36 @@
+{
+  "observedAt": "2026-10-11T22:47:41.942771+00:00",
+  "logs": [
+    {
+      "file": "editor-run-1.log",
+      "sha256": "e6538f2638ae38330a284710e115bbb8ec785461063e81de53223143e9084417",
+      "errorsOrNonFinite": []
+    },
+    {
+      "file": "game-run-1.log",
+      "sha256": "a8fd65f211ca66b945a15e25028d2ce96e2daf4992b2d3dc3d8d03b2f3dc6812",
+      "errorsOrNonFinite": []
+    },
+    {
+      "file": "editor-run-2.log",
+      "sha256": "140f77480d915f8d8621bec8f9ba42767ae6455ecf314a8ab70e0b7195e52490",
+      "errorsOrNonFinite": []
+    },
+    {
+      "file": "game-run-2.log",
+      "sha256": "201bac69f85df2679331848ae0c3287ea4d64d5808d605dd418517384b12f3c3",
+      "errorsOrNonFinite": []
+    },
+    {
+      "file": "editor-run-3.log",
+      "sha256": "69ad0e622d950dd1649dfddb5cf5c6c571a647729f6732ccfe1f1c7e20a55db1",
+      "errorsOrNonFinite": []
+    },
+    {
+      "file": "game-run-3.log",
+      "sha256": "7b25ef36e1c008fd0e3166ca6808b6f30d8c67f40c0b29b624eb20910133e0c4",
+      "errorsOrNonFinite": []
+    }
+  ],
+  "scope": "These three real GUI runs only; earlier failed rounds and resource-probe initial parse error remain preserved separately."
+}
