@@ -164,12 +164,17 @@ func _maybe_request_tracking() -> void:
 	if not privacy.authorization_finished.is_connected(_on_tracking_finished):
 		privacy.authorization_finished.connect(_on_tracking_finished)
 	if not _tracking_requested and privacy.can_request_ads() and privacy.tracking_status() == MpIosAdPrivacy.NOT_DETERMINED:
-		_tracking_requested = true
-		privacy.request_tracking_authorization()
+		_tracking_requested = privacy.request_tracking_authorization()
 
 
 func _on_tracking_finished(_status: int) -> void:
 	# 신호 인자보다 현재 OS/UMP 상태를 다시 읽는다. 늦은 신호로 권한을 복제하지 않는다.
+	if _privacy().tracking_status() == MpIosAdPrivacy.NOT_DETERMINED:
+		# 표시 실패·OS 미결정 완료는 다음 명시적 준비·활성화에서 재시도한다.
+		# 이 콜백에서 즉시 재요청하는 반복을 피한다.
+		_tracking_requested = false
+		_ads_allowed()
+		return
 	_initialize()
 
 

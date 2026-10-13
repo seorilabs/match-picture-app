@@ -11,6 +11,7 @@ class FakePrivacy:
 	var allows_ads := true
 	var available := true
 	var requests := 0
+	var request_accepted := true
 	func is_available() -> bool:
 		return available
 	func tracking_status() -> int:
@@ -19,7 +20,7 @@ class FakePrivacy:
 		return available and allows_ads
 	func request_tracking_authorization() -> bool:
 		requests += 1
-		return available
+		return available and request_accepted
 	func finish(value: int) -> void:
 		status = value
 		authorization_finished.emit(value)
@@ -38,6 +39,7 @@ class IosAds:
 
 func _ready() -> void:
 	_check_unresolved()
+	_check_tracking_retry()
 	_check_blocked()
 	_check_authorized_and_withdrawn()
 	_check_ump_and_errors()
@@ -79,6 +81,28 @@ func _check_blocked() -> void:
 	missing.privacy.available = false
 	missing._finish_consent()
 	_check(missing.initializations == 0 and missing._loader.calls == 0, "네이티브 연결 없음은 광고 차단")
+
+func _check_tracking_retry() -> void:
+	for completion in [-1, 0]:
+		var ads := _new_ads()
+		ads._finish_consent()
+		# 표시 실패 신호와 실제 OS 상태는 별개다. OS는 계속 미결정이다.
+		ads.privacy.authorization_finished.emit(completion)
+		_check(ads.privacy.requests == 1 and ads.initializations == 0,
+			"표시 실패·미결정 완료(%d)는 자동 반복하지 않는다" % completion)
+		ads._on_application_resumed()
+		_check(ads.privacy.requests == 2 and ads._loader.calls == 0,
+			"표시 실패·미결정 완료(%d) 후 다음 활성화에서 재요청" % completion)
+		ads.privacy.finish(3)
+		_check(ads.initializations == 1 and ads._loader.calls == 1,
+			"재요청 허용 후에만 광고 초기화·로드")
+	var rejected := _new_ads()
+	rejected.privacy.request_accepted = false
+	rejected._finish_consent()
+	rejected.privacy.request_accepted = true
+	rejected.prepare()
+	_check(rejected.privacy.requests == 2 and rejected.initializations == 0,
+		"네이티브 요청 미접수는 다음 명시적 준비에서 복구")
 
 func _check_authorized_and_withdrawn() -> void:
 	var ads := _new_ads()
