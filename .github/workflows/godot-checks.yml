@@ -31,11 +31,16 @@ jobs:
       godot_version: "4.7.2"
       godot_status: stable
       check_command: |
+        python3 tools/prepare_ios_privacy.py --dependencies-only
         bash scripts/godot_quality_gate.sh \
           --project godot \
           --smoke-scene res://tests/core_test_runner.tscn \
           --smoke-scene res://tests/test_runner.tscn \
-          --smoke-scene res://tests/play_through.tscn
+          --smoke-scene res://tests/play_through.tscn \
+          --smoke-scene res://tests/release_stability.tscn \
+          --smoke-scene res://tests/ios_ad_privacy.tscn \
+          --smoke-scene res://tests/review_sandbox.tscn
+        python3 tools/check_admob_bundle.py
         python3 tools/check_core_boundary.py
         python3 tools/generate_sfx.py --check
         python3 tools/check_data_safety.py

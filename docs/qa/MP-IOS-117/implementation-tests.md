@@ -8,3 +8,5 @@
 - Python 문법·shell 문법·`git diff --check` 통과.
 
 위 결과는 자동 검증·네이티브 라이브러리 컴파일이다. 실제 Editor Run, signed archive, Apple 권한창, Google 네트워크, iPhone/iPad 동작, App Privacy 저장, 재심사 접수를 증명하지 않는다. 현재 실제 iPad 검수 환경은 없다고 사용자가 확인했다.
+
+- 별도의 깨끗한 Godot 4.7.2 clone으로 재현 검증: 기존 캐시에 있던 생성 헤더 때문에 초기 명령은 누락을 감추었으나, 필요한 `gdvirtual`, `gdextension_interface`, `disabled_classes` 생성 대상을 명시한 후 fresh 소스에서도 debug/release arm64 컴파일 통과. 재현 실패와 수정 후 결과를 구분한다.

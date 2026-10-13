@@ -81,7 +81,7 @@ def main():
             run("python3", "-m", "venv", venv)
             run(venv / "bin/pip", "install", "SCons==4.10.1")
         scons = str(venv / "bin/scons")
-    run(scons, "platform=ios", "target=template_release", "arch=arm64", "core/object/gdvirtual.gen.h", cwd=source)
+    run(scons, "platform=ios", "target=template_release", "arch=arm64", "core/object/gdvirtual.gen.h", "core/extension/gdextension_interface.gen.h", "core/disabled_classes.gen.h", cwd=source)
     sdk = subprocess.check_output(["xcrun", "--sdk", "iphoneos", "--show-sdk-path"], text=True).strip()
     framework = CACHE / "ump/UserMessagingPlatform.xcframework/ios-arm64"
     output = ROOT / "godot/ios/plugins/ad_privacy"
