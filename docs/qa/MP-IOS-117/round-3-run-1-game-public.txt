@@ -1,0 +1,70 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+OpenGL API 4.1 Metal - 90.5 - Compatibility - Using Device: Apple - Apple M3
+
+[mp117-runtime] user=<isolated-userdata>/match-picture-MP-IOS-117-round-3-sdk-1fc334b/ before Save; isolated=true
+[ui] safe area 여백(뷰포트 단위) 좌 0 상 0 우 0 하 0 / 창 (405, 720) / 안전영역 [P: (0, 30), S: (1920, 988)]
+[review] Editor Run / in-memory storage / fake SDK callbacks
+[mp117-case] native request rejected initially; status remains0
+[mp117-observe] window=(405, 720) visible_rect=[P: (0.0, 0.0), S: (810.0, 1440.0)] display=macOS save={ "schema": 1, "has_played": false, "best_seconds": 24.6, "best_splits": [], "clear_count": 3, "language": "auto", "muted": false }
+[mp117-observe] ATT=0 UMP=true ATTrequests=1 SDKinits=0 loads=0 showing=false loading=false generation=0 consent_busy=false
+[mp117-observe] window=(405, 720) visible_rect=[P: (0.0, 0.0), S: (810.0, 1440.0)] display=macOS save={ "schema": 1, "has_played": false, "best_seconds": 24.6, "best_splits": [], "clear_count": 3, "language": "auto", "muted": false }
+[mp117-observe] ATT=0 UMP=true ATTrequests=1 SDKinits=0 loads=0 showing=false loading=false generation=0 consent_busy=false
+[mp117-case] next explicit prepare after rejected request
+[review] ATT=0 UMP=true ATT-requests=2 SDK-inits=0 ad-loads=0 ready=false
+[mp117-observe] window=(405, 720) visible_rect=[P: (0.0, 0.0), S: (810.0, 1440.0)] display=macOS save={ "schema": 1, "has_played": false, "best_seconds": 24.6, "best_splits": [], "clear_count": 3, "language": "auto", "muted": false }
+[mp117-observe] ATT=0 UMP=true ATTrequests=2 SDKinits=0 loads=0 showing=false loading=false generation=0 consent_busy=false
+[mp117-case] timeout callback -1; OS status unchanged0; no immediate retry
+[review] ATT=0 UMP=true ATT-requests=2 SDK-inits=0 ad-loads=0 ready=false
+[mp117-observe] window=(405, 720) visible_rect=[P: (0.0, 0.0), S: (810.0, 1440.0)] display=macOS save={ "schema": 1, "has_played": false, "best_seconds": 24.6, "best_splits": [], "clear_count": 3, "language": "auto", "muted": false }
+[mp117-observe] ATT=0 UMP=true ATTrequests=2 SDKinits=0 loads=0 showing=false loading=false generation=0 consent_busy=false
+[review] capture=res://build/review/capture-24116.png result=0
+[review] ATT=0 UMP=true ATT-requests=3 SDK-inits=0 ad-loads=0 ready=false
+[mp117-case] completed callback0; OS status unchanged0; no immediate retry
+[review] ATT=0 UMP=true ATT-requests=3 SDK-inits=0 ad-loads=0 ready=false
+[mp117-observe] window=(405, 720) visible_rect=[P: (0.0, 0.0), S: (810.0, 1440.0)] display=macOS save={ "schema": 1, "has_played": false, "best_seconds": 24.6, "best_splits": [], "clear_count": 3, "language": "auto", "muted": false }
+[mp117-observe] ATT=0 UMP=true ATTrequests=3 SDKinits=0 loads=0 showing=false loading=false generation=0 consent_busy=false
+[mp117-case] explicit prepare
+[review] ATT=0 UMP=true ATT-requests=4 SDK-inits=0 ad-loads=0 ready=false
+[review] ATT=3 UMP=true ATT-requests=4 SDK-inits=1 ad-loads=1 ready=false
+[mp117-case] OS permission withdrawn without authorization callback
+[review] ATT=2 UMP=true ATT-requests=4 SDK-inits=1 ad-loads=1 ready=false
+[mp117-case] first generation late ad destroyed=true shows=0
+[review] ATT=2 UMP=true ATT-requests=4 SDK-inits=1 ad-loads=1 ready=false
+[mp117-observe] window=(405, 720) visible_rect=[P: (0.0, 0.0), S: (810.0, 1440.0)] display=macOS save={ "schema": 1, "has_played": false, "best_seconds": 24.6, "best_splits": [], "clear_count": 3, "language": "auto", "muted": false }
+[mp117-observe] ATT=2 UMP=true ATTrequests=4 SDKinits=1 loads=1 showing=false loading=false generation=1 consent_busy=false
+[mp117-observe] request_extras={ "npa": "1" }
+[review] ATT=3 UMP=true ATT-requests=4 SDK-inits=1 ad-loads=2 ready=false
+[review] ATT=3 UMP=true ATT-requests=4 SDK-inits=1 ad-loads=2 ready=true
+[mp117-observe] window=(405, 720) visible_rect=[P: (0.0, 0.0), S: (810.0, 1440.0)] display=macOS save={ "schema": 1, "has_played": false, "best_seconds": 24.6, "best_splits": [], "clear_count": 3, "language": "auto", "muted": false }
+[mp117-observe] ATT=3 UMP=true ATTrequests=4 SDKinits=1 loads=2 showing=false loading=false generation=1 consent_busy=false
+[mp117-observe] request_extras={ "npa": "1" }
+[mp117-observe] request_extras={ "npa": "1" }
+[review] capture=res://build/review/capture-344896.png result=0
+[mp117-observe] window=(405, 720) visible_rect=[P: (0.0, 0.0), S: (810.0, 1440.0)] display=macOS save={ "schema": 1, "has_played": true, "best_seconds": 24.6, "best_splits": [], "clear_count": 3, "language": "auto", "muted": false }
+[mp117-observe] ATT=3 UMP=true ATTrequests=4 SDKinits=1 loads=2 showing=false loading=false generation=1 consent_busy=false
+[mp117-observe] request_extras={ "npa": "1" }
+[mp117-observe] request_extras={ "npa": "1" }
+[mp117-observe] window=(405, 720) visible_rect=[P: (0.0, 0.0), S: (810.0, 1440.0)] display=macOS save={ "schema": 1, "has_played": true, "best_seconds": 24.6, "best_splits": [], "clear_count": 3, "language": "auto", "muted": false }
+[mp117-observe] ATT=3 UMP=true ATTrequests=4 SDKinits=1 loads=2 showing=false loading=false generation=1 consent_busy=false
+[mp117-observe] request_extras={ "npa": "1" }
+[mp117-observe] request_extras={ "npa": "1" }
+[review] capture=res://build/review/capture-367460.png result=0
+[mp117-observe] window=(405, 720) visible_rect=[P: (0.0, 0.0), S: (810.0, 1440.0)] display=macOS save={ "schema": 1, "has_played": true, "best_seconds": 24.6, "best_splits": [], "clear_count": 4, "language": "auto", "muted": false }
+[mp117-observe] ATT=3 UMP=true ATTrequests=4 SDKinits=1 loads=2 showing=true loading=false generation=1 consent_busy=false
+[mp117-observe] request_extras={ "npa": "1" }
+[mp117-observe] request_extras={ "npa": "1" }
+[review] ATT=3 UMP=true ATT-requests=4 SDK-inits=1 ad-loads=3 ready=false
+[mp117-observe] window=(405, 720) visible_rect=[P: (0.0, 0.0), S: (810.0, 1440.0)] display=macOS save={ "schema": 1, "has_played": true, "best_seconds": 24.6, "best_splits": [], "clear_count": 4, "language": "auto", "muted": false }
+[mp117-observe] ATT=3 UMP=true ATTrequests=4 SDKinits=1 loads=3 showing=false loading=true generation=1 consent_busy=false
+[mp117-observe] request_extras={ "npa": "1" }
+[mp117-observe] request_extras={ "npa": "1" }
+[mp117-observe] request_extras={ "npa": "1" }
+[review] ATT=2 UMP=true ATT-requests=4 SDK-inits=1 ad-loads=3 ready=false
+[mp117-observe] window=(405, 720) visible_rect=[P: (0.0, 0.0), S: (810.0, 1440.0)] display=macOS save={ "schema": 1, "has_played": true, "best_seconds": 24.6, "best_splits": [], "clear_count": 4, "language": "auto", "muted": false }
+[mp117-observe] ATT=2 UMP=true ATTrequests=4 SDKinits=1 loads=3 showing=false loading=true generation=2 consent_busy=false
+[mp117-observe] request_extras={ "npa": "1" }
+[mp117-observe] request_extras={ "npa": "1" }
+[mp117-observe] request_extras={ "npa": "1" }
+[review] ATT=2 UMP=true ATT-requests=4 SDK-inits=1 ad-loads=3 ready=false
+[mp117-runtime] Ctrl+B -> product Back notification proxy
+[review] capture=res://build/review/capture-404900.png result=0

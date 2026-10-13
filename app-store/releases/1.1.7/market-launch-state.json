@@ -1,0 +1,151 @@
+{
+  "schemaVersion": 1,
+  "app": {
+    "name": "Match Symbols",
+    "repo": "seorilabs/match-picture-app",
+    "sourceRevision": "f12f032881619284bc45d0bbef380ea6fb173f26"
+  },
+  "release": {
+    "version": "1.1.7",
+    "tag": "확정 필요 (검수 후 중앙 발급)",
+    "objective": "submitted",
+    "countries": [],
+    "rolloutMode": "기존 AFTER_APPROVAL 설정 보존; 재심사 접수 목표"
+  },
+  "deploymentApproval": {
+    "status": "approved",
+    "markets": [
+      "app_store"
+    ],
+    "objective": "submitted",
+    "approvedAt": "2026-10-13",
+    "evidence": [
+      "사용자: 다음 버전 준비하고 재심사 신청하자",
+      "MP-IOS-117 v1/c92196f: v1 승인 — 수정·검수·재심사 진행"
+    ]
+  },
+  "commonGates": {
+    "candidate": {
+      "status": "blocked",
+      "evidence": [
+        "docs/design/2026-10-13-ios-1.1.7-ad-privacy/design.md",
+        "docs/qa/MP-IOS-117/review-plan.md"
+      ],
+      "checkedAt": "2026-10-13T12:38:45.505943+00:00",
+      "blocker": "필수 native 권한·광고 실제 검증 없음, 사용자가 iPad 검수 환경 없음을 확인; 전체 E2E·중앙 검증 미통과"
+    },
+    "quality": {
+      "status": "pass",
+      "evidence": [
+        "docs/qa/MP-IOS-117/implementation-tests.md",
+        "https://github.com/seorilabs/match-picture-app/actions/runs/38398414390",
+        "iOS 개인정보 자동 29건과 전체 npm run check 통과"
+      ],
+      "checkedAt": "2026-10-13T12:38:45.505943+00:00",
+      "blocker": null
+    },
+    "production_dependencies": {
+      "status": "pending",
+      "evidence": [],
+      "checkedAt": null,
+      "blocker": null
+    },
+    "observability": {
+      "status": "pending",
+      "evidence": [],
+      "checkedAt": null,
+      "blocker": null
+    }
+  },
+  "markets": {
+    "app_store": {
+      "objective": "submitted",
+      "state": "pending",
+      "identity": {
+        "applicationId": "1528539634 / com.github.magicsih.MatchSymbol",
+        "version": "1.1.7",
+        "build": "확정 필요 (미발급)"
+      },
+      "gates": {
+        "candidate": {
+          "status": "blocked",
+          "evidence": [
+            "docs/design/2026-10-13-ios-1.1.7-ad-privacy/design.md",
+            "docs/qa/MP-IOS-117/review-plan.md"
+          ],
+          "checkedAt": "2026-10-13T12:38:45.505943+00:00",
+          "blocker": "필수 native 권한·광고 실제 검증 없음, 사용자가 iPad 검수 환경 없음을 확인; 전체 E2E·중앙 검증 미통과"
+        },
+        "artifact": {
+          "status": "pending",
+          "evidence": [],
+          "checkedAt": null,
+          "blocker": null
+        },
+        "upload": {
+          "status": "pending",
+          "evidence": [],
+          "checkedAt": null,
+          "blocker": null
+        },
+        "processing": {
+          "status": "pending",
+          "evidence": [],
+          "checkedAt": null,
+          "blocker": null
+        },
+        "qa": {
+          "status": "blocked",
+          "evidence": [
+            "사용자: 현재 iPad 검수 환경 없음",
+            "iPhone 12 Pro 연결 확인; 현재 후보 설치·실제 ATT/UMP/광고 검수 미실행"
+          ],
+          "checkedAt": "2026-10-13T12:38:45.505943+00:00",
+          "blocker": "같은 후보의 iPhone/iPad native 검수 근거 없음; iPad 환경 미제공"
+        },
+        "metadata": {
+          "status": "pending",
+          "evidence": [],
+          "checkedAt": null,
+          "blocker": null
+        },
+        "policy": {
+          "status": "pending",
+          "evidence": [],
+          "checkedAt": null,
+          "blocker": null
+        },
+        "submission": {
+          "status": "pending",
+          "evidence": [],
+          "checkedAt": null,
+          "blocker": null
+        },
+        "approval": {
+          "status": "pending",
+          "evidence": [],
+          "checkedAt": null,
+          "blocker": null
+        },
+        "release": {
+          "status": "pending",
+          "evidence": [],
+          "checkedAt": null,
+          "blocker": null
+        },
+        "live_smoke": {
+          "status": "pending",
+          "evidence": [],
+          "checkedAt": null,
+          "blocker": null
+        }
+      },
+      "liveReadback": {
+        "version": "1.1.6",
+        "appStoreState": "REJECTED",
+        "submissionState": "UNRESOLVED_ISSUES",
+        "checkedAt": "2026-10-13T12:23:44.320950+00:00"
+      }
+    }
+  }
+}

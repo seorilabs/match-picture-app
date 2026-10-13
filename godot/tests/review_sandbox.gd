@@ -3,8 +3,9 @@ extends Node
 ## F1: UMP 진입 필요 상태, F2: 저장 실패, F3/F4: 양식 성공/실패 콜백.
 ## F7: 이번 화면 캡처. F8: 원래 저장된 기록으로 타이틀에 복귀.
 const Cases = preload("res://tests/release_stability.gd")
+const PrivacyCases = preload("res://tests/ios_ad_privacy.gd")
 var _storage := Cases.FailingStorage.new()
-var _ads := Cases.FakeAdMob.new()
+var _ads := PrivacyCases.IosAds.new()
 var _main: Node
 
 func _ready() -> void:
@@ -12,7 +13,7 @@ func _ready() -> void:
 	Save.set_values({"best_seconds": 24.6, "clear_count": 3})
 	_ads.required = false
 	_ads._loader = Cases.FakeLoader.new()
-	_ads._ready = true
+	_ads._finish_consent()
 	_main = load("res://scenes/main.tscn").instantiate()
 	add_child(_main)
 	var previous: MpInterstitialAdPort = _main.get("_ads")
@@ -44,6 +45,22 @@ func _input(event: InputEvent) -> void:
 			if _ads.privacy_callback.is_valid() and _ads.is_privacy_options_busy():
 				_ads.privacy_callback.call(null if event.keycode == KEY_F3 else FormError.new(1, "QA simulated form failure"))
 				print("[review] privacy success=", event.keycode == KEY_F3)
+		KEY_F5, KEY_F6:
+			_ads.privacy.finish(3 if event.keycode == KEY_F5 else 2)
+			_print_privacy_state()
+		KEY_F9:
+			_ads.privacy.allows_ads = not _ads.privacy.allows_ads
+			_ads.prepare()
+			_print_privacy_state()
+		KEY_F10:
+			_ads._on_application_resumed()
+			_print_privacy_state()
+		KEY_F12:
+			if _ads._showing and _ads._ad != null:
+				_ads._ad.full_screen_content_callback.on_ad_dismissed_full_screen_content.call()
+			elif _ads._loading:
+				_ads._loader.callbacks.back().on_ad_loaded.call(Cases.FakeAd.new())
+			_print_privacy_state()
 		KEY_F7:
 			_capture()
 		KEY_F8:
@@ -59,3 +76,8 @@ func _capture() -> void:
 	var path := "res://build/review/capture-%d.png" % Time.get_ticks_msec()
 	var error := get_viewport().get_texture().get_image().save_png(path)
 	print("[review] capture=", path, " result=", error)
+
+func _print_privacy_state() -> void:
+	print("[review] ATT=%d UMP=%s ATT-requests=%d SDK-inits=%d ad-loads=%d ready=%s" % [
+		_ads.privacy.status, _ads.privacy.allows_ads, _ads.privacy.requests,
+		_ads.initializations, _ads._loader.calls, _ads.is_available()])

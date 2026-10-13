@@ -84,3 +84,6 @@ jobs:
       export_options_plist: app-store/exportOptions.plist
       godot_version: "4.7.2"
       godot_status: stable
+      prepare_project_script: tools/prepare_ios_privacy.sh
+      post_export_project_script: tools/finish_ios_privacy.sh
+      post_export_validation_script: tools/validate_ios_privacy.sh

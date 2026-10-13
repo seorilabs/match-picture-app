@@ -1,0 +1,18 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+OpenGL API 4.1 Metal - 90.5 - Compatibility - Using Device: Apple - Apple M3
+
+[mp117-runtime] user=<isolated-userdata>/match-picture-MP-IOS-117-round-3-disk-1fc334b/ before Save; isolated=true
+[ui] safe area 여백(뷰포트 단위) 좌 0 상 0 우 0 하 0 / 창 (540, 720) / 안전영역 [P: (0, 30), S: (1920, 988)]
+[mp117-observe] window=(540, 720) visible_rect=[P: (0.0, 0.0), S: (1080.0, 1440.0)] display=macOS save={ "best_seconds": 144.973129851875, "best_splits": [58.997320999999, 8.85670827272909, 7.56800630303455, 10.1107004242474, 10.8385420000054, 11.6252503333395, 10.7175913333408, 11.8226506666691, 14.4363595185105], "clear_count": 1.0, "has_played": true, "language": "en", "muted": false, "schema": 1.0 }
+[mp117-capture] path=res://build/review/capture-30788.png pixels=(540, 720) result=0
+[mp117-observe] window=(540, 720) visible_rect=[P: (0.0, 0.0), S: (1080.0, 1440.0)] display=macOS save={ "best_seconds": 144.973129851875, "best_splits": [58.997320999999, 8.85670827272909, 7.56800630303455, 10.1107004242474, 10.8385420000054, 11.6252503333395, 10.7175913333408, 11.8226506666691, 14.4363595185105], "clear_count": 1.0, "has_played": true, "language": "en", "muted": false, "schema": 1.0 }
+[mp117-capture] path=res://build/review/capture-39404.png pixels=(540, 720) result=0
+[mp117-observe] window=(540, 720) visible_rect=[P: (0.0, 0.0), S: (1080.0, 1440.0)] display=macOS save={ "best_seconds": 144.973129851875, "best_splits": [58.997320999999, 8.85670827272909, 7.56800630303455, 10.1107004242474, 10.8385420000054, 11.6252503333395, 10.7175913333408, 11.8226506666691, 14.4363595185105], "clear_count": 1.0, "has_played": true, "language": "en", "muted": false, "schema": 1.0 }
+[mp117-observe] window=(540, 720) visible_rect=[P: (0.0, 0.0), S: (1080.0, 1440.0)] display=macOS save={ "best_seconds": 144.973129851875, "best_splits": [58.997320999999, 8.85670827272909, 7.56800630303455, 10.1107004242474, 10.8385420000054, 11.6252503333395, 10.7175913333408, 11.8226506666691, 14.4363595185105], "clear_count": 1.0, "has_played": true, "language": "ko", "muted": false, "schema": 1.0 }
+[mp117-capture] path=res://build/review/capture-51808.png pixels=(540, 720) result=0
+[mp117-capture] path=res://build/review/capture-65112.png pixels=(540, 720) result=0
+[mp117-observe] window=(540, 720) visible_rect=[P: (0.0, 0.0), S: (1080.0, 1440.0)] display=macOS save={ "best_seconds": 144.973129851875, "best_splits": [58.997320999999, 8.85670827272909, 7.56800630303455, 10.1107004242474, 10.8385420000054, 11.6252503333395, 10.7175913333408, 11.8226506666691, 14.4363595185105], "clear_count": 1.0, "has_played": true, "language": "ko", "muted": false, "schema": 1.0 }
+[mp117-capture] path=res://build/review/capture-77604.png pixels=(540, 720) result=0
+[mp117-runtime] Ctrl+B -> product Back notification proxy
+[mp117-capture] path=res://build/review/capture-85733.png pixels=(540, 720) result=0
+[mp117-runtime] Ctrl+B -> product Back notification proxy

@@ -1,0 +1,12 @@
+[config]
+name="MatchAdPrivacy"
+binary="libmatch_ad_privacy.a"
+initialization="initialize_match_ad_privacy"
+deinitialization="deinitialize_match_ad_privacy"
+
+[dependencies]
+system=["Foundation.framework", "UIKit.framework", "AppTrackingTransparency.framework"]
+linker_flags=["-ObjC"]
+
+[plist]
+NSUserTrackingUsageDescription:string="Allow linking your activity across other companies' apps and websites to measure advertising effectiveness."

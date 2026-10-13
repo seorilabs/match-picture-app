@@ -1,0 +1,14 @@
+{
+  "schema": "seorilabs.release-notes/v2",
+  "version": "v1.1.7",
+  "notes": {
+    "ko-KR": "광고 개인정보 동의와 추적 허용 절차를 보완했어요.",
+    "en-US": "Updated advertising consent and tracking permission handling."
+  },
+  "markets": {
+    "appStore": {
+      "ko-KR": "광고 개인정보 동의와 추적 허용 절차를 보완했어요.",
+      "en-US": "Updated advertising consent and tracking permission handling."
+    }
+  }
+}

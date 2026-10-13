@@ -27,10 +27,16 @@ var _consent_busy := false
 var _privacy_form_open := false
 ## 이전 동의로 시작한 로드 결과를 폐기하기 위한 세대.
 var _generation := 0
+var _ios_privacy: Object
+var _tracking_requested := false
+var _consent_failed := false
+var _permission_granted := false
 
 
 func _init() -> void:
 	_request_consent()
+	if _uses_ios_privacy():
+		_connect_focus.call_deferred()
 
 
 func prepare() -> void:
@@ -38,7 +44,7 @@ func prepare() -> void:
 
 
 func is_available() -> bool:
-	return _ad != null and not _showing and not _consent_busy and _consent_allows_ads()
+	return _ads_allowed() and _ad != null and not _showing and not _consent_busy
 
 
 ## 원본과 같이 Retry에서만 요청한다. 중복 요청이나 미완료 동의는 건너뛴다.
@@ -86,8 +92,8 @@ func _request_consent() -> void:
 		request, _on_consent_updated, _on_consent_update_failed)
 
 
-func _on_consent_update_failed(_error: FormError) -> void:
-	_finish_consent()
+func _on_consent_update_failed(error: FormError) -> void:
+	_finish_consent(error != null)
 
 
 func _on_consent_updated() -> void:
@@ -103,7 +109,8 @@ func _on_consent_form_loaded(form: ConsentForm) -> void:
 	form.show(_on_consent_update_failed)
 
 
-func _finish_consent() -> void:
+func _finish_consent(failed: bool = false) -> void:
+	_consent_failed = failed
 	_consent_busy = false
 	privacy_options_changed.emit()
 	_initialize()
@@ -115,7 +122,7 @@ func _present_privacy_options(callback: Callable) -> void:
 
 func _on_privacy_options_finished(error: FormError) -> void:
 	_privacy_form_open = false
-	_finish_consent()
+	_finish_consent(error != null)
 	privacy_options_finished.emit(error == null)
 
 
@@ -128,15 +135,79 @@ func _consent_status() -> int:
 
 
 func _consent_allows_ads() -> bool:
-	# 현재 Poing 바인딩이 제공하는 상태만 사용한다. SDK/개인정보 선택은 어댑터 밖에 저장하지 않는다.
+	if _uses_ios_privacy():
+		var privacy := _privacy()
+		return not _consent_failed and privacy.is_available() and privacy.can_request_ads() and privacy.tracking_status() == MpIosAdPrivacy.AUTHORIZED
+	# Android의 기존 동의 경로는 유지한다.
 	return _consent_status() in [
 		ConsentInformation.ConsentStatus.NOT_REQUIRED,
 		ConsentInformation.ConsentStatus.OBTAINED,
 	]
 
 
+func _uses_ios_privacy() -> bool:
+	return OS.get_name() == "iOS"
+
+
+func _privacy() -> Object:
+	if _ios_privacy == null:
+		_ios_privacy = MpIosAdPrivacy.new()
+	return _ios_privacy
+
+
+func _maybe_request_tracking() -> void:
+	if not _uses_ios_privacy() or _consent_busy or _consent_failed:
+		return
+	var privacy := _privacy()
+	if not privacy.is_available():
+		return
+	if not privacy.authorization_finished.is_connected(_on_tracking_finished):
+		privacy.authorization_finished.connect(_on_tracking_finished)
+	if not _tracking_requested and privacy.can_request_ads() and privacy.tracking_status() == MpIosAdPrivacy.NOT_DETERMINED:
+		_tracking_requested = privacy.request_tracking_authorization()
+
+
+func _on_tracking_finished(_status: int) -> void:
+	# 신호 인자보다 현재 OS/UMP 상태를 다시 읽는다. 늦은 신호로 권한을 복제하지 않는다.
+	if _privacy().tracking_status() == MpIosAdPrivacy.NOT_DETERMINED:
+		# 표시 실패·OS 미결정 완료는 다음 명시적 준비·활성화에서 재시도한다.
+		# 이 콜백에서 즉시 재요청하는 반복을 피한다.
+		_tracking_requested = false
+		_ads_allowed()
+		return
+	_initialize()
+
+
+func _connect_focus() -> void:
+	var tree := Engine.get_main_loop() as SceneTree
+	if tree != null and not tree.root.focus_entered.is_connected(_on_application_resumed):
+		tree.root.focus_entered.connect(_on_application_resumed)
+
+
+func _on_application_resumed() -> void:
+	var previously_allowed := _permission_granted
+	_maybe_request_tracking()
+	var allowed := _ads_allowed()
+	# 권한 변화 없는 복귀에서는 로드 실패 후 재요청 기회를 늘리지 않는다.
+	if allowed and not previously_allowed:
+		_initialize()
+
+
+func _ads_allowed() -> bool:
+	var allowed := not _consent_busy and _consent_allows_ads()
+	if _permission_granted and not allowed:
+		_generation += 1
+	_permission_granted = allowed
+	if not allowed and _ad != null:
+		_ad.destroy()
+		_ad = null
+		_showing = false
+	return allowed
+
+
 func _initialize() -> void:
-	if _consent_busy or not _consent_allows_ads():
+	_maybe_request_tracking()
+	if _consent_busy or not _ads_allowed():
 		return
 	if _ready:
 		_load()
@@ -161,7 +232,7 @@ func _on_initialized(_status: InitializationStatus) -> void:
 
 
 func _load() -> void:
-	if not _ready or _loading or _ad != null or _consent_busy or not _consent_allows_ads():
+	if not _ready or _loading or _ad != null or _consent_busy or not _ads_allowed():
 		return
 	_loading = true
 	var request := AdRequest.new()
@@ -175,7 +246,7 @@ func _load() -> void:
 
 func _on_ad_loaded(ad: InterstitialAd, generation: int) -> void:
 	_loading = false
-	if generation != _generation or _consent_busy or not _consent_allows_ads():
+	if generation != _generation or _consent_busy or not _ads_allowed():
 		ad.destroy()
 		_load()
 		return

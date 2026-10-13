@@ -1,0 +1,118 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+OpenGL API 4.1 Metal - 90.5 - Compatibility - Using Device: Apple - Apple M3
+
+[mp117-runtime] user=<isolated-userdata>/match-picture-MP-IOS-117-round-1-87658f5/ before Save; isolated=true
+[ui] safe area 여백(뷰포트 단위) 좌 0 상 0 우 0 하 0 / 창 (324, 720) / 안전영역 [P: (0, 30), S: (1920, 988)]
+[review] Editor Run / in-memory storage / fake SDK callbacks
+[mp117-observe] window=(324, 720) visible_rect=[P: (0.0, 0.0), S: (648.0, 1440.0)] display=macOS save={ "schema": 1, "has_played": false, "best_seconds": 24.6, "best_splits": [], "clear_count": 3, "language": "auto", "muted": false }
+[mp117-observe] ATT=0 UMP=true ATTrequests=1 SDKinits=0 loads=0 showing=false loading=false generation=0 consent_busy=false
+[mp117-observe] window=(324, 720) visible_rect=[P: (0.0, 0.0), S: (648.0, 1440.0)] display=macOS save={ "schema": 1, "has_played": false, "best_seconds": 24.6, "best_splits": [], "clear_count": 3, "language": "auto", "muted": false }
+[mp117-observe] ATT=0 UMP=true ATTrequests=1 SDKinits=0 loads=0 showing=false loading=false generation=0 consent_busy=false
+[review] capture=res://build/review/capture-109110.png result=0
+[review] privacy required=true
+[review] capture=res://build/review/capture-121635.png result=0
+[mp117-observe] window=(324, 720) visible_rect=[P: (0.0, 0.0), S: (648.0, 1440.0)] display=macOS save={ "schema": 1, "has_played": false, "best_seconds": 24.6, "best_splits": [], "clear_count": 3, "language": "en", "muted": true }
+[mp117-observe] ATT=0 UMP=true ATTrequests=1 SDKinits=0 loads=0 showing=false loading=false generation=1 consent_busy=true
+[review] capture=res://build/review/capture-131648.png result=0
+[review] privacy success=false
+[mp117-observe] window=(324, 720) visible_rect=[P: (0.0, 0.0), S: (648.0, 1440.0)] display=macOS save={ "schema": 1, "has_played": false, "best_seconds": 24.6, "best_splits": [], "clear_count": 3, "language": "en", "muted": true }
+[mp117-observe] ATT=0 UMP=true ATTrequests=1 SDKinits=0 loads=0 showing=false loading=false generation=1 consent_busy=false
+[review] capture=res://build/review/capture-139766.png result=0
+[review] privacy success=true
+[mp117-observe] window=(324, 720) visible_rect=[P: (0.0, 0.0), S: (648.0, 1440.0)] display=macOS save={ "schema": 1, "has_played": false, "best_seconds": 24.6, "best_splits": [], "clear_count": 3, "language": "en", "muted": true }
+[mp117-observe] ATT=0 UMP=true ATTrequests=1 SDKinits=0 loads=0 showing=false loading=false generation=2 consent_busy=false
+[review] capture=res://build/review/capture-151133.png result=0
+[review] capture=res://build/review/capture-168332.png result=0
+[review] capture=res://build/review/capture-181416.png result=0
+[review] capture=res://build/review/capture-187790.png result=0
+[review] capture=res://build/review/capture-204208.png result=0
+[review] capture=res://build/review/capture-215492.png result=0
+[review] capture=res://build/review/capture-227340.png result=0
+[review] capture=res://build/review/capture-250735.png result=0
+[review] capture=res://build/review/capture-250836.png result=0
+[review] capture=res://build/review/capture-250910.png result=0
+[review] capture=res://build/review/capture-251003.png result=0
+[review] capture=res://build/review/capture-251085.png result=0
+[review] capture=res://build/review/capture-251156.png result=0
+[review] capture=res://build/review/capture-251210.png result=0
+[review] capture=res://build/review/capture-251251.png result=0
+[review] capture=res://build/review/capture-251299.png result=0
+[review] capture=res://build/review/capture-251334.png result=0
+[review] capture=res://build/review/capture-251374.png result=0
+[review] capture=res://build/review/capture-251415.png result=0
+[review] capture=res://build/review/capture-264094.png result=0
+[review] capture=res://build/review/capture-264182.png result=0
+[review] capture=res://build/review/capture-264324.png result=0
+[review] capture=res://build/review/capture-264398.png result=0
+[review] capture=res://build/review/capture-264468.png result=0
+[review] capture=res://build/review/capture-264516.png result=0
+[review] capture=res://build/review/capture-264600.png result=0
+[review] capture=res://build/review/capture-264682.png result=0
+[review] capture=res://build/review/capture-264827.png result=0
+[review] capture=res://build/review/capture-264919.png result=0
+[review] capture=res://build/review/capture-264991.png result=0
+[review] capture=res://build/review/capture-265085.png result=0
+[review] capture=res://build/review/capture-265149.png result=0
+[review] capture=res://build/review/capture-265211.png result=0
+[review] capture=res://build/review/capture-265298.png result=0
+[review] capture=res://build/review/capture-265332.png result=0
+[review] capture=res://build/review/capture-265410.png result=0
+[review] capture=res://build/review/capture-265458.png result=0
+[review] capture=res://build/review/capture-265535.png result=0
+[review] capture=res://build/review/capture-265573.png result=0
+[review] capture=res://build/review/capture-265643.png result=0
+[review] capture=res://build/review/capture-265689.png result=0
+[review] capture=res://build/review/capture-265804.png result=0
+[review] capture=res://build/review/capture-265868.png result=0
+[review] capture=res://build/review/capture-265910.png result=0
+[review] capture=res://build/review/capture-265973.png result=0
+[review] capture=res://build/review/capture-266035.png result=0
+[review] capture=res://build/review/capture-266073.png result=0
+[review] capture=res://build/review/capture-266114.png result=0
+[review] capture=res://build/review/capture-266156.png result=0
+[review] capture=res://build/review/capture-266201.png result=0
+[review] capture=res://build/review/capture-266240.png result=0
+[review] capture=res://build/review/capture-266352.png result=0
+[review] capture=res://build/review/capture-266399.png result=0
+[review] capture=res://build/review/capture-266490.png result=0
+[review] capture=res://build/review/capture-266572.png result=0
+[review] capture=res://build/review/capture-266634.png result=0
+[review] capture=res://build/review/capture-266727.png result=0
+[review] capture=res://build/review/capture-266819.png result=0
+[review] capture=res://build/review/capture-266927.png result=0
+[review] capture=res://build/review/capture-267015.png result=0
+[review] capture=res://build/review/capture-267119.png result=0
+[review] capture=res://build/review/capture-267201.png result=0
+[review] capture=res://build/review/capture-267344.png result=0
+[review] capture=res://build/review/capture-267399.png result=0
+[review] capture=res://build/review/capture-339302.png result=0
+[review] capture=res://build/review/capture-383500.png result=0
+[mp117-observe] window=(324, 720) visible_rect=[P: (0.0, 0.0), S: (648.0, 1440.0)] display=macOS save={ "schema": 1, "has_played": true, "best_seconds": 24.6, "best_splits": [], "clear_count": 3, "language": "en", "muted": true }
+[mp117-observe] ATT=0 UMP=true ATTrequests=1 SDKinits=0 loads=0 showing=false loading=false generation=2 consent_busy=false
+[review] ATT=3 UMP=true ATT-requests=1 SDK-inits=1 ad-loads=1 ready=false
+[review] ATT=3 UMP=true ATT-requests=1 SDK-inits=1 ad-loads=1 ready=true
+[mp117-observe] window=(324, 720) visible_rect=[P: (0.0, 0.0), S: (648.0, 1440.0)] display=macOS save={ "schema": 1, "has_played": true, "best_seconds": 24.6, "best_splits": [], "clear_count": 4, "language": "en", "muted": true }
+[mp117-observe] ATT=3 UMP=true ATTrequests=1 SDKinits=1 loads=1 showing=false loading=false generation=2 consent_busy=false
+[mp117-observe] request_extras={ "npa": "1" }
+[mp117-observe] window=(324, 720) visible_rect=[P: (0.0, 0.0), S: (648.0, 1440.0)] display=macOS save={ "schema": 1, "has_played": true, "best_seconds": 24.6, "best_splits": [], "clear_count": 4, "language": "en", "muted": true }
+[mp117-observe] ATT=3 UMP=true ATTrequests=1 SDKinits=1 loads=1 showing=true loading=false generation=2 consent_busy=false
+[mp117-observe] request_extras={ "npa": "1" }
+[review] capture=res://build/review/capture-394875.png result=0
+[review] ATT=3 UMP=true ATT-requests=1 SDK-inits=1 ad-loads=2 ready=false
+[review] ATT=3 UMP=false ATT-requests=1 SDK-inits=1 ad-loads=2 ready=false
+[review] ATT=3 UMP=false ATT-requests=1 SDK-inits=1 ad-loads=2 ready=false
+[mp117-observe] window=(324, 720) visible_rect=[P: (0.0, 0.0), S: (648.0, 1440.0)] display=macOS save={ "schema": 1, "has_played": true, "best_seconds": 24.6, "best_splits": [], "clear_count": 4, "language": "en", "muted": true }
+[mp117-observe] ATT=3 UMP=false ATTrequests=1 SDKinits=1 loads=2 showing=false loading=true generation=3 consent_busy=false
+[mp117-observe] request_extras={ "npa": "1" }
+[mp117-observe] request_extras={ "npa": "1" }
+[mp117-runtime] Ctrl+B -> product Back notification proxy
+[review] capture=res://build/review/capture-411507.png result=0
+[review] capture=res://build/review/capture-423393.png result=0
+[mp117-observe] window=(324, 720) visible_rect=[P: (0.0, 0.0), S: (648.0, 1440.0)] display=macOS save={ "schema": 1, "has_played": true, "best_seconds": 24.6, "best_splits": [], "clear_count": 4, "language": "auto", "muted": false }
+[mp117-observe] ATT=3 UMP=false ATTrequests=1 SDKinits=1 loads=2 showing=false loading=true generation=4 consent_busy=true
+[mp117-observe] request_extras={ "npa": "1" }
+[mp117-observe] request_extras={ "npa": "1" }
+[review] capture=res://build/review/capture-438328.png result=0
+[review] privacy success=true
+[review] capture=res://build/review/capture-452925.png result=0
+[mp117-runtime] Ctrl+B -> product Back notification proxy
