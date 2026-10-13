@@ -21,6 +21,19 @@ on:
         type: choice
         options: ["false", "true"]
         default: "false"
+      release_exception_id:
+        description: "검토된 한 릴리스 예외 ID. 비우면 일반 E2E 검증."
+        type: string
+        required: false
+        default: ""
+      configuration_fingerprint:
+        type: string
+        required: false
+        default: ""
+      release_verifier_sha:
+        type: string
+        required: false
+        default: ""
   workflow_call:
     inputs:
       release_tag:
@@ -31,6 +44,18 @@ on:
         type: boolean
         required: false
         default: false
+      release_exception_id:
+        type: string
+        required: false
+        default: ""
+      configuration_fingerprint:
+        type: string
+        required: false
+        default: ""
+      release_verifier_sha:
+        type: string
+        required: false
+        default: ""
     # caller 는 secret 을 상속하지 않는다. 아래 이름만 1:1 로 명시 전달한다.
     # org secret 은 visibility 가 private 이라 public 저장소에서 해석되지 않는다.
     # 저장소 또는 app-store environment 스코프에 등록돼 있어야 한다.
@@ -54,6 +79,7 @@ on:
 
 permissions:
   contents: read
+  actions: read
 
 concurrency:
   group: app-store-deploy-${{ inputs.release_tag || github.ref }}
@@ -73,6 +99,9 @@ jobs:
       GODOT_ANALYTICS_CONFIG_JSON_BASE64: ${{ secrets.GODOT_ANALYTICS_CONFIG_JSON_BASE64 }}
     with:
       release_tag: ${{ inputs.release_tag }}
+      release_exception_id: ${{ inputs.release_exception_id }}
+      configuration_fingerprint: ${{ inputs.configuration_fingerprint }}
+      release_verifier_sha: ${{ inputs.release_verifier_sha }}
       upload: ${{ inputs.upload == true || inputs.upload == 'true' }}
       # 검증한 archive identity 와 같아야 한다. app-store/app-store.config.json 의
       # bundleId, export_presets.cfg 의 application/bundle_identifier 와 같은 값이다.
