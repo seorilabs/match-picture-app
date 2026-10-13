@@ -8,6 +8,7 @@
 class MatchAdPrivacy : public Object {
 	GDCLASS(MatchAdPrivacy, Object);
 	bool pending = false;
+	unsigned presentation_checks = 0;
 	id active_observer = nil;
 
 protected:
@@ -35,6 +36,7 @@ public:
 			return false;
 		}
 		pending = true;
+		presentation_checks = 0;
 		const ObjectID instance_id = get_instance_id();
 		dispatch_async(dispatch_get_main_queue(), ^{
 			auto *instance = Object::cast_to<MatchAdPrivacy>(ObjectDB::get_instance(instance_id));
@@ -67,7 +69,29 @@ public:
 			[NSNotificationCenter.defaultCenter removeObserver:active_observer];
 			active_observer = nil;
 		}
+		// UMP와 처음 실행 Game Center 인증의 dismiss 애니메이션 중에는 ATT가
+		// 표시되지 않을 수 있다. 화면이 비워진 뒤 요청하고, 대기를 허용으로 간주하지 않는다.
+		UIViewController *root = nil;
+		for (UIScene *scene in UIApplication.sharedApplication.connectedScenes) {
+			if (scene.activationState == UISceneActivationStateForegroundActive && [scene isKindOfClass:UIWindowScene.class]) {
+				for (UIWindow *window in ((UIWindowScene *)scene).windows) {
+					if (window.isKeyWindow) root = window.rootViewController;
+				}
+			}
+		}
 		const ObjectID instance_id = get_instance_id();
+		if (root == nil || root.presentedViewController != nil) {
+			if (++presentation_checks >= 120) {
+				pending = false;
+				emit_signal("authorization_finished", -1);
+				return;
+			}
+			dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 250 * NSEC_PER_MSEC), dispatch_get_main_queue(), ^{
+				auto *instance = Object::cast_to<MatchAdPrivacy>(ObjectDB::get_instance(instance_id));
+				if (instance) instance->request_when_active();
+			});
+			return;
+		}
 		[ATTrackingManager requestTrackingAuthorizationWithCompletionHandler:^(ATTrackingManagerAuthorizationStatus status) {
 			dispatch_async(dispatch_get_main_queue(), ^{
 				auto *instance = Object::cast_to<MatchAdPrivacy>(ObjectDB::get_instance(instance_id));
