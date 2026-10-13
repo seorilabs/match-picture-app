@@ -1,6 +1,8 @@
 #!/usr/bin/env python3
 """Godot export가 생성한 InfoPlist.strings에 ATT 문구를 넣고 archive 포함을 검증한다."""
 import argparse
+import hashlib
+import json
 import plistlib
 from pathlib import Path
 import re
@@ -67,7 +69,12 @@ def main():
         manifests = list(app.rglob("PrivacyInfo.xcprivacy"))
         if not manifests:
             raise RuntimeError("signed 앱의 SDK privacy manifest 누락")
-        print(f"[ios-privacy] signed 앱 bridge/ATT/ko·en/manifest {len(manifests)}개 확인")
+        expected = json.loads((Path(__file__).resolve().parents[1] / "app-store/releases/1.1.7/sdk-privacy-manifests.json").read_text())
+        digests = {hashlib.sha256(p.read_bytes()).hexdigest() for p in manifests}
+        for sdk in expected["manifests"]:
+            if sdk["manifestSha256"] not in digests:
+                raise RuntimeError(f"signed 앱의 SDK 선언이 조사한 버전과 다르다: {sdk['sdk']}")
+        print(f"[ios-privacy] signed 앱 bridge/ATT/ko·en/SDK manifest {len(manifests)}개 확인")
 
 
 if __name__ == "__main__":
