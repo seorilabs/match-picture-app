@@ -1,0 +1,658 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+Invalid plugin config file ad_privacy/ad_privacy.gdip
+Invalid plugin config file ad_privacy/ad_privacy.gdip
+[   0% ] [90m[1mfirst_scan_filesystem[22m | Started 프로젝트 초기화 (5 steps)[39m[0m
+[  16% ] [90m[1mfirst_scan_filesystem[22m | 전역 클래스 이름을 불러오는 중...[39m[0m
+[  33% ] [90m[1mfirst_scan_filesystem[22m | GDExtensions 검증 중...[39m[0m
+[  50% ] [90m[1mfirst_scan_filesystem[22m | 오토로드 스크립트를 만드는 중...[39m[0m
+[  66% ] [90m[1mfirst_scan_filesystem[22m | 플러그인을 초기화 중...[39m[0m
+[  83% ] [90m[1mfirst_scan_filesystem[22m | 파일 스캔 시작 중...[39m[0m
+[92m[ DONE ][39m [1mfirst_scan_filesystem[22m
+[0m
+Invalid plugin config file ad_privacy/ad_privacy.gdip
+Invalid plugin config file ad_privacy/ad_privacy.gdip
+[   0% ] [90m[1mupdate_scripts_classes[22m | Started 전역 클래스를 등록하는 중... (180 steps)[39m[0m
+[   0% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[   0% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[   1% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[   1% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[   2% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[   2% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[   3% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[   3% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[   4% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[   4% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[   5% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[   6% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[   6% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[   7% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[   7% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[   8% ] [90m[1mupdate_scripts_classes[22m | AdapterResponseInfo[39m[0m
+[   8% ] [90m[1mupdate_scripts_classes[22m | AdapterStatus[39m[0m
+[   9% ] [90m[1mupdate_scripts_classes[22m | AdChoicesPlacement[39m[0m
+[   9% ] [90m[1mupdate_scripts_classes[22m | AdError[39m[0m
+[  10% ] [90m[1mupdate_scripts_classes[22m | AdPosition[39m[0m
+[  11% ] [90m[1mupdate_scripts_classes[22m | AdRequest[39m[0m
+[  11% ] [90m[1mupdate_scripts_classes[22m | AdSize[39m[0m
+[  12% ] [90m[1mupdate_scripts_classes[22m | AdValue[39m[0m
+[  12% ] [90m[1mupdate_scripts_classes[22m | AdVideoController[39m[0m
+[  13% ] [90m[1mupdate_scripts_classes[22m | LoadAdError[39m[0m
+[  13% ] [90m[1mupdate_scripts_classes[22m | MediaContent[39m[0m
+[  14% ] [90m[1mupdate_scripts_classes[22m | NativeAdOptions[39m[0m
+[  14% ] [90m[1mupdate_scripts_classes[22m | NativeMediaAspectRatio[39m[0m
+[  15% ] [90m[1mupdate_scripts_classes[22m | NativeTemplateFontStyle[39m[0m
+[  16% ] [90m[1mupdate_scripts_classes[22m | NativeTemplateStyle[39m[0m
+[  16% ] [90m[1mupdate_scripts_classes[22m | NativeTemplateTextStyle[39m[0m
+[  17% ] [90m[1mupdate_scripts_classes[22m | RequestConfiguration[39m[0m
+[  17% ] [90m[1mupdate_scripts_classes[22m | ResponseInfo[39m[0m
+[  18% ] [90m[1mupdate_scripts_classes[22m | RewardedItem[39m[0m
+[  18% ] [90m[1mupdate_scripts_classes[22m | ServerSideVerificationOptions[39m[0m
+[  19% ] [90m[1mupdate_scripts_classes[22m | AdVideoOptions[39m[0m
+[  19% ] [90m[1mupdate_scripts_classes[22m | AdInspectorClosedListener[39m[0m
+[  20% ] [90m[1mupdate_scripts_classes[22m | AdListener[39m[0m
+[  20% ] [90m[1mupdate_scripts_classes[22m | AppOpenAdLoadCallback[39m[0m
+[  21% ] [90m[1mupdate_scripts_classes[22m | FullScreenContentCallback[39m[0m
+[  22% ] [90m[1mupdate_scripts_classes[22m | InterstitialAdLoadCallback[39m[0m
+[  22% ] [90m[1mupdate_scripts_classes[22m | OnInitializationCompleteListener[39m[0m
+[  23% ] [90m[1mupdate_scripts_classes[22m | OnUserEarnedRewardListener[39m[0m
+[  23% ] [90m[1mupdate_scripts_classes[22m | RewardedAdLoadCallback[39m[0m
+[  24% ] [90m[1mupdate_scripts_classes[22m | RewardedInterstitialAdLoadCallback[39m[0m
+[  24% ] [90m[1mupdate_scripts_classes[22m | VideoLifecycleCallbacks[39m[0m
+[  25% ] [90m[1mupdate_scripts_classes[22m | AdView[39m[0m
+[  25% ] [90m[1mupdate_scripts_classes[22m | AppOpenAd[39m[0m
+[  26% ] [90m[1mupdate_scripts_classes[22m | AppOpenAdLoader[39m[0m
+[  27% ] [90m[1mupdate_scripts_classes[22m | InitializationStatus[39m[0m
+[  27% ] [90m[1mupdate_scripts_classes[22m | InterstitialAd[39m[0m
+[  28% ] [90m[1mupdate_scripts_classes[22m | InterstitialAdLoader[39m[0m
+[  28% ] [90m[1mupdate_scripts_classes[22m | MobileAds[39m[0m
+[  29% ] [90m[1mupdate_scripts_classes[22m | NativeOverlayAd[39m[0m
+[  29% ] [90m[1mupdate_scripts_classes[22m | RewardedAd[39m[0m
+[  30% ] [90m[1mupdate_scripts_classes[22m | RewardedAdLoader[39m[0m
+[  30% ] [90m[1mupdate_scripts_classes[22m | RewardedInterstitialAd[39m[0m
+[  31% ] [90m[1mupdate_scripts_classes[22m | RewardedInterstitialAdLoader[39m[0m
+[  32% ] [90m[1mupdate_scripts_classes[22m | MobileSingletonPlugin[39m[0m
+[  32% ] [90m[1mupdate_scripts_classes[22m | AppLovin[39m[0m
+[  33% ] [90m[1mupdate_scripts_classes[22m | BidMachine[39m[0m
+[  33% ] [90m[1mupdate_scripts_classes[22m | Chartboost[39m[0m
+[  34% ] [90m[1mupdate_scripts_classes[22m | DTExchange[39m[0m
+[  34% ] [90m[1mupdate_scripts_classes[22m | IMobile[39m[0m
+[  35% ] [90m[1mupdate_scripts_classes[22m | InMobi[39m[0m
+[  35% ] [90m[1mupdate_scripts_classes[22m | IronSource[39m[0m
+[  36% ] [90m[1mupdate_scripts_classes[22m | LineAds[39m[0m
+[  37% ] [90m[1mupdate_scripts_classes[22m | LineMediationExtras[39m[0m
+[  37% ] [90m[1mupdate_scripts_classes[22m | FBAdSettings[39m[0m
+[  38% ] [90m[1mupdate_scripts_classes[22m | UnityAds[39m[0m
+[  38% ] [90m[1mupdate_scripts_classes[22m | Vungle[39m[0m
+[  39% ] [90m[1mupdate_scripts_classes[22m | VungleInterstitialMediationExtras[39m[0m
+[  39% ] [90m[1mupdate_scripts_classes[22m | VungleMediationExtras[39m[0m
+[  40% ] [90m[1mupdate_scripts_classes[22m | VungleRewardedMediationExtras[39m[0m
+[  40% ] [90m[1mupdate_scripts_classes[22m | MediationExtras[39m[0m
+[  41% ] [90m[1mupdate_scripts_classes[22m | ConsentForm[39m[0m
+[  41% ] [90m[1mupdate_scripts_classes[22m | ConsentInformation[39m[0m
+[  42% ] [90m[1mupdate_scripts_classes[22m | UserMessagingPlatform[39m[0m
+[  43% ] [90m[1mupdate_scripts_classes[22m | ConsentDebugSettings[39m[0m
+[  43% ] [90m[1mupdate_scripts_classes[22m | ConsentRequestParameters[39m[0m
+[  44% ] [90m[1mupdate_scripts_classes[22m | DebugGeography[39m[0m
+[  44% ] [90m[1mupdate_scripts_classes[22m | FormError[39m[0m
+[  45% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  45% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  46% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  46% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  47% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  48% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  48% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  49% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  49% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  50% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  50% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  51% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  51% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  52% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  53% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  53% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  54% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  54% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  55% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  55% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  56% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  56% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  57% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  58% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  58% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  59% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  59% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  60% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  60% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  61% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  61% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  62% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  62% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  63% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  64% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  64% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  65% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  65% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  66% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  66% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  67% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  67% ] [90m[1mupdate_scripts_classes[22m | JsonMarshaller[39m[0m
+[  68% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  69% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  69% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  70% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  70% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  71% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  71% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  72% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  72% ] [90m[1mupdate_scripts_classes[22m | MpAnalyticsPort[39m[0m
+[  73% ] [90m[1mupdate_scripts_classes[22m | MpInterstitialAdPort[39m[0m
+[  74% ] [90m[1mupdate_scripts_classes[22m | MpLeaderboardPort[39m[0m
+[  74% ] [90m[1mupdate_scripts_classes[22m | MpSharePort[39m[0m
+[  75% ] [90m[1mupdate_scripts_classes[22m | MpStoragePort[39m[0m
+[  75% ] [90m[1mupdate_scripts_classes[22m | MpAnalyticsEvents[39m[0m
+[  76% ] [90m[1mupdate_scripts_classes[22m | MpBestRecord[39m[0m
+[  76% ] [90m[1mupdate_scripts_classes[22m | MpCardLayout[39m[0m
+[  77% ] [90m[1mupdate_scripts_classes[22m | MpDeck[39m[0m
+[  77% ] [90m[1mupdate_scripts_classes[22m | MpGameState[39m[0m
+[  78% ] [90m[1mupdate_scripts_classes[22m | MpPlacement[39m[0m
+[  79% ] [90m[1mupdate_scripts_classes[22m | MpRound[39m[0m
+[  79% ] [90m[1mupdate_scripts_classes[22m | MpRules[39m[0m
+[  80% ] [90m[1mupdate_scripts_classes[22m | MpSymbolSpot[39m[0m
+[  80% ] [90m[1mupdate_scripts_classes[22m | MpAdMobInterstitialAds[39m[0m
+[  81% ] [90m[1mupdate_scripts_classes[22m | MpAitInterstitialAds[39m[0m
+[  81% ] [90m[1mupdate_scripts_classes[22m | MpAitLeaderboard[39m[0m
+[  82% ] [90m[1mupdate_scripts_classes[22m | MpAitShare[39m[0m
+[  82% ] [90m[1mupdate_scripts_classes[22m | MpFileStorage[39m[0m
+[  83% ] [90m[1mupdate_scripts_classes[22m | MpGa4Analytics[39m[0m
+[  83% ] [90m[1mupdate_scripts_classes[22m | MpGameCenterLeaderboard[39m[0m
+[  84% ] [90m[1mupdate_scripts_classes[22m | MpGooglePlayLeaderboard[39m[0m
+[  85% ] [90m[1mupdate_scripts_classes[22m | MpIosAdPrivacy[39m[0m
+[  85% ] [90m[1mupdate_scripts_classes[22m | MpLeaderboardSettings[39m[0m
+[  86% ] [90m[1mupdate_scripts_classes[22m | MpCardView[39m[0m
+[  86% ] [90m[1mupdate_scripts_classes[22m | MpGameScreen[39m[0m
+[  87% ] [90m[1mupdate_scripts_classes[22m | MpHud[39m[0m
+[  87% ] [90m[1mupdate_scripts_classes[22m | MpJudgeMark[39m[0m
+[  88% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  88% ] [90m[1mupdate_scripts_classes[22m | MpQuitConfirm[39m[0m
+[  89% ] [90m[1mupdate_scripts_classes[22m | MpResultPopup[39m[0m
+[  90% ] [90m[1mupdate_scripts_classes[22m | MpSafeArea[39m[0m
+[  90% ] [90m[1mupdate_scripts_classes[22m | MpSettingsPopup[39m[0m
+[  91% ] [90m[1mupdate_scripts_classes[22m | MpSplitBars[39m[0m
+[  91% ] [90m[1mupdate_scripts_classes[22m | MpSymbolButton[39m[0m
+[  92% ] [90m[1mupdate_scripts_classes[22m | MpSymbolLibrary[39m[0m
+[  92% ] [90m[1mupdate_scripts_classes[22m | MpTitleScreen[39m[0m
+[  93% ] [90m[1mupdate_scripts_classes[22m | MpTutorialOverlay[39m[0m
+[  93% ] [90m[1mupdate_scripts_classes[22m | MpUiKit[39m[0m
+[  94% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  95% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  95% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  96% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  96% ] [90m[1mupdate_scripts_classes[22m | MpMemoryStorage[39m[0m
+[  97% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  97% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  98% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  98% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[92m[ DONE ][39m [1mupdate_scripts_classes[22m
+[0m
+[   0% ] [90m[1m_update_scan_actions[22m | Started 액션 스캔 중... (106 steps)[39m[0m
+[   0% ] [90m[1m_update_scan_actions[22m | Ko-fi_Logo_RGB_ColorBg.png[39m[0m
+[   0% ] [90m[1m_update_scan_actions[22m | Patreon_logo_with_wordmark.svg[39m[0m
+[   1% ] [90m[1m_update_scan_actions[22m | PayPal.svg[39m[0m
+[   2% ] [90m[1m_update_scan_actions[22m | NotoSansSC-Regular.otf[39m[0m
+[   3% ] [90m[1m_update_scan_actions[22m | android.png[39m[0m
+[   4% ] [90m[1m_update_scan_actions[22m | arrow_left.svg[39m[0m
+[   5% ] [90m[1m_update_scan_actions[22m | arrow_right.svg[39m[0m
+[   6% ] [90m[1m_update_scan_actions[22m | flood_it_icon.svg[39m[0m
+[   7% ] [90m[1m_update_scan_actions[22m | format-app-open.svg[39m[0m
+[   8% ] [90m[1m_update_scan_actions[22m | format-banner.svg[39m[0m
+[   9% ] [90m[1m_update_scan_actions[22m | format-interstitial.svg[39m[0m
+[  10% ] [90m[1m_update_scan_actions[22m | format-native.svg[39m[0m
+[  11% ] [90m[1m_update_scan_actions[22m | format-rewarded-interstitial.svg[39m[0m
+[  12% ] [90m[1m_update_scan_actions[22m | google_play_icon.svg[39m[0m
+[  13% ] [90m[1m_update_scan_actions[22m | icon-15.png[39m[0m
+[  14% ] [90m[1m_update_scan_actions[22m | icon-76.png[39m[0m
+[  14% ] [90m[1m_update_scan_actions[22m | icon-120.png[39m[0m
+[  15% ] [90m[1m_update_scan_actions[22m | icon-500.png[39m[0m
+[  16% ] [90m[1m_update_scan_actions[22m | icon-1024.png[39m[0m
+[  17% ] [90m[1m_update_scan_actions[22m | ios.png[39m[0m
+[  18% ] [90m[1m_update_scan_actions[22m | music.ogg[39m[0m
+[  19% ] [90m[1m_update_scan_actions[22m | poing.jpeg[39m[0m
+[  20% ] [90m[1m_update_scan_actions[22m | pos_bottom.svg[39m[0m
+[  21% ] [90m[1m_update_scan_actions[22m | pos_bottom_left.svg[39m[0m
+[  22% ] [90m[1m_update_scan_actions[22m | pos_bottom_right.svg[39m[0m
+[  23% ] [90m[1m_update_scan_actions[22m | pos_center.svg[39m[0m
+[  24% ] [90m[1m_update_scan_actions[22m | pos_left.svg[39m[0m
+[  25% ] [90m[1m_update_scan_actions[22m | pos_right.svg[39m[0m
+[  26% ] [90m[1m_update_scan_actions[22m | pos_top.svg[39m[0m
+[  27% ] [90m[1m_update_scan_actions[22m | pos_top_left.svg[39m[0m
+[  28% ] [90m[1m_update_scan_actions[22m | pos_top_right.svg[39m[0m
+[  28% ] [90m[1m_update_scan_actions[22m | admob_sample.csv[39m[0m
+[  29% ] [90m[1m_update_scan_actions[22m | correct.wav[39m[0m
+[  30% ] [90m[1m_update_scan_actions[22m | wrong.wav[39m[0m
+[  31% ] [90m[1m_update_scan_actions[22m | app-icon-background.png[39m[0m
+[  32% ] [90m[1m_update_scan_actions[22m | app-icon-foreground.png[39m[0m
+[  33% ] [90m[1m_update_scan_actions[22m | app-icon-source.png[39m[0m
+[  34% ] [90m[1m_update_scan_actions[22m | seori-labs-boot-splash-1024.png[39m[0m
+[  35% ] [90m[1m_update_scan_actions[22m | splash-source.png[39m[0m
+[  36% ] [90m[1m_update_scan_actions[22m | DoHyeon-Regular.ttf[39m[0m
+[  37% ] [90m[1m_update_scan_actions[22m | PressStart2P-Regular.ttf[39m[0m
+[  38% ] [90m[1m_update_scan_actions[22m | adaptive-background-432.png[39m[0m
+[  39% ] [90m[1m_update_scan_actions[22m | adaptive-foreground-432.png[39m[0m
+[  40% ] [90m[1m_update_scan_actions[22m | icon-192.png[39m[0m
+[  41% ] [90m[1m_update_scan_actions[22m | icon-1024.png[39m[0m
+[  42% ] [90m[1m_update_scan_actions[22m | finger.png[39m[0m
+[  42% ] [90m[1m_update_scan_actions[22m | joker.png[39m[0m
+[  43% ] [90m[1m_update_scan_actions[22m | stopwatch.png[39m[0m
+[  44% ] [90m[1m_update_scan_actions[22m | 001.png[39m[0m
+[  45% ] [90m[1m_update_scan_actions[22m | 002.png[39m[0m
+[  46% ] [90m[1m_update_scan_actions[22m | 003.png[39m[0m
+[  47% ] [90m[1m_update_scan_actions[22m | 004.png[39m[0m
+[  48% ] [90m[1m_update_scan_actions[22m | 005.png[39m[0m
+[  49% ] [90m[1m_update_scan_actions[22m | 006.png[39m[0m
+[  50% ] [90m[1m_update_scan_actions[22m | 007.png[39m[0m
+[  51% ] [90m[1m_update_scan_actions[22m | 008.png[39m[0m
+[  52% ] [90m[1m_update_scan_actions[22m | 009.png[39m[0m
+[  53% ] [90m[1m_update_scan_actions[22m | 010.png[39m[0m
+[  54% ] [90m[1m_update_scan_actions[22m | 011.png[39m[0m
+[  55% ] [90m[1m_update_scan_actions[22m | 012.png[39m[0m
+[  56% ] [90m[1m_update_scan_actions[22m | 013.png[39m[0m
+[  57% ] [90m[1m_update_scan_actions[22m | 014.png[39m[0m
+[  57% ] [90m[1m_update_scan_actions[22m | 015.png[39m[0m
+[  58% ] [90m[1m_update_scan_actions[22m | 016.png[39m[0m
+[  59% ] [90m[1m_update_scan_actions[22m | 017.png[39m[0m
+[  60% ] [90m[1m_update_scan_actions[22m | 018.png[39m[0m
+[  61% ] [90m[1m_update_scan_actions[22m | 019.png[39m[0m
+[  62% ] [90m[1m_update_scan_actions[22m | 020.png[39m[0m
+[  63% ] [90m[1m_update_scan_actions[22m | 021.png[39m[0m
+[  64% ] [90m[1m_update_scan_actions[22m | 022.png[39m[0m
+[  65% ] [90m[1m_update_scan_actions[22m | 023.png[39m[0m
+[  66% ] [90m[1m_update_scan_actions[22m | 024.png[39m[0m
+[  67% ] [90m[1m_update_scan_actions[22m | 025.png[39m[0m
+[  68% ] [90m[1m_update_scan_actions[22m | 026.png[39m[0m
+[  69% ] [90m[1m_update_scan_actions[22m | 027.png[39m[0m
+[  70% ] [90m[1m_update_scan_actions[22m | 028.png[39m[0m
+[  71% ] [90m[1m_update_scan_actions[22m | 029.png[39m[0m
+[  71% ] [90m[1m_update_scan_actions[22m | 030.png[39m[0m
+[  72% ] [90m[1m_update_scan_actions[22m | 031.png[39m[0m
+[  73% ] [90m[1m_update_scan_actions[22m | 032.png[39m[0m
+[  74% ] [90m[1m_update_scan_actions[22m | 033.png[39m[0m
+[  75% ] [90m[1m_update_scan_actions[22m | 034.png[39m[0m
+[  76% ] [90m[1m_update_scan_actions[22m | 035.png[39m[0m
+[  77% ] [90m[1m_update_scan_actions[22m | 036.png[39m[0m
+[  78% ] [90m[1m_update_scan_actions[22m | 037.png[39m[0m
+[  79% ] [90m[1m_update_scan_actions[22m | 038.png[39m[0m
+[  80% ] [90m[1m_update_scan_actions[22m | 039.png[39m[0m
+[  81% ] [90m[1m_update_scan_actions[22m | 040.png[39m[0m
+[  82% ] [90m[1m_update_scan_actions[22m | 041.png[39m[0m
+[  83% ] [90m[1m_update_scan_actions[22m | 042.png[39m[0m
+[  84% ] [90m[1m_update_scan_actions[22m | 043.png[39m[0m
+[  85% ] [90m[1m_update_scan_actions[22m | 044.png[39m[0m
+[  85% ] [90m[1m_update_scan_actions[22m | 045.png[39m[0m
+[  86% ] [90m[1m_update_scan_actions[22m | 046.png[39m[0m
+[  87% ] [90m[1m_update_scan_actions[22m | 047.png[39m[0m
+[  88% ] [90m[1m_update_scan_actions[22m | 048.png[39m[0m
+[  89% ] [90m[1m_update_scan_actions[22m | 049.png[39m[0m
+[  90% ] [90m[1m_update_scan_actions[22m | 050.png[39m[0m
+[  91% ] [90m[1m_update_scan_actions[22m | 051.png[39m[0m
+[  92% ] [90m[1m_update_scan_actions[22m | 052.png[39m[0m
+[  93% ] [90m[1m_update_scan_actions[22m | 053.png[39m[0m
+[  94% ] [90m[1m_update_scan_actions[22m | 054.png[39m[0m
+[  95% ] [90m[1m_update_scan_actions[22m | 055.png[39m[0m
+[  96% ] [90m[1m_update_scan_actions[22m | 056.png[39m[0m
+[  97% ] [90m[1m_update_scan_actions[22m | 057.png[39m[0m
+[  98% ] [90m[1m_update_scan_actions[22m | translations.csv[39m[0m
+[92m[ DONE ][39m [1m_update_scan_actions[22m
+[0m
+[   0% ] [90m[1mreimport[22m | Started 애셋 (다시) 가져오는 중 (106 steps)[39m[0m
+[   0% ] [90m[1mreimport[22m | 다시 가져올 파일을 준비 중...[39m[0m
+[   0% ] [90m[1mreimport[22m | 다시 가져올 파일을 준비 중...[39m[0m
+[   1% ] [90m[1mreimport[22m | 다시 가져올 파일을 준비 중...[39m[0m
+[   2% ] [90m[1mreimport[22m | 다시 가져올 파일을 준비 중...[39m[0m
+[   3% ] [90m[1mreimport[22m | 다시 가져올 파일을 준비 중...[39m[0m
+[   4% ] [90m[1mreimport[22m | 다시 가져올 파일을 준비 중...[39m[0m
+[   5% ] [90m[1mreimport[22m | 다시 가져올 파일을 준비 중...[39m[0m
+[   6% ] [90m[1mreimport[22m | 다시 가져올 파일을 준비 중...[39m[0m
+[   7% ] [90m[1mreimport[22m | 다시 가져올 파일을 준비 중...[39m[0m
+[   8% ] [90m[1mreimport[22m | 다시 가져올 파일을 준비 중...[39m[0m
+[   9% ] [90m[1mreimport[22m | 다시 가져올 파일을 준비 중...[39m[0m
+[  10% ] [90m[1mreimport[22m | 다시 가져올 파일을 준비 중...[39m[0m
+[  11% ] [90m[1mreimport[22m | 다시 가져올 파일을 준비 중...[39m[0m
+[  12% ] [90m[1mreimport[22m | 다시 가져올 파일을 준비 중...[39m[0m
+[  13% ] [90m[1mreimport[22m | 다시 가져올 파일을 준비 중...[39m[0m
+[  14% ] [90m[1mreimport[22m | 다시 가져올 파일을 준비 중...[39m[0m
+[  14% ] [90m[1mreimport[22m | 다시 가져올 파일을 준비 중...[39m[0m
+[  15% ] [90m[1mreimport[22m | 다시 가져올 파일을 준비 중...[39m[0m
+[  16% ] [90m[1mreimport[22m | 다시 가져올 파일을 준비 중...[39m[0m
+[  17% ] [90m[1mreimport[22m | 다시 가져올 파일을 준비 중...[39m[0m
+[  18% ] [90m[1mreimport[22m | 다시 가져올 파일을 준비 중...[39m[0m
+[  19% ] [90m[1mreimport[22m | 다시 가져올 파일을 준비 중...[39m[0m
+[  20% ] [90m[1mreimport[22m | 다시 가져올 파일을 준비 중...[39m[0m
+[  21% ] [90m[1mreimport[22m | 다시 가져올 파일을 준비 중...[39m[0m
+[  22% ] [90m[1mreimport[22m | 다시 가져올 파일을 준비 중...[39m[0m
+[  23% ] [90m[1mreimport[22m | 다시 가져올 파일을 준비 중...[39m[0m
+[  24% ] [90m[1mreimport[22m | 다시 가져올 파일을 준비 중...[39m[0m
+[  25% ] [90m[1mreimport[22m | 다시 가져올 파일을 준비 중...[39m[0m
+[  26% ] [90m[1mreimport[22m | 다시 가져올 파일을 준비 중...[39m[0m
+[  27% ] [90m[1mreimport[22m | 다시 가져올 파일을 준비 중...[39m[0m
+[  28% ] [90m[1mreimport[22m | 다시 가져올 파일을 준비 중...[39m[0m
+[  28% ] [90m[1mreimport[22m | 다시 가져올 파일을 준비 중...[39m[0m
+[  29% ] [90m[1mreimport[22m | 다시 가져올 파일을 준비 중...[39m[0m
+[  30% ] [90m[1mreimport[22m | 다시 가져올 파일을 준비 중...[39m[0m
+[  31% ] [90m[1mreimport[22m | 다시 가져올 파일을 준비 중...[39m[0m
+[  32% ] [90m[1mreimport[22m | 다시 가져올 파일을 준비 중...[39m[0m
+[  33% ] [90m[1mreimport[22m | 다시 가져올 파일을 준비 중...[39m[0m
+[  34% ] [90m[1mreimport[22m | 다시 가져올 파일을 준비 중...[39m[0m
+[  35% ] [90m[1mreimport[22m | 다시 가져올 파일을 준비 중...[39m[0m
+[  36% ] [90m[1mreimport[22m | 다시 가져올 파일을 준비 중...[39m[0m
+[  37% ] [90m[1mreimport[22m | 다시 가져올 파일을 준비 중...[39m[0m
+[  38% ] [90m[1mreimport[22m | 다시 가져올 파일을 준비 중...[39m[0m
+[  39% ] [90m[1mreimport[22m | 다시 가져올 파일을 준비 중...[39m[0m
+[  40% ] [90m[1mreimport[22m | 다시 가져올 파일을 준비 중...[39m[0m
+[  41% ] [90m[1mreimport[22m | 다시 가져올 파일을 준비 중...[39m[0m
+[  42% ] [90m[1mreimport[22m | 다시 가져올 파일을 준비 중...[39m[0m
+[  42% ] [90m[1mreimport[22m | 다시 가져올 파일을 준비 중...[39m[0m
+[  43% ] [90m[1mreimport[22m | 다시 가져올 파일을 준비 중...[39m[0m
+[  44% ] [90m[1mreimport[22m | 다시 가져올 파일을 준비 중...[39m[0m
+[  45% ] [90m[1mreimport[22m | 다시 가져올 파일을 준비 중...[39m[0m
+[  46% ] [90m[1mreimport[22m | 다시 가져올 파일을 준비 중...[39m[0m
+[  47% ] [90m[1mreimport[22m | 다시 가져올 파일을 준비 중...[39m[0m
+[  48% ] [90m[1mreimport[22m | 다시 가져올 파일을 준비 중...[39m[0m
+[  49% ] [90m[1mreimport[22m | 다시 가져올 파일을 준비 중...[39m[0m
+[  50% ] [90m[1mreimport[22m | 다시 가져올 파일을 준비 중...[39m[0m
+[  51% ] [90m[1mreimport[22m | 다시 가져올 파일을 준비 중...[39m[0m
+[  52% ] [90m[1mreimport[22m | 다시 가져올 파일을 준비 중...[39m[0m
+[  53% ] [90m[1mreimport[22m | 다시 가져올 파일을 준비 중...[39m[0m
+[  54% ] [90m[1mreimport[22m | 다시 가져올 파일을 준비 중...[39m[0m
+[  55% ] [90m[1mreimport[22m | 다시 가져올 파일을 준비 중...[39m[0m
+[  56% ] [90m[1mreimport[22m | 다시 가져올 파일을 준비 중...[39m[0m
+[  57% ] [90m[1mreimport[22m | 다시 가져올 파일을 준비 중...[39m[0m
+[  57% ] [90m[1mreimport[22m | 다시 가져올 파일을 준비 중...[39m[0m
+[  58% ] [90m[1mreimport[22m | 다시 가져올 파일을 준비 중...[39m[0m
+[  59% ] [90m[1mreimport[22m | 다시 가져올 파일을 준비 중...[39m[0m
+[  60% ] [90m[1mreimport[22m | 다시 가져올 파일을 준비 중...[39m[0m
+[  61% ] [90m[1mreimport[22m | 다시 가져올 파일을 준비 중...[39m[0m
+[  62% ] [90m[1mreimport[22m | 다시 가져올 파일을 준비 중...[39m[0m
+[  63% ] [90m[1mreimport[22m | 다시 가져올 파일을 준비 중...[39m[0m
+[  64% ] [90m[1mreimport[22m | 다시 가져올 파일을 준비 중...[39m[0m
+[  65% ] [90m[1mreimport[22m | 다시 가져올 파일을 준비 중...[39m[0m
+[  66% ] [90m[1mreimport[22m | 다시 가져올 파일을 준비 중...[39m[0m
+[  67% ] [90m[1mreimport[22m | 다시 가져올 파일을 준비 중...[39m[0m
+[  68% ] [90m[1mreimport[22m | 다시 가져올 파일을 준비 중...[39m[0m
+[  69% ] [90m[1mreimport[22m | 다시 가져올 파일을 준비 중...[39m[0m
+[  70% ] [90m[1mreimport[22m | 다시 가져올 파일을 준비 중...[39m[0m
+[  71% ] [90m[1mreimport[22m | 다시 가져올 파일을 준비 중...[39m[0m
+[  71% ] [90m[1mreimport[22m | 다시 가져올 파일을 준비 중...[39m[0m
+[  72% ] [90m[1mreimport[22m | 다시 가져올 파일을 준비 중...[39m[0m
+[  73% ] [90m[1mreimport[22m | 다시 가져올 파일을 준비 중...[39m[0m
+[  74% ] [90m[1mreimport[22m | 다시 가져올 파일을 준비 중...[39m[0m
+[  75% ] [90m[1mreimport[22m | 다시 가져올 파일을 준비 중...[39m[0m
+[  76% ] [90m[1mreimport[22m | 다시 가져올 파일을 준비 중...[39m[0m
+[  77% ] [90m[1mreimport[22m | 다시 가져올 파일을 준비 중...[39m[0m
+[  78% ] [90m[1mreimport[22m | 다시 가져올 파일을 준비 중...[39m[0m
+[  79% ] [90m[1mreimport[22m | 다시 가져올 파일을 준비 중...[39m[0m
+[  80% ] [90m[1mreimport[22m | 다시 가져올 파일을 준비 중...[39m[0m
+[  81% ] [90m[1mreimport[22m | 다시 가져올 파일을 준비 중...[39m[0m
+[  82% ] [90m[1mreimport[22m | 다시 가져올 파일을 준비 중...[39m[0m
+[  83% ] [90m[1mreimport[22m | 다시 가져올 파일을 준비 중...[39m[0m
+[  84% ] [90m[1mreimport[22m | 다시 가져올 파일을 준비 중...[39m[0m
+[  85% ] [90m[1mreimport[22m | 다시 가져올 파일을 준비 중...[39m[0m
+[  85% ] [90m[1mreimport[22m | 다시 가져올 파일을 준비 중...[39m[0m
+[  86% ] [90m[1mreimport[22m | 다시 가져올 파일을 준비 중...[39m[0m
+[  87% ] [90m[1mreimport[22m | 다시 가져올 파일을 준비 중...[39m[0m
+[  88% ] [90m[1mreimport[22m | 다시 가져올 파일을 준비 중...[39m[0m
+[  89% ] [90m[1mreimport[22m | 다시 가져올 파일을 준비 중...[39m[0m
+[  90% ] [90m[1mreimport[22m | 다시 가져올 파일을 준비 중...[39m[0m
+[  91% ] [90m[1mreimport[22m | 다시 가져올 파일을 준비 중...[39m[0m
+[  92% ] [90m[1mreimport[22m | 다시 가져올 파일을 준비 중...[39m[0m
+[  93% ] [90m[1mreimport[22m | 다시 가져올 파일을 준비 중...[39m[0m
+[  94% ] [90m[1mreimport[22m | 다시 가져올 파일을 준비 중...[39m[0m
+[  95% ] [90m[1mreimport[22m | 다시 가져올 파일을 준비 중...[39m[0m
+[  96% ] [90m[1mreimport[22m | 다시 가져올 파일을 준비 중...[39m[0m
+[  97% ] [90m[1mreimport[22m | 다시 가져올 파일을 준비 중...[39m[0m
+[  98% ] [90m[1mreimport[22m | 다시 가져올 파일을 준비 중...[39m[0m
+[   0% ] [90m[1mreimport[22m | 다시 가져오기 전 작업을 수행 중...[39m[0m
+[   0% ] [90m[1mreimport[22m | translations.csv[39m[0m
+[   0% ] [90m[1mreimport[22m | admob_sample.csv[39m[0m
+[   1% ] [90m[1mreimport[22m | translations.csv[39m[0m
+[   2% ] [90m[1mreimport[22m | admob_sample.csv[39m[0m
+[   3% ] [90m[1mreimport[22m | NotoSansSC-Regular.otf[39m[0m
+res://assets/fonts/PressStart2P-Regular.ttf: Pixel font detected, disabling subpixel positioning.
+res://assets/fonts/PressStart2P-Regular.ttf: Pixel font detected, disabling hinting.
+[   4% ] [90m[1mreimport[22m | music.ogg[39m[0m
+[   5% ] [90m[1mreimport[22m | translations.csv[39m[0m
+[   6% ] [90m[1mreimport[22m | admob_sample.csv[39m[0m
+[   7% ] [90m[1mreimport[22m | NotoSansSC-Regular.otf[39m[0m
+[   8% ] [90m[1mreimport[22m | DoHyeon-Regular.ttf[39m[0m
+[   9% ] [90m[1mreimport[22m | PressStart2P-Regular.ttf[39m[0m
+[  10% ] [90m[1mreimport[22m | music.ogg[39m[0m
+[  11% ] [90m[1mreimport[22m | 031.png[39m[0m
+[  12% ] [90m[1mreimport[22m | 030.png[39m[0m
+[  13% ] [90m[1mreimport[22m | 029.png[39m[0m
+[  14% ] [90m[1mreimport[22m | 028.png[39m[0m
+[  14% ] [90m[1mreimport[22m | 027.png[39m[0m
+[  15% ] [90m[1mreimport[22m | 026.png[39m[0m
+[  16% ] [90m[1mreimport[22m | 025.png[39m[0m
+[  17% ] [90m[1mreimport[22m | 024.png[39m[0m
+[  18% ] [90m[1mreimport[22m | 023.png[39m[0m
+[  19% ] [90m[1mreimport[22m | 022.png[39m[0m
+[  20% ] [90m[1mreimport[22m | 021.png[39m[0m
+[  21% ] [90m[1mreimport[22m | 020.png[39m[0m
+[  22% ] [90m[1mreimport[22m | 019.png[39m[0m
+[  23% ] [90m[1mreimport[22m | 018.png[39m[0m
+Invalid plugin config file ad_privacy/ad_privacy.gdip
+[  24% ] [90m[1mreimport[22m | 017.png[39m[0m
+[  25% ] [90m[1mreimport[22m | 016.png[39m[0m
+[  26% ] [90m[1mreimport[22m | 015.png[39m[0m
+[  27% ] [90m[1mreimport[22m | 014.png[39m[0m
+[  28% ] [90m[1mreimport[22m | 013.png[39m[0m
+[  28% ] [90m[1mreimport[22m | 012.png[39m[0m
+[  29% ] [90m[1mreimport[22m | 011.png[39m[0m
+[  30% ] [90m[1mreimport[22m | 010.png[39m[0m
+[  31% ] [90m[1mreimport[22m | 009.png[39m[0m
+[  32% ] [90m[1mreimport[22m | 057.png[39m[0m
+[  33% ] [90m[1mreimport[22m | 056.png[39m[0m
+[  34% ] [90m[1mreimport[22m | 055.png[39m[0m
+[  35% ] [90m[1mreimport[22m | 054.png[39m[0m
+[  36% ] [90m[1mreimport[22m | 053.png[39m[0m
+[  37% ] [90m[1mreimport[22m | 052.png[39m[0m
+[  38% ] [90m[1mreimport[22m | 051.png[39m[0m
+[  39% ] [90m[1mreimport[22m | 050.png[39m[0m
+[  40% ] [90m[1mreimport[22m | 049.png[39m[0m
+[  41% ] [90m[1mreimport[22m | 048.png[39m[0m
+[  42% ] [90m[1mreimport[22m | 047.png[39m[0m
+[  42% ] [90m[1mreimport[22m | 046.png[39m[0m
+[  43% ] [90m[1mreimport[22m | 045.png[39m[0m
+[  44% ] [90m[1mreimport[22m | 044.png[39m[0m
+[  45% ] [90m[1mreimport[22m | 043.png[39m[0m
+[  46% ] [90m[1mreimport[22m | 042.png[39m[0m
+[  47% ] [90m[1mreimport[22m | 041.png[39m[0m
+[  48% ] [90m[1mreimport[22m | 040.png[39m[0m
+[  49% ] [90m[1mreimport[22m | 039.png[39m[0m
+[  50% ] [90m[1mreimport[22m | 038.png[39m[0m
+[  51% ] [90m[1mreimport[22m | 037.png[39m[0m
+[  52% ] [90m[1mreimport[22m | 036.png[39m[0m
+[  53% ] [90m[1mreimport[22m | 035.png[39m[0m
+[  54% ] [90m[1mreimport[22m | 034.png[39m[0m
+[  55% ] [90m[1mreimport[22m | 033.png[39m[0m
+[  56% ] [90m[1mreimport[22m | 032.png[39m[0m
+[  57% ] [90m[1mreimport[22m | pos_left.svg[39m[0m
+[  57% ] [90m[1mreimport[22m | pos_center.svg[39m[0m
+[  58% ] [90m[1mreimport[22m | pos_bottom_right.svg[39m[0m
+[  59% ] [90m[1mreimport[22m | pos_bottom_left.svg[39m[0m
+[  60% ] [90m[1mreimport[22m | pos_bottom.svg[39m[0m
+[  61% ] [90m[1mreimport[22m | poing.jpeg[39m[0m
+[  62% ] [90m[1mreimport[22m | ios.png[39m[0m
+[  63% ] [90m[1mreimport[22m | icon-1024.png[39m[0m
+[  64% ] [90m[1mreimport[22m | icon-500.png[39m[0m
+[  65% ] [90m[1mreimport[22m | icon-120.png[39m[0m
+[  66% ] [90m[1mreimport[22m | icon-76.png[39m[0m
+[  67% ] [90m[1mreimport[22m | icon-15.png[39m[0m
+[  68% ] [90m[1mreimport[22m | google_play_icon.svg[39m[0m
+[  69% ] [90m[1mreimport[22m | format-rewarded-interstitial.svg[39m[0m
+[  70% ] [90m[1mreimport[22m | format-native.svg[39m[0m
+[  71% ] [90m[1mreimport[22m | format-interstitial.svg[39m[0m
+[  71% ] [90m[1mreimport[22m | format-banner.svg[39m[0m
+[  72% ] [90m[1mreimport[22m | format-app-open.svg[39m[0m
+[  73% ] [90m[1mreimport[22m | flood_it_icon.svg[39m[0m
+[  74% ] [90m[1mreimport[22m | arrow_right.svg[39m[0m
+[  75% ] [90m[1mreimport[22m | arrow_left.svg[39m[0m
+[  76% ] [90m[1mreimport[22m | android.png[39m[0m
+[  77% ] [90m[1mreimport[22m | PayPal.svg[39m[0m
+[  78% ] [90m[1mreimport[22m | Patreon_logo_with_wordmark.svg[39m[0m
+[  79% ] [90m[1mreimport[22m | Ko-fi_Logo_RGB_ColorBg.png[39m[0m
+[  80% ] [90m[1mreimport[22m | 008.png[39m[0m
+[  81% ] [90m[1mreimport[22m | 007.png[39m[0m
+[  82% ] [90m[1mreimport[22m | 006.png[39m[0m
+[  83% ] [90m[1mreimport[22m | 005.png[39m[0m
+[  84% ] [90m[1mreimport[22m | 004.png[39m[0m
+[  85% ] [90m[1mreimport[22m | 003.png[39m[0m
+[  85% ] [90m[1mreimport[22m | 002.png[39m[0m
+[  86% ] [90m[1mreimport[22m | 001.png[39m[0m
+[  87% ] [90m[1mreimport[22m | stopwatch.png[39m[0m
+[  88% ] [90m[1mreimport[22m | joker.png[39m[0m
+[  89% ] [90m[1mreimport[22m | finger.png[39m[0m
+[  90% ] [90m[1mreimport[22m | icon-1024.png[39m[0m
+[  91% ] [90m[1mreimport[22m | icon-192.png[39m[0m
+[  92% ] [90m[1mreimport[22m | adaptive-foreground-432.png[39m[0m
+[  93% ] [90m[1mreimport[22m | adaptive-background-432.png[39m[0m
+[  94% ] [90m[1mreimport[22m | splash-source.png[39m[0m
+[  95% ] [90m[1mreimport[22m | seori-labs-boot-splash-1024.png[39m[0m
+[  96% ] [90m[1mreimport[22m | app-icon-source.png[39m[0m
+[  96% ] [90m[1mreimport[22m | app-icon-source.png[39m[0m
+[  97% ] [90m[1mreimport[22m | translations.csv[39m[0m
+[  98% ] [90m[1mreimport[22m | admob_sample.csv[39m[0m
+[  99% ] [90m[1mreimport[22m | 애셋 가져오기 마무리 중...[39m[0m
+[92m[ DONE ][39m [1mreimport[22m
+[0m
+[   0% ] [90m[1mreimport[22m | Started 애셋 (다시) 가져오는 중 (106 steps)[39m[0m
+[   0% ] [90m[1mreimport[22m | 다시 가져오기 후 작업을 수행 중...[39m[0m
+[92m[ DONE ][39m [1mreimport[22m
+[0m
+[   0% ] [90m[1mloading_editor_layout[22m | Started 편집기를 불러오는 중 (5 steps)[39m[0m
+[   0% ] [90m[1mloading_editor_layout[22m | 편집기 레이아웃을 불러오는 중...[39m[0m
+[  16% ] [90m[1mloading_editor_layout[22m | 독을 불러오는 중...[39m[0m
+[92m[ DONE ][39m [1mloading_editor_layout[22m
+[0m
+[mp117-editor] self_contained=true config=<qa-workspace>/docs/qa/MP-IOS-117/build/editor/editor_data cache=<qa-workspace>/docs/qa/MP-IOS-117/build/editor/editor_data/cache user=<isolated-userdata>/match-picture-MP-IOS-117-round-2-5c9d3b3/ embed=-1
+[mp117-editor] actual EditorInterface.play_main_scene once
+Invalid plugin config file ad_privacy/ad_privacy.gdip
+[mp117-editor] is_playing_scene=true
+Invalid plugin config file ad_privacy/ad_privacy.gdip
+Invalid plugin config file ad_privacy/ad_privacy.gdip
+Invalid plugin config file ad_privacy/ad_privacy.gdip
+Invalid plugin config file ad_privacy/ad_privacy.gdip
+Invalid plugin config file ad_privacy/ad_privacy.gdip
+Invalid plugin config file ad_privacy/ad_privacy.gdip
+Invalid plugin config file ad_privacy/ad_privacy.gdip
+Invalid plugin config file ad_privacy/ad_privacy.gdip
+Invalid plugin config file ad_privacy/ad_privacy.gdip
+Invalid plugin config file ad_privacy/ad_privacy.gdip
+Invalid plugin config file ad_privacy/ad_privacy.gdip
+Invalid plugin config file ad_privacy/ad_privacy.gdip
+Invalid plugin config file ad_privacy/ad_privacy.gdip
+Invalid plugin config file ad_privacy/ad_privacy.gdip
+Invalid plugin config file ad_privacy/ad_privacy.gdip
+Invalid plugin config file ad_privacy/ad_privacy.gdip
+Invalid plugin config file ad_privacy/ad_privacy.gdip
+Invalid plugin config file ad_privacy/ad_privacy.gdip
+Invalid plugin config file ad_privacy/ad_privacy.gdip
+Invalid plugin config file ad_privacy/ad_privacy.gdip
+Invalid plugin config file ad_privacy/ad_privacy.gdip
+Invalid plugin config file ad_privacy/ad_privacy.gdip
+Invalid plugin config file ad_privacy/ad_privacy.gdip
+Invalid plugin config file ad_privacy/ad_privacy.gdip
+Invalid plugin config file ad_privacy/ad_privacy.gdip
+Invalid plugin config file ad_privacy/ad_privacy.gdip
+Invalid plugin config file ad_privacy/ad_privacy.gdip
+Invalid plugin config file ad_privacy/ad_privacy.gdip
+Invalid plugin config file ad_privacy/ad_privacy.gdip
+Invalid plugin config file ad_privacy/ad_privacy.gdip
+Invalid plugin config file ad_privacy/ad_privacy.gdip
+Invalid plugin config file ad_privacy/ad_privacy.gdip
+Invalid plugin config file ad_privacy/ad_privacy.gdip
+Invalid plugin config file ad_privacy/ad_privacy.gdip
+Invalid plugin config file ad_privacy/ad_privacy.gdip
+Invalid plugin config file ad_privacy/ad_privacy.gdip
+Invalid plugin config file ad_privacy/ad_privacy.gdip
+Invalid plugin config file ad_privacy/ad_privacy.gdip
+Invalid plugin config file ad_privacy/ad_privacy.gdip
+Invalid plugin config file ad_privacy/ad_privacy.gdip
+Invalid plugin config file ad_privacy/ad_privacy.gdip
+Invalid plugin config file ad_privacy/ad_privacy.gdip
+Invalid plugin config file ad_privacy/ad_privacy.gdip
+Invalid plugin config file ad_privacy/ad_privacy.gdip
+Invalid plugin config file ad_privacy/ad_privacy.gdip
+Invalid plugin config file ad_privacy/ad_privacy.gdip
+Invalid plugin config file ad_privacy/ad_privacy.gdip
+Invalid plugin config file ad_privacy/ad_privacy.gdip
+Invalid plugin config file ad_privacy/ad_privacy.gdip
+Invalid plugin config file ad_privacy/ad_privacy.gdip
+Invalid plugin config file ad_privacy/ad_privacy.gdip
+Invalid plugin config file ad_privacy/ad_privacy.gdip
+Invalid plugin config file ad_privacy/ad_privacy.gdip
+Invalid plugin config file ad_privacy/ad_privacy.gdip
+Invalid plugin config file ad_privacy/ad_privacy.gdip
+Invalid plugin config file ad_privacy/ad_privacy.gdip
+Invalid plugin config file ad_privacy/ad_privacy.gdip
+Invalid plugin config file ad_privacy/ad_privacy.gdip
+Invalid plugin config file ad_privacy/ad_privacy.gdip
+Invalid plugin config file ad_privacy/ad_privacy.gdip
+Invalid plugin config file ad_privacy/ad_privacy.gdip
+Invalid plugin config file ad_privacy/ad_privacy.gdip
+Invalid plugin config file ad_privacy/ad_privacy.gdip
+Invalid plugin config file ad_privacy/ad_privacy.gdip
+Invalid plugin config file ad_privacy/ad_privacy.gdip
+Invalid plugin config file ad_privacy/ad_privacy.gdip
+Invalid plugin config file ad_privacy/ad_privacy.gdip
+Invalid plugin config file ad_privacy/ad_privacy.gdip
+Invalid plugin config file ad_privacy/ad_privacy.gdip
+Invalid plugin config file ad_privacy/ad_privacy.gdip
+Invalid plugin config file ad_privacy/ad_privacy.gdip
+Invalid plugin config file ad_privacy/ad_privacy.gdip
+Invalid plugin config file ad_privacy/ad_privacy.gdip
+Invalid plugin config file ad_privacy/ad_privacy.gdip
+Invalid plugin config file ad_privacy/ad_privacy.gdip
+Invalid plugin config file ad_privacy/ad_privacy.gdip
+Invalid plugin config file ad_privacy/ad_privacy.gdip
+Invalid plugin config file ad_privacy/ad_privacy.gdip
+Invalid plugin config file ad_privacy/ad_privacy.gdip
+Invalid plugin config file ad_privacy/ad_privacy.gdip
+Invalid plugin config file ad_privacy/ad_privacy.gdip
+Invalid plugin config file ad_privacy/ad_privacy.gdip
+Invalid plugin config file ad_privacy/ad_privacy.gdip
+Invalid plugin config file ad_privacy/ad_privacy.gdip
+Invalid plugin config file ad_privacy/ad_privacy.gdip
+Invalid plugin config file ad_privacy/ad_privacy.gdip
+Invalid plugin config file ad_privacy/ad_privacy.gdip
+Invalid plugin config file ad_privacy/ad_privacy.gdip
+Invalid plugin config file ad_privacy/ad_privacy.gdip
+Invalid plugin config file ad_privacy/ad_privacy.gdip
+Invalid plugin config file ad_privacy/ad_privacy.gdip
+Invalid plugin config file ad_privacy/ad_privacy.gdip
+Invalid plugin config file ad_privacy/ad_privacy.gdip
+Invalid plugin config file ad_privacy/ad_privacy.gdip
+Invalid plugin config file ad_privacy/ad_privacy.gdip
+Invalid plugin config file ad_privacy/ad_privacy.gdip
+Invalid plugin config file ad_privacy/ad_privacy.gdip
+Invalid plugin config file ad_privacy/ad_privacy.gdip
+Invalid plugin config file ad_privacy/ad_privacy.gdip
+Invalid plugin config file ad_privacy/ad_privacy.gdip
+Invalid plugin config file ad_privacy/ad_privacy.gdip
+Invalid plugin config file ad_privacy/ad_privacy.gdip
+Invalid plugin config file ad_privacy/ad_privacy.gdip
+Invalid plugin config file ad_privacy/ad_privacy.gdip
+Invalid plugin config file ad_privacy/ad_privacy.gdip
+Invalid plugin config file ad_privacy/ad_privacy.gdip
+Invalid plugin config file ad_privacy/ad_privacy.gdip
+Invalid plugin config file ad_privacy/ad_privacy.gdip
+Invalid plugin config file ad_privacy/ad_privacy.gdip
+Invalid plugin config file ad_privacy/ad_privacy.gdip
+Invalid plugin config file ad_privacy/ad_privacy.gdip
+Invalid plugin config file ad_privacy/ad_privacy.gdip
+Invalid plugin config file ad_privacy/ad_privacy.gdip
+Invalid plugin config file ad_privacy/ad_privacy.gdip
+Invalid plugin config file ad_privacy/ad_privacy.gdip
+Invalid plugin config file ad_privacy/ad_privacy.gdip
+Invalid plugin config file ad_privacy/ad_privacy.gdip
+Invalid plugin config file ad_privacy/ad_privacy.gdip

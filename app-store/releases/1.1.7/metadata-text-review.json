@@ -1,0 +1,19 @@
+{
+  "status": "draft-source-reviewed; build, images, privacy publication, saved-values review pending",
+  "checkedAt": "2026-10-13T12:23:44.320950+00:00",
+  "currentVersion": "1.1.6",
+  "proposedVersion": "1.1.7",
+  "activeLocales": [
+    "en-US",
+    "ko"
+  ],
+  "assetSha256": "3523926241a07503ec07aa5369315734ab50cbfe2031419d4cd356b63892037e",
+  "effectiveWhatsNew": {
+    "ko": "광고 개인정보 동의와 추적 허용 절차를 보완했어요.",
+    "en-US": "Updated advertising consent and tracking permission handling."
+  },
+  "sourceScope": "only advertising consent and tracking changes in candidate",
+  "savedReadback": false,
+  "submitted": false,
+  "effectiveWhatsNewAsset": "release-notes.json"
+}

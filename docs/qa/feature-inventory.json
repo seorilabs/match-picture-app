@@ -39,11 +39,41 @@
     },
     {
       "id": "native-leaderboards",
-      "core": false
+      "core": false,
+      "foundation": true,
+      "paths": [
+        "godot/src/platform/*leaderboard*",
+        "godot/src/core/ports/*leaderboard*",
+        "godot/src/ui/main.gd",
+        "godot/addons/gamecenter/**",
+        "godot/addons/GodotPlayGameServices/**",
+        "godot/leaderboard.config.json",
+        "godot/project.godot",
+        "godot/export_presets.cfg",
+        "tools/*leaderboard*",
+        ".github/workflows/deploy-app-store.yml",
+        "godot/autoload/platform.gd"
+      ]
     },
     {
       "id": "interstitial-and-privacy",
-      "core": false
+      "core": false,
+      "foundation": true,
+      "paths": [
+        "godot/src/platform/*ads*",
+        "godot/src/platform/ios_ad_privacy.gd",
+        "godot/src/core/ports/*ad*",
+        "godot/src/ui/main.gd",
+        "godot/addons/admob/**",
+        "godot/ios/plugins/**",
+        "platform/ios/**",
+        "godot/project.godot",
+        "godot/export_presets.cfg",
+        "tools/*admob*",
+        "tools/*ios_privacy*",
+        ".github/workflows/deploy-app-store.yml",
+        "godot/autoload/platform.gd"
+      ]
     },
     {
       "id": "ait-share",
@@ -51,7 +81,21 @@
     },
     {
       "id": "analytics",
-      "core": false
+      "core": false,
+      "foundation": true,
+      "paths": [
+        "godot/src/platform/ga4_analytics.gd",
+        "godot/src/core/ports/*analytics*",
+        "godot/src/ui/main.gd",
+        "godot/project.godot",
+        "godot/export_presets.cfg",
+        "tools/*analytics*",
+        ".github/workflows/deploy-app-store.yml",
+        "godot/src/core/analytics_events.gd",
+        "godot/autoload/platform.gd",
+        "godot/autoload/save.gd",
+        "godot/analytics.config.json"
+      ]
     }
   ]
 }

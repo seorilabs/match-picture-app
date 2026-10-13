@@ -1,0 +1,21 @@
+{
+  "status": "draft-not-saved; current-native-build-and-saved-values-not-verified",
+  "appStoreId": "1528539634",
+  "bundleId": "com.github.magicsih.MatchSymbol",
+  "versionString": "1.1.7",
+  "build": null,
+  "existingVersionId": "1d36616f-cdc7-4d53-abcc-f3442c26a261",
+  "existingSubmissionId": "162856a7-6e04-4531-a840-53613e8df83e",
+  "activeLocales": ["en-US", "ko"],
+  "whatsNewAsset": "release-notes.json",
+  "reviewNotes": "On first launch, the app completes any required Google privacy consent form before requesting Apple's App Tracking Transparency permission when the system status is not determined. The request is independent of whether a GDPR form is required in the user's region. Advertising is initialized and requested only when ATT is authorized and the Google SDK permits ad requests. If permission is denied, restricted, or unresolved, the game remains fully playable without ads. Non-personalized ad requests remain enabled for users who authorize tracking. Ad privacy choices remain available in Settings when required by the Google SDK. The current system permission is checked again when the app becomes active and before an ad is used.",
+  "privacyPolicyProposed": {
+    "ko": "https://www.seorilabs.com/apps/match-picture/privacy/",
+    "en-US": "https://www.seorilabs.com/en/apps/match-picture/privacy/"
+  },
+  "privacyPolicyPublished": false,
+  "appPrivacy": "SDK and app collection draft; final signed archive and runtime verification pending",
+  "screenshotsReview": "pending current version image review",
+  "saveReadback": "not executed",
+  "submission": "not executed"
+}

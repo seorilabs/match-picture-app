@@ -1,0 +1,34 @@
+{
+  "evidence/round-2-hint-left.png": {
+    "sha256": "cb10a09a2146bbb220401c6a85367bb22b1c4d1d453d797a63e6a72b10aaf1b3",
+    "originalLogicalPath": "build/round-2/godot/build/review/capture-167658.png"
+  },
+  "evidence/round-2-hint-right.png": {
+    "sha256": "f2f612952267b45e20d5bf190dc46b3eafd1ba19addd560907ecb82ec59caf2e",
+    "originalLogicalPath": "build/round-2/godot/build/review/capture-157249.png"
+  },
+  "evidence/round-3-hint-baseline.png": {
+    "sha256": "da5ed1de1be5e1f696034819e43c010d8f83cce40b0c528c2178ac864514ba4d",
+    "originalLogicalPath": "build/round-3/run-2-captures/capture-132601.png"
+  },
+  "evidence/round-3-hint-left.png": {
+    "sha256": "303c21816f62dd02a15eacd45ec294aece4c409072c1bdc503f209a9e4db4bd0",
+    "originalLogicalPath": "build/round-3/run-2-captures/capture-134843.png"
+  },
+  "evidence/round-3-hint-return.png": {
+    "sha256": "deb97eb5087641da4622c59b460be6cb961c02926fdd245d5995506df0ff3c60",
+    "originalLogicalPath": "build/round-3/run-2-captures/capture-166902.png"
+  },
+  "evidence/round-3-result.png": {
+    "sha256": "b045352c001dcaf64cfddfda7bce479697c35110e1869aca596d1009d6e03581",
+    "originalLogicalPath": "build/round-3/run-2-captures/capture-319720.png"
+  },
+  "evidence/round-3-primary-restart.png": {
+    "sha256": "7a2ce86612ef9191a545fb199261614446e020b6fab9170c71971f8ba868e5b0",
+    "originalLogicalPath": "build/round-3/run-3-captures/capture-30788.png"
+  },
+  "evidence/round-3-backup-settings.png": {
+    "sha256": "b6c34a85f67a4c8b465a9705a1880d824632d73ccf8ce8482dea7f115f152010",
+    "originalLogicalPath": "build/round-3/run-4-captures/capture-39899.png"
+  }
+}

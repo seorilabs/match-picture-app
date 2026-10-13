@@ -1,6 +1,6 @@
 # MP-IOS-117 독립 UI 검수 준비
 
-- 상태: **준비 완료·실행 대기**. 이 문서는 실행 결과나 통과 근거가 아니다.
+- 상태: **승인된 3회 독립 Editor 검수 완료·native gate 차단**. 실행 결과는 회차 보고서와 최종 검수 보고서에 따로 기록했다.
 - 승인 설계: [MP-IOS-117 v1](../../design/2026-10-13-ios-1.1.7-ad-privacy/design.md), 승인 대상 커밋 `c92196fab6a302832c4919f71ff745cb3d280db6`.
 - 사람 승인: 대화의 `v1 승인 — 수정·검수·재심사 진행`. 설계 문서의 검토 대기 표기는 승인 후 구현자가 갱신한다.
 - 구현자: `/root`. 독립 검수자: `/root/privacy_ui_review`.
@@ -29,7 +29,7 @@
 3. 격리 복사본 `project.godot`에만 공식 설정 `application/config/use_custom_user_dir=true`, `application/config/custom_user_dir_name="match-picture-MP-IOS-117-round-N-<short-sha>"`를 추가한다. Save보다 앞에 동작하는 검수 guard가 실제 `ProjectSettings.globalize_path("user://")`를 확인해야 한다. 경로가 다르면 Run을 중단한다.
 4. Editor 설정은 `run/window_placement/game_embed_mode=-1`로 별도 게임 창을 사용한다. 공유 환경에서 비어 있는 debugger/LSP 포트를 확인해 전용 값으로 지정한다. Editor plugin이 실제 self-contained 경로와 설정을 검증한 뒤 공식 `EditorInterface.play_main_scene()` 또는 승인된 검수 scene Run을 한 번 호출한다.
 5. 실제 Editor Run의 게임 child를 PID·인자·bundle 식별자로 확인한다. child는 비headless·비embedded 렌더 창이어야 한다. Editor host에 headless 옵션을 쓴다면 사실을 기록하고 실제 GUI child·입력·렌더 근거를 따로 확인한다. headless 테스트만으로 회차를 세지 않는다.
-6. CUA를 전용 앱에 정확히 바인딩하고 실제 버튼·카드 클릭과 키 입력을 수행한다. F7은 현재 viewport 원본 PNG를 보존하는 보조 입력으로만 사용한다. F6 Back notification 대역은 OS 하드웨어 Back 근거와 구분한다.
+6. CUA를 전용 앱에 정확히 바인딩하고 실제 버튼·카드 클릭과 키 입력을 수행한다. F7은 현재 viewport 원본 PNG를 보존하는 보조 입력으로만 사용한다. Ctrl+B Back notification 대역은 OS 하드웨어 Back 근거와 구분한다.
 7. 각 실행 직전·직후 자기 PID, 창·viewport 치수, 사용자 저장 위치, 실제 소스 지문, 로그를 보존한다. 종료는 제품의 Exit→Yes를 사용하고 이후 자기 PID 부재를 shell로 확인한다. 종료 뒤 CUA 재조회가 Project Manager를 자동 실행할 수 있으므로 이를 새 Run으로 오인하거나 다른 앱을 종료하지 않는다.
 8. `SCRIPT ERROR`, `ERROR:`, NaN/비유한 레이아웃을 검사한다. PNG의 실제 크기·SHA-256과 입력·관찰 시각을 연결하고 전환 프레임을 안정 화면의 증거로 사용하지 않는다.
 
@@ -84,10 +84,12 @@
 ## 실기기와 최종 gate
 
 - iPhone 12 Pro paired는 사용 가능성만 뜻하며 제품 실행 증거가 아니다. 실제 ATT 미결정·허용·거부, UMP 순서, 테스트 광고, 재실행·설정 변경·철회를 최종 후보와 연결해야 한다.
-- iPad 실기기는 미확인이다. iPad 검수는 현재 **미실행**이며 화면 캡처·simulator·Editor를 실기기 근거로 바꾸지 않는다.
+- 사용자가 iPad 실기기 환경이 없다고 확인했다. iPad 검수는 **미실행**이며 화면 캡처·simulator·Editor를 실기기 근거로 바꾸지 않는다.
 - signed app의 native plugin·ATT framework·ko/en 목적 문구, SDK manifest·App Privacy·개인정보 페이지 정합성, 최종 SHA의 전체 기능 E2E·중앙 검증, 업로드·재심사 read-back은 별도 단계다.
 - 3회차 후 미충족·주요 결함·미검수 항목이 남으면 추가 회차의 문제·근거·범위·시간·비용·환경·중단 영향을 보고한다. 사람 승인 없이 4회차를 시작하거나 최종 E2E로 UI 미검수를 덮지 않는다.
 
 ## 현재 실행 결과
 
-Editor Run 0회. 실제 제품 입력 0회. 실기기 QA 0회. PASS 항목 없음. 구현자의 후보 준비 알림을 기다린다.
+1·2회차는 각각 실제 Editor Run 1회, 3회차는 사전 조율한 서로 다른 4개 시나리오로 완료했다. 후보는 각각 `87658f5`, `5c9d3b3`, `1fc334b`이며 원래 판정을 보존한다. 자세한 결과는 [최종 검수 보고서](independent-review.md)와 각 회차 문서에 있다. 이후 변경된 광고 활성 복귀 경로는 미재확인이다. 실기기 QA는 미실행이며 변경받은 native 광고·권한과 최종 E2E는 blocked다.
+
+기능 목록의 foundation/paths는 구현자가 후속 갱신 중이다. 위의 “현재 파일에는 없음”은 준비 당시 후보 상태를 설명한다. 이 검수는 당시 13개 전체 목록을 사용했고 기존 기반 기능 통과 근거를 승계하지 않았다.

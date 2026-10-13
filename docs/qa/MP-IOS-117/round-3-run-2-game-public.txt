@@ -1,0 +1,82 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+OpenGL API 4.1 Metal - 90.5 - Compatibility - Using Device: Apple - Apple M3
+
+[mp117-runtime] user=<isolated-userdata>/match-picture-MP-IOS-117-round-3-disk-1fc334b/ before Save; isolated=true
+[ui] safe area 여백(뷰포트 단위) 좌 0 상 0 우 0 하 0 / 창 (405, 720) / 안전영역 [P: (0, 30), S: (1920, 988)]
+[mp117-observe] window=(405, 720) visible_rect=[P: (0.0, 0.0), S: (810.0, 1440.0)] display=macOS save={ "schema": 1, "has_played": false, "best_seconds": 0.0, "best_splits": [], "clear_count": 0, "language": "auto", "muted": false }
+[mp117-capture] path=res://build/review/capture-27732.png pixels=(405, 720) result=0
+[mp117-observe] window=(405, 720) visible_rect=[P: (0.0, 0.0), S: (810.0, 1440.0)] display=macOS save={ "schema": 1, "has_played": false, "best_seconds": 0.0, "best_splits": [], "clear_count": 0, "language": "auto", "muted": false }
+[mp117-capture] path=res://build/review/capture-49348.png pixels=(405, 720) result=0
+[mp117-observe] window=(405, 720) visible_rect=[P: (0.0, 0.0), S: (810.0, 1440.0)] display=macOS save={ "schema": 1, "has_played": false, "best_seconds": 0.0, "best_splits": [], "clear_count": 0, "language": "en", "muted": true }
+[mp117-capture] path=res://build/review/capture-64255.png pixels=(405, 720) result=0
+[mp117-capture] path=res://build/review/capture-74201.png pixels=(405, 720) result=0
+[mp117-capture] path=res://build/review/capture-85249.png pixels=(405, 720) result=0
+[mp117-capture] path=res://build/review/capture-96541.png pixels=(405, 720) result=0
+[mp117-capture] path=res://build/review/capture-110274.png pixels=(405, 720) result=0
+[mp117-capture] path=res://build/review/capture-132601.png pixels=(405, 720) result=0
+[mp117-capture] path=res://build/review/capture-132953.png pixels=(405, 720) result=0
+[mp117-capture] path=res://build/review/capture-133295.png pixels=(405, 720) result=0
+[mp117-capture] path=res://build/review/capture-133598.png pixels=(405, 720) result=0
+[mp117-capture] path=res://build/review/capture-133913.png pixels=(405, 720) result=0
+[mp117-capture] path=res://build/review/capture-134255.png pixels=(405, 720) result=0
+[mp117-capture] path=res://build/review/capture-134558.png pixels=(405, 720) result=0
+[mp117-capture] path=res://build/review/capture-134843.png pixels=(405, 720) result=0
+[mp117-capture] path=res://build/review/capture-135176.png pixels=(405, 720) result=0
+[mp117-capture] path=res://build/review/capture-135494.png pixels=(405, 720) result=0
+[mp117-capture] path=res://build/review/capture-135818.png pixels=(405, 720) result=0
+[mp117-capture] path=res://build/review/capture-136152.png pixels=(405, 720) result=0
+[mp117-capture] path=res://build/review/capture-136459.png pixels=(405, 720) result=0
+[mp117-capture] path=res://build/review/capture-136851.png pixels=(405, 720) result=0
+[mp117-capture] path=res://build/review/capture-137989.png pixels=(405, 720) result=0
+[mp117-capture] path=res://build/review/capture-138526.png pixels=(405, 720) result=0
+[mp117-capture] path=res://build/review/capture-139617.png pixels=(405, 720) result=0
+[mp117-capture] path=res://build/review/capture-139991.png pixels=(405, 720) result=0
+[mp117-capture] path=res://build/review/capture-140589.png pixels=(405, 720) result=0
+[mp117-capture] path=res://build/review/capture-140986.png pixels=(405, 720) result=0
+[mp117-capture] path=res://build/review/capture-141343.png pixels=(405, 720) result=0
+[mp117-capture] path=res://build/review/capture-141869.png pixels=(405, 720) result=0
+[mp117-capture] path=res://build/review/capture-142268.png pixels=(405, 720) result=0
+[mp117-capture] path=res://build/review/capture-142649.png pixels=(405, 720) result=0
+[mp117-capture] path=res://build/review/capture-143035.png pixels=(405, 720) result=0
+[mp117-capture] path=res://build/review/capture-143454.png pixels=(405, 720) result=0
+[mp117-capture] path=res://build/review/capture-143835.png pixels=(405, 720) result=0
+[mp117-capture] path=res://build/review/capture-144676.png pixels=(405, 720) result=0
+[mp117-capture] path=res://build/review/capture-145093.png pixels=(405, 720) result=0
+[mp117-capture] path=res://build/review/capture-145536.png pixels=(405, 720) result=0
+[mp117-capture] path=res://build/review/capture-145877.png pixels=(405, 720) result=0
+[mp117-capture] path=res://build/review/capture-146268.png pixels=(405, 720) result=0
+[mp117-capture] path=res://build/review/capture-146825.png pixels=(405, 720) result=0
+[mp117-capture] path=res://build/review/capture-147276.png pixels=(405, 720) result=0
+[mp117-capture] path=res://build/review/capture-147860.png pixels=(405, 720) result=0
+[mp117-capture] path=res://build/review/capture-148389.png pixels=(405, 720) result=0
+[mp117-capture] path=res://build/review/capture-148885.png pixels=(405, 720) result=0
+[mp117-capture] path=res://build/review/capture-149868.png pixels=(405, 720) result=0
+[mp117-capture] path=res://build/review/capture-150334.png pixels=(405, 720) result=0
+[mp117-capture] path=res://build/review/capture-150678.png pixels=(405, 720) result=0
+[mp117-capture] path=res://build/review/capture-151302.png pixels=(405, 720) result=0
+[mp117-capture] path=res://build/review/capture-151951.png pixels=(405, 720) result=0
+[mp117-capture] path=res://build/review/capture-155374.png pixels=(405, 720) result=0
+[mp117-capture] path=res://build/review/capture-156336.png pixels=(405, 720) result=0
+[mp117-capture] path=res://build/review/capture-157205.png pixels=(405, 720) result=0
+[mp117-capture] path=res://build/review/capture-158354.png pixels=(405, 720) result=0
+[mp117-capture] path=res://build/review/capture-159083.png pixels=(405, 720) result=0
+[mp117-capture] path=res://build/review/capture-159886.png pixels=(405, 720) result=0
+[mp117-capture] path=res://build/review/capture-160546.png pixels=(405, 720) result=0
+[mp117-capture] path=res://build/review/capture-161121.png pixels=(405, 720) result=0
+[mp117-capture] path=res://build/review/capture-161775.png pixels=(405, 720) result=0
+[mp117-capture] path=res://build/review/capture-162318.png pixels=(405, 720) result=0
+[mp117-capture] path=res://build/review/capture-162851.png pixels=(405, 720) result=0
+[mp117-capture] path=res://build/review/capture-163652.png pixels=(405, 720) result=0
+[mp117-capture] path=res://build/review/capture-164152.png pixels=(405, 720) result=0
+[mp117-capture] path=res://build/review/capture-164608.png pixels=(405, 720) result=0
+[mp117-capture] path=res://build/review/capture-165233.png pixels=(405, 720) result=0
+[mp117-capture] path=res://build/review/capture-165852.png pixels=(405, 720) result=0
+[mp117-capture] path=res://build/review/capture-166410.png pixels=(405, 720) result=0
+[mp117-capture] path=res://build/review/capture-166902.png pixels=(405, 720) result=0
+[mp117-capture] path=res://build/review/capture-269151.png pixels=(405, 720) result=0
+[mp117-observe] window=(405, 720) visible_rect=[P: (0.0, 0.0), S: (810.0, 1440.0)] display=macOS save={ "schema": 1, "has_played": true, "best_seconds": 0.0, "best_splits": [], "clear_count": 0, "language": "en", "muted": true }
+[mp117-observe] window=(405, 720) visible_rect=[P: (0.0, 0.0), S: (810.0, 1440.0)] display=macOS save={ "schema": 1, "has_played": true, "best_seconds": 144.973129851875, "best_splits": [58.997320999999, 8.85670827272909, 7.56800630303455, 10.1107004242474, 10.8385420000054, 11.6252503333395, 10.7175913333408, 11.8226506666691, 14.4363595185105], "clear_count": 1, "language": "en", "muted": false }
+[mp117-capture] path=res://build/review/capture-288948.png pixels=(405, 720) result=0
+[mp117-observe] window=(405, 720) visible_rect=[P: (0.0, 0.0), S: (810.0, 1440.0)] display=macOS save={ "schema": 1, "has_played": true, "best_seconds": 144.973129851875, "best_splits": [58.997320999999, 8.85670827272909, 7.56800630303455, 10.1107004242474, 10.8385420000054, 11.6252503333395, 10.7175913333408, 11.8226506666691, 14.4363595185105], "clear_count": 1, "language": "en", "muted": false }
+[mp117-capture] path=res://build/review/capture-307927.png pixels=(405, 720) result=0
+[mp117-capture] path=res://build/review/capture-319720.png pixels=(405, 720) result=0

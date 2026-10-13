@@ -1,0 +1,12 @@
+{
+  "engine": "4.7.2.stable.official.ed1daf0bf",
+  "app": "build/editor/Match Picture Privacy QA.app",
+  "bundleId": "com.seorilabs.matchpicture.mp117review",
+  "signing": "ad-hoc isolated copy; original untouched",
+  "files": {
+    "officialExecutable": "c7cccbf8fb143e34e02fd6521e09be2c2b974f0d5db080b19071c9c570718ccf",
+    "qaExecutable": "62f370988eaa12303a408908ce5124c322db6adaf8029383174ed1ba839dc2b4",
+    "qaInfoPlist": "e3543e7708bee8beb9c054d54fb71c8f3c095130c73bf321382277fe6747a737"
+  },
+  "preparedAt": "2026-10-13T11:54:07.887740+00:00"
+}

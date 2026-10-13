@@ -1,0 +1,149 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+OpenGL API 4.1 Metal - 90.5 - Compatibility - Using Device: Apple - Apple M3
+
+[mp117-runtime] user=<isolated-userdata>/match-picture-MP-IOS-117-round-2-5c9d3b3/ before Save; isolated=true
+[ui] safe area 여백(뷰포트 단위) 좌 0 상 0 우 0 하 0 / 창 (324, 720) / 안전영역 [P: (0, 30), S: (1920, 988)]
+[review] Editor Run / in-memory storage / fake SDK callbacks
+[mp117-observe] window=(324, 720) visible_rect=[P: (0.0, 0.0), S: (648.0, 1440.0)] display=macOS save={ "schema": 1, "has_played": false, "best_seconds": 24.6, "best_splits": [], "clear_count": 3, "language": "auto", "muted": false }
+[mp117-observe] ATT=0 UMP=true ATTrequests=1 SDKinits=0 loads=0 showing=false loading=false generation=0 consent_busy=false
+[mp117-observe] window=(324, 720) visible_rect=[P: (0.0, 0.0), S: (648.0, 1440.0)] display=macOS save={ "schema": 1, "has_played": false, "best_seconds": 24.6, "best_splits": [], "clear_count": 3, "language": "auto", "muted": false }
+[mp117-observe] ATT=0 UMP=true ATTrequests=1 SDKinits=0 loads=0 showing=false loading=false generation=0 consent_busy=false
+[review] ATT=2 UMP=true ATT-requests=1 SDK-inits=0 ad-loads=0 ready=false
+[review] ATT=2 UMP=true ATT-requests=1 SDK-inits=0 ad-loads=0 ready=false
+[mp117-observe] window=(324, 720) visible_rect=[P: (0.0, 0.0), S: (648.0, 1440.0)] display=macOS save={ "schema": 1, "has_played": false, "best_seconds": 24.6, "best_splits": [], "clear_count": 3, "language": "auto", "muted": false }
+[mp117-observe] ATT=1 UMP=true ATTrequests=1 SDKinits=0 loads=0 showing=false loading=false generation=0 consent_busy=false
+[mp117-observe] window=(324, 720) visible_rect=[P: (0.0, 0.0), S: (648.0, 1440.0)] display=macOS save={ "schema": 1, "has_played": false, "best_seconds": 24.6, "best_splits": [], "clear_count": 3, "language": "auto", "muted": false }
+[mp117-observe] ATT=1 UMP=true ATTrequests=1 SDKinits=0 loads=0 showing=false loading=false generation=0 consent_busy=false
+[mp117-observe] window=(324, 720) visible_rect=[P: (0.0, 0.0), S: (648.0, 1440.0)] display=macOS save={ "schema": 1, "has_played": false, "best_seconds": 24.6, "best_splits": [], "clear_count": 3, "language": "auto", "muted": false }
+[mp117-observe] ATT=-1 UMP=true ATTrequests=1 SDKinits=0 loads=0 showing=false loading=false generation=0 consent_busy=false
+[mp117-observe] window=(324, 720) visible_rect=[P: (0.0, 0.0), S: (648.0, 1440.0)] display=macOS save={ "schema": 1, "has_played": false, "best_seconds": 24.6, "best_splits": [], "clear_count": 3, "language": "auto", "muted": false }
+[mp117-observe] ATT=2 UMP=true ATTrequests=1 SDKinits=0 loads=0 showing=false loading=false generation=0 consent_busy=false
+[mp117-observe] window=(324, 720) visible_rect=[P: (0.0, 0.0), S: (648.0, 1440.0)] display=macOS save={ "schema": 1, "has_played": false, "best_seconds": 24.6, "best_splits": [], "clear_count": 3, "language": "auto", "muted": false }
+[mp117-observe] ATT=2 UMP=true ATTrequests=1 SDKinits=0 loads=0 showing=false loading=false generation=0 consent_busy=false
+[review] capture=res://build/review/capture-32279.png result=0
+[review] privacy required=true
+[review] privacy success=false
+[review] capture=res://build/review/capture-59237.png result=0
+[review] privacy success=true
+[review] ATT=2 UMP=false ATT-requests=1 SDK-inits=0 ad-loads=0 ready=false
+[review] ATT=2 UMP=false ATT-requests=1 SDK-inits=0 ad-loads=0 ready=false
+[mp117-observe] window=(324, 720) visible_rect=[P: (0.0, 0.0), S: (648.0, 1440.0)] display=macOS save={ "schema": 1, "has_played": false, "best_seconds": 24.6, "best_splits": [], "clear_count": 3, "language": "en", "muted": true }
+[mp117-observe] ATT=2 UMP=false ATTrequests=1 SDKinits=0 loads=0 showing=false loading=false generation=2 consent_busy=false
+[review] storage failure=true
+[review] capture=res://build/review/capture-70674.png result=0
+[review] storage failure=false
+[review] storage failure=true
+[review] capture=res://build/review/capture-109367.png result=0
+[review] capture=res://build/review/capture-118921.png result=0
+[review] capture=res://build/review/capture-138833.png result=0
+[review] capture=res://build/review/capture-139112.png result=0
+[review] capture=res://build/review/capture-139345.png result=0
+[review] capture=res://build/review/capture-139612.png result=0
+[review] capture=res://build/review/capture-139890.png result=0
+[review] capture=res://build/review/capture-140212.png result=0
+[review] capture=res://build/review/capture-140441.png result=0
+[review] capture=res://build/review/capture-140730.png result=0
+[review] capture=res://build/review/capture-141021.png result=0
+[review] capture=res://build/review/capture-141254.png result=0
+[review] capture=res://build/review/capture-141495.png result=0
+[review] capture=res://build/review/capture-141784.png result=0
+[review] capture=res://build/review/capture-142090.png result=0
+[review] capture=res://build/review/capture-142366.png result=0
+[review] capture=res://build/review/capture-142643.png result=0
+[review] capture=res://build/review/capture-142933.png result=0
+[review] capture=res://build/review/capture-143250.png result=0
+[review] capture=res://build/review/capture-143584.png result=0
+[review] capture=res://build/review/capture-143883.png result=0
+[review] capture=res://build/review/capture-144182.png result=0
+[review] capture=res://build/review/capture-144491.png result=0
+[review] capture=res://build/review/capture-144754.png result=0
+[review] capture=res://build/review/capture-145149.png result=0
+[review] capture=res://build/review/capture-145450.png result=0
+[review] capture=res://build/review/capture-145733.png result=0
+[review] capture=res://build/review/capture-146046.png result=0
+[review] capture=res://build/review/capture-146367.png result=0
+[review] capture=res://build/review/capture-146682.png result=0
+[review] capture=res://build/review/capture-146992.png result=0
+[review] capture=res://build/review/capture-147301.png result=0
+[review] capture=res://build/review/capture-147634.png result=0
+[review] capture=res://build/review/capture-147933.png result=0
+[review] capture=res://build/review/capture-148261.png result=0
+[review] capture=res://build/review/capture-148551.png result=0
+[review] capture=res://build/review/capture-148866.png result=0
+[review] capture=res://build/review/capture-149186.png result=0
+[review] capture=res://build/review/capture-149462.png result=0
+[review] capture=res://build/review/capture-149757.png result=0
+[review] capture=res://build/review/capture-150136.png result=0
+[review] capture=res://build/review/capture-150691.png result=0
+[review] capture=res://build/review/capture-151051.png result=0
+[review] capture=res://build/review/capture-151600.png result=0
+[review] capture=res://build/review/capture-151933.png result=0
+[review] capture=res://build/review/capture-152216.png result=0
+[review] capture=res://build/review/capture-152512.png result=0
+[review] capture=res://build/review/capture-152792.png result=0
+[review] capture=res://build/review/capture-153100.png result=0
+[review] capture=res://build/review/capture-153399.png result=0
+[review] capture=res://build/review/capture-153674.png result=0
+[review] capture=res://build/review/capture-153950.png result=0
+[review] capture=res://build/review/capture-154254.png result=0
+[review] capture=res://build/review/capture-154546.png result=0
+[review] capture=res://build/review/capture-154792.png result=0
+[review] capture=res://build/review/capture-155100.png result=0
+[review] capture=res://build/review/capture-155391.png result=0
+[review] capture=res://build/review/capture-155620.png result=0
+[review] capture=res://build/review/capture-155862.png result=0
+[review] capture=res://build/review/capture-156154.png result=0
+[review] capture=res://build/review/capture-156450.png result=0
+[review] capture=res://build/review/capture-156733.png result=0
+[review] capture=res://build/review/capture-157017.png result=0
+[review] capture=res://build/review/capture-157249.png result=0
+[review] capture=res://build/review/capture-157512.png result=0
+[review] capture=res://build/review/capture-157832.png result=0
+[review] capture=res://build/review/capture-158117.png result=0
+[review] capture=res://build/review/capture-158374.png result=0
+[review] capture=res://build/review/capture-158659.png result=0
+[review] capture=res://build/review/capture-158966.png result=0
+[review] capture=res://build/review/capture-159267.png result=0
+[review] capture=res://build/review/capture-159600.png result=0
+[review] capture=res://build/review/capture-159887.png result=0
+[review] capture=res://build/review/capture-160166.png result=0
+[review] capture=res://build/review/capture-160475.png result=0
+[review] capture=res://build/review/capture-160712.png result=0
+[review] capture=res://build/review/capture-160971.png result=0
+[review] capture=res://build/review/capture-161246.png result=0
+[review] capture=res://build/review/capture-161543.png result=0
+[review] capture=res://build/review/capture-161779.png result=0
+[review] capture=res://build/review/capture-162058.png result=0
+[review] capture=res://build/review/capture-162371.png result=0
+[review] capture=res://build/review/capture-162616.png result=0
+[review] capture=res://build/review/capture-162854.png result=0
+[review] capture=res://build/review/capture-163146.png result=0
+[review] capture=res://build/review/capture-163354.png result=0
+[review] capture=res://build/review/capture-163645.png result=0
+[review] capture=res://build/review/capture-163925.png result=0
+[review] capture=res://build/review/capture-164162.png result=0
+[review] capture=res://build/review/capture-164454.png result=0
+[review] capture=res://build/review/capture-164679.png result=0
+[review] capture=res://build/review/capture-164976.png result=0
+[review] capture=res://build/review/capture-165266.png result=0
+[review] capture=res://build/review/capture-165549.png result=0
+[review] capture=res://build/review/capture-165833.png result=0
+[review] capture=res://build/review/capture-166132.png result=0
+[review] capture=res://build/review/capture-166438.png result=0
+[review] capture=res://build/review/capture-166762.png result=0
+[review] capture=res://build/review/capture-167040.png result=0
+[review] capture=res://build/review/capture-167345.png result=0
+[review] capture=res://build/review/capture-167658.png result=0
+[review] capture=res://build/review/capture-168019.png result=0
+[review] capture=res://build/review/capture-316389.png result=0
+[mp117-observe] window=(324, 720) visible_rect=[P: (0.0, 0.0), S: (648.0, 1440.0)] display=macOS save={ "schema": 1, "has_played": true, "best_seconds": 24.6, "best_splits": [], "clear_count": 3, "language": "en", "muted": true }
+[mp117-observe] ATT=2 UMP=false ATTrequests=1 SDKinits=0 loads=0 showing=false loading=false generation=2 consent_busy=false
+[review] capture=res://build/review/capture-330747.png result=0
+[review] storage failure=false
+[mp117-observe] window=(324, 720) visible_rect=[P: (0.0, 0.0), S: (648.0, 1440.0)] display=macOS save={ "schema": 1, "has_played": true, "best_seconds": 24.6, "best_splits": [], "clear_count": 3, "language": "ko", "muted": false }
+[mp117-observe] ATT=2 UMP=false ATTrequests=1 SDKinits=0 loads=0 showing=false loading=false generation=2 consent_busy=false
+[review] capture=res://build/review/capture-351651.png result=0
+[mp117-observe] window=(324, 720) visible_rect=[P: (0.0, 0.0), S: (648.0, 1440.0)] display=macOS save={ "schema": 1, "has_played": true, "best_seconds": 24.6, "best_splits": [], "clear_count": 3, "language": "ko", "muted": false }
+[mp117-observe] ATT=2 UMP=false ATTrequests=1 SDKinits=0 loads=0 showing=false loading=false generation=2 consent_busy=false
+[review] capture=res://build/review/capture-370088.png result=0
+[mp117-runtime] Ctrl+B -> product Back notification proxy
