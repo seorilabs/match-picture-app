@@ -79,7 +79,6 @@ on:
 
 permissions:
   contents: read
-  actions: read
 
 concurrency:
   group: app-store-deploy-${{ inputs.release_tag || github.ref }}
