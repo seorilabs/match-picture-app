@@ -2,9 +2,11 @@
 """공식 해시를 확인한 iOS 의존성과 같은 Godot 버전으로 ATT/UMP bridge를 준비한다."""
 import argparse
 import hashlib
+import json
 import os
 from pathlib import Path
 import shutil
+import shlex
 import subprocess
 import tempfile
 import urllib.request
@@ -55,6 +57,30 @@ def extract(archive, dest):
                     target.write_bytes(payload)
 
 
+def engine_flags(source, scons, target):
+    # Object의 mutex·debug 필드 배치는 엔진의 컴파일 정의와 같아야 한다.
+    # compilation DB만 생성하며 엔진·제품 전체를 빌드하지 않는다.
+    run(scons, "platform=ios", f"target=template_{target}", "arch=arm64",
+        "compiledb=yes", "compiledb_gen_only=yes", cwd=source)
+    database = json.loads((source / "compile_commands.json").read_text())
+    entries = [entry for entry in database if Path(entry["file"]).as_posix().endswith("core/object/object.cpp")]
+    if len(entries) != 1:
+        raise RuntimeError("엔진 Object의 컴파일 옵션을 하나로 확인할 수 없다")
+    entry = entries[0]
+    arguments = entry.get("arguments") or shlex.split(entry["command"])
+    flags = []
+    for index, argument in enumerate(arguments):
+        if argument == "-D":
+            flags.append("-D" + arguments[index + 1])
+        elif argument.startswith("-D"):
+            flags.append(argument)
+        elif argument in ("-fno-exceptions", "-fno-rtti"):
+            flags.append(argument)
+    if "-DTHREADS_ENABLED" not in flags or ("-DDEBUG_ENABLED" in flags) != (target == "debug"):
+        raise RuntimeError("공식 template의 thread/debug 객체 배치 옵션이 다르다")
+    return flags
+
+
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--dependencies-only", action="store_true")
@@ -88,10 +114,10 @@ def main():
     with tempfile.TemporaryDirectory(prefix="mp-ios-privacy-") as build:
         for target in ("debug", "release"):
             obj = Path(build) / f"ad_privacy.{target}.o"
-            flags = ["-DDEBUG_ENABLED"] if target == "debug" else []
+            flags = engine_flags(source, scons, target)
             run("xcrun", "--sdk", "iphoneos", "clang++", "-c", "-std=c++17", "-arch", "arm64",
                 "-isysroot", sdk, "-miphoneos-version-min=15.0", "-fobjc-arc", "-fmodules", "-fcxx-modules",
-                "-DUNIX_ENABLED", "-DIOS_ENABLED", "-DAPPLE_EMBEDDED_ENABLED", "-DNDEBUG", *flags,
+                *flags,
                 "-I", source, "-I", source / "platform/ios", "-I", source / "platform/apple_embedded", "-F", framework, "-O2", ROOT / "platform/ios/ad_privacy/ad_privacy.mm", "-o", obj)
             run("xcrun", "libtool", "-static", "-o", output / f"libmatch_ad_privacy.{target}.a", obj)
     print("[ios-privacy] ATT/UMP bridge debug/release arm64 빌드 완료")

@@ -40,6 +40,7 @@ class IosAds:
 func _ready() -> void:
 	_check_unresolved()
 	_check_tracking_retry()
+	_check_resume_after_load_failure()
 	_check_blocked()
 	_check_authorized_and_withdrawn()
 	_check_ump_and_errors()
@@ -142,6 +143,19 @@ func _check_ump_and_errors() -> void:
 	_check(ads.initializations == 0 and ads._loader.calls == 0, "이번 동의 갱신 오류에서 광고 없이 진행")
 	ads._finish_consent()
 	_check(ads.initializations == 1 and ads._loader.calls == 1, "후속 정상 동의에서 복구")
+
+func _check_resume_after_load_failure() -> void:
+	var ads := _new_ads()
+	ads.privacy.status = 3
+	ads._finish_consent()
+	ads._loader.callbacks[0].on_ad_failed_to_load.call(null)
+	ads._on_application_resumed()
+	_check(ads._loader.calls == 1, "권한 변화 없는 앱 복귀는 실패한 광고를 재요청하지 않는다")
+	ads.privacy.status = 2
+	ads._on_application_resumed()
+	ads.privacy.status = 3
+	ads._on_application_resumed()
+	_check(ads._loader.calls == 2, "앱 복귀에서 권한이 새로 허용되면 광고 준비")
 
 func _check(value: bool, label: String) -> void:
 	_checks += 1

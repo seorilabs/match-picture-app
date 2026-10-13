@@ -12,6 +12,13 @@ STRINGS = {
     "en": "Allow linking your activity across other companies' apps and websites to measure advertising effectiveness.",
 }
 KEY = "NSUserTrackingUsageDescription"
+ROOT_COLLECTION = [
+    {"NSPrivacyCollectedDataType": kind,
+     "NSPrivacyCollectedDataTypeLinked": True,
+     "NSPrivacyCollectedDataTypeTracking": False,
+     "NSPrivacyCollectedDataTypePurposes": ["NSPrivacyCollectedDataTypePurposeAnalytics"]}
+    for kind in ("NSPrivacyCollectedDataTypeDeviceID", "NSPrivacyCollectedDataTypeProductInteraction")
+]
 
 
 def check_strings(path, locale):
@@ -19,6 +26,33 @@ def check_strings(path, locale):
     import json
     if json.loads(value).get(KEY) != STRINGS[locale]:
         raise RuntimeError(f"ATT 지역화가 다르다: {locale}")
+
+
+def check_manifests(app, expected):
+    manifests = list(app.rglob("PrivacyInfo.xcprivacy"))
+    root = app / "PrivacyInfo.xcprivacy"
+    if root not in manifests:
+        raise RuntimeError("signed 앱의 root privacy manifest 누락")
+    root_manifest = plistlib.loads(root.read_bytes())
+    if root_manifest.get("NSPrivacyTracking") is not True:
+        raise RuntimeError("signed 앱의 root 추적 공개 누락")
+    collection = sorted(root_manifest.get("NSPrivacyCollectedDataTypes", []), key=lambda item: item["NSPrivacyCollectedDataType"])
+    if collection != ROOT_COLLECTION or root_manifest.get("NSPrivacyTrackingDomains", []):
+        raise RuntimeError("signed 앱의 root 수집·추적 도메인 선언이 검토한 설정과 다르다")
+    matched = set()
+    for path in manifests:
+        if path == root:
+            continue
+        declaration = plistlib.loads(path.read_bytes())
+        matches = [sdk for sdk in expected["manifests"]
+                   if path.parent.name == Path(sdk["manifestPath"]).parent.name
+                   and declaration == sdk["declaration"]]
+        if len(matches) != 1 or matches[0]["sdk"] in matched:
+            raise RuntimeError(f"예상 밖 SDK privacy manifest: {path.relative_to(app)}")
+        matched.add(matches[0]["sdk"])
+    if matched != {sdk["sdk"] for sdk in expected["manifests"]}:
+        raise RuntimeError("signed 앱의 SDK privacy manifest 누락")
+    return len(manifests)
 
 
 def main():
@@ -62,21 +96,12 @@ def main():
             raise RuntimeError("signed 앱의 ATT framework 연결 누락")
         # release의 stripped symbol 여부에 의존하지 않고 등록 singleton/method 문자열을 검사한다.
         data = binary.read_bytes()
-        for name in (b"MatchAdPrivacy", b"request_tracking_authorization", b"can_request_ads"):
+        for name in (b"MatchAdPrivacy", b"tracking_status", b"request_tracking_authorization", b"can_request_ads", b"authorization_finished"):
             if name not in data:
                 raise RuntimeError(f"signed 앱의 native bridge 누락: {name.decode()}")
-        manifests = list(app.rglob("PrivacyInfo.xcprivacy"))
-        if not manifests:
-            raise RuntimeError("signed 앱의 SDK privacy manifest 누락")
         expected = json.loads((Path(__file__).resolve().parents[1] / "app-store/releases/1.1.7/sdk-privacy-manifests.json").read_text())
-        declarations = [plistlib.loads(p.read_bytes()) for p in manifests]
-        root_manifest = plistlib.loads((app / "PrivacyInfo.xcprivacy").read_bytes())
-        if root_manifest.get("NSPrivacyTracking") is not True:
-            raise RuntimeError("signed 앱의 root 추적 공개 누락")
-        for sdk in expected["manifests"]:
-            if sdk["declaration"] not in declarations:
-                raise RuntimeError(f"signed 앱의 SDK 선언이 조사한 버전과 다르다: {sdk['sdk']}")
-        print(f"[ios-privacy] signed 앱 bridge/ATT/ko·en/SDK manifest {len(manifests)}개 확인")
+        count = check_manifests(app, expected)
+        print(f"[ios-privacy] signed 앱 bridge/ATT/ko·en/SDK manifest {count}개 확인")
 
 
 if __name__ == "__main__":

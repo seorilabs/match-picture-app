@@ -185,7 +185,12 @@ func _connect_focus() -> void:
 
 
 func _on_application_resumed() -> void:
-	_initialize()
+	var previously_allowed := _permission_granted
+	_maybe_request_tracking()
+	var allowed := _ads_allowed()
+	# 권한 변화 없는 복귀에서는 로드 실패 후 재요청 기회를 늘리지 않는다.
+	if allowed and not previously_allowed:
+		_initialize()
 
 
 func _ads_allowed() -> bool:
