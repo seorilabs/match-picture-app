@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """vendoring 한 AdMob 플러그인이 온전한지, 설정이 어긋나지 않았는지 검사한다.
 
-플러그인은 바이너리까지 저장소에 넣어 두었다. 파일이 빠지거나 버전이 어긋나면
+Android payload는 저장소에, iOS payload는 공식 해시 검증 후 준비한다. 파일이 빠지거나 버전이 어긋나면
 빌드가 아니라 실기기에서 광고가 안 나오는 식으로 늦게 드러나므로 여기서 막는다.
 
 실행: python3 tools/check_admob_bundle.py
@@ -16,7 +16,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 
 # merge-battle 과 같은 버전이다. Godot 4.7.2 까지 테스트된 릴리스다.
-# v4 는 "v5.1.0" 처럼 접두사가 붙었지만 v5 부터는 숫자만 쓴다.
+# 공식 v5.1.0 배포물을 쓴다. iOS는 tools/prepare_ios_privacy.py로 재현한다.
 PLUGIN_VERSION = "5.1.0"
 
 # 없으면 광고가 아예 초기화되지 않는 네이티브 payload.
