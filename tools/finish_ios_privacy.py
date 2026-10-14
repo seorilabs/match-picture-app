@@ -23,6 +23,20 @@ ROOT_COLLECTION = [
 ]
 
 
+# Godot4.7.2의 API 접근 기본 선언을 실제 project-only export와 대조했다.
+# 엔진/접근 사유 변경은 검토 원문도 함께 갱신해야 한다.
+ROOT_MANIFEST = {
+    "NSPrivacyTracking": True,
+    "NSPrivacyTrackingDomains": list(TRACKING_DOMAINS),
+    "NSPrivacyCollectedDataTypes": ROOT_COLLECTION,
+    "NSPrivacyAccessedAPITypes": [
+        {"NSPrivacyAccessedAPIType": "NSPrivacyAccessedAPICategoryFileTimestamp", "NSPrivacyAccessedAPITypeReasons": ["DDA9.1", "C617.1"]},
+        {"NSPrivacyAccessedAPIType": "NSPrivacyAccessedAPICategorySystemBootTime", "NSPrivacyAccessedAPITypeReasons": ["35F9.1"]},
+        {"NSPrivacyAccessedAPIType": "NSPrivacyAccessedAPICategoryDiskSpace", "NSPrivacyAccessedAPITypeReasons": ["E174.1", "85F4.1"]},
+    ],
+}
+
+
 def check_strings(path, locale):
     value = subprocess.check_output(["plutil", "-convert", "json", "-o", "-", str(path)], text=True)
     import json
@@ -67,8 +81,9 @@ def check_manifests(app, expected):
     if root_manifest.get("NSPrivacyTracking") is not True:
         raise RuntimeError("signed 앱의 root 추적 공개 누락")
     collection = sorted(root_manifest.get("NSPrivacyCollectedDataTypes", []), key=lambda item: item["NSPrivacyCollectedDataType"])
-    if collection != ROOT_COLLECTION or root_manifest.get("NSPrivacyTrackingDomains") != list(TRACKING_DOMAINS):
-        raise RuntimeError("signed 앱의 root 수집·추적 도메인 선언이 검토한 설정과 다르다")
+    normalized = {**root_manifest, "NSPrivacyCollectedDataTypes": collection}
+    if json.dumps(normalized, sort_keys=True) != json.dumps(ROOT_MANIFEST, sort_keys=True):
+        raise RuntimeError("signed 앱의 root 전체 선언이 검토한 설정과 다르다")
     matched = set()
     for path in manifests:
         if path == root:
@@ -77,7 +92,7 @@ def check_manifests(app, expected):
         validate_tracking_information(declaration, str(path.relative_to(app)))
         matches = [sdk for sdk in expected["manifests"]
                    if path.parent.name == Path(sdk["manifestPath"]).parent.name
-                   and declaration == sdk["declaration"]]
+                   and json.dumps(declaration, sort_keys=True) == json.dumps(sdk["declaration"], sort_keys=True)]
         if len(matches) != 1 or matches[0]["sdk"] in matched:
             raise RuntimeError(f"예상 밖 SDK privacy manifest: {path.relative_to(app)}")
         matched.add(matches[0]["sdk"])

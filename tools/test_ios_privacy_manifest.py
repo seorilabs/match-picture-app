@@ -25,6 +25,11 @@ class PrivacyManifestTests(unittest.TestCase):
             "NSPrivacyTracking": True,
             "NSPrivacyTrackingDomains": DOMAINS,
             "NSPrivacyCollectedDataTypes": copy.deepcopy(privacy.ROOT_COLLECTION),
+            "NSPrivacyAccessedAPITypes": [
+                {"NSPrivacyAccessedAPIType": "NSPrivacyAccessedAPICategoryFileTimestamp", "NSPrivacyAccessedAPITypeReasons": ["DDA9.1", "C617.1"]},
+                {"NSPrivacyAccessedAPIType": "NSPrivacyAccessedAPICategorySystemBootTime", "NSPrivacyAccessedAPITypeReasons": ["35F9.1"]},
+                {"NSPrivacyAccessedAPIType": "NSPrivacyAccessedAPICategoryDiskSpace", "NSPrivacyAccessedAPITypeReasons": ["E174.1", "85F4.1"]},
+            ],
         }
         for sdk in self.expected["manifests"]:
             path = self.app / "Frameworks" / Path(sdk["manifestPath"]).parent.name / "PrivacyInfo.xcprivacy"
@@ -77,6 +82,34 @@ class PrivacyManifestTests(unittest.TestCase):
         changed["NSPrivacyCollectedDataTypes"][0]["NSPrivacyCollectedDataTypeTracking"] = True
         with self.assertRaises(RuntimeError):
             self.check(changed)
+
+    def test_root_accessed_api_tampering_or_missing_is_rejected(self):
+        for mode in ["missing", "empty", "reason", "extra"]:
+            changed = copy.deepcopy(self.root)
+            if mode == "missing":
+                del changed["NSPrivacyAccessedAPITypes"]
+            elif mode == "empty":
+                changed["NSPrivacyAccessedAPITypes"] = []
+            elif mode == "reason":
+                changed["NSPrivacyAccessedAPITypes"][0]["NSPrivacyAccessedAPITypeReasons"] = ["INVALID.1"]
+            else:
+                changed["UnreviewedRootKey"] = "unreviewed"
+            with self.subTest(mode=mode), self.assertRaises(RuntimeError):
+                self.check(changed)
+
+    def test_root_collection_boolean_cannot_be_an_integer(self):
+        changed = copy.deepcopy(self.root)
+        changed["NSPrivacyCollectedDataTypes"][0]["NSPrivacyCollectedDataTypeLinked"] = 1
+        with self.assertRaises(RuntimeError):
+            self.check(changed)
+
+    def test_sdk_collection_boolean_cannot_be_an_integer(self):
+        path = next((self.app / "Frameworks").rglob("PrivacyInfo.xcprivacy"))
+        declaration = plistlib.loads(path.read_bytes())
+        declaration["NSPrivacyCollectedDataTypes"][0]["NSPrivacyCollectedDataTypeLinked"] = int(declaration["NSPrivacyCollectedDataTypes"][0]["NSPrivacyCollectedDataTypeLinked"])
+        path.write_bytes(plistlib.dumps(declaration))
+        with self.assertRaises(RuntimeError):
+            self.check(self.root)
 
     def test_missing_sdk_manifest_is_rejected(self):
         path = next((self.app / "Frameworks").rglob("PrivacyInfo.xcprivacy"))
