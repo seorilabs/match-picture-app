@@ -45,3 +45,4 @@ jobs:
         python3 tools/generate_sfx.py --check
         python3 tools/check_data_safety.py
         python3 tools/check_release_workflow_contract.py
+        python3 -m unittest discover -s tools -p test_ios_privacy_manifest.py
