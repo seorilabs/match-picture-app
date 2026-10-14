@@ -1,0 +1,36 @@
+{
+  "schemaVersion": 1,
+  "level": "L3",
+  "baseline": "v1.1.7",
+  "changedFeatures": [
+    "interstitial-and-privacy"
+  ],
+  "environments": [
+    "dev"
+  ],
+  "redesign": false,
+  "foundationRerun": true,
+  "floorOverrides": [
+    {
+      "rule": "foundation",
+      "featureId": "interstitial-and-privacy",
+      "reason": "이번 1.1.8/1001008만 v1과 같은 실기기 생략을 적용한다. root 추적 도메인 2개·엄격 검사·정상 검증 연결만 변경하며 SDK·ATT/UMP·NPA 동작은 유지한다. OS/네트워크·실기기는 not_verified/waived, 전체 제품 E2E는 blocked다. 만료는 2026-10-20T13:41:40Z이며 자동 연장하지 않는다."
+    },
+    {
+      "rule": "foundation",
+      "featureId": "native-leaderboards",
+      "reason": "공통 export 설정과 App Store caller 경로가 겹쳐 실기기 하한이 계산된다. 제품 코드·SDK·설정값은 바꾸지 않는다. 이번 1.1.8/1001008만 v1과 같은 실기기 생략을 적용하며 Editor 대역은 다시 실행한다. Game Center OS/네트워크는 not_verified/waived다. 만료는 2026-10-20T13:41:40Z다."
+    },
+    {
+      "rule": "foundation",
+      "featureId": "analytics",
+      "reason": "공통 export 설정과 App Store caller 경로가 겹쳐 실기기 하한이 계산된다. 별도 앱 GA4의 measurement_id/api_secret 공란과 비활성을 유지한다. 이번 1.1.8/1001008만 v1과 같은 실기기 생략을 적용하고 Editor 대역은 다시 실행한다. 외부 전송은 not_verified/waived다. 만료는 2026-10-20T13:41:40Z다."
+    }
+  ],
+  "release": {
+    "markets": [
+      "app-store"
+    ],
+    "until": "public"
+  }
+}
