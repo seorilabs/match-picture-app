@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """Godot export가 생성한 InfoPlist.strings에 ATT 문구를 넣고 archive 포함을 검증한다."""
 import argparse
+import hashlib
 import json
 import plistlib
 from pathlib import Path
@@ -12,6 +13,7 @@ STRINGS = {
     "en": "Allow linking your activity across other companies' apps and websites to measure advertising effectiveness.",
 }
 KEY = "NSUserTrackingUsageDescription"
+TRACKING_DOMAINS = ("googleads.g.doubleclick.net", "pagead2.googlesyndication.com")
 ROOT_COLLECTION = [
     {"NSPrivacyCollectedDataType": kind,
      "NSPrivacyCollectedDataTypeLinked": True,
@@ -21,11 +23,52 @@ ROOT_COLLECTION = [
 ]
 
 
+# Godot4.7.2의 API 접근 기본 선언을 실제 project-only export와 대조했다.
+# 엔진/접근 사유 변경은 검토 원문도 함께 갱신해야 한다.
+ROOT_MANIFEST = {
+    "NSPrivacyTracking": True,
+    "NSPrivacyTrackingDomains": list(TRACKING_DOMAINS),
+    "NSPrivacyCollectedDataTypes": ROOT_COLLECTION,
+    "NSPrivacyAccessedAPITypes": [
+        {"NSPrivacyAccessedAPIType": "NSPrivacyAccessedAPICategoryFileTimestamp", "NSPrivacyAccessedAPITypeReasons": ["DDA9.1", "C617.1"]},
+        {"NSPrivacyAccessedAPIType": "NSPrivacyAccessedAPICategorySystemBootTime", "NSPrivacyAccessedAPITypeReasons": ["35F9.1"]},
+        {"NSPrivacyAccessedAPIType": "NSPrivacyAccessedAPICategoryDiskSpace", "NSPrivacyAccessedAPITypeReasons": ["E174.1", "85F4.1"]},
+    ],
+}
+
+
 def check_strings(path, locale):
     value = subprocess.check_output(["plutil", "-convert", "json", "-o", "-", str(path)], text=True)
     import json
     if json.loads(value).get(KEY) != STRINGS[locale]:
         raise RuntimeError(f"ATT 지역화가 다르다: {locale}")
+
+
+def validate_tracking_information(manifest, location):
+    tracking_present = "NSPrivacyTracking" in manifest
+    domains_present = "NSPrivacyTrackingDomains" in manifest
+    if not tracking_present:
+        if domains_present:
+            raise RuntimeError(f"추적 도메인에는 Boolean 추적 선언이 필요하다: {location}")
+        return
+    tracking = manifest["NSPrivacyTracking"]
+    if type(tracking) is not bool:
+        raise RuntimeError(f"추적 선언은 Boolean이어야 한다: {location}")
+    if not tracking:
+        if domains_present:
+            raise RuntimeError(f"비추적 선언에는 추적 도메인 키를 넣지 않는다: {location}")
+        return
+    domains = manifest.get("NSPrivacyTrackingDomains")
+    if not isinstance(domains, list) or not domains:
+        raise RuntimeError(f"추적 선언에는 비어 있지 않은 도메인 배열이 필요하다: {location}")
+    for domain in domains:
+        if not isinstance(domain, str) or len(domain) > 253 or "." not in domain:
+            raise RuntimeError(f"추적 도메인 형식이 유효하지 않다: {location}")
+        labels = domain.split(".")
+        if not all(re.fullmatch(r"[A-Za-z0-9](?:[A-Za-z0-9-]{0,61}[A-Za-z0-9])?", label) for label in labels) or not re.search(r"[A-Za-z]", labels[-1]):
+            raise RuntimeError(f"추적 도메인은 경로 없는 호스트 이름이어야 한다: {location}")
+    if len(set(domains)) != len(domains):
+        raise RuntimeError(f"추적 도메인이 중복된다: {location}")
 
 
 def check_manifests(app, expected):
@@ -34,19 +77,22 @@ def check_manifests(app, expected):
     if root not in manifests:
         raise RuntimeError("signed 앱의 root privacy manifest 누락")
     root_manifest = plistlib.loads(root.read_bytes())
+    validate_tracking_information(root_manifest, "PrivacyInfo.xcprivacy")
     if root_manifest.get("NSPrivacyTracking") is not True:
         raise RuntimeError("signed 앱의 root 추적 공개 누락")
     collection = sorted(root_manifest.get("NSPrivacyCollectedDataTypes", []), key=lambda item: item["NSPrivacyCollectedDataType"])
-    if collection != ROOT_COLLECTION or root_manifest.get("NSPrivacyTrackingDomains", []):
-        raise RuntimeError("signed 앱의 root 수집·추적 도메인 선언이 검토한 설정과 다르다")
+    normalized = {**root_manifest, "NSPrivacyCollectedDataTypes": collection}
+    if json.dumps(normalized, sort_keys=True) != json.dumps(ROOT_MANIFEST, sort_keys=True):
+        raise RuntimeError("signed 앱의 root 전체 선언이 검토한 설정과 다르다")
     matched = set()
     for path in manifests:
         if path == root:
             continue
         declaration = plistlib.loads(path.read_bytes())
+        validate_tracking_information(declaration, str(path.relative_to(app)))
         matches = [sdk for sdk in expected["manifests"]
                    if path.parent.name == Path(sdk["manifestPath"]).parent.name
-                   and declaration == sdk["declaration"]]
+                   and json.dumps(declaration, sort_keys=True) == json.dumps(sdk["declaration"], sort_keys=True)]
         if len(matches) != 1 or matches[0]["sdk"] in matched:
             raise RuntimeError(f"예상 밖 SDK privacy manifest: {path.relative_to(app)}")
         matched.add(matches[0]["sdk"])
@@ -102,6 +148,11 @@ def main():
         expected = json.loads((Path(__file__).resolve().parents[1] / "app-store/releases/1.1.7/sdk-privacy-manifests.json").read_text())
         count = check_manifests(app, expected)
         print(f"[ios-privacy] signed 앱 bridge/ATT/ko·en/SDK manifest {count}개 확인")
+        evidence = [{"path": str(path.relative_to(app)),
+                     "sha256": hashlib.sha256(path.read_bytes()).hexdigest(),
+                     "declaration": plistlib.loads(path.read_bytes())}
+                    for path in sorted(app.rglob("PrivacyInfo.xcprivacy"))]
+        print("[ios-privacy-manifests] " + json.dumps(evidence, ensure_ascii=False, sort_keys=True))
 
 
 if __name__ == "__main__":
